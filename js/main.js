@@ -285,6 +285,8 @@
 
     var order = (viewer.getAttribute('data-photos') || '1').split(',').map(function (n) { return n.trim(); });
     var offsets = (viewer.getAttribute('data-frame-offsets') || '').split(',').map(function (v) { return parseFloat(v) || 0; });
+    var photoBase = viewer.getAttribute('data-photo-base') || 'assets/photos';
+    var photoExt = viewer.getAttribute('data-photo-ext') || '.webp';
     var imgs = [];
     var loaded = 0;
     var frame = 0;
@@ -299,7 +301,7 @@
         loaded++;
         if (loaded === 1) { fitCanvas(); draw(); }
       };
-      im.src = 'assets/photos/' + n + '.webp';
+      im.src = photoBase + '/' + n + photoExt;
       imgs[i] = im;
     });
 
@@ -396,7 +398,7 @@
     var downX = 0;
     canvas.addEventListener('mousedown', function (e) { downX = e.clientX; });
     canvas.addEventListener('click', function (e) {
-      if (Math.abs(e.clientX - downX) < 5) openLightbox(order, frame, frameCount);
+      if (Math.abs(e.clientX - downX) < 5) openLightbox(order, frame, frameCount, photoBase, photoExt);
     });
 
     var resizeT;
@@ -409,11 +411,13 @@
   }
 
   /* ---------- Lightbox ---------- */
-  function openLightbox(order, frame, frameCount) {
+  function openLightbox(order, frame, frameCount, photoBase, photoExt) {
     var idx = ((Math.round(frame) % frameCount) + frameCount) % frameCount;
     var lb = $('#lightbox') || buildLightbox();
     var img = $('img', lb);
-    img.src = 'assets/photos/' + order[idx] + '.webp';
+    var base = photoBase || 'assets/photos';
+    var ext = photoExt || '.webp';
+    img.src = base + '/' + order[idx] + ext;
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
