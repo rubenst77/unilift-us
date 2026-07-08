@@ -500,6 +500,22 @@ h1 { letter-spacing: -0.03em; }
   color: var(--steel);
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.viewer__drag-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--blue-accent);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  animation: viewerDragHint 1.8s ease-in-out infinite;
+}
+@keyframes viewerDragHint {
+  0%, 100% { transform: translateX(3px); opacity: 0.55; }
+  50% { transform: translateX(-3px); opacity: 1; }
 }
 .viewer__hint-icon { color: var(--coral); font-size: 0.9rem; }
 

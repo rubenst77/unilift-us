@@ -331,8 +331,8 @@
       var dir = 0;
       idleTimer = setInterval(function () {
         if (interacted) { stopIdle(); return; }
-        dir++;
-        frame = dir % frameCount;
+        dir--;
+        frame = ((dir % frameCount) + frameCount) % frameCount;
         draw();
       }, 1400);
     }
@@ -351,7 +351,7 @@
     function pointerMove(x) {
       if (!dragging) return;
       var dx = x - lastX; lastX = x;
-      velocity = dx * SENSITIVITY;
+      velocity = -dx * SENSITIVITY;
       frame += velocity;
       draw();
     }
@@ -383,15 +383,15 @@
       if (Math.abs(e.deltaY) < 1) return;
       e.preventDefault();
       markInteracted();
-      frame += e.deltaY > 0 ? 1 : -1;
+      frame += e.deltaY > 0 ? -1 : 1;
       frame = Math.round(frame);
       draw();
     }, { passive: false });
 
     // Keyboard
     viewer.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') { markInteracted(); frame = Math.round(frame) - 1; draw(); }
-      else if (e.key === 'ArrowRight') { markInteracted(); frame = Math.round(frame) + 1; draw(); }
+      if (e.key === 'ArrowLeft') { markInteracted(); frame = Math.round(frame) + 1; draw(); }
+      else if (e.key === 'ArrowRight') { markInteracted(); frame = Math.round(frame) - 1; draw(); }
     });
 
     // Tap to open lightbox (only when it wasn't a drag)
