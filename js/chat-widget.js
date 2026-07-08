@@ -6,7 +6,7 @@
 
   var REP = {
     name: 'Ruben da Costa',
-    title: 'FAS-Tech · UNILIFT specialist',
+    title: 'Sales Director at FAS-Tech',
     email: 'ruben.dacosta@fas-technology.com',
     whatsapp: 'https://wa.me/352691592667',
     avatar: 'assets/avatar_ruben@96.webp',
@@ -14,10 +14,9 @@
   };
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var TEASER_KEY = 'chatTeaserDismissed';
   var PULSE_KEY = 'chatLauncherPulseDone';
 
-  var root, launcher, teaser, panel, messagesEl, actionsEl, liveRegion, closeBtn;
+  var root, launcherBar, panel, messagesEl, actionsEl, liveRegion, closeBtn;
   var panelBuilt = false;
   var isOpen = false;
   var lastFocus = null;
@@ -27,7 +26,6 @@
 
   function init() {
     createLauncher();
-    scheduleTeaser();
   }
 
   function createLauncher() {
@@ -35,72 +33,27 @@
     root.className = 'chat-widget';
     root.id = 'contact-chat-widget';
 
-    launcher = document.createElement('button');
-    launcher.type = 'button';
-    launcher.className = 'chat-launcher';
-    launcher.setAttribute('aria-label', 'Open contact chat');
-    launcher.setAttribute('aria-expanded', 'false');
-    launcher.setAttribute('aria-controls', 'contact-chat-panel');
+    launcherBar = document.createElement('button');
+    launcherBar.type = 'button';
+    launcherBar.className = 'chat-launcher-bar';
+    launcherBar.setAttribute('aria-label', 'Open contact chat with Ruben');
+    launcherBar.setAttribute('aria-expanded', 'false');
+    launcherBar.setAttribute('aria-controls', 'contact-chat-panel');
+    launcherBar.innerHTML =
+      '<span class="chat-launcher-bar__label">Need help?</span>' +
+      '<span class="chat-launcher-bar__avatar">' +
+        '<img src="' + REP.avatar + '" alt="" width="68" height="68" loading="eager" decoding="async">' +
+        '<span class="chat-launcher-bar__dot" aria-hidden="true"></span>' +
+      '</span>';
 
-    var avatarWrap = document.createElement('span');
-    avatarWrap.className = 'chat-launcher__avatar';
-    var img = document.createElement('img');
-    img.src = REP.avatar;
-    img.alt = '';
-    img.width = 60;
-    img.height = 60;
-    img.loading = 'eager';
-    img.decoding = 'async';
-    img.fetchPriority = 'low';
-    avatarWrap.appendChild(img);
-
-    var dot = document.createElement('span');
-    dot.className = 'chat-launcher__dot';
-    dot.setAttribute('aria-hidden', 'true');
-
-    launcher.appendChild(avatarWrap);
-    launcher.appendChild(dot);
-    launcher.addEventListener('click', togglePanel);
-
-    teaser = document.createElement('div');
-    teaser.className = 'chat-teaser';
-    teaser.setAttribute('role', 'status');
-    teaser.innerHTML =
-      '<p class="chat-teaser__text">Hi, I\'m Ruben — questions about the UNILIFT?</p>' +
-      '<button type="button" class="chat-teaser__dismiss" aria-label="Dismiss message">&times;</button>';
-
-    teaser.querySelector('.chat-teaser__dismiss').addEventListener('click', function (e) {
-      e.stopPropagation();
-      dismissTeaser();
-    });
-    teaser.addEventListener('click', function () {
-      openPanel();
-      dismissTeaser();
-    });
-
-    root.appendChild(teaser);
-    root.appendChild(launcher);
+    launcherBar.addEventListener('click', togglePanel);
+    root.appendChild(launcherBar);
     document.body.appendChild(root);
 
     if (!sessionStorage.getItem(PULSE_KEY) && !prefersReduced) {
-      launcher.classList.add('chat-launcher--pulse');
+      launcherBar.classList.add('chat-launcher-bar--pulse');
       sessionStorage.setItem(PULSE_KEY, '1');
     }
-  }
-
-  function scheduleTeaser() {
-    if (sessionStorage.getItem(TEASER_KEY)) return;
-    var delay = prefersReduced ? 4000 : 4000;
-    setTimeout(function () {
-      if (sessionStorage.getItem(TEASER_KEY) || isOpen) return;
-      teaser.classList.add('is-visible');
-      if (!prefersReduced) teaser.classList.add('chat-teaser--animate');
-    }, delay);
-  }
-
-  function dismissTeaser() {
-    sessionStorage.setItem(TEASER_KEY, '1');
-    teaser.classList.remove('is-visible', 'chat-teaser--animate');
   }
 
   function togglePanel() {
@@ -123,7 +76,7 @@
     header.className = 'chat-panel__header';
     header.innerHTML =
       '<div class="chat-panel__rep">' +
-        '<img class="chat-panel__rep-avatar" src="' + REP.avatar + '" alt="" width="40" height="40" loading="lazy" decoding="async">' +
+        '<img class="chat-panel__rep-avatar" src="' + REP.avatarLg + '" alt="" width="48" height="48" loading="lazy" decoding="async">' +
         '<div class="chat-panel__rep-meta">' +
           '<strong class="chat-panel__rep-name">' + REP.name + '</strong>' +
           '<span class="chat-panel__rep-title">' + REP.title + '</span>' +
@@ -187,13 +140,12 @@
 
   function openPanel() {
     buildPanel();
-    dismissTeaser();
     lastFocus = document.activeElement;
     isOpen = true;
     panel.classList.add('is-open');
     panel.setAttribute('aria-hidden', 'false');
-    launcher.setAttribute('aria-expanded', 'true');
-    launcher.classList.add('is-hidden');
+    launcherBar.setAttribute('aria-expanded', 'true');
+    launcherBar.classList.add('is-hidden');
     resetFlow();
     setTimeout(function () { closeBtn.focus(); }, 50);
   }
@@ -203,10 +155,10 @@
     isOpen = false;
     panel.classList.remove('is-open');
     panel.setAttribute('aria-hidden', 'true');
-    launcher.setAttribute('aria-expanded', 'false');
-    launcher.classList.remove('is-hidden');
+    launcherBar.setAttribute('aria-expanded', 'false');
+    launcherBar.classList.remove('is-hidden');
     if (lastFocus && lastFocus.focus) lastFocus.focus();
-    else launcher.focus();
+    else launcherBar.focus();
   }
 
   function resetFlow() {
@@ -217,10 +169,9 @@
   }
 
   function startGreeting() {
-    showTyping(function () {
-      addBotMessage('Hi! I\'m Ruben. What can I help you with?');
-      showInitialChips();
-    });
+    addBotMessage('I\'m Ruben, Sales Director at FAS-Tech. I\'m here to help with anything — any question you have.');
+    addBotMessage('What can I help you with?');
+    showInitialChips();
   }
 
   function showInitialChips() {
@@ -228,7 +179,8 @@
       { label: 'Request a quote', intent: 'quote' },
       { label: 'Get the datasheet', intent: 'datasheet' },
       { label: 'Become a US distributor', intent: 'distributor' },
-      { label: 'Ask a technical question', intent: 'technical' }
+      { label: 'Ask a technical question', intent: 'technical' },
+      { label: 'Other', intent: 'other' }
     ];
     renderChips(chips, onChipSelect);
   }
@@ -236,14 +188,13 @@
   function onChipSelect(intent, label) {
     clearActions();
     addUserMessage(label);
-    showTyping(function () {
-      switch (intent) {
-        case 'quote': handleQuote(); break;
-        case 'datasheet': handleDatasheet(); break;
-        case 'distributor': handleDistributor(); break;
-        case 'technical': handleTechnical(); break;
-      }
-    });
+    switch (intent) {
+      case 'quote': handleQuote(); break;
+      case 'datasheet': handleDatasheet(); break;
+      case 'distributor': handleDistributor(); break;
+      case 'technical': handleTechnical(); break;
+      case 'other': handleOther(); break;
+    }
   }
 
   function handleQuote() {
@@ -251,13 +202,12 @@
     var wrap = document.createElement('div');
     wrap.className = 'chat-action-group';
 
-    var mailBtn = document.createElement('a');
-    mailBtn.className = 'btn btn--primary btn--sm chat-action-btn';
-    mailBtn.href = buildMailto('UNILIFT quote request', quoteBody());
-    mailBtn.textContent = 'Open email to Ruben';
-    mailBtn.addEventListener('click', function () {
-      onMailtoClick('quote');
-    });
+    wrap.appendChild(createMailButton(
+      'Open email to Ruben',
+      'UNILIFT quote request',
+      quoteBody(),
+      'quote'
+    ));
 
     var formLink = document.createElement('button');
     formLink.type = 'button';
@@ -265,18 +215,13 @@
     formLink.textContent = 'Or use the full quote form';
     formLink.addEventListener('click', function () {
       fireWebhook('quote');
-      if (typeof window.__scrollToSection === 'function') window.__scrollToSection('contact');
-      else {
-        var contactEl = document.getElementById('contact');
-        if (contactEl) contactEl.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
-      }
+      scrollToSection('contact');
       closePanel();
     });
 
-    wrap.appendChild(mailBtn);
     wrap.appendChild(formLink);
     actionsEl.appendChild(wrap);
-    mailBtn.focus();
+    wrap.querySelector('.chat-action-btn').focus();
     showClosingFallback();
   }
 
@@ -287,7 +232,7 @@
 
     var btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'btn btn--primary btn--sm chat-action-btn';
+    btn.className = 'btn btn--primary chat-action-btn';
     btn.textContent = 'Get the datasheet';
     btn.addEventListener('click', function () {
       fireWebhook('datasheet');
@@ -311,17 +256,15 @@
     var wrap = document.createElement('div');
     wrap.className = 'chat-action-group';
 
-    var mailBtn = document.createElement('a');
-    mailBtn.className = 'btn btn--primary btn--sm chat-action-btn';
-    mailBtn.href = buildMailto('UNILIFT US distributor enquiry', distributorBody());
-    mailBtn.textContent = 'Open email to Ruben';
-    mailBtn.addEventListener('click', function () {
-      onMailtoClick('distributor');
-    });
+    wrap.appendChild(createMailButton(
+      'Open email to Ruben',
+      'UNILIFT US distributor enquiry',
+      distributorBody(),
+      'distributor'
+    ));
 
-    wrap.appendChild(mailBtn);
     actionsEl.appendChild(wrap);
-    mailBtn.focus();
+    wrap.querySelector('.chat-action-btn').focus();
     showClosingFallback();
   }
 
@@ -338,11 +281,7 @@
     faqLink.className = 'chat-action-link';
     faqLink.textContent = 'See the FAQ';
     faqLink.addEventListener('click', function () {
-      if (typeof window.__scrollToSection === 'function') window.__scrollToSection('faq');
-      else {
-        var faqEl = document.getElementById('faq');
-        if (faqEl) faqEl.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
-      }
+      scrollToSection('faq');
       closePanel();
     });
 
@@ -353,14 +292,8 @@
       if (!text) { input.focus(); return; }
       addUserMessage(text);
       clearActions();
-      var mailto = buildMailto('UNILIFT technical question', technicalBody(text));
-      fireWebhook('technical', text);
-      copyEmailHint();
-      window.location.href = mailto;
-      showTyping(function () {
-        addBotMessage('Opening your email app with your question — if nothing opens, use the contact details below.');
-        showClosingFallback(true);
-      });
+      openMailto('UNILIFT technical question', technicalBody(text), 'technical');
+      showClosingFallback();
     });
 
     actionsEl.appendChild(form);
@@ -368,26 +301,79 @@
     form.querySelector('.chat-tech-input').focus();
   }
 
-  function showClosingFallback(force) {
-    if (closingShown && !force) return;
+  function handleOther() {
+    addBotMessage('No problem — tell me what you need and I\'ll point you in the right direction.');
+    var wrap = document.createElement('div');
+    wrap.className = 'chat-action-group';
+
+    wrap.appendChild(createMailButton(
+      'Open email to Ruben',
+      'UNILIFT enquiry',
+      otherBody(),
+      'other'
+    ));
+
+    actionsEl.appendChild(wrap);
+    wrap.querySelector('.chat-action-btn').focus();
+    showClosingFallback();
+  }
+
+  function showClosingFallback() {
+    if (closingShown) return;
     closingShown = true;
-    setTimeout(function () {
-      var el = document.createElement('div');
-      el.className = 'chat-msg chat-msg--bot chat-msg--closing';
-      el.innerHTML =
-        '<img class="chat-msg__avatar" src="' + REP.avatar + '" alt="" width="32" height="32" loading="lazy" decoding="async">' +
-        '<div class="chat-msg__bubble">' +
-          '<p class="chat-closing-text">Prefer email or WhatsApp?</p>' +
-          '<p class="chat-closing-links">' +
-            '<a href="mailto:' + REP.email + '">' + REP.email + '</a>' +
-            ' <span class="chat-closing-sep" aria-hidden="true">|</span> ' +
-            '<a href="' + REP.whatsapp + '" target="_blank" rel="noopener noreferrer">WhatsApp</a>' +
-          '</p>' +
-        '</div>';
-      messagesEl.appendChild(el);
-      scrollMessages();
-      announce('Contact options: email ' + REP.email + ' or WhatsApp');
-    }, force ? 0 : 120);
+
+    var card = document.createElement('div');
+    card.className = 'chat-contact-card';
+    card.innerHTML =
+      '<p class="chat-contact-card__lead">Prefer email or WhatsApp?</p>' +
+      '<div class="chat-contact-block">' +
+        '<p class="chat-contact-block__label">Contact me directly at my personal email:</p>' +
+        '<a class="chat-contact-email" href="mailto:' + REP.email + '">' + REP.email + '</a>' +
+      '</div>' +
+      '<div class="chat-contact-block">' +
+        '<p class="chat-contact-block__label">Or send me a WhatsApp message:</p>' +
+        '<a class="btn btn--primary chat-contact-wa" href="' + REP.whatsapp + '" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>' +
+      '</div>';
+
+    card.querySelector('.chat-contact-email').addEventListener('click', function () {
+      copyEmailHint();
+    });
+
+    actionsEl.appendChild(card);
+    scrollMessages();
+    announce('Contact options: email or WhatsApp');
+  }
+
+  function createMailButton(label, subject, body, intent) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn--primary chat-action-btn';
+    btn.textContent = label;
+    btn.addEventListener('click', function () {
+      openMailto(subject, body, intent);
+    });
+    return btn;
+  }
+
+  function openMailto(subject, body, intent) {
+    if (intent) fireWebhook(intent, body);
+    copyEmailHint();
+    var url = buildMailto(subject, body);
+    var opened = false;
+
+    try {
+      var a = document.createElement('a');
+      a.href = url;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      opened = true;
+    } catch (err) { /* try fallback */ }
+
+    if (!opened) {
+      window.location.href = url;
+    }
   }
 
   function renderChips(items, onSelect) {
@@ -411,29 +397,14 @@
 
   function clearActions() {
     actionsEl.innerHTML = '';
-  }
-
-  function showTyping(done) {
-    var row = document.createElement('div');
-    row.className = 'chat-msg chat-msg--bot chat-msg--typing';
-    row.setAttribute('aria-hidden', 'true');
-    row.innerHTML =
-      '<img class="chat-msg__avatar" src="' + REP.avatar + '" alt="" width="32" height="32" loading="lazy" decoding="async">' +
-      '<div class="chat-msg__bubble chat-msg__bubble--dots"><span></span><span></span><span></span></div>';
-    messagesEl.appendChild(row);
-    scrollMessages();
-    var delay = prefersReduced ? 0 : 600;
-    setTimeout(function () {
-      row.remove();
-      if (done) done();
-    }, delay);
+    closingShown = false;
   }
 
   function addBotMessage(text) {
     var row = document.createElement('div');
     row.className = 'chat-msg chat-msg--bot';
     row.innerHTML =
-      '<img class="chat-msg__avatar" src="' + REP.avatar + '" alt="" width="32" height="32" loading="lazy" decoding="async">' +
+      '<img class="chat-msg__avatar" src="' + REP.avatar + '" alt="" width="36" height="36" loading="lazy" decoding="async">' +
       '<div class="chat-msg__bubble"></div>';
     row.querySelector('.chat-msg__bubble').textContent = text;
     messagesEl.appendChild(row);
@@ -458,6 +429,15 @@
     if (liveRegion) liveRegion.textContent = text;
   }
 
+  function scrollToSection(id) {
+    if (typeof window.__scrollToSection === 'function') {
+      window.__scrollToSection(id);
+      return;
+    }
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
+  }
+
   function buildMailto(subject, body) {
     return 'mailto:' + REP.email +
       '?subject=' + encodeURIComponent(subject) +
@@ -476,9 +456,8 @@
     return 'Hi Ruben,\n\nI have a technical question about the UNILIFT:\n\n' + question + '\n\nThanks,';
   }
 
-  function onMailtoClick(intent) {
-    fireWebhook(intent);
-    copyEmailHint();
+  function otherBody() {
+    return 'Hi Ruben,\n\nI have a question about the UNILIFT:\n\n\nThanks,';
   }
 
   function copyEmailHint() {
@@ -494,7 +473,7 @@
     var toast = document.createElement('p');
     toast.className = 'chat-copy-toast';
     toast.setAttribute('role', 'status');
-    toast.textContent = 'Address copied';
+    toast.textContent = 'Email copied';
     root.appendChild(toast);
     setTimeout(function () { toast.remove(); }, 2200);
   }
