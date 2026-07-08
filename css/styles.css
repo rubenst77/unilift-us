@@ -523,8 +523,8 @@ h1 { letter-spacing: -0.03em; }
 }
 .viewer__swipe-icon {
   display: block;
-  width: 44px;
-  height: 34px;
+  width: 36px;
+  height: 14px;
 }
 @keyframes viewerSwipeLeft {
   0%, 100% { transform: translateX(5px); opacity: 0.55; }
