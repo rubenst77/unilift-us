@@ -49,8 +49,9 @@
     img.alt = '';
     img.width = 60;
     img.height = 60;
-    img.loading = 'lazy';
+    img.loading = 'eager';
     img.decoding = 'async';
+    img.fetchPriority = 'low';
     avatarWrap.appendChild(img);
 
     var dot = document.createElement('span');
