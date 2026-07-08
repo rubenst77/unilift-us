@@ -328,11 +328,9 @@
 
     function startIdle() {
       if (prefersReduced || interacted) return;
-      var dir = 0;
       idleTimer = setInterval(function () {
         if (interacted) { stopIdle(); return; }
-        dir--;
-        frame = ((dir % frameCount) + frameCount) % frameCount;
+        frame = (Math.round(frame) + 1) % frameCount;
         draw();
       }, 1400);
     }
