@@ -51,6 +51,7 @@
     initConsent();
     initAppsParallax();
     initTracking();
+    window.__scrollToSection = function (id) { scrollToEl(document.getElementById(id)); };
   }
 
   /* ---------- Smooth scroll (Lenis + GSAP ticker) ---------- */
@@ -653,6 +654,8 @@
         });
       });
     }
+
+    window.__openDatasheetModal = openDatasheet;
 
     // expose for contact form "Get Datasheet" success
     window.__openDatasheetSuccess = function () { openAndShowSuccess(); };
