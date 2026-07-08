@@ -1,0 +1,20 @@
+# Dependencies / tooling
+node_modules/
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Local verification artifacts
+_verify_*.png
+_full.png
+_band_*.png
+_sec_*.png
+_v_*.png
+_shot.mjs
+_shotv.mjs
+
+# Source bundle (assets already copied into /assets)
+UNIFIFT_build_assets/
