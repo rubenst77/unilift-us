@@ -653,6 +653,14 @@ h1 { letter-spacing: -0.03em; }
   object-fit: contain;
   object-position: center;
 }
+.closeup__media--lg {
+  padding: clamp(0.75rem, 2.5vw, 1.35rem);
+  overflow: hidden;
+}
+.closeup__media--lg img {
+  max-width: 118%;
+  max-height: 118%;
+}
 .closeup__body { max-width: 480px; }
 .closeup__hero-label {
   font-family: var(--font-display, var(--font-sans));
