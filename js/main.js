@@ -451,8 +451,8 @@
       var tilt = block.classList.contains('closeup--reverse') ? -10 : 10;
 
       gsap.set(wrap, { opacity: 0, x: fromX, rotateY: tilt, transformPerspective: 900 });
-      gsap.set(media, { clipPath: 'inset(14% 10% 14% 10% round 14px)', scale: 0.92 });
-      if (img) gsap.set(img, { scale: 1.22, rotation: i % 2 ? -5 : 5, transformOrigin: '50% 50%' });
+      gsap.set(media, { opacity: 0.85, y: 24 });
+      if (img) gsap.set(img, { scale: 1, rotation: 0 });
       if (label) gsap.set(label, { opacity: 0, y: 48, scale: 0.92 });
       if (title) gsap.set(title, { opacity: 0, y: 32 });
       if (text) gsap.set(text, { opacity: 0, y: 24 });
@@ -462,10 +462,10 @@
       });
 
       tl.to(wrap, { opacity: 1, x: 0, rotateY: 0, duration: 1.05, ease: 'power4.out' })
-        .to(media, { clipPath: 'inset(0% 0% 0% 0% round 14px)', scale: 1, duration: 0.9, ease: 'power3.inOut' }, '-=0.82');
+        .to(media, { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }, '-=0.82');
 
       if (img) {
-        tl.to(img, { scale: 1, rotation: 0, duration: 1.15, ease: 'elastic.out(1, 0.52)' }, '-=0.72');
+        tl.to(img, { scale: 1, rotation: 0, duration: 0.7, ease: 'power3.out' }, '-=0.72');
       }
       if (label) {
         tl.to(label, { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: 'back.out(1.4)' }, '-=0.55');
@@ -479,7 +479,7 @@
 
       if (img) {
         gsap.to(img, {
-          y: -16,
+          y: -8,
           ease: 'none',
           scrollTrigger: {
             trigger: block,
@@ -489,7 +489,7 @@
           }
         });
         gsap.to(wrap, {
-          y: 10,
+          y: 6,
           ease: 'none',
           scrollTrigger: {
             trigger: block,
