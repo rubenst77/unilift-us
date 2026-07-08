@@ -40,6 +40,7 @@
     initHeroIntro();
     initCountUps();
     initProductViewer();
+    initCloseups();
     initFeatureCards();
     initSpecTabs();
     initFaq();
@@ -283,6 +284,7 @@
     var ctx = canvas.getContext('2d');
 
     var order = (viewer.getAttribute('data-photos') || '1').split(',').map(function (n) { return n.trim(); });
+    var offsets = (viewer.getAttribute('data-frame-offsets') || '').split(',').map(function (v) { return parseFloat(v) || 0; });
     var imgs = [];
     var loaded = 0;
     var frame = 0;
@@ -317,7 +319,8 @@
       if (!im || !im.complete || !im.naturalWidth) return;
       var scale = Math.min(rect.width / im.naturalWidth, rect.height / im.naturalHeight) * 0.94;
       var w = im.naturalWidth * scale, h = im.naturalHeight * scale;
-      ctx.drawImage(im, (rect.width - w) / 2, (rect.height - h) / 2, w, h);
+      var offsetX = (offsets[idx] || 0) * rect.width;
+      ctx.drawImage(im, (rect.width - w) / 2 + offsetX, (rect.height - h) / 2, w, h);
     }
 
     function startIdle() {
@@ -422,6 +425,78 @@
     lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lightbox__close')) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     return lb;
+  }
+
+  /* ---------- Close-up detail rows (scroll animations) ---------- */
+  function initCloseups() {
+    var blocks = $$('[data-closeup]');
+    if (!blocks.length) return;
+
+    if (prefersReduced || !(window.gsap && window.ScrollTrigger)) return;
+
+    var gsap = window.gsap;
+    blocks.forEach(function (block, i) {
+      var wrap = $('.closeup__media-wrap', block);
+      var media = $('.closeup__media', block);
+      var img = $('img', media || block);
+      var label = $('.closeup__hero-label', block);
+      var title = $('.closeup__title', block);
+      var text = $('.closeup__text', block);
+      if (!wrap || !media) return;
+
+      var fromX = block.classList.contains('closeup--reverse') ? 72 : -72;
+      var tilt = block.classList.contains('closeup--reverse') ? -10 : 10;
+
+      gsap.set(wrap, { opacity: 0, x: fromX, rotateY: tilt, transformPerspective: 900 });
+      gsap.set(media, { clipPath: 'inset(14% 10% 14% 10% round 14px)', scale: 0.92 });
+      if (img) gsap.set(img, { scale: 1.22, rotation: i % 2 ? -5 : 5, transformOrigin: '50% 50%' });
+      if (label) gsap.set(label, { opacity: 0, y: 48, scale: 0.92 });
+      if (title) gsap.set(title, { opacity: 0, y: 32 });
+      if (text) gsap.set(text, { opacity: 0, y: 24 });
+
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: block, start: 'top 80%', once: true }
+      });
+
+      tl.to(wrap, { opacity: 1, x: 0, rotateY: 0, duration: 1.05, ease: 'power4.out' })
+        .to(media, { clipPath: 'inset(0% 0% 0% 0% round 14px)', scale: 1, duration: 0.9, ease: 'power3.inOut' }, '-=0.82');
+
+      if (img) {
+        tl.to(img, { scale: 1, rotation: 0, duration: 1.15, ease: 'elastic.out(1, 0.52)' }, '-=0.72');
+      }
+      if (label) {
+        tl.to(label, { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: 'back.out(1.4)' }, '-=0.55');
+      }
+      if (title) {
+        tl.to(title, { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' }, '-=0.42');
+      }
+      if (text) {
+        tl.to(text, { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' }, '-=0.38');
+      }
+
+      if (img) {
+        gsap.to(img, {
+          y: -16,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: block,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.4
+          }
+        });
+        gsap.to(wrap, {
+          y: 10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: block,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 2
+          }
+        });
+      }
+    });
   }
 
   /* ---------- Feature cards (mobile tap-to-expand) ---------- */
