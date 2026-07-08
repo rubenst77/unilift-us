@@ -12,13 +12,27 @@
   var DATASHEET_PDF = 'assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf';
   var isEmail = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); };
 
-  function track(name, params) {
-    if (typeof window.gtag === 'function') { window.gtag('event', name, params || {}); }
+  function trackConversion(eventName, params) {
+    try {
+      window.dataLayer = window.dataLayer || [];
+      var payload = Object.assign({ event: eventName }, params || {});
+      window.dataLayer.push(payload);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, params || {});
+      }
+    } catch (err) { /* tracking must never break the page */ }
+  }
+
+  function warnWebhookUnset() {
+    if (!window.LEAD_WEBHOOK_URL) {
+      console.warn('LEAD_WEBHOOK_URL not set - leads are not being delivered');
+    }
   }
 
   document.addEventListener('DOMContentLoaded', init);
 
   function init() {
+    warnWebhookUnset();
     initSmoothScroll();
     initNavbar();
     initReveal();
@@ -32,13 +46,10 @@
     initDatasheet();
     initContactForm();
     initModelQuote();
+    initPartner();
     initConsent();
     initAppsParallax();
-
-    // CTA analytics
-    $$('[data-cta]').forEach(function (el) {
-      el.addEventListener('click', function () { track('cta_click', { event_label: el.getAttribute('data-cta') }); });
-    });
+    initTracking();
   }
 
   /* ---------- Smooth scroll (Lenis + GSAP ticker) ---------- */
@@ -531,7 +542,6 @@
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       if (emailInput) setTimeout(function () { emailInput.focus(); }, 50);
-      track('datasheet_open');
     }
     function closeDatasheet() {
       modal.classList.remove('is-open');
@@ -540,7 +550,19 @@
       if (lastFocus) lastFocus.focus();
     }
     function showForm() { formWrap.style.display = ''; success.classList.remove('is-visible'); }
-    function showSuccess() { formWrap.style.display = 'none'; success.classList.add('is-visible'); }
+    function showSuccess(isFallback) {
+      formWrap.style.display = 'none';
+      success.classList.add('is-visible');
+      var h3 = $('h3', success);
+      var p = $('p', success);
+      if (isFallback && h3 && p) {
+        h3.textContent = 'Download ready';
+        p.textContent = 'We could not deliver the email right now. Use the link below for the PDF.';
+      } else if (h3 && p) {
+        h3.textContent = 'Check your inbox';
+        p.textContent = 'The datasheet is on its way.';
+      }
+    }
 
     function directDownload() {
       var a = document.createElement('a');
@@ -566,11 +588,22 @@
         emailInput.classList.remove('is-invalid');
         if (err) err.classList.remove('is-visible');
 
-        localStorage.setItem('datasheetUnlocked', 'true');
-        track('generate_lead', { source: 'datasheet_gate' });
+        var payload = { email: emailInput.value.trim(), source: 'datasheet_gate', page: location.pathname, ts: Date.now() };
+        var submitBtn = $('button[type="submit"]', form);
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.7'; }
 
-        sendLead({ email: emailInput.value.trim(), source: 'datasheet_gate', page: location.pathname, ts: Date.now() })
-          .finally(function () { showSuccess(); }); // never block the file on webhook result
+        sendLead(payload).then(function (res) {
+          if (res.ok) {
+            localStorage.setItem('datasheetUnlocked', 'true');
+            trackConversion('datasheet_request', { source: 'datasheet_gate' });
+            showSuccess(false);
+          } else {
+            localStorage.setItem('datasheetUnlocked', 'true');
+            directDownload();
+            showSuccess(true);
+          }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+        });
       });
     }
 
@@ -597,15 +630,19 @@
   function sendLead(payload) {
     var url = window.LEAD_WEBHOOK_URL;
     if (!url) {
-      console.info('[UNILIFT] LEAD_WEBHOOK_URL not set. Skipping POST.', payload);
       return Promise.resolve({ ok: false, skipped: true });
     }
     return fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
-    }).then(function (r) { return { ok: r.ok }; })
-      .catch(function (err) { console.warn('[UNILIFT] lead webhook failed', err); return { ok: false }; });
+    }).then(function (r) {
+      if (!r.ok) { console.warn('[UNILIFT] lead webhook returned', r.status); }
+      return { ok: r.ok };
+    }).catch(function (err) {
+      console.warn('[UNILIFT] lead webhook failed', err);
+      return { ok: false, error: true };
+    });
   }
 
   /* ==========================================================================
@@ -664,10 +701,10 @@
 
       var btn = $('[data-cta="form-submit"]', form);
       if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
-      track('generate_lead', { source: 'contact_form', inquiry: inquiry });
 
       sendLead(payload).then(function (res) {
-        if (res.skipped || res.ok) {
+        if (res.ok) {
+          trackConversion('generate_lead', { source: 'contact_form', inquiry: inquiry });
           fields.style.display = 'none';
           success.classList.add('is-visible');
           if (inquiry === 'datasheet') {
@@ -675,9 +712,8 @@
             if (typeof window.__openDatasheetSuccess === 'function') window.__openDatasheetSuccess();
           }
         } else {
-          // graceful fallback to mailto
           status.classList.add('is-error');
-          status.innerHTML = 'Something went wrong. <a href="' + mailtoFor(payload) + '">Email us directly →</a>';
+          status.innerHTML = 'We couldn\'t submit right now. Email us at <a href="mailto:info@fas-technology.com">info@fas-technology.com</a>.';
           if (btn) { btn.disabled = false; btn.style.opacity = ''; }
         }
       });
@@ -693,6 +729,47 @@
     return 'mailto:info@fas-technology.com?subject=' + subject + '&body=' + body;
   }
 
+  /* ---------- Partner / distributor CTA ---------- */
+  function initPartner() {
+    var btn = $('#partner-cta');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      setInquiryChip('distributor');
+      scrollToEl($('#contact'));
+      trackConversion('quote_click', { cta: 'partner' });
+    });
+  }
+
+  function setInquiryChip(value) {
+    var chips = $$('#quote-form .chip');
+    chips.forEach(function (c) {
+      c.classList.toggle('is-active', c.getAttribute('data-inquiry') === value);
+    });
+  }
+
+  /* ---------- Conversion tracking ---------- */
+  function initTracking() {
+    $$('[data-track="quote"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        trackConversion('quote_click', { cta: el.getAttribute('data-cta') || 'quote' });
+      });
+    });
+    $$('[data-cta]').forEach(function (el) {
+      var cta = el.getAttribute('data-cta') || '';
+      if (/quote/i.test(cta) && !el.hasAttribute('data-track')) {
+        el.addEventListener('click', function () {
+          trackConversion('quote_click', { cta: cta });
+        });
+      }
+    });
+    $$('[data-cta="whatsapp-contact"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        trackConversion('whatsapp_click', {});
+      });
+    });
+  }
+
   /* ---------- Model quote preselect ---------- */
   function initModelQuote() {
     $$('[data-model-quote]').forEach(function (btn) {
@@ -705,7 +782,8 @@
         }
         // set inquiry to quote
         var chips = $$('#quote-form .chip');
-        chips.forEach(function (c) { c.classList.toggle('is-active', c.getAttribute('data-inquiry') === 'quote'); });
+        setInquiryChip('quote');
+        trackConversion('quote_click', { cta: btn.getAttribute('data-cta') || 'model-quote' });
         scrollToEl($('#contact'));
       });
     });
@@ -735,9 +813,9 @@
   /* ---------- Applications parallax ---------- */
   function initAppsParallax() {
     if (prefersReduced || !window.gsap || !window.ScrollTrigger) return;
-    $$('.app__bg').forEach(function (bg) {
+    $$('[data-app-bg]').forEach(function (bg) {
       window.gsap.to(bg, {
-        yPercent: 12, ease: 'none',
+        yPercent: 9, ease: 'none',
         scrollTrigger: { trigger: bg.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
       });
     });

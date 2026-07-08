@@ -15,6 +15,8 @@ _sec_*.png
 _v_*.png
 _shot.mjs
 _shotv.mjs
+_lh.json
+*.report.html
 
 # Source bundle (assets already copied into /assets)
 UNIFIFT_build_assets/

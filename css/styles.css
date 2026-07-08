@@ -347,7 +347,7 @@ h1 { letter-spacing: -0.03em; }
   background-size: cover;
   background-position: center;
 }
-/* Blueprint grid placeholder (until hero.jpg exists) */
+/* Blueprint grid placeholder (fallback if hero image missing) */
 .hero__bg--placeholder {
   background-image:
     linear-gradient(rgba(156, 195, 229, 0.06) 1px, transparent 1px),
@@ -355,12 +355,13 @@ h1 { letter-spacing: -0.03em; }
     radial-gradient(circle at 70% 20%, rgba(27, 76, 130, 0.5), transparent 55%);
   background-size: 44px 44px, 44px 44px, 100% 100%;
 }
+.hero__bg--photo { background-color: var(--navy-900); }
 .hero__overlay {
   position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(180deg,
-    rgba(10, 28, 51, 0.45) 0%,
-    rgba(10, 28, 51, 0.70) 55%,
-    rgba(10, 28, 51, 0.88) 100%);
+    rgba(10, 28, 51, 0.70) 0%,
+    rgba(10, 28, 51, 0.78) 45%,
+    rgba(10, 28, 51, 0.85) 100%);
 }
 .hero__inner {
   width: 100%;
@@ -387,6 +388,22 @@ h1 { letter-spacing: -0.03em; }
   font-weight: 400;
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-md); }
+.hero__certs {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem;
+  margin-top: var(--sp-lg);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+.hero__certs li { position: relative; }
+.hero__certs li + li::before {
+  content: "\00b7";
+  position: absolute;
+  left: -0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+}
 
 .hero__scroll {
   position: absolute;
@@ -791,7 +808,11 @@ h1 { letter-spacing: -0.03em; }
 .app__bg {
   position: absolute; inset: 0; z-index: -2;
   background-size: cover; background-position: center;
-  transform: scale(1.06);
+  transform: scale(1.08);
+  will-change: transform;
+}
+.app--placeholder .app__overlay {
+  background: linear-gradient(180deg, rgba(10, 28, 51, 0.35) 0%, rgba(10, 28, 51, 0.88) 100%);
 }
 .app__overlay {
   position: absolute; inset: 0; z-index: -1;
@@ -811,6 +832,50 @@ h1 { letter-spacing: -0.03em; }
 .app__kicker { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sky); margin-bottom: 0.6rem; }
 .app__title { color: var(--white); font-size: var(--fs-h3); margin-bottom: 0.5rem; }
 .app__desc { color: rgba(255, 255, 255, 0.8); font-size: 0.98rem; max-width: 46ch; }
+
+/* ==========================================================================
+   DISTRIBUTOR BAND
+   ========================================================================== */
+.distributor__inner { max-width: 640px; }
+.distributor__title { font-size: var(--fs-h2); margin: 0.4rem 0 var(--sp-md); }
+.distributor__text { color: rgba(255, 255, 255, 0.82); margin-bottom: var(--sp-xl); font-size: 1.05rem; }
+
+/* ==========================================================================
+   TRUST STRIP
+   ========================================================================== */
+.trust { background: var(--paper); padding: var(--sp-2xl) 0; }
+.trust__head { text-align: center; margin-bottom: var(--sp-xl); }
+.trust__caption { color: var(--steel); font-size: 1rem; max-width: 52ch; margin: 0 auto; }
+.trust__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-md);
+}
+.trust__item { margin: 0; }
+.trust__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+.trust__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.5s var(--ease), transform 0.6s var(--ease);
+}
+.trust__item:hover .trust__media img { filter: grayscale(0); transform: scale(1.04); }
+.trust__item figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--steel);
+  text-align: center;
+}
+@media (max-width: 900px) { .trust__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .trust__grid { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
    SPECIFICATIONS (tabbed)
