@@ -517,14 +517,14 @@ h1 { letter-spacing: -0.03em; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--coral);
+  color: var(--steel);
   line-height: 0;
   animation: viewerSwipeLeft 1.4s ease-in-out infinite;
 }
 .viewer__swipe-icon {
   display: block;
-  width: 46px;
-  height: 32px;
+  width: 44px;
+  height: 34px;
 }
 @keyframes viewerSwipeLeft {
   0%, 100% { transform: translateX(5px); opacity: 0.55; }
