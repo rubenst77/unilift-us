@@ -315,9 +315,10 @@
       var idx = ((Math.round(frame) % frameCount) + frameCount) % frameCount;
       var im = imgs[idx];
       var rect = viewer.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, rect.width, rect.height);
       if (!im || !im.complete || !im.naturalWidth) return;
-      var scale = Math.min(rect.width / im.naturalWidth, rect.height / im.naturalHeight) * 0.94;
+      var scale = Math.min(rect.width / im.naturalWidth, rect.height / im.naturalHeight) * 0.92;
       var w = im.naturalWidth * scale, h = im.naturalHeight * scale;
       var offsetX = (offsets[idx] || 0) * rect.width;
       ctx.drawImage(im, (rect.width - w) / 2 + offsetX, (rect.height - h) / 2, w, h);

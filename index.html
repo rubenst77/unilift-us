@@ -275,11 +275,11 @@
         </div>
 
         <!-- Right: interactive product viewer -->
-        <div class="reveal">
+        <div class="viewer-stack reveal">
           <div class="viewer" id="product-viewer"
                data-viewer
-               data-photos="1,2,4,3,7"
-               data-frame-offsets="0,0.042,0,0,0.018"
+               data-photos="2,3,7,1,4"
+               data-frame-offsets="0.038,0,0.016,0,0"
                data-glb="assets/model/unilift.glb"
                aria-label="Interactive product viewer. Drag to rotate the UNILIFT hoist."
                role="img"
@@ -287,6 +287,15 @@
             <canvas class="viewer__canvas" id="viewer-canvas"></canvas>
 
             <span class="viewer__label" id="viewer-label">Drag to rotate</span>
+          </div>
+
+          <div class="viewer__actions">
+            <a href="#contact" class="btn btn--primary btn--lg" data-cta="product-quote" data-track="quote">
+              Request a Quote <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <button type="button" class="btn btn--outline btn--lg" data-datasheet-trigger data-cta="product-datasheet">
+              Get the Datasheet <span aria-hidden="true">&darr;</span>
+            </button>
           </div>
         </div>
       </div>

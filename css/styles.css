@@ -461,13 +461,22 @@ h1 { letter-spacing: -0.03em; }
 .point__desc { color: var(--steel); font-size: 0.96rem; line-height: 1.5; }
 
 /* Viewer */
+.viewer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+}
+.viewer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+  justify-content: center;
+}
 .viewer {
   position: relative;
   aspect-ratio: 1 / 1;
   width: 100%;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(27, 76, 130, 0.10), transparent 62%),
-    var(--paper);
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
@@ -489,10 +498,6 @@ h1 { letter-spacing: -0.03em; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--steel);
-  display: flex; align-items: center; gap: 0.5rem;
-  background: rgba(255,255,255,0.7);
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
 }
