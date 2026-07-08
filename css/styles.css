@@ -1109,12 +1109,28 @@ h1 { letter-spacing: -0.03em; }
    ========================================================================== */
 .faq__list { max-width: 800px; margin: 0 auto; }
 .faq__title {
-  font-size: clamp(1.65rem, 3.2vw, 2.1rem);
+  display: inline-block;
+  font-size: clamp(2rem, 4.5vw, 2.85rem);
   font-weight: 700;
-  color: var(--navy-800);
+  color: var(--navy-900);
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  position: relative;
+  padding-bottom: 0.75rem;
 }
+.faq__title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 3.25rem;
+  height: 3px;
+  background: var(--coral);
+  border-radius: 2px;
+}
+.faq__title-accent { color: var(--blue-accent); }
 .faq__category {
   font-family: var(--font-mono);
   font-size: 0.72rem;
