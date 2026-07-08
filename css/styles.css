@@ -502,10 +502,10 @@ h1 { letter-spacing: -0.03em; }
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  gap: 0.55rem;
   line-height: 1;
 }
 .viewer__label-text {
@@ -516,14 +516,15 @@ h1 { letter-spacing: -0.03em; }
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   color: var(--coral);
   line-height: 0;
   animation: viewerSwipeLeft 1.4s ease-in-out infinite;
 }
 .viewer__swipe-icon {
   display: block;
-  width: 54px;
-  height: 38px;
+  width: 46px;
+  height: 32px;
 }
 @keyframes viewerSwipeLeft {
   0%, 100% { transform: translateX(5px); opacity: 0.55; }
