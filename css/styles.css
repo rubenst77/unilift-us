@@ -498,7 +498,7 @@ h1 { letter-spacing: -0.03em; }
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--steel);
+  color: var(--navy-900);
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
   display: inline-flex;
@@ -517,7 +517,7 @@ h1 { letter-spacing: -0.03em; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--steel);
+  color: var(--navy-900);
   line-height: 0;
   animation: viewerSwipeLeft 1.4s ease-in-out infinite;
 }
