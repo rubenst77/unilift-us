@@ -1108,6 +1108,13 @@ h1 { letter-spacing: -0.03em; }
    FAQ
    ========================================================================== */
 .faq__list { max-width: 800px; margin: 0 auto; }
+.faq__title {
+  font-size: clamp(1.65rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  color: var(--navy-800);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
 .faq__category {
   font-family: var(--font-mono);
   font-size: 0.72rem;
