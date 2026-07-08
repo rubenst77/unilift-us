@@ -491,7 +491,7 @@ h1 { letter-spacing: -0.03em; }
 .viewer.is-dragging .viewer__canvas { cursor: grabbing; }
 .viewer__label {
   position: absolute;
-  left: 50%; bottom: 0.4rem;
+  left: 50%; bottom: 0.35rem;
   transform: translateX(-50%);
   font-family: var(--font-mono);
   font-size: 0.88rem;
@@ -502,29 +502,32 @@ h1 { letter-spacing: -0.03em; }
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.3rem;
   line-height: 1;
 }
 .viewer__label-text {
   white-space: nowrap;
   line-height: 1;
 }
-.viewer__drag-arrow {
-  display: inline-flex;
+.viewer__drag-gesture {
+  display: flex;
   align-items: center;
   justify-content: center;
   color: var(--coral);
-  font-size: 1.55rem;
-  font-weight: 700;
-  line-height: 1;
-  height: 1em;
-  animation: viewerArrowLeft 1.4s ease-in-out infinite;
+  line-height: 0;
+  animation: viewerSwipeLeft 1.4s ease-in-out infinite;
 }
-@keyframes viewerArrowLeft {
-  0%, 100% { transform: translateX(6px); opacity: 0.45; }
-  50% { transform: translateX(-4px); opacity: 1; }
+.viewer__swipe-icon {
+  display: block;
+  width: 54px;
+  height: 38px;
+}
+@keyframes viewerSwipeLeft {
+  0%, 100% { transform: translateX(5px); opacity: 0.55; }
+  50% { transform: translateX(-5px); opacity: 1; }
 }
 .viewer__hint-icon { color: var(--coral); font-size: 0.9rem; }
 
@@ -1373,5 +1376,5 @@ h1 { letter-spacing: -0.03em; }
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
   .hero [data-hero-anim] { opacity: 1 !important; transform: none !important; }
-  .hero__scroll-line::after, .hotspot::before, .viewer__drag-arrow { animation: none !important; }
+  .hero__scroll-line::after, .hotspot::before, .viewer__drag-gesture { animation: none !important; }
 }
