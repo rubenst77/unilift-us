@@ -274,31 +274,12 @@
         <div class="reveal">
           <div class="viewer" id="product-viewer"
                data-viewer
-               data-photos="1,5,3,2,6,4,7"
+               data-photos="1,2,7,3,4"
                data-glb="assets/model/unilift.glb"
                aria-label="Interactive product viewer. Drag to rotate the UNILIFT hoist."
                role="img"
                tabindex="0">
             <canvas class="viewer__canvas" id="viewer-canvas"></canvas>
-
-            <div class="viewer__hotspots" id="viewer-hotspots">
-              <!-- Positions are % of the frame; tuned to photo 1 (front 3/4) -->
-              <button class="hotspot" style="left:50%; top:14%;" data-hotspot
-                      data-title="OSLA secondary brake" data-text="Independent overspeed lock mounted above the rope inlet." aria-label="OSLA secondary brake">
-                <span class="hotspot__dot"></span>
-                <span class="hotspot__popover"><span class="hotspot__title">OSLA secondary brake</span><span class="hotspot__text">Independent overspeed lock mounted above the rope inlet.</span></span>
-              </button>
-              <button class="hotspot" style="left:34%; top:50%;" data-hotspot
-                      data-title="Control box / E-stop" data-text="Sealed IP55 box with E-stop, up/down and status indicators." aria-label="Control box and emergency stop">
-                <span class="hotspot__dot"></span>
-                <span class="hotspot__popover"><span class="hotspot__title">Control box / E-stop</span><span class="hotspot__text">Sealed IP55 box with E-stop, up/down and status indicators.</span></span>
-              </button>
-              <button class="hotspot" style="left:52%; top:84%;" data-hotspot
-                      data-title="Power connector" data-text="Industrial 3-pin (1P) or 4-pin (3P) connector at the base." aria-label="Power connector">
-                <span class="hotspot__dot"></span>
-                <span class="hotspot__popover"><span class="hotspot__title">Power connector</span><span class="hotspot__text">Industrial 3-pin (1P) or 4-pin (3P) connector at the base.</span></span>
-              </button>
-            </div>
 
             <span class="viewer__label" id="viewer-label">
               <span class="viewer__hint-icon" aria-hidden="true">&harr;</span> Drag to rotate
@@ -317,8 +298,8 @@
         <!-- Row 1 -->
         <article class="closeup reveal">
           <div class="closeup__media">
-            <img src="assets/photos/3.webp" width="1563" height="1563" loading="lazy" decoding="async"
-                 alt="Close-up of the UNILIFT control box and FAS-Tech nameplate">
+            <img class="media-crop media-crop--front" src="assets/photos/5.webp" width="1563" height="1563" loading="lazy" decoding="async"
+                 alt="Front view of the UNILIFT with FAS-Tech nameplate and motor assembly">
           </div>
           <div class="closeup__body">
             <div class="closeup__kicker">Build quality</div>
@@ -330,7 +311,7 @@
         <!-- Row 2 -->
         <article class="closeup closeup--reverse reveal">
           <div class="closeup__media">
-            <img src="assets/photos/8.webp" width="1563" height="1563" loading="lazy" decoding="async"
+            <img class="media-crop media-crop--osla" src="assets/photos/8.webp" width="1563" height="1563" loading="lazy" decoding="async"
                  alt="Close-up of the OSLA overspeed lock mechanism at the top of the hoist">
           </div>
           <div class="closeup__body">
@@ -343,7 +324,7 @@
         <!-- Row 3 -->
         <article class="closeup reveal">
           <div class="closeup__media">
-            <img src="assets/photos/9.webp" width="1563" height="1563" loading="lazy" decoding="async"
+            <img class="media-crop media-crop--base" src="assets/photos/9.webp" width="1563" height="1563" loading="lazy" decoding="async"
                  alt="Close-up of the UNILIFT base and industrial power connector">
           </div>
           <div class="closeup__body">
@@ -369,7 +350,7 @@
       <div class="features__grid">
         <article class="feature-card reveal">
           <div class="feature-card__media">
-            <img src="assets/photos/7@800.webp" width="800" height="800" loading="lazy" decoding="async" style="object-position:center;" alt="UNILIFT hoist body housing the overload mechanism">
+            <img class="media-crop media-crop--body" src="assets/photos/6@800.webp" width="800" height="800" loading="lazy" decoding="async" alt="UNILIFT hoist body housing the overload mechanism">
           </div>
           <h3 class="feature-card__title">Built-in Overload Mechanism</h3>
           <p class="feature-card__desc">When the load reaches or exceeds the limit, the hoist stops rising and will only descend. Trips at <span class="num">125%</span> WLL.</p>
@@ -377,7 +358,7 @@
 
         <article class="feature-card reveal">
           <div class="feature-card__media">
-            <img src="assets/photos/5@800.webp" width="800" height="800" loading="lazy" decoding="async" style="object-position:center top;" alt="UNILIFT brake and motor assembly">
+            <img class="media-crop media-crop--motor" src="assets/photos/2@800.webp" width="800" height="800" loading="lazy" decoding="async" alt="UNILIFT rear view showing brake and motor assembly">
           </div>
           <h3 class="feature-card__title">Safety Lowering Mechanism</h3>
           <p class="feature-card__desc">In a power failure, the electro-mechanical brake can be released manually for a safe, controlled descent.</p>
@@ -385,7 +366,7 @@
 
         <article class="feature-card reveal">
           <div class="feature-card__media">
-            <img src="assets/photos/3@800.webp" width="800" height="800" loading="lazy" decoding="async" style="object-position:center;" alt="UNILIFT connection box with hour counter">
+            <img class="media-crop media-crop--panel" src="assets/photos/3@800.webp" width="800" height="800" loading="lazy" decoding="async" alt="UNILIFT connection box with hour counter">
           </div>
           <h3 class="feature-card__title">Hour Counter</h3>
           <p class="feature-card__desc">An internal running-hours counter in the connection box records operating time, so service intervals are always known.</p>
@@ -393,7 +374,7 @@
 
         <article class="feature-card reveal">
           <div class="feature-card__media">
-            <img src="assets/photos/6@800.webp" width="800" height="800" loading="lazy" decoding="async" style="object-position:center;" alt="UNILIFT housing showing attachment points">
+            <img class="media-crop media-crop--mount" src="assets/photos/4@800.webp" width="800" height="800" loading="lazy" decoding="async" alt="UNILIFT side view showing attachment points and connector">
           </div>
           <h3 class="feature-card__title">Attachment Points</h3>
           <p class="feature-card__desc">Suspend from a central load pin, or fix at the housing corners with a hook, screw or pins. Adaptable to any rig.</p>
@@ -763,7 +744,7 @@
         </div>
       </div>
       <div class="ctaband__card reveal" aria-hidden="true">
-        <img src="assets/photos/1@800.webp" width="800" height="800" loading="lazy" decoding="async" alt="">
+        <img class="media-crop media-crop--product" src="assets/photos/7@800.webp" width="800" height="800" loading="lazy" decoding="async" alt="">
       </div>
     </div>
   </section>

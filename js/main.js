@@ -258,7 +258,7 @@
     var hotspots = $('#viewer-hotspots', viewer);
     var label = $('#viewer-label', viewer);
     if (canvas) canvas.remove();
-    if (hotspots) hotspots.style.display = 'none';
+    if (hotspots) hotspots.remove();
     if (label) label.textContent = '';
 
     var s = document.createElement('script');
@@ -278,7 +278,6 @@
 
   function mountPhotoViewer(viewer) {
     var canvas = $('#viewer-canvas', viewer);
-    var hotspots = $('#viewer-hotspots', viewer);
     var label = $('#viewer-label', viewer);
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
@@ -286,12 +285,11 @@
     var order = (viewer.getAttribute('data-photos') || '1').split(',').map(function (n) { return n.trim(); });
     var imgs = [];
     var loaded = 0;
-    var frame = 0;               // current frame index (float during drag)
+    var frame = 0;
     var frameCount = order.length;
     var interacted = false;
     var idleTimer = null;
 
-    // Preload
     order.forEach(function (n, i) {
       var im = new Image();
       im.decoding = 'async';
@@ -317,28 +315,18 @@
       var rect = viewer.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width, rect.height);
       if (!im || !im.complete || !im.naturalWidth) return;
-      // contain
       var scale = Math.min(rect.width / im.naturalWidth, rect.height / im.naturalHeight) * 0.94;
       var w = im.naturalWidth * scale, h = im.naturalHeight * scale;
       ctx.drawImage(im, (rect.width - w) / 2, (rect.height - h) / 2, w, h);
-      updateHotspots(idx);
     }
 
-    function updateHotspots(idx) {
-      if (!hotspots) return;
-      // Hotspots are calibrated to the default front view (frame 0 = photo 1)
-      if (idx === 0) { hotspots.classList.remove('is-hidden'); }
-      else { hotspots.classList.add('is-hidden'); closeHotspots(); }
-    }
-
-    // Idle auto-cycle until first interaction
     function startIdle() {
       if (prefersReduced || interacted) return;
       var dir = 0;
       idleTimer = setInterval(function () {
         if (interacted) { stopIdle(); return; }
         dir++;
-        frame = dir % 4; // cycle first 4 angles
+        frame = dir % frameCount;
         draw();
       }, 1400);
     }
@@ -407,10 +395,6 @@
       if (Math.abs(e.clientX - downX) < 5) openLightbox(order, frame, frameCount);
     });
 
-    // Hotspots
-    initHotspots(hotspots);
-
-    // Resize
     var resizeT;
     window.addEventListener('resize', function () {
       clearTimeout(resizeT);
@@ -419,21 +403,6 @@
 
     startIdle();
   }
-
-  function initHotspots(container) {
-    if (!container) return;
-    var spots = $$('[data-hotspot]', container);
-    spots.forEach(function (sp) {
-      sp.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var wasOpen = sp.classList.contains('is-open');
-        closeHotspots();
-        if (!wasOpen) sp.classList.add('is-open');
-      });
-    });
-    document.addEventListener('click', function () { closeHotspots(); });
-  }
-  function closeHotspots() { $$('.hotspot.is-open').forEach(function (s) { s.classList.remove('is-open'); }); }
 
   /* ---------- Lightbox ---------- */
   function openLightbox(order, frame, frameCount) {
