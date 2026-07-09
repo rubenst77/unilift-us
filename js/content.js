@@ -116,6 +116,13 @@
 
     var pdfLink = document.querySelector('[data-cms="datasheet-pdf"]');
     if (pdfLink && g.datasheetPdf) pdfLink.href = g.datasheetPdf;
+
+    if (g.rep) {
+      window.__siteRep = g.rep;
+    }
+    if (g.booking) {
+      window.__siteBooking = g.booking;
+    }
   }
 
   function hydrateHero(d) {

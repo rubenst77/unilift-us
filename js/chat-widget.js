@@ -4,15 +4,7 @@
 (function () {
   'use strict';
 
-  var REP = {
-    name: 'Ruben da Costa',
-    title: 'Sales Director at FAS-Tech',
-    email: 'ruben.dacosta@fas-technology.com',
-    whatsapp: 'https://wa.me/352691592667',
-    avatar: 'assets/avatar_ruben@96.webp',
-    avatarLg: 'assets/avatar_ruben.webp'
-  };
-
+  var REP;
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PULSE_KEY = 'chatLauncherPulseDone';
 
@@ -24,7 +16,22 @@
 
   document.addEventListener('DOMContentLoaded', init);
 
+  function getRepConfig() {
+    var r = window.__siteRep || {};
+    var wa = r.whatsapp || '352691592667';
+    if (wa.indexOf('http') !== 0) wa = 'https://wa.me/' + String(wa).replace(/\D/g, '');
+    return {
+      name: r.name || 'Ruben da Costa',
+      title: r.title || 'Sales Director at FAS-Tech',
+      email: r.email || 'ruben.dacosta@fas-technology.com',
+      whatsapp: wa,
+      avatar: r.avatar || 'assets/cararuben.png',
+      avatarLg: r.avatarLg || 'assets/cararuben.png'
+    };
+  }
+
   function init() {
+    REP = getRepConfig();
     createLauncher();
   }
 
@@ -177,6 +184,7 @@
   function showInitialChips() {
     var chips = [
       { label: 'Request a quote', intent: 'quote' },
+      { label: 'Book a call', intent: 'booking' },
       { label: 'Get the datasheet', intent: 'datasheet' },
       { label: 'Become a US distributor', intent: 'distributor' },
       { label: 'Ask a technical question', intent: 'technical' },
@@ -191,6 +199,7 @@
     trackIntent(intent);
     switch (intent) {
       case 'quote': handleQuote(); break;
+      case 'booking': handleBooking(); break;
       case 'datasheet': handleDatasheet(); break;
       case 'distributor': handleDistributor(); break;
       case 'technical': handleTechnical(); break;
@@ -201,6 +210,29 @@
   function handleQuote() {
     addBotMessage('Great. Tell me the model and your project and I will get you a price.');
     showClosingFallback();
+  }
+
+  function handleBooking() {
+    addBotMessage('Pick a time on my calendar and I will confirm by email.');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn--primary chat-action-btn';
+    btn.textContent = 'Open calendar';
+    btn.addEventListener('click', function () {
+      openBooking();
+      closePanel();
+    });
+    actionsEl.appendChild(btn);
+    btn.focus();
+  }
+
+  function openBooking() {
+    if (typeof window.__openBooking === 'function') {
+      window.__openBooking();
+      return;
+    }
+    var trigger = document.querySelector('[data-booking-open]');
+    if (trigger) trigger.click();
   }
 
   function handleDatasheet() {

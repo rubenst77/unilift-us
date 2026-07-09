@@ -113,6 +113,56 @@ content:
           - name: datasheetPdf
             label: Datasheet PDF path
             type: image
+          - name: rep
+            label: Ruben (sales contact)
+            type: object
+            fields:
+              - name: name
+                label: Name
+                type: string
+              - name: title
+                label: Job title
+                type: string
+              - name: email
+                label: Email
+                type: string
+              - name: whatsapp
+                label: WhatsApp number (digits only)
+                type: string
+              - name: avatar
+                label: Avatar (small, chat widget)
+                type: image
+              - name: avatarLg
+                label: Avatar (large, booking modal)
+                type: image
+          - name: booking
+            label: Calendar booking
+            type: object
+            fields:
+              - name: enabled
+                label: Enable booking
+                type: boolean
+              - name: title
+                label: Booking title
+                type: string
+              - name: description
+                label: Booking description
+                type: text
+              - name: duration
+                label: Duration label
+                type: string
+              - name: provider
+                label: Provider
+                type: select
+                description: Use calendly for Calendly links, or iframe for Microsoft Bookings / Google / other embed URLs.
+                options:
+                  values:
+                    - calendly
+                    - iframe
+              - name: url
+                label: Calendar URL
+                type: string
+                description: Calendly event link (e.g. https://calendly.com/ruben/30min) or full iframe embed URL.
           - name: seo
             label: SEO & social
             type: object

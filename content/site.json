@@ -47,7 +47,23 @@
       "intro": "Get a custom quote, request the full technical datasheet, or discuss US distribution."
     },
     "navCta": "Request a Quote",
-    "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf"
+    "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf",
+    "rep": {
+      "name": "Ruben da Costa",
+      "title": "Sales Director at FAS-Tech",
+      "email": "ruben.dacosta@fas-technology.com",
+      "whatsapp": "352691592667",
+      "avatar": "assets/cararuben.png",
+      "avatarLg": "assets/cararuben.png"
+    },
+    "booking": {
+      "enabled": true,
+      "title": "Book a 30-minute call",
+      "description": "Pick a time that works for you. Ruben will confirm by email.",
+      "duration": "30 min",
+      "provider": "calendly",
+      "url": ""
+    }
   },
   "hero": {
     "kicker": "Lifting Solutions",
