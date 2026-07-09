@@ -63,7 +63,7 @@ content:
             label: Phone / WhatsApp (display)
             type: string
           - name: phoneTel
-            label: Phone (tel: link, digits only)
+            label: "Phone (tel: link, digits only)"
             type: string
           - name: whatsapp
             label: WhatsApp number (digits, no +)
