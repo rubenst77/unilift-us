@@ -210,8 +210,20 @@
 
     var imagesRoot = document.querySelector('[data-xray-images]');
     var calloutsRoot = document.querySelector('[data-xray-callouts]');
+    var progressRoot = document.querySelector('[data-xray-progress]');
     var mobileRoot = document.querySelector('[data-cms="closeups-mobile"]');
     var items = c.items || [];
+
+    if (progressRoot) {
+      progressRoot.innerHTML = items.map(function (item, i) {
+        return (
+          '<div class="xray__tick' + (i === 0 ? ' is-active' : '') + '" data-tick="' + i + '">' +
+            '<span class="xray__tick-num">' + item.step + '</span>' +
+            '<span class="xray__tick-label">' + item.title + '</span>' +
+          '</div>'
+        );
+      }).join('');
+    }
 
     if (imagesRoot) {
       imagesRoot.innerHTML = items.map(function (item, i) {
@@ -227,7 +239,6 @@
       calloutsRoot.innerHTML = items.map(function (item, i) {
         return (
           '<article class="xray__callout' + (i === 0 ? ' is-active' : '') + '" data-xray-callout="' + i + '">' +
-            '<span class="xray__step">' + item.step + '</span>' +
             '<h3 class="xray__callout-title">' + item.title + '</h3>' +
             '<p class="xray__callout-sub">' + item.subline + '</p>' +
             '<p class="xray__callout-text">' + item.text + '</p>' +
@@ -243,7 +254,7 @@
             '<div class="xray__mobile-media">' +
               '<img src="' + item.mobileImage + '" width="800" height="800" loading="lazy" decoding="async" alt="' + (item.mobileImageAlt || '') + '">' +
             '</div>' +
-            '<span class="xray__step">' + item.step + '</span>' +
+            '<span class="xray__mobile-step">' + item.step + '</span>' +
             '<h3 class="xray__callout-title">' + item.title + '</h3>' +
             '<p class="xray__callout-sub">' + item.subline + '</p>' +
             '<p class="xray__callout-text">' + item.text + '</p>' +
