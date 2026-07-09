@@ -462,6 +462,7 @@
 
     var pinWrap = $('[data-xray-pin]', section);
     var stage = $('.xray__stage', section);
+    var panel = $('.xray__image-panel', section);
     var images = $$('[data-xray-img]', section);
     var callouts = $$('[data-xray-callout]', section);
     var ticks = $$('.xray__tick', section);
@@ -470,14 +471,26 @@
 
     var gsap = window.gsap;
 
-    gsap.set(images, { autoAlpha: 0, scale: 1.06, force3D: true });
-    gsap.set(images[0], { autoAlpha: 1, scale: 1 });
-    gsap.set(callouts, { autoAlpha: 0, y: 32 });
+    gsap.set(images, { autoAlpha: 0, scale: 1.04, x: 0, force3D: true });
+    gsap.set(images[0], { autoAlpha: 1, scale: 1, x: 0 });
+    gsap.set(callouts, { autoAlpha: 0, y: 28 });
     gsap.set(callouts[0], { autoAlpha: 1, y: 0 });
+    callouts.forEach(function (c, ci) {
+      var title = $('.xray__callout-title', c);
+      var sub = $('.xray__callout-sub', c);
+      var text = $('.xray__callout-text', c);
+      var parts = [title, sub, text].filter(Boolean);
+      if (ci === 0) gsap.set(parts, { autoAlpha: 1, y: 0 });
+      else gsap.set(parts, { autoAlpha: 0, y: 14 });
+    });
+    if (panel) gsap.set(panel, { scale: 1, y: 0 });
     callouts[0].classList.add('is-active');
     images[0].classList.add('is-active');
+    if (panel) panel.classList.add('is-step-active');
     ticks.forEach(function (t, i) { t.classList.toggle('is-active', i === 0); });
     if (track) track.style.setProperty('--xray-progress', '0%');
+
+    var currentStep = -1;
 
     var tl = gsap.timeline({
       scrollTrigger: {
@@ -485,21 +498,24 @@
         start: 'top top',
         end: 'bottom bottom',
         pin: stage,
-        scrub: 0.65,
+        scrub: 0.35,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         snap: {
           snapTo: [0, 0.5, 1],
-          duration: { min: 0.15, max: 0.4 },
-          delay: 0.04,
+          duration: { min: 0.08, max: 0.22 },
+          delay: 0.02,
           ease: 'power2.inOut'
         },
         onUpdate: function (self) {
           var step = Math.round(self.progress * 2);
           ticks.forEach(function (t, i) { t.classList.toggle('is-active', i <= step); });
           if (track) track.style.setProperty('--xray-progress', (self.progress * 100) + '%');
-          callouts.forEach(function (c, ci) { c.classList.toggle('is-active', ci === step); });
-          images.forEach(function (img, ii) { img.classList.toggle('is-active', ii === step); });
+          if (step !== currentStep) {
+            callouts.forEach(function (c, ci) { c.classList.toggle('is-active', ci === step); });
+            images.forEach(function (img, ii) { img.classList.toggle('is-active', ii === step); });
+            currentStep = step;
+          }
         }
       }
     });
@@ -510,10 +526,17 @@
 
     for (var i = 1; i < callouts.length; i++) {
       var label = 'step' + i;
-      tl.to(images[i - 1], { autoAlpha: 0, scale: 1.04, duration: 0.35, ease: 'power2.in' }, label)
-        .to(images[i], { autoAlpha: 1, scale: 1, duration: 0.45, ease: 'power2.out' }, label)
-        .to(callouts[i - 1], { autoAlpha: 0, y: -24, duration: 0.35, ease: 'power2.in' }, label)
-        .to(callouts[i], { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, label);
+      var title = $('.xray__callout-title', callouts[i]);
+      var sub = $('.xray__callout-sub', callouts[i]);
+      var text = $('.xray__callout-text', callouts[i]);
+      tl.to(images[i - 1], { autoAlpha: 0, scale: 1.02, x: -14, duration: 0.18, ease: 'power2.in' }, label)
+        .fromTo(images[i], { autoAlpha: 0, scale: 1.04, x: 18 }, { autoAlpha: 1, scale: 1, x: 0, duration: 0.24, ease: 'power2.out' }, label)
+        .to(callouts[i - 1], { autoAlpha: 0, y: -20, duration: 0.18, ease: 'power2.in' }, label)
+        .fromTo(callouts[i], { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.24, ease: 'power2.out' }, label)
+        .fromTo([title, sub, text], { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.2, stagger: 0.04, ease: 'power2.out' }, label + '+=0.04');
+      if (panel) {
+        tl.fromTo(panel, { scale: 0.985 }, { scale: 1, duration: 0.24, ease: 'power2.out' }, label);
+      }
     }
 
     tl.to({}, { duration: 0.01 }, 2);
