@@ -58,11 +58,11 @@
     },
     "booking": {
       "enabled": true,
-      "title": "Book a 30-minute call",
-      "description": "Pick a time that works for you. Ruben will confirm by email.",
+      "title": "Book a call with Ruben",
+      "description": "Pick a time that works for you. Confirmed automatically on Google Calendar.",
       "duration": "30 min",
-      "provider": "calendly",
-      "url": ""
+      "provider": "iframe",
+      "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
     }
   },
   "hero": {

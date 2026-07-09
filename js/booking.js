@@ -114,7 +114,14 @@
       iframe.title = 'Book a meeting';
       iframe.className = 'booking-embed__frame';
       iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
       embedEl.appendChild(iframe);
+
+      var ext = document.createElement('p');
+      ext.className = 'booking-embed__external';
+      ext.innerHTML =
+        'Calendar not loading? <a href="' + url + '" target="_blank" rel="noopener noreferrer">Open booking page in a new tab</a>.';
+      embedEl.appendChild(ext);
     }
   }
 

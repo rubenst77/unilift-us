@@ -110,11 +110,36 @@ content:
           - name: navCta
             label: Navigation CTA label
             type: string
-          - name: datasheetPdf
-            label: Datasheet PDF path
-            type: image
+          - name: booking
+            label: "Calendar booking (Ruben)"
+            type: object
+            fields:
+              - name: enabled
+                label: Enable booking
+                type: boolean
+              - name: title
+                label: Booking title
+                type: string
+              - name: description
+                label: Booking description
+                type: text
+              - name: duration
+                label: Duration label
+                type: string
+              - name: provider
+                label: Provider
+                type: select
+                description: Use iframe for Google Calendar or Microsoft Bookings. Use calendly only for Calendly links.
+                options:
+                  values:
+                    - iframe
+                    - calendly
+              - name: url
+                label: Calendar URL
+                type: string
+                description: Google link e.g. https://calendar.app.google/xxxxx or Calendly event URL.
           - name: rep
-            label: Ruben (sales contact)
+            label: "Ruben (photo + contact)"
             type: object
             fields:
               - name: name
@@ -135,34 +160,9 @@ content:
               - name: avatarLg
                 label: Avatar (large, booking modal)
                 type: image
-          - name: booking
-            label: Calendar booking
-            type: object
-            fields:
-              - name: enabled
-                label: Enable booking
-                type: boolean
-              - name: title
-                label: Booking title
-                type: string
-              - name: description
-                label: Booking description
-                type: text
-              - name: duration
-                label: Duration label
-                type: string
-              - name: provider
-                label: Provider
-                type: select
-                description: Use calendly for Calendly links, or iframe for Microsoft Bookings / Google / other embed URLs.
-                options:
-                  values:
-                    - calendly
-                    - iframe
-              - name: url
-                label: Calendar URL
-                type: string
-                description: Calendly event link (e.g. https://calendly.com/ruben/30min) or full iframe embed URL.
+          - name: datasheetPdf
+            label: Datasheet PDF path
+            type: image
           - name: seo
             label: SEO & social
             type: object
