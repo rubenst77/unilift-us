@@ -52,6 +52,7 @@
     initAppsParallax();
     initTracking();
     window.__scrollToSection = function (id) { scrollToEl(document.getElementById(id)); };
+    window.__sendLead = sendLead;
   }
 
   /* ---------- Smooth scroll (Lenis + GSAP ticker) ---------- */
@@ -584,6 +585,9 @@
         directDownload();
         return;
       }
+      openDatasheetGate();
+    }
+    function openDatasheetGate() {
       lastFocus = document.activeElement;
       showForm();
       modal.classList.add('is-open');
@@ -656,6 +660,7 @@
     }
 
     window.__openDatasheetModal = openDatasheet;
+    window.__openDatasheetGate = openDatasheetGate;
 
     // expose for contact form "Get Datasheet" success
     window.__openDatasheetSuccess = function () { openAndShowSuccess(); };

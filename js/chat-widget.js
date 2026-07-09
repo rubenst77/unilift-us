@@ -169,7 +169,7 @@
   }
 
   function startGreeting() {
-    addBotMessage('I\'m Ruben, Sales Director at FAS-Tech. I\'m here to help with anything — any question you have.');
+    addBotMessage('I\'m Ruben, Sales Director at FAS-Tech. I\'m here to help with anything, any question you have.');
     addBotMessage('What can I help you with?');
     showInitialChips();
   }
@@ -188,6 +188,7 @@
   function onChipSelect(intent, label) {
     clearActions();
     addUserMessage(label);
+    trackIntent(intent);
     switch (intent) {
       case 'quote': handleQuote(); break;
       case 'datasheet': handleDatasheet(); break;
@@ -198,84 +199,31 @@
   }
 
   function handleQuote() {
-    addBotMessage('Great — tell me the model and your project and I\'ll get you a price.');
-    var wrap = document.createElement('div');
-    wrap.className = 'chat-action-group';
-
-    wrap.appendChild(createMailButton(
-      'Open email to Ruben',
-      'UNILIFT quote request',
-      quoteBody(),
-      'quote'
-    ));
-
-    var formLink = document.createElement('button');
-    formLink.type = 'button';
-    formLink.className = 'chat-action-link';
-    formLink.textContent = 'Or use the full quote form';
-    formLink.addEventListener('click', function () {
-      fireWebhook('quote');
-      scrollToSection('contact');
-      closePanel();
-    });
-
-    wrap.appendChild(formLink);
-    actionsEl.appendChild(wrap);
-    wrap.querySelector('.chat-action-btn').focus();
+    addBotMessage('Great. Tell me the model and your project and I will get you a price.');
     showClosingFallback();
   }
 
   function handleDatasheet() {
-    addBotMessage('I\'ll send the full technical datasheet.');
-    var wrap = document.createElement('div');
-    wrap.className = 'chat-action-group';
-
+    addBotMessage('Enter your email on the next screen and I will send you the full technical datasheet.');
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'btn btn--primary chat-action-btn';
-    btn.textContent = 'Get the datasheet';
+    btn.textContent = 'Continue to datasheet';
     btn.addEventListener('click', function () {
-      fireWebhook('datasheet');
-      if (typeof window.__openDatasheetModal === 'function') {
-        window.__openDatasheetModal();
-      } else {
-        var trigger = document.querySelector('[data-datasheet-trigger]');
-        if (trigger) trigger.click();
-      }
+      openDatasheetGate();
       closePanel();
     });
-
-    wrap.appendChild(btn);
-    actionsEl.appendChild(wrap);
+    actionsEl.appendChild(btn);
     btn.focus();
-    showClosingFallback();
   }
 
   function handleDistributor() {
-    addBotMessage('We\'re opening US territories now.');
-    var wrap = document.createElement('div');
-    wrap.className = 'chat-action-group';
-
-    wrap.appendChild(createMailButton(
-      'Open email to Ruben',
-      'UNILIFT US distributor enquiry',
-      distributorBody(),
-      'distributor'
-    ));
-
-    actionsEl.appendChild(wrap);
-    wrap.querySelector('.chat-action-btn').focus();
+    addBotMessage('We are opening US territories now. Get in touch and we can talk about your market.');
     showClosingFallback();
   }
 
   function handleTechnical() {
-    addBotMessage('Ask away — I\'ll get back to you fast.');
-    var form = document.createElement('form');
-    form.className = 'chat-tech-form';
-    form.innerHTML =
-      '<input type="text" class="chat-tech-input" placeholder="Your question…" aria-label="Your technical question" required maxlength="500">' +
-      '<button type="submit" class="chat-tech-send" aria-label="Send question">Send</button>';
-
+    addBotMessage('Contact me directly at my personal email and I will reply as quickly as possible.');
     var faqLink = document.createElement('button');
     faqLink.type = 'button';
     faqLink.className = 'chat-action-link';
@@ -284,37 +232,12 @@
       scrollToSection('faq');
       closePanel();
     });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var input = form.querySelector('.chat-tech-input');
-      var text = (input.value || '').trim();
-      if (!text) { input.focus(); return; }
-      addUserMessage(text);
-      clearActions();
-      openMailto('UNILIFT technical question', technicalBody(text), 'technical');
-      showClosingFallback();
-    });
-
-    actionsEl.appendChild(form);
     actionsEl.appendChild(faqLink);
-    form.querySelector('.chat-tech-input').focus();
+    showClosingFallback();
   }
 
   function handleOther() {
-    addBotMessage('No problem — tell me what you need and I\'ll point you in the right direction.');
-    var wrap = document.createElement('div');
-    wrap.className = 'chat-action-group';
-
-    wrap.appendChild(createMailButton(
-      'Open email to Ruben',
-      'UNILIFT enquiry',
-      otherBody(),
-      'other'
-    ));
-
-    actionsEl.appendChild(wrap);
-    wrap.querySelector('.chat-action-btn').focus();
+    addBotMessage('Happy to help. Reach out by email or WhatsApp and tell me what you need.');
     showClosingFallback();
   }
 
@@ -337,6 +260,11 @@
 
     card.querySelector('.chat-contact-email').addEventListener('click', function () {
       copyEmailHint();
+      trackIntent('email_click');
+    });
+
+    card.querySelector('.chat-contact-wa').addEventListener('click', function () {
+      trackIntent('whatsapp_click');
     });
 
     actionsEl.appendChild(card);
@@ -344,36 +272,13 @@
     announce('Contact options: email or WhatsApp');
   }
 
-  function createMailButton(label, subject, body, intent) {
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'btn btn--primary chat-action-btn';
-    btn.textContent = label;
-    btn.addEventListener('click', function () {
-      openMailto(subject, body, intent);
-    });
-    return btn;
-  }
-
-  function openMailto(subject, body, intent) {
-    if (intent) fireWebhook(intent, body);
-    copyEmailHint();
-    var url = buildMailto(subject, body);
-    var opened = false;
-
-    try {
-      var a = document.createElement('a');
-      a.href = url;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      opened = true;
-    } catch (err) { /* try fallback */ }
-
-    if (!opened) {
-      window.location.href = url;
+  function openDatasheetGate() {
+    if (typeof window.__openDatasheetGate === 'function') {
+      window.__openDatasheetGate();
+      return;
     }
+    var trigger = document.querySelector('[data-datasheet-trigger]');
+    if (trigger) trigger.click();
   }
 
   function renderChips(items, onSelect) {
@@ -438,28 +343,6 @@
     if (el) el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
   }
 
-  function buildMailto(subject, body) {
-    return 'mailto:' + REP.email +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(body);
-  }
-
-  function quoteBody() {
-    return 'Hi Ruben,\n\nI\'m interested in the UNILIFT.\nModel: \nCompany: \nProject / quantity: \n\nThanks,';
-  }
-
-  function distributorBody() {
-    return 'Hi Ruben,\n\nI\'m interested in becoming a UNILIFT distributor in the US.\nCompany: \nTerritory / state: \n\nThanks,';
-  }
-
-  function technicalBody(question) {
-    return 'Hi Ruben,\n\nI have a technical question about the UNILIFT:\n\n' + question + '\n\nThanks,';
-  }
-
-  function otherBody() {
-    return 'Hi Ruben,\n\nI have a question about the UNILIFT:\n\n\nThanks,';
-  }
-
   function copyEmailHint() {
     if (!navigator.clipboard || !navigator.clipboard.writeText) return;
     navigator.clipboard.writeText(REP.email).then(function () {
@@ -478,20 +361,25 @@
     setTimeout(function () { toast.remove(); }, 2200);
   }
 
-  function fireWebhook(intent, text) {
+  function trackIntent(intent, text) {
+    var payload = {
+      source: 'chat_widget',
+      intent: intent,
+      text: text || undefined,
+      ts: Date.now(),
+      page: location.pathname
+    };
+    if (typeof window.__sendLead === 'function') {
+      window.__sendLead(payload);
+      return;
+    }
     var url = window.LEAD_WEBHOOK_URL;
     if (!url) return;
     try {
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          source: 'chat_widget',
-          intent: intent,
-          text: text || undefined,
-          ts: Date.now(),
-          page: location.pathname
-        }),
+        body: JSON.stringify(payload),
         keepalive: true
       }).catch(function () { /* fire-and-forget */ });
     } catch (err) { /* ignore */ }
