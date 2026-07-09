@@ -208,7 +208,6 @@
     setText(document.querySelector('[data-cms="closeups-kicker"]'), c.kicker);
     setText(document.querySelector('[data-cms="closeups-heading"]'), c.heading);
 
-    var imagesRoot = document.querySelector('[data-xray-images]');
     var stepsRoot = document.querySelector('[data-xray-steps]');
     var mobileRoot = document.querySelector('[data-xray-mobile]');
     var items = c.items || [];
@@ -224,28 +223,24 @@
       );
     }
 
-    if (imagesRoot) {
-      imagesRoot.innerHTML = items.map(function (item, i) {
-        return (
-          '<img class="xray__img' + (i === 0 ? ' is-active' : '') + '" data-xray-img="' + i + '" ' +
-            'src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
-            'decoding="async" alt="' + (item.imageAlt || '') + '">'
-        );
-      }).join('');
-    }
-
     if (stepsRoot) {
       stepsRoot.innerHTML = items.map(function (item, i) {
         return (
           '<article class="xray__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '">' +
-            '<div class="xray__eyebrow">' +
-              '<span class="xray__idx">' + item.step + '</span>' +
-              '<span class="xray__rule" aria-hidden="true"></span>' +
+            '<div class="xray__frame">' +
+              '<img src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
+                'decoding="async" alt="' + (item.imageAlt || '') + '">' +
             '</div>' +
-            '<h3 class="xray__title">' + item.title + '</h3>' +
-            '<p class="xray__sub">' + item.subline + '</p>' +
-            '<p class="xray__text">' + item.text + '</p>' +
-            renderSpecs(item.specs) +
+            '<div class="xray__copy">' +
+              '<div class="xray__eyebrow">' +
+                '<span class="xray__idx">' + item.step + '</span>' +
+                '<span class="xray__rule" aria-hidden="true"></span>' +
+              '</div>' +
+              '<h3 class="xray__title">' + item.title + '</h3>' +
+              '<p class="xray__sub">' + item.subline + '</p>' +
+              '<p class="xray__text">' + item.text + '</p>' +
+              renderSpecs(item.specs) +
+            '</div>' +
           '</article>'
         );
       }).join('');

@@ -452,7 +452,7 @@
     return lb;
   }
 
-  /* ---------- Inside the UNILIFT (sticky + IntersectionObserver) ---------- */
+  /* ---------- Inside the UNILIFT (scroll steps) ---------- */
   function initCloseups() {
     var section = document.getElementById('xray');
     if (!section) return;
@@ -462,28 +462,18 @@
       section._xrayIO = null;
     }
 
-    var steps = $$('[data-step]', section);
-    var imgs = $$('[data-xray-img]', section);
-    if (!steps.length || !imgs.length) return;
+    var steps = $$('.xray__step', section);
+    if (!steps.length) return;
 
     if (prefersReduced || window.innerWidth < 1024) return;
-
-    var current = 0;
-
-    function activate(i) {
-      if (i === current) return;
-      current = i;
-      steps.forEach(function (s, si) { s.classList.toggle('is-active', si === i); });
-      imgs.forEach(function (img, ii) { img.classList.toggle('is-active', ii === i); });
-    }
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
-          activate(parseInt(e.target.getAttribute('data-step'), 10));
+          steps.forEach(function (s) { s.classList.toggle('is-active', s === e.target); });
         }
       });
-    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+    }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
 
     steps.forEach(function (s) { io.observe(s); });
     section._xrayIO = io;
