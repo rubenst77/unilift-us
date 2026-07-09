@@ -22,7 +22,7 @@
       "youtube": "https://www.youtube.com/channel/UC3aVqagmLcEgvphduGfdfrg"
     },
     "manufacturerUrl": "https://www.fas-technology.com",
-    "SITE_URL": "https://unilift-us.vercel.app",
+    "SITE_URL": "https://www.fas-tech.us",
     "LEAD_WEBHOOK_URL": "",
     "GA4_ID": "G-XXXXXXXXXX",
     "GADS_ID": "AW-XXXXXXXXXX",
@@ -142,7 +142,7 @@
         "title": "Build quality",
         "subline": "Engineered and labelled in Luxembourg.",
         "text": "Every UNILIFT is factory-tested before it ships, with E-stop, up/down, overload alarm and status indicators sealed in one IP55 control box.",
-        "tag": "IP55 CONTROL BOX",
+        "chip": "IP55 CONTROL BOX",
         "specs": [
           {
             "k": "Protection",
@@ -150,7 +150,7 @@
           },
           {
             "k": "Testing",
-            "v": "100% factory-tested"
+            "v": "100% factory"
           }
         ],
         "image": "assets/photos/1.webp",
@@ -163,7 +163,7 @@
         "title": "The OSLA overspeed lock",
         "subline": "Independent mechanical safety, always fitted.",
         "text": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. Fully mechanical and independent, it needs no power to arrest a fall.",
-        "tag": "OSLA SECONDARY BRAKE",
+        "chip": "OSLA SECONDARY BRAKE",
         "specs": [
           {
             "k": "Locking speed",
@@ -184,7 +184,7 @@
         "title": "Built to be serviced",
         "subline": "Connected for the jobsite, designed for uptime.",
         "text": "Industrial 3-pin or 4-pin power connectors, an internal hour-meter, and a 500-hour overhaul cycle keep integration and maintenance straightforward.",
-        "tag": "3P POWER CONNECTOR",
+        "chip": "3P POWER CONNECTOR",
         "specs": [
           {
             "k": "Service interval",

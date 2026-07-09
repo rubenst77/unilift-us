@@ -312,8 +312,8 @@ content:
               - name: text
                 label: Body text
                 type: text
-              - name: tag
-                label: Tag chip text
+              - name: chip
+                label: Chip label text
                 type: string
               - name: specs
                 label: Spec pairs

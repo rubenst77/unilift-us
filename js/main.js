@@ -464,8 +464,7 @@
 
     var steps = $$('[data-step]', section);
     var imgs = $$('[data-xray-img]', section);
-    var numEl = $('[data-xray-num]', section);
-    var tagEl = $('[data-xray-tag]', section);
+    var chipEl = $('[data-xray-chip]', section);
     if (!steps.length || !imgs.length) return;
 
     if (prefersReduced || window.innerWidth < 1024) return;
@@ -477,19 +476,12 @@
       current = i;
       steps.forEach(function (s, si) { s.classList.toggle('is-active', si === i); });
       imgs.forEach(function (img, ii) { img.classList.toggle('is-active', ii === i); });
-      if (numEl) {
-        numEl.style.opacity = '0';
+      if (chipEl) {
+        chipEl.style.opacity = '0';
         setTimeout(function () {
-          numEl.textContent = '0' + (i + 1);
-          numEl.style.opacity = '1';
-        }, 200);
-      }
-      if (tagEl) {
-        tagEl.style.opacity = '0';
-        setTimeout(function () {
-          tagEl.textContent = steps[i].getAttribute('data-tag') || '';
-          tagEl.style.opacity = '1';
-        }, 180);
+          chipEl.textContent = steps[i].getAttribute('data-chip') || '';
+          chipEl.style.opacity = '1';
+        }, 150);
       }
     }
 
@@ -499,7 +491,7 @@
           activate(parseInt(e.target.getAttribute('data-step'), 10));
         }
       });
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
 
     steps.forEach(function (s) { io.observe(s); });
     section._xrayIO = io;

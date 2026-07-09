@@ -211,13 +211,13 @@
     var imagesRoot = document.querySelector('[data-xray-images]');
     var stepsRoot = document.querySelector('[data-xray-steps]');
     var mobileRoot = document.querySelector('[data-xray-mobile]');
-    var tagEl = document.querySelector('[data-xray-tag]');
+    var chipEl = document.querySelector('[data-xray-chip]');
     var items = c.items || [];
 
     function renderSpecs(specs) {
       if (!specs || !specs.length) return '';
       return (
-        '<div class="xray2__step-spec">' +
+        '<div class="xray__spec">' +
           specs.map(function (s) {
             return '<div><span class="k">' + s.k + '</span><span class="v">' + s.v + '</span></div>';
           }).join('') +
@@ -228,7 +228,7 @@
     if (imagesRoot) {
       imagesRoot.innerHTML = items.map(function (item, i) {
         return (
-          '<img class="xray2__img' + (i === 0 ? ' is-active' : '') + '" data-xray-img="' + i + '" ' +
+          '<img class="xray__img' + (i === 0 ? ' is-active' : '') + '" data-xray-img="' + i + '" ' +
             'src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
             'decoding="async" alt="' + (item.imageAlt || '') + '">'
         );
@@ -237,36 +237,40 @@
 
     if (stepsRoot) {
       stepsRoot.innerHTML = items.map(function (item, i) {
+        var chip = item.chip || item.tag || '';
         return (
-          '<article class="xray2__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '" data-tag="' + (item.tag || '') + '">' +
-            '<div class="xray2__step-head">' +
-              '<span class="xray2__step-num">' + item.step + '</span>' +
-              '<span class="xray2__step-line" aria-hidden="true"></span>' +
+          '<article class="xray__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '" data-chip="' + chip + '">' +
+            '<div class="xray__eyebrow">' +
+              '<span class="xray__idx">' + item.step + '</span>' +
+              '<span class="xray__rule" aria-hidden="true"></span>' +
             '</div>' +
-            '<h3 class="xray2__step-title">' + item.title + '</h3>' +
-            '<p class="xray2__step-sub">' + item.subline + '</p>' +
-            '<p class="xray2__step-text">' + item.text + '</p>' +
+            '<h3 class="xray__title">' + item.title + '</h3>' +
+            '<p class="xray__sub">' + item.subline + '</p>' +
+            '<p class="xray__text">' + item.text + '</p>' +
             renderSpecs(item.specs) +
           '</article>'
         );
       }).join('');
     }
 
-    if (tagEl && items[0]) {
-      tagEl.textContent = items[0].tag || '';
+    if (chipEl && items[0]) {
+      chipEl.textContent = items[0].chip || items[0].tag || '';
     }
 
     if (mobileRoot) {
       mobileRoot.innerHTML = items.map(function (item) {
         return (
-          '<article class="xray2__mblock">' +
-            '<div class="xray2__mpanel">' +
+          '<article class="xray__mblock">' +
+            '<div class="xray__mframe">' +
               '<img src="' + item.mobileImage + '" width="800" height="800" loading="lazy" decoding="async" alt="' + (item.mobileImageAlt || '') + '">' +
             '</div>' +
-            '<span class="xray2__mnum">' + item.step + '</span>' +
-            '<h3 class="xray2__step-title">' + item.title + '</h3>' +
-            '<p class="xray2__step-sub">' + item.subline + '</p>' +
-            '<p class="xray2__step-text">' + item.text + '</p>' +
+            '<div class="xray__eyebrow">' +
+              '<span class="xray__idx">' + item.step + '</span>' +
+              '<span class="xray__rule" aria-hidden="true"></span>' +
+            '</div>' +
+            '<h3 class="xray__title">' + item.title + '</h3>' +
+            '<p class="xray__sub">' + item.subline + '</p>' +
+            '<p class="xray__text">' + item.text + '</p>' +
             renderSpecs(item.specs) +
           '</article>'
         );
