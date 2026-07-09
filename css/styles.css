@@ -659,20 +659,21 @@ h1 { letter-spacing: -0.03em; }
   display: grid;
   grid-template-columns: minmax(0, 46%) minmax(0, 54%);
   gap: clamp(20px, 3vw, 40px);
-  align-items: start;
+  align-items: stretch;
   position: relative;
   margin-top: clamp(12px, 2vw, 24px);
 }
 .xray__viz {
   position: relative;
+  align-self: stretch;
 }
 .xray__sticky {
   position: sticky;
-  top: clamp(72px, 9vh, 96px);
+  top: clamp(64px, 8vh, 88px);
+  height: calc(100vh - clamp(64px, 8vh, 88px));
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding-top: clamp(4px, 1vw, 12px);
 }
 .xray__frame {
   position: relative;
@@ -708,11 +709,11 @@ h1 { letter-spacing: -0.03em; }
   flex-direction: column;
 }
 .xray__step {
-  min-height: 68vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: clamp(4px, 1vw, 12px) 0 0;
+  justify-content: center;
+  padding: 0 clamp(0px, 2vw, 16px);
 }
 .xray__eyebrow {
   display: flex;
