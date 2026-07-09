@@ -171,6 +171,17 @@
         "title": "Build quality",
         "subline": "Engineered and labelled in Luxembourg.",
         "text": "Every UNILIFT is factory-tested before it ships, with E-stop, up/down, overload alarm and status indicators sealed in one IP55 control box.",
+        "tag": "IP55 CONTROL BOX",
+        "specs": [
+          {
+            "k": "Protection",
+            "v": "IP55"
+          },
+          {
+            "k": "Testing",
+            "v": "100% factory-tested"
+          }
+        ],
         "image": "assets/photos/1.webp",
         "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
         "mobileImage": "assets/photos/1@800.webp",
@@ -181,6 +192,17 @@
         "title": "The OSLA overspeed lock",
         "subline": "Independent mechanical safety, always fitted.",
         "text": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. Fully mechanical and independent, it needs no power to arrest a fall.",
+        "tag": "OSLA SECONDARY BRAKE",
+        "specs": [
+          {
+            "k": "Locking speed",
+            "v": "98 ft/min"
+          },
+          {
+            "k": "Locking distance",
+            "v": "<= 10.2 in"
+          }
+        ],
         "image": "assets/photos/8.webp",
         "imageAlt": "Close-up of the OSLA overspeed lock at the top of the hoist",
         "mobileImage": "assets/photos/8@800.webp",
@@ -191,6 +213,17 @@
         "title": "Built to be serviced",
         "subline": "Connected for the jobsite, designed for uptime.",
         "text": "Industrial 3-pin or 4-pin power connectors, an internal hour-meter, and a 500-hour overhaul cycle keep integration and maintenance straightforward.",
+        "tag": "3P POWER CONNECTOR",
+        "specs": [
+          {
+            "k": "Service interval",
+            "v": "100 h"
+          },
+          {
+            "k": "Overhaul cycle",
+            "v": "500 h"
+          }
+        ],
         "image": "assets/photos/9.webp",
         "imageAlt": "UNILIFT power connector and service connection detail",
         "mobileImage": "assets/photos/9@800.webp",
@@ -846,38 +879,34 @@
   </section>
 
 
-  <!-- ========== CLOSE-UP XRAY (pinned callouts) ========== -->
-  <section id="xray" class="xray section on-dark" aria-label="Inside the UNILIFT">
-    <div class="xray__blueprint" aria-hidden="true"></div>
+  <!-- ========== INSIDE THE UNILIFT (sticky scrollytelling) ========== -->
+  <section id="xray" class="xray2 section on-dark" aria-label="Inside the UNILIFT">
+    <div class="xray2__blueprint" aria-hidden="true"></div>
 
-    <div class="container xray__intro">
-      <div class="kicker kicker--white" data-cms="closeups-kicker">INSIDE THE UNILIFT</div>
-      <h2 class="xray__heading" data-cms="closeups-heading">Engineered down to the last detail.</h2>
+    <div class="container xray2__intro">
+      <span class="xray2__kicker" data-cms="closeups-kicker">INSIDE THE UNILIFT</span>
+      <h2 class="xray2__heading" data-cms="closeups-heading">Engineered down to the last detail.</h2>
     </div>
 
-    <div class="xray__desktop" data-xray-desktop>
-      <div class="xray__pin-wrap" data-xray-pin data-xray-steps="3">
-        <div class="xray__stage" data-xray-stage>
-          <nav class="xray__progress" aria-label="Detail progress">
-            <div class="xray__progress-track" aria-hidden="true"></div>
-            <div class="xray__progress-steps" data-xray-progress></div>
-          </nav>
-
-          <div class="xray__visual">
-            <div class="xray__glow" aria-hidden="true"></div>
-            <div class="xray__image-panel">
-              <div class="xray__image-wrap" data-xray-images aria-live="polite"></div>
+    <div class="container xray2__grid">
+      <div class="xray2__stickycol">
+        <div class="xray2__sticky">
+          <div class="xray2__panelwrap">
+            <span class="xray2__num" data-xray-num>01</span>
+            <div class="xray2__panel">
+              <div data-xray-images aria-live="polite"></div>
+              <div class="xray2__tag">
+                <span class="xray2__tag-dot"></span>
+                <span class="xray2__tag-text" data-xray-tag>IP55 CONTROL BOX</span>
+              </div>
             </div>
-          </div>
-
-          <div class="xray__copy">
-            <div class="xray__callouts" data-cms="closeups-callouts" data-xray-callouts></div>
           </div>
         </div>
       </div>
+      <div class="xray2__steps" data-xray-steps></div>
     </div>
 
-    <div class="xray__mobile container" data-xray-mobile data-cms="closeups-mobile"></div>
+    <div class="container xray2__mobile" data-xray-mobile data-cms="closeups-mobile"></div>
   </section>
 
 

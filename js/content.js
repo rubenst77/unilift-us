@@ -209,57 +209,65 @@
     setText(document.querySelector('[data-cms="closeups-heading"]'), c.heading);
 
     var imagesRoot = document.querySelector('[data-xray-images]');
-    var calloutsRoot = document.querySelector('[data-xray-callouts]');
-    var progressRoot = document.querySelector('[data-xray-progress]');
-    var mobileRoot = document.querySelector('[data-cms="closeups-mobile"]');
+    var stepsRoot = document.querySelector('[data-xray-steps]');
+    var mobileRoot = document.querySelector('[data-xray-mobile]');
+    var tagEl = document.querySelector('[data-xray-tag]');
     var items = c.items || [];
 
-    if (progressRoot) {
-      progressRoot.innerHTML = items.map(function (item, i) {
-        var active = i === 0;
-        return (
-          '<div class="xray__tick' + (active ? ' is-active' : '') + '" data-tick="' + i + '"' +
-            (active ? ' aria-current="step"' : '') + '>' +
-            '<span class="xray__tick-num">' + item.step + '</span>' +
-            '<span class="xray__tick-label">' + item.title + '</span>' +
-          '</div>'
-        );
-      }).join('');
+    function renderSpecs(specs) {
+      if (!specs || !specs.length) return '';
+      return (
+        '<div class="xray2__step-spec">' +
+          specs.map(function (s) {
+            return '<div><span class="k">' + s.k + '</span><span class="v">' + s.v + '</span></div>';
+          }).join('') +
+        '</div>'
+      );
     }
 
     if (imagesRoot) {
       imagesRoot.innerHTML = items.map(function (item, i) {
         return (
-          '<img class="xray__img' + (i === 0 ? ' is-active' : '') + '" data-xray-img="' + i + '" ' +
+          '<img class="xray2__img' + (i === 0 ? ' is-active' : '') + '" data-xray-img="' + i + '" ' +
             'src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
             'decoding="async" alt="' + (item.imageAlt || '') + '">'
         );
       }).join('');
     }
 
-    if (calloutsRoot) {
-      calloutsRoot.innerHTML = items.map(function (item, i) {
+    if (stepsRoot) {
+      stepsRoot.innerHTML = items.map(function (item, i) {
         return (
-          '<article class="xray__callout' + (i === 0 ? ' is-active' : '') + '" data-xray-callout="' + i + '">' +
-            '<h3 class="xray__callout-title">' + item.title + '</h3>' +
-            '<p class="xray__callout-sub">' + item.subline + '</p>' +
-            '<p class="xray__callout-text">' + item.text + '</p>' +
+          '<article class="xray2__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '" data-tag="' + (item.tag || '') + '">' +
+            '<div class="xray2__step-head">' +
+              '<span class="xray2__step-num">' + item.step + '</span>' +
+              '<span class="xray2__step-line" aria-hidden="true"></span>' +
+            '</div>' +
+            '<h3 class="xray2__step-title">' + item.title + '</h3>' +
+            '<p class="xray2__step-sub">' + item.subline + '</p>' +
+            '<p class="xray2__step-text">' + item.text + '</p>' +
+            renderSpecs(item.specs) +
           '</article>'
         );
       }).join('');
     }
 
+    if (tagEl && items[0]) {
+      tagEl.textContent = items[0].tag || '';
+    }
+
     if (mobileRoot) {
       mobileRoot.innerHTML = items.map(function (item) {
         return (
-          '<article class="xray__mobile-block">' +
-            '<div class="xray__mobile-media">' +
+          '<article class="xray2__mblock">' +
+            '<div class="xray2__mpanel">' +
               '<img src="' + item.mobileImage + '" width="800" height="800" loading="lazy" decoding="async" alt="' + (item.mobileImageAlt || '') + '">' +
             '</div>' +
-            '<span class="xray__mobile-step">' + item.step + '</span>' +
-            '<h3 class="xray__callout-title">' + item.title + '</h3>' +
-            '<p class="xray__callout-sub">' + item.subline + '</p>' +
-            '<p class="xray__callout-text">' + item.text + '</p>' +
+            '<span class="xray2__mnum">' + item.step + '</span>' +
+            '<h3 class="xray2__step-title">' + item.title + '</h3>' +
+            '<p class="xray2__step-sub">' + item.subline + '</p>' +
+            '<p class="xray2__step-text">' + item.text + '</p>' +
+            renderSpecs(item.specs) +
           '</article>'
         );
       }).join('');

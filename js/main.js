@@ -452,139 +452,57 @@
     return lb;
   }
 
-  /* ---------- Xray pinned close-ups ---------- */
+  /* ---------- Inside the UNILIFT (sticky + IntersectionObserver) ---------- */
   function initCloseups() {
     var section = document.getElementById('xray');
     if (!section) return;
 
-    if (section._xrayScrollTrigger) {
-      section._xrayScrollTrigger.kill();
-      section._xrayScrollTrigger = null;
+    if (section._xrayIO) {
+      section._xrayIO.disconnect();
+      section._xrayIO = null;
     }
 
-    var mobileBlocks = $$('.xray__mobile-block', section);
-    var useMobile = prefersReduced || window.innerWidth < 1024;
+    var steps = $$('[data-step]', section);
+    var imgs = $$('[data-xray-img]', section);
+    var numEl = $('[data-xray-num]', section);
+    var tagEl = $('[data-xray-tag]', section);
+    if (!steps.length || !imgs.length) return;
 
-    if (useMobile || !(window.gsap && window.ScrollTrigger)) {
-      if (useMobile && window.gsap && window.ScrollTrigger && !prefersReduced) {
-        mobileBlocks.forEach(function (block) {
-          window.gsap.fromTo(block,
-            { opacity: 0, y: 28 },
-            {
-              opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
-              scrollTrigger: { trigger: block, start: 'top 85%', once: true }
-            }
-          );
-        });
-        return;
+    if (prefersReduced || window.innerWidth < 1024) return;
+
+    var current = 0;
+
+    function activate(i) {
+      if (i === current) return;
+      current = i;
+      steps.forEach(function (s, si) { s.classList.toggle('is-active', si === i); });
+      imgs.forEach(function (img, ii) { img.classList.toggle('is-active', ii === i); });
+      if (numEl) {
+        numEl.style.opacity = '0';
+        setTimeout(function () {
+          numEl.textContent = '0' + (i + 1);
+          numEl.style.opacity = '1';
+        }, 200);
       }
-      mobileBlocks.forEach(function (block) { block.classList.add('is-visible'); });
-      return;
+      if (tagEl) {
+        tagEl.style.opacity = '0';
+        setTimeout(function () {
+          tagEl.textContent = steps[i].getAttribute('data-tag') || '';
+          tagEl.style.opacity = '1';
+        }, 180);
+      }
     }
 
-    var pinWrap = $('[data-xray-pin]', section);
-    var images = $$('[data-xray-img]', section);
-    var callouts = $$('[data-xray-callout]', section);
-    var ticks = $$('.xray__tick', section);
-    var track = $('.xray__progress-track', section);
-    if (!pinWrap || images.length < 2 || callouts.length < 2) return;
-
-    var gsap = window.gsap;
-    var stepCount = callouts.length;
-    var navH = 74;
-    var segment = 1;
-
-    pinWrap.style.setProperty('--xray-steps', stepCount);
-
-    var calloutParts = callouts.map(function (c) {
-      return [
-        $('.xray__callout-title', c),
-        $('.xray__callout-sub', c),
-        $('.xray__callout-text', c)
-      ].filter(Boolean);
-    });
-
-    images.slice(1).forEach(function (img) {
-      var pre = new Image();
-      pre.src = img.getAttribute('src') || img.src;
-    });
-
-    gsap.set(images, { autoAlpha: 0, scale: 1.015, force3D: true });
-    gsap.set(images[0], { autoAlpha: 1, scale: 1 });
-    gsap.set(callouts, { autoAlpha: 0 });
-    gsap.set(callouts[0], { autoAlpha: 1 });
-    calloutParts.forEach(function (parts, ci) {
-      if (ci === 0) gsap.set(parts, { autoAlpha: 1, y: 0 });
-      else gsap.set(parts, { autoAlpha: 0, y: 12 });
-    });
-
-    function setStep(index) {
-      ticks.forEach(function (t, i) {
-        var active = i === index;
-        t.classList.toggle('is-active', active);
-        if (active) t.setAttribute('aria-current', 'step');
-        else t.removeAttribute('aria-current');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          activate(parseInt(e.target.getAttribute('data-step'), 10));
+        }
       });
-      if (track) track.style.setProperty('--xray-step', index);
-      callouts.forEach(function (c, i) { c.classList.toggle('is-active', i === index); });
-      images.forEach(function (img, i) { img.classList.toggle('is-active', i === index); });
-    }
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
-    setStep(0);
-
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pinWrap,
-        start: 'top top+=' + navH,
-        end: function () {
-          return '+=' + (window.innerHeight * 0.8 * (stepCount - 1));
-        },
-        pin: true,
-        scrub: 0.35,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        snap: {
-          snapTo: 1 / (stepCount - 1),
-          duration: { min: 0.15, max: 0.3 },
-          ease: 'power2.inOut'
-        }
-      }
-    });
-
-    section._xrayScrollTrigger = tl.scrollTrigger;
-
-    for (var s = 0; s < stepCount; s++) {
-      tl.addLabel('step' + s, s * segment);
-      tl.call(setStep, [s], 'step' + s);
-    }
-
-    for (var j = 1; j < stepCount; j++) {
-      var at = j * segment;
-      var prev = j - 1;
-      var prevParts = calloutParts[prev];
-      var curParts = calloutParts[j];
-
-      tl.to(images[prev], { autoAlpha: 0, scale: 1, duration: 0.12, ease: 'power2.inOut' }, at - 0.12)
-        .fromTo(images[j], { autoAlpha: 0, scale: 1.015 }, { autoAlpha: 1, scale: 1, duration: 0.12, ease: 'power2.inOut' }, at - 0.12)
-        .to(callouts[prev], { autoAlpha: 0, duration: 0.1, ease: 'power2.in' }, at - 0.1)
-        .to(prevParts, { y: -8, autoAlpha: 0, duration: 0.1, ease: 'power2.in' }, at - 0.1)
-        .fromTo(callouts[j], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, ease: 'power2.out' }, at - 0.08)
-        .fromTo(curParts, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.15, stagger: 0.04, ease: 'power2.out' }, at - 0.06);
-    }
-
-    if (!section._xrayResizeBound) {
-      section._xrayResizeBound = true;
-      window.addEventListener('resize', function () {
-        var nowMobile = window.innerWidth < 1024;
-        if (nowMobile && section._xrayScrollTrigger) {
-          section._xrayScrollTrigger.kill();
-          section._xrayScrollTrigger = null;
-        }
-        window.ScrollTrigger.refresh();
-      }, { passive: true });
-    }
-
-    window.ScrollTrigger.refresh();
+    steps.forEach(function (s) { io.observe(s); });
+    section._xrayIO = io;
   }
 
   /* ---------- Feature cards (mobile tap-to-expand) ---------- */

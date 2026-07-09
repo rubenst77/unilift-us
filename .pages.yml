@@ -312,6 +312,20 @@ content:
               - name: text
                 label: Body text
                 type: text
+              - name: tag
+                label: Tag chip text
+                type: string
+              - name: specs
+                label: Spec pairs
+                type: object
+                list: true
+                fields:
+                  - name: k
+                    label: Label
+                    type: string
+                  - name: v
+                    label: Value
+                    type: string
               - name: image
                 label: Desktop image
                 type: image
