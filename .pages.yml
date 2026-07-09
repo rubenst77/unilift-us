@@ -284,41 +284,61 @@ content:
                 type: text
 
       - name: closeups
-        label: Close-up rows
+        label: Inside the UNILIFT (xray)
         type: file
         path: content/closeups.json
         format: json
         fields:
+          - name: kicker
+            label: Section kicker
+            type: string
+          - name: heading
+            label: Section heading
+            type: string
+          - name: desktopImage
+            label: Desktop pinned image
+            type: image
+          - name: desktopImageAlt
+            label: Desktop image alt text
+            type: string
           - name: items
-            label: Close-up rows
+            label: Callout steps
             type: object
             list: true
             fields:
-              - name: image
-                label: Photo
-                type: image
-              - name: imageAlt
-                label: Image alt text
+              - name: step
+                label: Step number
                 type: string
-              - name: imageSize
-                label: Image size
-                type: select
-                options:
-                  values:
-                    - default
-                    - lg
-              - name: reverse
-                label: Reverse layout
-                type: boolean
-              - name: label
-                label: Row label
+              - name: title
+                label: Title
                 type: string
-              - name: heading
-                label: Row heading
+              - name: subline
+                label: Subheading
                 type: string
-              - name: textHtml
-                label: Row paragraph (HTML)
+              - name: text
+                label: Body text
                 type: text
+              - name: anchorX
+                label: Anchor X (%)
+                type: number
+              - name: anchorY
+                label: Anchor Y (%)
+                type: number
+              - name: focusScale
+                label: Focus scale
+                type: number
+              - name: focusX
+                label: Focus pan X (%)
+                type: number
+              - name: focusY
+                label: Focus pan Y (%)
+                type: number
+              - name: mobileImage
+                label: Mobile image
+                type: image
+              - name: mobileImageAlt
+                label: Mobile image alt text
+                type: string
 
       - name: features
         label: Hoist features

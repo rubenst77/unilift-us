@@ -203,27 +203,65 @@
 
   function hydrateCloseups(d) {
     var c = d.closeups;
-    var root = document.querySelector('[data-cms="closeups-list"]');
-    if (!c || !root) return;
+    if (!c) return;
 
-    root.innerHTML = c.items.map(function (item) {
-      var reverse = item.reverse ? ' closeup--reverse' : '';
-      var size = item.imageSize === 'lg' ? ' closeup__media--lg' : '';
-      return (
-        '<article class="closeup' + reverse + '" data-closeup>' +
-          '<div class="closeup__media-wrap">' +
-            '<div class="closeup__media' + size + '">' +
-              '<img src="' + item.image + '" width="1200" height="1200" loading="lazy" decoding="async" alt="' + item.imageAlt + '">' +
+    setText(document.querySelector('[data-cms="closeups-kicker"]'), c.kicker);
+    setText(document.querySelector('[data-cms="closeups-heading"]'), c.heading);
+
+    var img = document.querySelector('[data-xray-image]');
+    if (img && c.desktopImage) {
+      img.src = c.desktopImage;
+      img.alt = c.desktopImageAlt || img.alt;
+    }
+
+    var anchorsRoot = document.querySelector('[data-xray-anchors]');
+    var calloutsRoot = document.querySelector('[data-xray-callouts]');
+    var mobileRoot = document.querySelector('[data-cms="closeups-mobile"]');
+    var items = c.items || [];
+
+    if (anchorsRoot) {
+      anchorsRoot.innerHTML = items.map(function (item, i) {
+        return (
+          '<div class="xray__anchor' + (i === 0 ? ' is-active' : '') + '" data-anchor="' + i + '" style="--ax:' + item.anchorX + '%;--ay:' + item.anchorY + '%">' +
+            '<span class="xray__anchor-ring"></span>' +
+            '<span class="xray__anchor-dot"></span>' +
+            '<span class="xray__anchor-line"></span>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    if (calloutsRoot) {
+      calloutsRoot.innerHTML = items.map(function (item, i) {
+        return (
+          '<article class="xray__callout' + (i === 0 ? ' is-active' : '') + '" data-xray-callout="' + i + '" ' +
+            'data-focus-scale="' + (item.focusScale || 1.12) + '" ' +
+            'data-focus-x="' + (item.focusX || 0) + '" ' +
+            'data-focus-y="' + (item.focusY || 0) + '">' +
+            '<span class="xray__step">' + item.step + '</span>' +
+            '<h3 class="xray__callout-title">' + item.title + '</h3>' +
+            '<p class="xray__callout-sub">' + item.subline + '</p>' +
+            '<p class="xray__callout-text">' + item.text + '</p>' +
+          '</article>'
+        );
+      }).join('');
+    }
+
+    if (mobileRoot) {
+      mobileRoot.innerHTML = items.map(function (item) {
+        return (
+          '<article class="xray__mobile-block">' +
+            '<div class="xray__mobile-media">' +
+              '<img src="' + item.mobileImage + '" width="800" height="800" loading="lazy" decoding="async" alt="' + (item.mobileImageAlt || '') + '">' +
             '</div>' +
-          '</div>' +
-          '<div class="closeup__body">' +
-            '<p class="closeup__hero-label">' + item.label + '</p>' +
-            '<h3 class="closeup__title">' + item.heading + '</h3>' +
-            '<p class="closeup__text">' + item.textHtml + '</p>' +
-          '</div>' +
-        '</article>'
-      );
-    }).join('');
+            '<span class="xray__step">' + item.step + '</span>' +
+            '<h3 class="xray__callout-title">' + item.title + '</h3>' +
+            '<p class="xray__callout-sub">' + item.subline + '</p>' +
+            '<p class="xray__callout-text">' + item.text + '</p>' +
+          '</article>'
+        );
+      }).join('');
+    }
   }
 
   function hydrateModels(d) {

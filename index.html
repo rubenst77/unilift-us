@@ -163,33 +163,49 @@
     ]
   },
   "closeups": {
+    "kicker": "INSIDE THE UNILIFT",
+    "heading": "Engineered down to the last detail.",
+    "desktopImage": "assets/photos/1.webp",
+    "desktopImageAlt": "UNILIFT traction hoist front view showing control box, OSLA unit, and power connector",
     "items": [
       {
-        "image": "assets/closeups/1.webp",
-        "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
-        "imageSize": "lg",
-        "reverse": false,
-        "label": "Build quality",
-        "heading": "Engineered and labelled in Luxembourg",
-        "textHtml": "Every UNILIFT is factory-tested before it ships. The control box integrates E-stop, up/down, overload alarm and status indicators in one sealed <span class=\"num\">IP55</span> unit."
+        "step": "01",
+        "title": "Build quality",
+        "subline": "Engineered and labelled in Luxembourg.",
+        "text": "Every UNILIFT is factory-tested before it ships, with E-stop, up/down, overload alarm and status indicators sealed in one IP55 control box.",
+        "anchorX": 28,
+        "anchorY": 42,
+        "focusScale": 1.12,
+        "focusX": 8,
+        "focusY": -5,
+        "mobileImage": "assets/photos/1.webp",
+        "mobileImageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate"
       },
       {
-        "image": "assets/closeups/8.webp",
-        "imageAlt": "Close-up of the OSLA overspeed lock mechanism at the top of the hoist",
-        "imageSize": "default",
-        "reverse": true,
-        "label": "Safety mechanism",
-        "heading": "The OSLA overspeed lock, up close",
-        "textHtml": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. It is mechanical and independent, needing no electrical power to arrest a fall."
+        "step": "02",
+        "title": "The OSLA overspeed lock",
+        "subline": "Independent mechanical safety, always fitted.",
+        "text": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. Fully mechanical and independent, it needs no power to arrest a fall.",
+        "anchorX": 72,
+        "anchorY": 15,
+        "focusScale": 1.12,
+        "focusX": -10,
+        "focusY": 14,
+        "mobileImage": "assets/photos/8.webp",
+        "mobileImageAlt": "Close-up of the OSLA overspeed lock at the top of the hoist"
       },
       {
-        "image": "assets/closeups/5.webp",
-        "imageAlt": "UNILIFT hoist motor and service connection detail",
-        "imageSize": "lg",
-        "reverse": false,
-        "label": "Serviceability",
-        "heading": "Built to be connected and serviced",
-        "textHtml": "Industrial 3-pin (1P) or 4-pin (3P) connectors, an internal hour-meter, and a <span class=\"num\">500-hour</span> overhaul cycle make integration and maintenance straightforward."
+        "step": "03",
+        "title": "Built to be serviced",
+        "subline": "Connected for the jobsite, designed for uptime.",
+        "text": "Industrial 3-pin or 4-pin power connectors, an internal hour-meter, and a 500-hour overhaul cycle keep integration and maintenance straightforward.",
+        "anchorX": 30,
+        "anchorY": 88,
+        "focusScale": 1.12,
+        "focusX": 10,
+        "focusY": -18,
+        "mobileImage": "assets/photos/9.webp",
+        "mobileImageAlt": "UNILIFT power connector and service connection detail"
       }
     ]
   },
@@ -854,56 +870,43 @@
   </section>
 
 
-  <!-- ========== CLOSE-UP DETAIL ROWS ========== -->
-  <section class="section section--paper closeups-section" aria-label="Close-up detail">
-    <div class="container">
-      <div class="closeups" data-cms="closeups-list">
-        <!-- Row 1 -->
-        <article class="closeup" data-closeup>
-          <div class="closeup__media-wrap">
-            <div class="closeup__media closeup__media--lg">
-              <img src="assets/closeups/1.webp" width="1200" height="1200" loading="lazy" decoding="async"
-                   alt="UNILIFT control box with E-stop and FAS-Tech nameplate">
-            </div>
-          </div>
-          <div class="closeup__body">
-            <p class="closeup__hero-label">Build quality</p>
-            <h3 class="closeup__title">Engineered and labelled in Luxembourg</h3>
-            <p class="closeup__text">Every UNILIFT is factory-tested before it ships. The control box integrates E-stop, up/down, overload alarm and status indicators in one sealed <span class="num">IP55</span> unit.</p>
-          </div>
-        </article>
+  <!-- ========== CLOSE-UP XRAY (pinned callouts) ========== -->
+  <section id="xray" class="xray section on-dark" aria-label="Inside the UNILIFT">
+    <div class="xray__blueprint" aria-hidden="true"></div>
 
-        <!-- Row 2 -->
-        <article class="closeup closeup--reverse" data-closeup>
-          <div class="closeup__media-wrap">
-            <div class="closeup__media">
-              <img src="assets/closeups/8.webp" width="1200" height="1200" loading="lazy" decoding="async"
-                   alt="Close-up of the OSLA overspeed lock mechanism at the top of the hoist">
-            </div>
-          </div>
-          <div class="closeup__body">
-            <p class="closeup__hero-label">Safety mechanism</p>
-            <h3 class="closeup__title">The OSLA overspeed lock, up close</h3>
-            <p class="closeup__text">Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. It is mechanical and independent, needing no electrical power to arrest a fall.</p>
-          </div>
-        </article>
+    <div class="container xray__intro">
+      <div class="kicker kicker--white" data-cms="closeups-kicker">INSIDE THE UNILIFT</div>
+      <h2 class="xray__heading" data-cms="closeups-heading">Engineered down to the last detail.</h2>
+    </div>
 
-        <!-- Row 3 -->
-        <article class="closeup" data-closeup>
-          <div class="closeup__media-wrap">
-            <div class="closeup__media closeup__media--lg">
-              <img src="assets/closeups/5.webp" width="1200" height="1200" loading="lazy" decoding="async"
-                   alt="UNILIFT hoist motor and service connection detail">
+    <div class="xray__desktop" data-xray-desktop>
+      <div class="xray__pin-wrap" data-xray-pin>
+        <div class="xray__stage">
+          <nav class="xray__progress" aria-label="Detail progress">
+            <div class="xray__progress-track" aria-hidden="true"></div>
+            <div class="xray__tick is-active" data-tick="0"><span>01</span></div>
+            <div class="xray__tick" data-tick="1"><span>02</span></div>
+            <div class="xray__tick" data-tick="2"><span>03</span></div>
+          </nav>
+
+          <div class="xray__visual">
+            <div class="xray__glow" aria-hidden="true"></div>
+            <div class="xray__image-panel">
+              <div class="xray__image-wrap">
+                <img class="xray__image" data-xray-image src="assets/photos/1.webp" width="1563" height="1563" alt="UNILIFT traction hoist front view" loading="lazy" decoding="async">
+                <div class="xray__anchors" data-xray-anchors aria-hidden="true"></div>
+              </div>
             </div>
           </div>
-          <div class="closeup__body">
-            <p class="closeup__hero-label">Serviceability</p>
-            <h3 class="closeup__title">Built to be connected and serviced</h3>
-            <p class="closeup__text">Industrial 3-pin (1P) or 4-pin (3P) connectors, an internal hour-meter, and a <span class="num">500-hour</span> overhaul cycle make integration and maintenance straightforward.</p>
+
+          <div class="xray__copy">
+            <div class="xray__callouts" data-cms="closeups-callouts" data-xray-callouts></div>
           </div>
-        </article>
+        </div>
       </div>
     </div>
+
+    <div class="xray__mobile container" data-xray-mobile data-cms="closeups-mobile"></div>
   </section>
 
 
