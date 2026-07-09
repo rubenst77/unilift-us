@@ -578,6 +578,9 @@
     triggers.forEach(function (t) {
       t.addEventListener('click', function () { openDatasheet(); });
     });
+    $$('[data-datasheet-gate]').forEach(function (t) {
+      t.addEventListener('click', function () { openDatasheetGate(); });
+    });
 
     function openDatasheet() {
       // Returning visitor: skip the gate, download directly.

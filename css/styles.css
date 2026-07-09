@@ -1103,6 +1103,37 @@ h1 { letter-spacing: -0.03em; }
 .specs__callout strong { color: var(--navy-900); }
 .specs__sub { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; margin: var(--sp-2xl) 0 var(--sp-md); color: var(--navy-900); }
 .specs__download { margin-top: var(--sp-2xl); }
+.specs__download-card {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: clamp(1.35rem, 3vw, 1.85rem);
+  text-align: center;
+  background: var(--white);
+  border: 1px solid rgba(18, 58, 102, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+.specs__download-kicker {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-kicker);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-accent);
+}
+.specs__download-text {
+  margin: 0 0 var(--sp-lg);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--steel);
+}
+.specs__download-btn { width: 100%; max-width: 400px; margin: 0 auto; }
+.specs__download-note {
+  margin: var(--sp-md) 0 0;
+  font-size: 0.88rem;
+  color: var(--steel);
+}
 
 /* ==========================================================================
    FAQ
