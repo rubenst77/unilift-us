@@ -211,7 +211,6 @@
     var imagesRoot = document.querySelector('[data-xray-images]');
     var stepsRoot = document.querySelector('[data-xray-steps]');
     var mobileRoot = document.querySelector('[data-xray-mobile]');
-    var chipEl = document.querySelector('[data-xray-chip]');
     var items = c.items || [];
 
     function renderSpecs(specs) {
@@ -237,9 +236,8 @@
 
     if (stepsRoot) {
       stepsRoot.innerHTML = items.map(function (item, i) {
-        var chip = item.chip || item.tag || '';
         return (
-          '<article class="xray__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '" data-chip="' + chip + '">' +
+          '<article class="xray__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '">' +
             '<div class="xray__eyebrow">' +
               '<span class="xray__idx">' + item.step + '</span>' +
               '<span class="xray__rule" aria-hidden="true"></span>' +
@@ -251,10 +249,6 @@
           '</article>'
         );
       }).join('');
-    }
-
-    if (chipEl && items[0]) {
-      chipEl.textContent = items[0].chip || items[0].tag || '';
     }
 
     if (mobileRoot) {

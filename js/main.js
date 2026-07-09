@@ -464,7 +464,6 @@
 
     var steps = $$('[data-step]', section);
     var imgs = $$('[data-xray-img]', section);
-    var chipEl = $('[data-xray-chip]', section);
     if (!steps.length || !imgs.length) return;
 
     if (prefersReduced || window.innerWidth < 1024) return;
@@ -476,13 +475,6 @@
       current = i;
       steps.forEach(function (s, si) { s.classList.toggle('is-active', si === i); });
       imgs.forEach(function (img, ii) { img.classList.toggle('is-active', ii === i); });
-      if (chipEl) {
-        chipEl.style.opacity = '0';
-        setTimeout(function () {
-          chipEl.textContent = steps[i].getAttribute('data-chip') || '';
-          chipEl.style.opacity = '1';
-        }, 150);
-      }
     }
 
     var io = new IntersectionObserver(function (entries) {
