@@ -627,7 +627,7 @@ h1 { letter-spacing: -0.03em; }
 }
 .xray__intro {
   position: relative;
-  padding: clamp(36px, 4.5vw, 56px) 0 0;
+  padding: clamp(32px, 4vw, 48px) 0 0;
 }
 .xray__kicker {
   font-family: var(--font-mono);
@@ -651,7 +651,7 @@ h1 { letter-spacing: -0.03em; }
   letter-spacing: -0.01em;
   font-size: clamp(32px, 4.4vw, 56px);
   line-height: 1.04;
-  margin-top: 12px;
+  margin-top: 8px;
   max-width: 14ch;
   color: var(--white);
 }
@@ -661,7 +661,7 @@ h1 { letter-spacing: -0.03em; }
   gap: clamp(20px, 3vw, 40px);
   align-items: stretch;
   position: relative;
-  margin-top: clamp(12px, 2vw, 24px);
+  margin-top: clamp(4px, 0.8vw, 12px);
 }
 .xray__viz {
   position: relative;
@@ -672,8 +672,9 @@ h1 { letter-spacing: -0.03em; }
   top: clamp(64px, 8vh, 88px);
   height: calc(100vh - clamp(64px, 8vh, 88px));
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding-top: 0;
 }
 .xray__frame {
   position: relative;
@@ -695,8 +696,10 @@ h1 { letter-spacing: -0.03em; }
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 1.5%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.06);
+  padding: 0;
   opacity: 0;
   transition: opacity 0.45s ease;
   will-change: opacity;
@@ -839,8 +842,10 @@ h1 { letter-spacing: -0.03em; }
   .xray__mframe img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 1.5%;
+    object-fit: cover;
+    object-position: center center;
+    transform: scale(1.06);
+    padding: 0;
   }
   .xray__mobile .xray__title { font-size: 26px; }
   .xray__mobile .xray__text { font-size: 16px; }
