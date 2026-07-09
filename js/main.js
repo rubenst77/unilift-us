@@ -462,29 +462,20 @@
 
     var pinWrap = $('[data-xray-pin]', section);
     var stage = $('.xray__stage', section);
-    var image = $('[data-xray-image]', section);
+    var images = $$('[data-xray-img]', section);
     var callouts = $$('[data-xray-callout]', section);
-    var anchors = $$('.xray__anchor', section);
     var ticks = $$('.xray__tick', section);
     var track = $('.xray__progress-track', section);
-    if (!pinWrap || !stage || !image || callouts.length < 3) return;
+    if (!pinWrap || !stage || images.length < 3 || callouts.length < 3) return;
 
     var gsap = window.gsap;
-    var focuses = callouts.map(function (c) {
-      return {
-        scale: parseFloat(c.getAttribute('data-focus-scale')) || 1.12,
-        xPercent: parseFloat(c.getAttribute('data-focus-x')) || 0,
-        yPercent: parseFloat(c.getAttribute('data-focus-y')) || 0
-      };
-    });
 
-    gsap.set(image, { scale: 1, xPercent: 0, yPercent: 0, force3D: true });
+    gsap.set(images, { autoAlpha: 0, scale: 1.06, force3D: true });
+    gsap.set(images[0], { autoAlpha: 1, scale: 1 });
     gsap.set(callouts, { autoAlpha: 0, y: 32 });
     gsap.set(callouts[0], { autoAlpha: 1, y: 0 });
-    gsap.set(anchors, { autoAlpha: 0 });
-    if (anchors[0]) gsap.set(anchors[0], { autoAlpha: 1 });
     callouts[0].classList.add('is-active');
-    if (anchors[0]) anchors[0].classList.add('is-active');
+    images[0].classList.add('is-active');
     ticks.forEach(function (t, i) { t.classList.toggle('is-active', i === 0); });
     if (track) track.style.setProperty('--xray-progress', '0%');
 
@@ -498,7 +489,7 @@
         anticipatePin: 1,
         invalidateOnRefresh: true,
         snap: {
-          snapTo: function (progress) { return Math.round(progress * 2) / 2; },
+          snapTo: [0, 0.5, 1],
           duration: { min: 0.15, max: 0.4 },
           delay: 0.04,
           ease: 'power2.inOut'
@@ -508,39 +499,24 @@
           ticks.forEach(function (t, i) { t.classList.toggle('is-active', i <= step); });
           if (track) track.style.setProperty('--xray-progress', (self.progress * 100) + '%');
           callouts.forEach(function (c, ci) { c.classList.toggle('is-active', ci === step); });
-          anchors.forEach(function (a, ai) { a.classList.toggle('is-active', ai === step); });
+          images.forEach(function (img, ii) { img.classList.toggle('is-active', ii === step); });
         }
       }
     });
 
-    tl.to(image, {
-      scale: focuses[0].scale,
-      xPercent: focuses[0].xPercent,
-      yPercent: focuses[0].yPercent,
-      duration: 1,
-      ease: 'power2.inOut'
-    }, 0);
+    tl.addLabel('step0', 0);
+    tl.addLabel('step1', 1);
+    tl.addLabel('step2', 2);
 
     for (var i = 1; i < callouts.length; i++) {
-      (function (idx) {
-        var at = idx;
-        tl.to(image, {
-          scale: focuses[idx].scale,
-          xPercent: focuses[idx].xPercent,
-          yPercent: focuses[idx].yPercent,
-          duration: 1,
-          ease: 'power2.inOut'
-        }, at)
-          .to(callouts[idx - 1], { autoAlpha: 0, y: -24, duration: 0.35, ease: 'power2.in' }, at - 0.05)
-          .to(callouts[idx], { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, at)
-          .to(anchors[idx - 1], { autoAlpha: 0, duration: 0.25, ease: 'power2.in' }, at - 0.05)
-          .to(anchors[idx], { autoAlpha: 1, duration: 0.35, ease: 'power2.out' }, at)
-          .add(function () {
-            callouts.forEach(function (c, ci) { c.classList.toggle('is-active', ci === idx); });
-            anchors.forEach(function (a, ai) { a.classList.toggle('is-active', ai === idx); });
-          }, at);
-      })(i);
+      var label = 'step' + i;
+      tl.to(images[i - 1], { autoAlpha: 0, scale: 1.04, duration: 0.35, ease: 'power2.in' }, label)
+        .to(images[i], { autoAlpha: 1, scale: 1, duration: 0.45, ease: 'power2.out' }, label)
+        .to(callouts[i - 1], { autoAlpha: 0, y: -24, duration: 0.35, ease: 'power2.in' }, label)
+        .to(callouts[i], { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, label);
     }
+
+    tl.to({}, { duration: 0.01 }, 2);
 
     window.addEventListener('resize', function () {
       if (window.innerWidth < 1024) window.ScrollTrigger.refresh();

@@ -295,12 +295,6 @@ content:
           - name: heading
             label: Section heading
             type: string
-          - name: desktopImage
-            label: Desktop pinned image
-            type: image
-          - name: desktopImageAlt
-            label: Desktop image alt text
-            type: string
           - name: items
             label: Callout steps
             type: object
@@ -318,21 +312,12 @@ content:
               - name: text
                 label: Body text
                 type: text
-              - name: anchorX
-                label: Anchor X (%)
-                type: number
-              - name: anchorY
-                label: Anchor Y (%)
-                type: number
-              - name: focusScale
-                label: Focus scale
-                type: number
-              - name: focusX
-                label: Focus pan X (%)
-                type: number
-              - name: focusY
-                label: Focus pan Y (%)
-                type: number
+              - name: image
+                label: Desktop image
+                type: image
+              - name: imageAlt
+                label: Desktop image alt text
+                type: string
               - name: mobileImage
                 label: Mobile image
                 type: image

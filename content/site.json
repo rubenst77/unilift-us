@@ -136,20 +136,15 @@
   "closeups": {
     "kicker": "INSIDE THE UNILIFT",
     "heading": "Engineered down to the last detail.",
-    "desktopImage": "assets/photos/1.webp",
-    "desktopImageAlt": "UNILIFT traction hoist front view showing control box, OSLA unit, and power connector",
     "items": [
       {
         "step": "01",
         "title": "Build quality",
         "subline": "Engineered and labelled in Luxembourg.",
         "text": "Every UNILIFT is factory-tested before it ships, with E-stop, up/down, overload alarm and status indicators sealed in one IP55 control box.",
-        "anchorX": 28,
-        "anchorY": 42,
-        "focusScale": 1.12,
-        "focusX": 8,
-        "focusY": -5,
-        "mobileImage": "assets/photos/1.webp",
+        "image": "assets/photos/1.webp",
+        "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
+        "mobileImage": "assets/photos/1@800.webp",
         "mobileImageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate"
       },
       {
@@ -157,12 +152,9 @@
         "title": "The OSLA overspeed lock",
         "subline": "Independent mechanical safety, always fitted.",
         "text": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. Fully mechanical and independent, it needs no power to arrest a fall.",
-        "anchorX": 72,
-        "anchorY": 15,
-        "focusScale": 1.12,
-        "focusX": -10,
-        "focusY": 14,
-        "mobileImage": "assets/photos/8.webp",
+        "image": "assets/photos/8.webp",
+        "imageAlt": "Close-up of the OSLA overspeed lock at the top of the hoist",
+        "mobileImage": "assets/photos/8@800.webp",
         "mobileImageAlt": "Close-up of the OSLA overspeed lock at the top of the hoist"
       },
       {
@@ -170,12 +162,9 @@
         "title": "Built to be serviced",
         "subline": "Connected for the jobsite, designed for uptime.",
         "text": "Industrial 3-pin or 4-pin power connectors, an internal hour-meter, and a 500-hour overhaul cycle keep integration and maintenance straightforward.",
-        "anchorX": 30,
-        "anchorY": 88,
-        "focusScale": 1.12,
-        "focusX": 10,
-        "focusY": -18,
-        "mobileImage": "assets/photos/9.webp",
+        "image": "assets/photos/9.webp",
+        "imageAlt": "UNILIFT power connector and service connection detail",
+        "mobileImage": "assets/photos/9@800.webp",
         "mobileImageAlt": "UNILIFT power connector and service connection detail"
       }
     ]

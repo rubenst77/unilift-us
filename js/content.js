@@ -208,25 +208,17 @@
     setText(document.querySelector('[data-cms="closeups-kicker"]'), c.kicker);
     setText(document.querySelector('[data-cms="closeups-heading"]'), c.heading);
 
-    var img = document.querySelector('[data-xray-image]');
-    if (img && c.desktopImage) {
-      img.src = c.desktopImage;
-      img.alt = c.desktopImageAlt || img.alt;
-    }
-
-    var anchorsRoot = document.querySelector('[data-xray-anchors]');
+    var imagesRoot = document.querySelector('[data-xray-images]');
     var calloutsRoot = document.querySelector('[data-xray-callouts]');
     var mobileRoot = document.querySelector('[data-cms="closeups-mobile"]');
     var items = c.items || [];
 
-    if (anchorsRoot) {
-      anchorsRoot.innerHTML = items.map(function (item, i) {
+    if (imagesRoot) {
+      imagesRoot.innerHTML = items.map(function (item, i) {
         return (
-          '<div class="xray__anchor' + (i === 0 ? ' is-active' : '') + '" data-anchor="' + i + '" style="--ax:' + item.anchorX + '%;--ay:' + item.anchorY + '%">' +
-            '<span class="xray__anchor-ring"></span>' +
-            '<span class="xray__anchor-dot"></span>' +
-            '<span class="xray__anchor-line"></span>' +
-          '</div>'
+          '<img class="xray__img' + (i === 0 ? ' is-active' : '') + '" data-xray-img="' + i + '" ' +
+            'src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
+            'decoding="async" alt="' + (item.imageAlt || '') + '">'
         );
       }).join('');
     }
@@ -234,10 +226,7 @@
     if (calloutsRoot) {
       calloutsRoot.innerHTML = items.map(function (item, i) {
         return (
-          '<article class="xray__callout' + (i === 0 ? ' is-active' : '') + '" data-xray-callout="' + i + '" ' +
-            'data-focus-scale="' + (item.focusScale || 1.12) + '" ' +
-            'data-focus-x="' + (item.focusX || 0) + '" ' +
-            'data-focus-y="' + (item.focusY || 0) + '">' +
+          '<article class="xray__callout' + (i === 0 ? ' is-active' : '') + '" data-xray-callout="' + i + '">' +
             '<span class="xray__step">' + item.step + '</span>' +
             '<h3 class="xray__callout-title">' + item.title + '</h3>' +
             '<p class="xray__callout-sub">' + item.subline + '</p>' +
