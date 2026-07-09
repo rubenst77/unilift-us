@@ -618,7 +618,7 @@ h1 { letter-spacing: -0.03em; }
   background: var(--navy-900);
   color: var(--white);
   overflow: hidden;
-  padding: clamp(2rem, 5vw, 3rem) 0 clamp(1.5rem, 3vw, 2rem);
+  padding: clamp(2rem, 5vw, 3rem) 0 0;
 }
 .xray__blueprint {
   position: absolute;
@@ -629,7 +629,7 @@ h1 { letter-spacing: -0.03em; }
     linear-gradient(rgba(156, 195, 229, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(156, 195, 229, 0.07) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 85%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 92%);
 }
 .xray__intro {
   position: relative;
@@ -650,33 +650,36 @@ h1 { letter-spacing: -0.03em; }
   height: auto;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(96px, 112px) minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(72px, 88px) minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: center;
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(1rem, 3vh, 1.75rem) clamp(1.25rem, 4vw, 2.5rem);
+  padding: clamp(0.75rem, 2vh, 1.25rem) clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 2vh, 1.5rem);
   box-sizing: border-box;
 }
 .xray__progress {
   position: relative;
   align-self: center;
+  --xray-steps: 3;
 }
 .xray__progress-steps {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(1.5rem, 3vh, 2.25rem);
+  gap: clamp(1.75rem, 3.5vh, 2.5rem);
 }
 .xray__progress-track {
   position: absolute;
-  left: 1.35rem;
-  top: 0.5rem;
-  bottom: 0.5rem;
+  left: 2.5rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
   width: 2px;
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 .xray__progress-track::after {
   content: '';
@@ -684,64 +687,36 @@ h1 { letter-spacing: -0.03em; }
   left: 0;
   top: 0;
   width: 100%;
-  height: var(--xray-progress, 0%);
-  background: linear-gradient(180deg, var(--coral), var(--blue-accent));
-  border-radius: 2px;
-  transition: height 0.15s var(--ease);
+  height: calc(var(--xray-step, 0) / max(var(--xray-steps, 3) - 1, 1) * 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), var(--blue-accent));
+  border-radius: 1px;
+  transition: height 0.25s var(--ease);
 }
 .xray__tick {
-  position: relative;
-  display: flex;
-  align-items: baseline;
-  gap: 0.65rem;
-  padding-left: 0.15rem;
-  opacity: 0.32;
-  transition: opacity 0.35s var(--ease);
-}
-.xray__tick::before {
-  content: '';
-  position: absolute;
-  left: 1.2rem;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  margin-top: -4px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.35s var(--ease);
+  display: grid;
+  grid-template-columns: 2.5rem 2px 0.75rem 1fr;
+  align-items: center;
+  opacity: 0.35;
+  transition: opacity 0.3s var(--ease);
 }
 .xray__tick.is-active {
   opacity: 1;
 }
-.xray__tick.is-active::before {
-  background: var(--coral);
-  box-shadow: 0 0 0 4px rgba(232, 80, 46, 0.18);
-  transform: scale(1.15);
-}
 .xray__tick-num {
-  flex-shrink: 0;
-  width: 2rem;
+  grid-column: 1;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.55);
-  transition: color 0.35s var(--ease);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s var(--ease);
 }
 .xray__tick.is-active .xray__tick-num {
   color: var(--white);
 }
 .xray__tick-label {
-  font-family: var(--font-head);
-  font-size: 0.72rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: rgba(255, 255, 255, 0.45);
-  max-width: 9ch;
-  transition: color 0.35s var(--ease);
-}
-.xray__tick.is-active .xray__tick-label {
-  color: rgba(255, 255, 255, 0.88);
+  display: none;
 }
 .xray__visual {
   position: relative;
@@ -763,7 +738,7 @@ h1 { letter-spacing: -0.03em; }
   width: 100%;
   max-width: 520px;
   padding: 0;
-  border-radius: 18px;
+  border-radius: 4px;
   background: #fff;
   overflow: hidden;
   box-shadow: 0 20px 56px rgba(0, 0, 0, 0.32);
@@ -788,14 +763,14 @@ h1 { letter-spacing: -0.03em; }
 }
 .xray__copy {
   position: relative;
-  min-height: 240px;
+  min-height: 180px;
   display: flex;
   align-items: center;
 }
 .xray__callouts {
   position: relative;
   width: 100%;
-  min-height: 220px;
+  min-height: 180px;
 }
 .xray__callout {
   position: absolute;

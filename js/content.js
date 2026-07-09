@@ -216,8 +216,10 @@
 
     if (progressRoot) {
       progressRoot.innerHTML = items.map(function (item, i) {
+        var active = i === 0;
         return (
-          '<div class="xray__tick' + (i === 0 ? ' is-active' : '') + '" data-tick="' + i + '">' +
+          '<div class="xray__tick' + (active ? ' is-active' : '') + '" data-tick="' + i + '"' +
+            (active ? ' aria-current="step"' : '') + '>' +
             '<span class="xray__tick-num">' + item.step + '</span>' +
             '<span class="xray__tick-label">' + item.title + '</span>' +
           '</div>'

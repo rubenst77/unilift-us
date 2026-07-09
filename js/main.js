@@ -73,7 +73,24 @@
 
     // Drive Lenis from GSAP's ticker so smooth scroll and ScrollTrigger stay in sync.
     if (window.gsap && window.ScrollTrigger) {
-      lenis.on('scroll', window.ScrollTrigger.update);
+      var ST = window.ScrollTrigger;
+      ST.scrollerProxy(document.documentElement, {
+        scrollTop: function (value) {
+          if (arguments.length) {
+            lenis.scrollTo(value, { immediate: true });
+          }
+          return lenis.scroll;
+        },
+        getBoundingClientRect: function () {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight
+          };
+        }
+      });
+      lenis.on('scroll', ST.update);
       window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
       window.gsap.ticker.lagSmoothing(0);
     } else {
@@ -440,6 +457,11 @@
     var section = document.getElementById('xray');
     if (!section) return;
 
+    if (section._xrayScrollTrigger) {
+      section._xrayScrollTrigger.kill();
+      section._xrayScrollTrigger = null;
+    }
+
     var mobileBlocks = $$('.xray__mobile-block', section);
     var useMobile = prefersReduced || window.innerWidth < 1024;
 
@@ -460,86 +482,107 @@
       return;
     }
 
-    var stage = $('[data-xray-stage]', section);
+    var pinWrap = $('[data-xray-pin]', section);
     var images = $$('[data-xray-img]', section);
     var callouts = $$('[data-xray-callout]', section);
     var ticks = $$('.xray__tick', section);
     var track = $('.xray__progress-track', section);
-    if (!stage || images.length < 3 || callouts.length < 3) return;
+    if (!pinWrap || images.length < 2 || callouts.length < 2) return;
 
     var gsap = window.gsap;
     var stepCount = callouts.length;
+    var navH = 74;
+    var segment = 1;
 
-    gsap.set(images, { autoAlpha: 0, scale: 1.02, force3D: true });
+    pinWrap.style.setProperty('--xray-steps', stepCount);
+
+    var calloutParts = callouts.map(function (c) {
+      return [
+        $('.xray__callout-title', c),
+        $('.xray__callout-sub', c),
+        $('.xray__callout-text', c)
+      ].filter(Boolean);
+    });
+
+    images.slice(1).forEach(function (img) {
+      var pre = new Image();
+      pre.src = img.getAttribute('src') || img.src;
+    });
+
+    gsap.set(images, { autoAlpha: 0, scale: 1.015, force3D: true });
     gsap.set(images[0], { autoAlpha: 1, scale: 1 });
     gsap.set(callouts, { autoAlpha: 0 });
     gsap.set(callouts[0], { autoAlpha: 1 });
-    callouts.forEach(function (c, ci) {
-      var title = $('.xray__callout-title', c);
-      var sub = $('.xray__callout-sub', c);
-      var text = $('.xray__callout-text', c);
-      var parts = [title, sub, text].filter(Boolean);
+    calloutParts.forEach(function (parts, ci) {
       if (ci === 0) gsap.set(parts, { autoAlpha: 1, y: 0 });
-      else gsap.set(parts, { autoAlpha: 0, y: 16 });
+      else gsap.set(parts, { autoAlpha: 0, y: 12 });
     });
-    callouts[0].classList.add('is-active');
-    images[0].classList.add('is-active');
-    ticks.forEach(function (t, i) { t.classList.toggle('is-active', i === 0); });
-    if (track) track.style.setProperty('--xray-progress', '0%');
 
-    var currentStep = -1;
+    function setStep(index) {
+      ticks.forEach(function (t, i) {
+        var active = i === index;
+        t.classList.toggle('is-active', active);
+        if (active) t.setAttribute('aria-current', 'step');
+        else t.removeAttribute('aria-current');
+      });
+      if (track) track.style.setProperty('--xray-step', index);
+      callouts.forEach(function (c, i) { c.classList.toggle('is-active', i === index); });
+      images.forEach(function (img, i) { img.classList.toggle('is-active', i === index); });
+    }
+
+    setStep(0);
 
     var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: stage,
-        start: 'top top',
-        end: '+=120%',
+        trigger: pinWrap,
+        start: 'top top+=' + navH,
+        end: function () {
+          return '+=' + (window.innerHeight * 0.8 * (stepCount - 1));
+        },
         pin: true,
-        scrub: 0.5,
+        scrub: 0.35,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         snap: {
-          snapTo: [0, 0.5, 1],
-          duration: { min: 0.12, max: 0.35 },
-          delay: 0.02,
-          ease: 'power3.out'
-        },
-        onUpdate: function (self) {
-          var step = Math.round(self.progress * (stepCount - 1));
-          ticks.forEach(function (t, i) { t.classList.toggle('is-active', i === step); });
-          if (track) track.style.setProperty('--xray-progress', (self.progress * 100) + '%');
-          if (step !== currentStep) {
-            callouts.forEach(function (c, ci) { c.classList.toggle('is-active', ci === step); });
-            images.forEach(function (img, ii) { img.classList.toggle('is-active', ii === step); });
-            currentStep = step;
-          }
+          snapTo: 1 / (stepCount - 1),
+          duration: { min: 0.15, max: 0.3 },
+          ease: 'power2.inOut'
         }
       }
     });
 
-    for (var i = 1; i < stepCount; i++) {
-      var fadeAt = i - 0.25;
-      var prev = i - 1;
-      var prevTitle = $('.xray__callout-title', callouts[prev]);
-      var prevSub = $('.xray__callout-sub', callouts[prev]);
-      var prevText = $('.xray__callout-text', callouts[prev]);
-      var curTitle = $('.xray__callout-title', callouts[i]);
-      var curSub = $('.xray__callout-sub', callouts[i]);
-      var curText = $('.xray__callout-text', callouts[i]);
+    section._xrayScrollTrigger = tl.scrollTrigger;
 
-      tl.to(images[prev], { autoAlpha: 0, scale: 1, duration: 0.22, ease: 'power2.inOut' }, fadeAt)
-        .fromTo(images[i], { autoAlpha: 0, scale: 1.02 }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: 'power2.inOut' }, fadeAt)
-        .to(callouts[prev], { autoAlpha: 0, duration: 0.2, ease: 'power2.in' }, fadeAt)
-        .to([prevTitle, prevSub, prevText], { y: -12, autoAlpha: 0, duration: 0.2, ease: 'power2.in' }, fadeAt)
-        .fromTo(callouts[i], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.28, ease: 'power2.out' }, fadeAt - 0.08)
-        .fromTo([curTitle, curSub, curText], { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.28, stagger: 0.05, ease: 'power2.out' }, fadeAt - 0.06);
+    for (var s = 0; s < stepCount; s++) {
+      tl.addLabel('step' + s, s * segment);
+      tl.call(setStep, [s], 'step' + s);
     }
 
-    tl.to({}, { duration: stepCount }, 0);
+    for (var j = 1; j < stepCount; j++) {
+      var at = j * segment;
+      var prev = j - 1;
+      var prevParts = calloutParts[prev];
+      var curParts = calloutParts[j];
 
-    window.addEventListener('resize', function () {
-      if (window.innerWidth < 1024) window.ScrollTrigger.refresh();
-    }, { passive: true });
+      tl.to(images[prev], { autoAlpha: 0, scale: 1, duration: 0.12, ease: 'power2.inOut' }, at - 0.12)
+        .fromTo(images[j], { autoAlpha: 0, scale: 1.015 }, { autoAlpha: 1, scale: 1, duration: 0.12, ease: 'power2.inOut' }, at - 0.12)
+        .to(callouts[prev], { autoAlpha: 0, duration: 0.1, ease: 'power2.in' }, at - 0.1)
+        .to(prevParts, { y: -8, autoAlpha: 0, duration: 0.1, ease: 'power2.in' }, at - 0.1)
+        .fromTo(callouts[j], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, ease: 'power2.out' }, at - 0.08)
+        .fromTo(curParts, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.15, stagger: 0.04, ease: 'power2.out' }, at - 0.06);
+    }
+
+    if (!section._xrayResizeBound) {
+      section._xrayResizeBound = true;
+      window.addEventListener('resize', function () {
+        var nowMobile = window.innerWidth < 1024;
+        if (nowMobile && section._xrayScrollTrigger) {
+          section._xrayScrollTrigger.kill();
+          section._xrayScrollTrigger = null;
+        }
+        window.ScrollTrigger.refresh();
+      }, { passive: true });
+    }
 
     window.ScrollTrigger.refresh();
   }
