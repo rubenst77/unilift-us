@@ -250,11 +250,12 @@ h1 { letter-spacing: -0.03em; }
 }
 .nav__brand { display: flex; align-items: center; color: var(--white); padding: 0; }
 .brand-logo {
-  height: 40px;
+  height: 44px;
   width: auto;
   display: block;
+  object-fit: contain;
 }
-.brand-logo--footer { height: 34px; }
+.brand-logo--footer { height: 48px; }
 
 .nav__links { display: flex; align-items: center; gap: clamp(1rem, 2vw, 2rem); }
 .nav__link {
@@ -1463,41 +1464,104 @@ h1 { letter-spacing: -0.03em; }
 /* ==========================================================================
    FOOTER
    ========================================================================== */
-.footer { background: var(--navy-900); color: rgba(255, 255, 255, 0.7); padding: 4.5rem 0 2rem; }
+.footer { background: var(--navy-900); color: rgba(255, 255, 255, 0.72); padding: 3.5rem 0 2rem; }
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1.2fr;
-  gap: 4rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  grid-template-columns: minmax(220px, 1.35fr) 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  padding-bottom: 2.5rem;
 }
-.footer__logo { display: inline-block; margin-bottom: 1rem; }
-.footer__tagline { font-size: 0.9rem; line-height: 1.55; max-width: 40ch; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.75); }
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  min-height: 100%;
+}
+.footer__logo { display: block; line-height: 0; }
+.footer__brand-bottom { display: flex; flex-direction: column; gap: 1.25rem; }
+.footer__contact-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.footer__contact-lines .footer__link {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+}
+.footer__tagline {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  max-width: 34ch;
+  margin-top: 1.25rem;
+  color: rgba(255, 255, 255, 0.55);
+}
 .footer__tagline strong { color: var(--sky); font-weight: 600; }
-.footer__social { display: flex; gap: 0.75rem; }
+.footer__social { display: flex; gap: 0.65rem; }
 .footer__social a {
-  width: 36px; height: 36px;
+  width: 34px; height: 34px;
   display: grid; place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius);
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.2s var(--ease);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
 }
-.footer__social a:hover { background: var(--navy-700); border-color: var(--navy-700); color: #fff; }
-.footer__social svg { width: 16px; height: 16px; }
-.footer__col h4 { color: var(--white); font-size: 0.75rem; margin-bottom: 1rem; font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
-.footer__links { display: flex; flex-direction: column; gap: 0.75rem; }
-.footer__link { font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); transition: color 0.2s var(--ease); width: fit-content; }
+.footer__social a:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+.footer__social svg { width: 15px; height: 15px; }
+.footer__col h4 {
+  color: var(--white);
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.35rem;
+}
+.footer__links { display: flex; flex-direction: column; gap: 0.85rem; }
+.footer__link {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.68);
+  transition: color 0.2s var(--ease);
+  width: fit-content;
+}
 .footer__link:hover { color: var(--white); }
-.footer__address { font-size: 0.875rem; line-height: 1.6; font-style: normal; color: rgba(255, 255, 255, 0.7); }
-.footer__bottom {
-  padding-top: 1.5rem;
-  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
-  align-items: center; justify-content: space-between;
+.footer__address {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.68);
 }
-.footer__legal { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(255, 255, 255, 0.45); letter-spacing: 0.02em; }
-.footer__legal a { color: rgba(255, 255, 255, 0.6); }
-.footer__legal a:hover { color: #fff; }
+.footer__bottom {
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.footer__legal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+.footer__legal-row a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.2s var(--ease);
+}
+.footer__legal-row a:hover { color: var(--white); }
+.footer__copyright {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
 
 /* ==========================================================================
    MODAL (email gate)
@@ -1668,6 +1732,8 @@ h1 { letter-spacing: -0.03em; }
   .features__grid { grid-template-columns: repeat(2, 1fr); }
   .contact__grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 0; }
+  .footer__brand-bottom { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
 }
 
 @media (max-width: 768px) {
@@ -1678,7 +1744,8 @@ h1 { letter-spacing: -0.03em; }
   .apps { grid-template-columns: 1fr; }
   .form__row { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; gap: var(--sp-xl); }
-  .footer__bottom { flex-direction: column; align-items: flex-start; }
+  .footer__brand { flex-direction: column; align-items: flex-start; }
+  .footer__brand-bottom { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 480px) {
