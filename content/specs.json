@@ -1,0 +1,102 @@
+{
+  "kicker": "Technical Datasheet",
+  "heading": "Full Specifications",
+  "subline": "From the official FAS-Technology datasheet (REF: TSUNIA-EN, Rev 1).",
+  "downloadTitle": "Download the full datasheet",
+  "downloadText": "Complete PDF with certified values, drawings, and installation data. Enter your email and we will send it to your inbox.",
+  "downloadCta": "Download PDF",
+  "tabs": [
+    {
+      "id": "general",
+      "label": "General",
+      "items": [
+        { "label": "Drive principle", "value": "Friction traction" },
+        { "label": "Lifting height", "value": "Unlimited (rope length)" },
+        { "label": "Primary brake", "value": "Electromagnetic" },
+        { "label": "Secondary brake", "value": "OSLA overspeed lock" },
+        { "label": "Sound power", "value": "≤ 79 dB @ 3.3 ft" },
+        { "label": "Protection class", "value": "IP55" },
+        { "label": "Gearbox", "value": "Double reduction" },
+        { "label": "Overload protection", "value": "Trips at 125% WLL" },
+        { "label": "Motor protection", "value": "Thermal + overcurrent" },
+        { "label": "Phase protection", "value": "Seq./loss/voltage" },
+        { "label": "Manual lift", "value": "Handwheel (optional)" },
+        { "label": "Emergency descent", "value": "Speed-limited" }
+      ],
+      "calloutHtml": "<strong>Operating environment:</strong> &minus;4 &deg;F to +131 &deg;F, humidity &le; 90% @ 77 &deg;F."
+    },
+    {
+      "id": "osla",
+      "label": "OSLA Brake",
+      "items": [
+        { "label": "Type", "value": "Independent mechanical" },
+        { "label": "Working load limit", "valueHtml": "2,200 lbs <span class=\"metric\">(1,000 kg)</span>" },
+        { "label": "Rope diameter", "valueHtml": "3/8\" <span class=\"metric\">(9.5 mm)</span>" },
+        { "label": "Locking speed", "value": "98 ft/min" },
+        { "label": "Locking distance", "value": "≤ 10.2 in" },
+        { "label": "Reset", "value": "Manual only" },
+        { "label": "Overhaul cycle", "value": "500 h @ 98 ft/min" }
+      ],
+      "calloutHtml": "<strong>Important:</strong> The OSLA automatically locks the wire rope on rope breakage or overspeed. It must always remain fitted; the hoist cannot operate without it."
+    },
+    {
+      "id": "rope",
+      "label": "Wire Rope",
+      "items": [
+        { "label": "Construction", "value": "5xK19S-SFC, fibre core" },
+        { "label": "Diameter", "valueHtml": "3/8\" <span class=\"metric\">(9.5 mm)</span>" },
+        { "label": "Min. breaking force", "valueHtml": "16,200 lbf <span class=\"metric\">(72.1 kN)</span>" },
+        { "label": "Tensile strength", "valueHtml": "313 ksi <span class=\"metric\">(2,160 MPa)</span>" },
+        { "label": "Lay", "value": "Right-hand" },
+        { "label": "Reel length range", "value": "328 to 1,312 ft" },
+        { "label": "End termination", "value": "Crimped alu sleeve" },
+        { "label": "Approval", "value": "FAS authorised only" }
+      ],
+      "calloutHtml": "<strong>Safety:</strong> Use only FAS-Technology authorised 3/8\" (9.5 mm) steel wire rope in good condition."
+    },
+    {
+      "id": "electrical",
+      "label": "Electrical",
+      "items": [
+        { "label": "Main switch", "value": "Required" },
+        { "label": "RCD/ELCB", "value": "≤ 30 mA" },
+        { "label": "Overcurrent protection", "value": "Type C fuse" },
+        { "label": "Generator sizing", "value": "≥ 3× rated power" },
+        { "label": "Connector", "value": "3-pin (1P) / 4-pin (3P)" }
+      ],
+      "cableTable": {
+        "heading": "Supply cable by working height (AWG)",
+        "columns": ["164 ft (50 m)", "328 ft (100 m)", "656 ft (200 m)"],
+        "rowLabel": "Cable",
+        "values": ["16 AWG", "14 AWG", "12 AWG"]
+      },
+      "calloutHtml": "<strong>Note:</strong> Electrical connection must comply with applicable national standards; supply voltage and frequency must match the hoist nameplate."
+    },
+    {
+      "id": "dimensions",
+      "label": "Dimensions",
+      "items": [
+        { "label": "Overall width", "valueHtml": "11.8 in <span class=\"metric\">(300 mm)</span>" },
+        { "label": "Overall height", "valueHtml": "30.2 in <span class=\"metric\">(767 mm)</span>" },
+        { "label": "Mounting holes", "valueHtml": "1 × &Oslash;0.65 in" },
+        { "label": "Fixing", "value": "5/8\" pin / M16-8.8" },
+        { "label": "Orientations", "value": "Front / lateral / inverted" },
+        { "label": "Flat install", "value": "Not permitted" }
+      ],
+      "calloutHtml": "<strong>Note:</strong> Dimensions are nominal. Refer to the drawing and to FAS-Technology for installation-specific values."
+    },
+    {
+      "id": "service",
+      "label": "Service",
+      "items": [
+        { "label": "Gear oil", "value": "Mobil SHC 632 synth." },
+        { "label": "Oil capacity", "valueHtml": "1.6 qt <span class=\"metric\">(1.5 L)</span>" },
+        { "label": "Oil temp range", "value": "&minus;22 to +140 &deg;F" },
+        { "label": "Brake clearance", "value": "0.012 to 0.016 in" },
+        { "label": "Service interval", "value": "100 h / per site / annual" },
+        { "label": "Overhaul cycle", "value": "500 working hours" }
+      ],
+      "calloutHtml": "<strong>Certifications:</strong> UL 1323 &middot; CSA Z271 &middot; EN 1808:2015 &middot; EN 60204-1."
+    }
+  ]
+}

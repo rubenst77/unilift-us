@@ -1,0 +1,65 @@
+{
+  "titleHtml": "FAQ <span class=\"faq__title-accent\">UNILIFT</span>",
+  "items": [
+    {
+      "category": "Certification & US market",
+      "question": "Is the UNILIFT certified for use in the United States?",
+      "answer": "Yes. It's UL 1323 listed and CSA Z271 certified, built to EN 1808:2015 and EN 60204-1. Certificates available on request."
+    },
+    {
+      "category": "Certification & US market",
+      "question": "Is it certified to lift people (man-riding)?",
+      "answer": "Yes, it's certified to EN 1808 for man-riding. Overload protection, dual braking, the OSLA overspeed lock and manual lowering are all built in as standard."
+    },
+    {
+      "category": "Certification & US market",
+      "question": "How does it fit OSHA and ANSI rules on my jobsite?",
+      "answer": "OSHA compliance for suspended work is site-based: it comes down to your rigging, anchorage, inspections and an independent fall-arrest system per worker. The UNILIFT is the certified hoist inside that setup, and we supply the load ratings and documentation your competent person needs. Ask our engineers about your specific application."
+    },
+    {
+      "category": "Specification & fit",
+      "question": "Single-phase or three-phase, which do I need?",
+      "answer": "Single-phase (UNI70A-S, 2 hp / 12 A) if that's the only power on site. Three-phase (UNI70A-T and UNI100A-T, 3 hp / 9 A) otherwise. The two UNI70A models lift the same load; the UNI100A steps up to 2,200 lbs."
+    },
+    {
+      "category": "Specification & fit",
+      "question": "What's the maximum lifting height?",
+      "answer": "Effectively unlimited. The rope passes through the hoist instead of winding onto a drum, so height depends only on the rope you run, not the machine. Reels go from 328 to 1,312 ft."
+    },
+    {
+      "category": "Specification & fit",
+      "question": "How big and heavy is it?",
+      "answer": "159 lbs, 11.8 in wide by 30.2 in tall. Compact enough for a small crew to position, with an IP55 aluminium housing for exposed sites."
+    },
+    {
+      "category": "Safety",
+      "question": "What happens if the rope breaks or the hoist overspeeds?",
+      "answer": "The OSLA secondary brake grips the rope and stops the fall automatically. It's fully mechanical, needs no power, and the hoist won't run without it."
+    },
+    {
+      "category": "Safety",
+      "question": "What if the power fails mid-lift?",
+      "answer": "The manual lowering mechanism brings the platform down by hand, safely and speed-limited. Nobody gets stranded."
+    },
+    {
+      "category": "Safety",
+      "question": "Can I use any wire rope?",
+      "answer": "No. Only FAS-authorised 3/8 in. steel rope (16,200 lbf breaking force). We supply certified rope with every hoist."
+    },
+    {
+      "category": "Ownership & support",
+      "question": "What are the lead times and warranty?",
+      "answer": "Both are confirmed with your quote, based on configuration and quantity. Send us your timeline and we'll come back with dates."
+    },
+    {
+      "category": "Ownership & support",
+      "question": "Can my team service it themselves?",
+      "answer": "Yes. Service is every 100 hours or annually, with a 500-hour overhaul. A built-in hour-meter tracks runtime, we train your crew for free, and we supply original parts."
+    },
+    {
+      "category": "Ownership & support",
+      "question": "Do you have US distributors?",
+      "answer": "The US network is opening up now. End user or would-be distributor, get in touch and we'll sort out local support."
+    }
+  ]
+}

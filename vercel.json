@@ -1,0 +1,3 @@
+{
+  "buildCommand": "node scripts/merge-content.js && node scripts/inline-content.js"
+}

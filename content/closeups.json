@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "image": "assets/closeups/1.webp",
+      "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
+      "imageSize": "lg",
+      "reverse": false,
+      "label": "Build quality",
+      "heading": "Engineered and labelled in Luxembourg",
+      "textHtml": "Every UNILIFT is factory-tested before it ships. The control box integrates E-stop, up/down, overload alarm and status indicators in one sealed <span class=\"num\">IP55</span> unit."
+    },
+    {
+      "image": "assets/closeups/8.webp",
+      "imageAlt": "Close-up of the OSLA overspeed lock mechanism at the top of the hoist",
+      "imageSize": "default",
+      "reverse": true,
+      "label": "Safety mechanism",
+      "heading": "The OSLA overspeed lock, up close",
+      "textHtml": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. It is mechanical and independent, needing no electrical power to arrest a fall."
+    },
+    {
+      "image": "assets/closeups/5.webp",
+      "imageAlt": "UNILIFT hoist motor and service connection detail",
+      "imageSize": "lg",
+      "reverse": false,
+      "label": "Serviceability",
+      "heading": "Built to be connected and serviced",
+      "textHtml": "Industrial 3-pin (1P) or 4-pin (3P) connectors, an internal hour-meter, and a <span class=\"num\">500-hour</span> overhaul cycle make integration and maintenance straightforward."
+    }
+  ]
+}

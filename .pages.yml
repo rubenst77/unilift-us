@@ -1,0 +1,546 @@
+media:
+  input: assets
+  output: assets
+
+components:
+  specRow:
+    type: object
+    label: Specification row
+    fields:
+      - name: label
+        label: Label
+        type: string
+      - name: value
+        label: Value
+        type: string
+        description: Plain text value (use valueHtml instead if you need metric spans or formatting).
+      - name: valueHtml
+        label: Value (HTML)
+        type: text
+        description: Optional HTML value. Leave blank to use the plain Value field.
+
+content:
+  - name: site
+    label: Site content
+    type: group
+    items:
+      - name: global
+        label: Global & settings
+        type: file
+        path: content/global.json
+        format: json
+        fields:
+          - name: companyName
+            label: Company name
+            type: string
+          - name: brandName
+            label: Brand name
+            type: string
+          - name: tagline
+            label: Footer tagline
+            type: text
+            description: HTML allowed (e.g. bold keywords).
+          - name: address
+            label: Address
+            type: object
+            fields:
+              - name: street
+                label: Street
+                type: string
+              - name: postalCode
+                label: Postal code
+                type: string
+              - name: city
+                label: City
+                type: string
+              - name: country
+                label: Country (display)
+                type: string
+              - name: display
+                label: Contact tile address (HTML)
+                type: text
+          - name: phone
+            label: Phone / WhatsApp (display)
+            type: string
+          - name: phoneTel
+            label: Phone (tel: link, digits only)
+            type: string
+          - name: whatsapp
+            label: WhatsApp number (digits, no +)
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: rcs
+            label: R.C.S number
+            type: string
+          - name: vat
+            label: VAT number
+            type: string
+          - name: copyrightYear
+            label: Copyright year
+            type: string
+          - name: social
+            label: Social links
+            type: object
+            fields:
+              - name: linkedin
+                label: LinkedIn URL
+                type: string
+              - name: youtube
+                label: YouTube URL
+                type: string
+          - name: manufacturerUrl
+            label: Manufacturer website URL
+            type: string
+          - name: SITE_URL
+            label: Site URL
+            type: string
+            description: Canonical base URL (no trailing slash).
+          - name: LEAD_WEBHOOK_URL
+            label: Lead webhook URL
+            type: string
+            description: n8n/Make webhook for form submissions. Leave empty to disable.
+          - name: GA4_ID
+            label: Google Analytics 4 ID
+            type: string
+          - name: GADS_ID
+            label: Google Ads ID
+            type: string
+          - name: navCta
+            label: Navigation CTA label
+            type: string
+          - name: datasheetPdf
+            label: Datasheet PDF path
+            type: image
+          - name: seo
+            label: SEO & social
+            type: object
+            fields:
+              - name: title
+                label: Page title
+                type: string
+              - name: description
+                label: Meta description
+                type: text
+              - name: ogTitle
+                label: Open Graph title
+                type: string
+              - name: ogDescription
+                label: Open Graph description
+                type: text
+              - name: ogImage
+                label: Open Graph image
+                type: image
+              - name: twitterTitle
+                label: Twitter title
+                type: string
+              - name: twitterDescription
+                label: Twitter description
+                type: text
+          - name: productSchema
+            label: Product schema (JSON-LD)
+            type: object
+            fields:
+              - name: name
+                label: Product name
+                type: string
+              - name: description
+                label: Product description
+                type: text
+              - name: image
+                label: Product image
+                type: image
+              - name: category
+                label: Product category
+                type: string
+          - name: contact
+            label: Contact section
+            type: object
+            fields:
+              - name: kicker
+                label: Contact kicker
+                type: string
+              - name: title
+                label: Contact headline
+                type: string
+              - name: intro
+                label: Contact intro
+                type: text
+
+      - name: hero
+        label: Hero
+        type: file
+        path: content/hero.json
+        format: json
+        fields:
+          - name: kicker
+            label: Hero kicker
+            type: string
+          - name: titleLines
+            label: Hero headline lines
+            type: string
+            list: true
+            description: One entry per line of the H1.
+          - name: subtitle
+            label: Hero subline
+            type: text
+          - name: primaryCta
+            label: Primary CTA label
+            type: string
+          - name: secondaryCta
+            label: Secondary CTA label
+            type: string
+          - name: backgroundImage
+            label: Hero background image
+            type: image
+          - name: scrollLabel
+            label: Scroll hint label
+            type: string
+          - name: certifications
+            label: Certification badges
+            type: string
+            list: true
+
+      - name: product
+        label: Product intro
+        type: file
+        path: content/product.json
+        format: json
+        fields:
+          - name: kicker
+            label: Section kicker
+            type: string
+          - name: headingHtml
+            label: Section heading (HTML)
+            type: text
+          - name: intro
+            label: Intro paragraph
+            type: text
+          - name: points
+            label: Selling points
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Point title
+                type: string
+              - name: titleHtml
+                label: Point title (HTML)
+                type: text
+                description: Use instead of Point title when you need spans or numbers.
+              - name: line
+                label: Point description
+                type: text
+
+      - name: closeups
+        label: Close-up rows
+        type: file
+        path: content/closeups.json
+        format: json
+        fields:
+          - name: items
+            label: Close-up rows
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Photo
+                type: image
+              - name: imageAlt
+                label: Image alt text
+                type: string
+              - name: imageSize
+                label: Image size
+                type: select
+                options:
+                  values:
+                    - default
+                    - lg
+              - name: reverse
+                label: Reverse layout
+                type: boolean
+              - name: label
+                label: Row label
+                type: string
+              - name: heading
+                label: Row heading
+                type: string
+              - name: textHtml
+                label: Row paragraph (HTML)
+                type: text
+
+      - name: features
+        label: Hoist features
+        type: file
+        path: content/features.json
+        format: json
+        fields:
+          - name: kicker
+            label: Section kicker
+            type: string
+          - name: headingHtml
+            label: Section heading (HTML)
+            type: text
+          - name: subline
+            label: Section subline
+            type: text
+          - name: items
+            label: Feature cards
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Photo
+                type: image
+              - name: imageAlt
+                label: Image alt text
+                type: string
+              - name: title
+                label: Feature title
+                type: string
+              - name: descriptionHtml
+                label: Feature description (HTML)
+                type: text
+
+      - name: models
+        label: Models
+        type: file
+        path: content/models.json
+        format: json
+        fields:
+          - name: kicker
+            label: Section kicker
+            type: string
+          - name: headingHtml
+            label: Section heading (HTML)
+            type: text
+          - name: subline
+            label: Section subline
+            type: text
+          - name: models
+            label: Models
+            type: object
+            list: true
+            fields:
+              - name: ref
+                label: Model reference
+                type: string
+              - name: phaseLabel
+                label: Phase label
+                type: string
+              - name: wllLbs
+                label: Working load (lbs, display)
+                type: string
+              - name: wllLbsRaw
+                label: Working load (lbs, number)
+                type: number
+              - name: wllKg
+                label: Working load (kg line)
+                type: string
+              - name: wllKgMetric
+                label: Working load (kg, for table)
+                type: string
+              - name: supply
+                label: Supply
+                type: string
+              - name: supplyFreq
+                label: Supply frequency
+                type: string
+              - name: motorHp
+                label: Motor (hp)
+                type: string
+              - name: motorKw
+                label: Motor (kW)
+                type: string
+              - name: motorDisplay
+                label: Motor (card display)
+                type: string
+              - name: ratedCurrent
+                label: Rated current
+                type: string
+              - name: controlBox
+                label: Control box
+                type: string
+              - name: connector
+                label: Connector
+                type: string
+              - name: featured
+                label: Featured card
+                type: boolean
+              - name: ribbon
+                label: Ribbon label
+                type: string
+              - name: ctaVariant
+                label: CTA style
+                type: select
+                options:
+                  values:
+                    - primary
+                    - outline
+              - name: ctaLabel
+                label: CTA label
+                type: string
+              - name: ctaId
+                label: CTA tracking ID
+                type: string
+              - name: formOption
+                label: Quote form option label
+                type: string
+          - name: sharedStrip
+            label: Shared spec strip
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label (optional)
+                type: string
+              - name: valueHtml
+                label: Value (HTML)
+                type: text
+
+      - name: specs
+        label: Specifications
+        type: file
+        path: content/specs.json
+        format: json
+        fields:
+          - name: kicker
+            label: Section kicker
+            type: string
+          - name: heading
+            label: Section heading
+            type: string
+          - name: subline
+            label: Section subline
+            type: text
+          - name: downloadTitle
+            label: Download bar title
+            type: string
+          - name: downloadText
+            label: Download bar text
+            type: text
+          - name: downloadCta
+            label: Download button label
+            type: string
+          - name: tabs
+            label: Specification tabs
+            type: object
+            list: true
+            fields:
+              - name: id
+                label: Tab ID
+                type: string
+                description: Lowercase slug (general, osla, rope, electrical, dimensions, service).
+              - name: label
+                label: Tab label
+                type: string
+              - name: items
+                label: Spec rows
+                type: object
+                list: true
+                fields:
+                  - name: label
+                    label: Label
+                    type: string
+                  - name: value
+                    label: Value
+                    type: string
+                  - name: valueHtml
+                    label: Value (HTML)
+                    type: text
+              - name: calloutHtml
+                label: Tab callout (HTML)
+                type: text
+              - name: cableTable
+                label: Cable table (Electrical tab only)
+                type: object
+                fields:
+                  - name: heading
+                    label: Table heading
+                    type: string
+                  - name: columns
+                    label: Column headers
+                    type: string
+                    list: true
+                  - name: rowLabel
+                    label: Row label
+                    type: string
+                  - name: values
+                    label: Row values
+                    type: string
+                    list: true
+
+      - name: applications
+        label: Applications (archived)
+        type: file
+        path: content/applications.json
+        format: json
+        description: Section currently hidden on the live page; kept for future use and CMS parity.
+        fields:
+          - name: items
+            label: Applications
+            type: object
+            list: true
+            fields:
+              - name: numeral
+                label: Numeral
+                type: string
+              - name: kicker
+                label: Kicker
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: line
+                label: Description
+                type: text
+              - name: image
+                label: Background image
+                type: image
+
+      - name: faq
+        label: FAQ
+        type: file
+        path: content/faq.json
+        format: json
+        fields:
+          - name: titleHtml
+            label: FAQ section title (HTML)
+            type: text
+          - name: items
+            label: Questions
+            type: object
+            list: true
+            fields:
+              - name: category
+                label: Category heading
+                type: string
+              - name: question
+                label: Question
+                type: string
+              - name: answer
+                label: Answer
+                type: text
+
+      - name: distributors
+        label: Distributor band
+        type: file
+        path: content/distributors.json
+        format: json
+        fields:
+          - name: kicker
+            label: Kicker
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: line
+            label: Supporting line
+            type: text
+          - name: ctaLabel
+            label: CTA label
+            type: string
+
+settings:
+  merge: direct

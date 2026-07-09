@@ -1,0 +1,19 @@
+{
+  "kicker": "The UNILIFT Hoist",
+  "headingHtml": "One hoist.<br>Unlimited <span class=\"hl\">height</span>.",
+  "intro": "An electric wire-rope traction hoist for man-riding and material lifting. Its &alpha;-shaped rope path lets the rope pass through the machine, so lift height is limited only by the rope you deploy.",
+  "points": [
+    {
+      "title": "Man-riding certified",
+      "line": "Designed and certified to EN 1808 for lifting people, with safety devices built in."
+    },
+    {
+      "titleHtml": "<span class=\"num\">1,500 to 2,200 lbs</span> WLL",
+      "line": "Three models, one platform. Single or three-phase, 208 V / 60 Hz."
+    },
+    {
+      "title": "Integrated OSLA brake",
+      "line": "Independent overspeed safety lock, factory-fitted. The hoist cannot run without it."
+    }
+  ]
+}

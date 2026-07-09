@@ -1,0 +1,31 @@
+{
+  "kicker": "Standard Safety",
+  "headingHtml": "Hoist main <span class=\"hl\">features</span>.",
+  "subline": "All required safety devices integrated as standard, per EN 1808.",
+  "items": [
+    {
+      "image": "assets/features/overload.png",
+      "imageAlt": "Built-in overload mechanism on the UNILIFT hoist",
+      "title": "Built-in Overload Mechanism",
+      "descriptionHtml": "When the load reaches or exceeds the limit, the hoist stops rising and will only descend. Trips at <span class=\"num\">125%</span> WLL."
+    },
+    {
+      "image": "assets/features/lowering.png",
+      "imageAlt": "Manual safety lowering mechanism on the UNILIFT hoist",
+      "title": "Safety Lowering Mechanism",
+      "descriptionHtml": "In a power failure, the electro-mechanical brake can be released manually for a safe, controlled descent."
+    },
+    {
+      "image": "assets/features/hour-counter.png",
+      "imageAlt": "Hour counter in the UNILIFT connection box",
+      "title": "Hour Counter",
+      "descriptionHtml": "An internal running-hours counter in the connection box records operating time, so service intervals are always known."
+    },
+    {
+      "image": "assets/features/attachment.png",
+      "imageAlt": "UNILIFT attachment points and suspension options",
+      "title": "Attachment Points",
+      "descriptionHtml": "Suspend from a central load pin, or fix at the housing corners with a hook, screw or pins. Adaptable to any rig."
+    }
+  ]
+}

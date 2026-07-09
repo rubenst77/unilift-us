@@ -32,6 +32,9 @@
   document.addEventListener('DOMContentLoaded', init);
 
   function init() {
+    if (typeof window.__hydrateSite === 'function') {
+      window.__hydrateSite();
+    }
     warnWebhookUnset();
     initSmoothScroll();
     initNavbar();

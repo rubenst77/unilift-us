@@ -1,0 +1,595 @@
+{
+  "global": {
+    "companyName": "FAS-Technology S.A.R.L",
+    "brandName": "FAS-Technology",
+    "tagline": "Engineering at your side. <strong>ACCESS, LIFTING, HEIGHT SAFETY SYSTEMS.</strong>",
+    "address": {
+      "street": "Avenue du Blues N°9",
+      "postalCode": "L-4368",
+      "city": "Belvaux",
+      "country": "Grand Duchy of Luxembourg",
+      "display": "Avenue du Blues N°9, L-4368 Belvaux,<br>Grand Duchy of Luxembourg"
+    },
+    "phone": "+352 691 592 667",
+    "phoneTel": "+352691592667",
+    "whatsapp": "+352691592667",
+    "email": "info@fas-technology.com",
+    "rcs": "B237309",
+    "vat": "LU33813019",
+    "copyrightYear": "2026",
+    "social": {
+      "linkedin": "https://www.linkedin.com/company/26258075",
+      "youtube": "https://www.youtube.com/channel/UC3aVqagmLcEgvphduGfdfrg"
+    },
+    "manufacturerUrl": "https://www.fas-technology.com",
+    "SITE_URL": "https://unilift-us.vercel.app",
+    "LEAD_WEBHOOK_URL": "",
+    "GA4_ID": "G-XXXXXXXXXX",
+    "GADS_ID": "AW-XXXXXXXXXX",
+    "seo": {
+      "title": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist | FAS-Tech",
+      "description": "UNILIFT motorized traction hoist. UL 1323 listed, man-riding certified, 1,500 to 2,200 lbs WLL, unlimited lift height. Built for the US jobsite. Request a quote.",
+      "ogTitle": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist",
+      "ogDescription": "Motorized traction hoists for lifting people and equipment. Unlimited height, built for the American jobsite.",
+      "ogImage": "assets/photos/1.webp",
+      "twitterTitle": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist",
+      "twitterDescription": "Motorized traction hoists for lifting people and equipment. Unlimited height."
+    },
+    "productSchema": {
+      "name": "UNILIFT Traction Hoist Range",
+      "description": "Electric wire-rope traction hoist for man-riding and material lifting. UL 1323 listed, CSA Z271 certified, EN 1808:2015. Unlimited lift height.",
+      "image": "assets/photos/1.webp",
+      "category": "Traction Hoist"
+    },
+    "contact": {
+      "kicker": "Let's Talk",
+      "title": "Ready to spec the UNILIFT for your project?",
+      "intro": "Get a custom quote, request the full technical datasheet, or discuss US distribution."
+    },
+    "navCta": "Request a Quote",
+    "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf"
+  },
+  "hero": {
+    "kicker": "Lifting Solutions",
+    "titleLines": [
+      "Efficient lifting for",
+      "elevator installation."
+    ],
+    "subtitle": "Motorized traction hoists for lifting people and equipment. Unlimited height, built for the American jobsite.",
+    "primaryCta": "Request a Quote",
+    "secondaryCta": "Get the Datasheet",
+    "backgroundImage": "assets/context/hero.webp",
+    "scrollLabel": "Scroll to explore",
+    "certifications": [
+      "UL 1323",
+      "CSA Z271",
+      "EN 1808:2015",
+      "EN 60204-1"
+    ]
+  },
+  "product": {
+    "kicker": "The UNILIFT Hoist",
+    "headingHtml": "One hoist.<br>Unlimited <span class=\"hl\">height</span>.",
+    "intro": "An electric wire-rope traction hoist for man-riding and material lifting. Its &alpha;-shaped rope path lets the rope pass through the machine, so lift height is limited only by the rope you deploy.",
+    "points": [
+      {
+        "title": "Man-riding certified",
+        "line": "Designed and certified to EN 1808 for lifting people, with safety devices built in."
+      },
+      {
+        "titleHtml": "<span class=\"num\">1,500 to 2,200 lbs</span> WLL",
+        "line": "Three models, one platform. Single or three-phase, 208 V / 60 Hz."
+      },
+      {
+        "title": "Integrated OSLA brake",
+        "line": "Independent overspeed safety lock, factory-fitted. The hoist cannot run without it."
+      }
+    ]
+  },
+  "features": {
+    "kicker": "Standard Safety",
+    "headingHtml": "Hoist main <span class=\"hl\">features</span>.",
+    "subline": "All required safety devices integrated as standard, per EN 1808.",
+    "items": [
+      {
+        "image": "assets/features/overload.png",
+        "imageAlt": "Built-in overload mechanism on the UNILIFT hoist",
+        "title": "Built-in Overload Mechanism",
+        "descriptionHtml": "When the load reaches or exceeds the limit, the hoist stops rising and will only descend. Trips at <span class=\"num\">125%</span> WLL."
+      },
+      {
+        "image": "assets/features/lowering.png",
+        "imageAlt": "Manual safety lowering mechanism on the UNILIFT hoist",
+        "title": "Safety Lowering Mechanism",
+        "descriptionHtml": "In a power failure, the electro-mechanical brake can be released manually for a safe, controlled descent."
+      },
+      {
+        "image": "assets/features/hour-counter.png",
+        "imageAlt": "Hour counter in the UNILIFT connection box",
+        "title": "Hour Counter",
+        "descriptionHtml": "An internal running-hours counter in the connection box records operating time, so service intervals are always known."
+      },
+      {
+        "image": "assets/features/attachment.png",
+        "imageAlt": "UNILIFT attachment points and suspension options",
+        "title": "Attachment Points",
+        "descriptionHtml": "Suspend from a central load pin, or fix at the housing corners with a hook, screw or pins. Adaptable to any rig."
+      }
+    ]
+  },
+  "closeups": {
+    "items": [
+      {
+        "image": "assets/closeups/1.webp",
+        "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
+        "imageSize": "lg",
+        "reverse": false,
+        "label": "Build quality",
+        "heading": "Engineered and labelled in Luxembourg",
+        "textHtml": "Every UNILIFT is factory-tested before it ships. The control box integrates E-stop, up/down, overload alarm and status indicators in one sealed <span class=\"num\">IP55</span> unit."
+      },
+      {
+        "image": "assets/closeups/8.webp",
+        "imageAlt": "Close-up of the OSLA overspeed lock mechanism at the top of the hoist",
+        "imageSize": "default",
+        "reverse": true,
+        "label": "Safety mechanism",
+        "heading": "The OSLA overspeed lock, up close",
+        "textHtml": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. It is mechanical and independent, needing no electrical power to arrest a fall."
+      },
+      {
+        "image": "assets/closeups/5.webp",
+        "imageAlt": "UNILIFT hoist motor and service connection detail",
+        "imageSize": "lg",
+        "reverse": false,
+        "label": "Serviceability",
+        "heading": "Built to be connected and serviced",
+        "textHtml": "Industrial 3-pin (1P) or 4-pin (3P) connectors, an internal hour-meter, and a <span class=\"num\">500-hour</span> overhaul cycle make integration and maintenance straightforward."
+      }
+    ]
+  },
+  "models": {
+    "kicker": "Model Lineup",
+    "headingHtml": "Three models.<br>One spec sheet to <span class=\"hl\">learn</span>.",
+    "subline": "Single-phase for lighter setups, three-phase for maximum capacity. Same proven platform.",
+    "models": [
+      {
+        "ref": "UNI70A-9P11-S",
+        "phaseLabel": "208 V · 1-PHASE",
+        "wllLbs": "1,500",
+        "wllLbsRaw": 1500,
+        "wllKg": "680 kg WLL",
+        "wllKgMetric": "680 kg",
+        "supply": "208 V · 1-phase",
+        "supplyFreq": "208 V / 60 Hz",
+        "motorHp": "2 hp",
+        "motorKw": "1.5 kW",
+        "motorDisplay": "2 hp (1.5 kW)",
+        "ratedCurrent": "12 A",
+        "controlBox": "1P",
+        "connector": "3-pin / 3-core",
+        "featured": false,
+        "ribbon": "",
+        "ctaVariant": "outline",
+        "ctaLabel": "Request Quote",
+        "ctaId": "quote-UNI70A-S",
+        "formOption": "UNI70A-9P11-S, 1,500 lbs, Single-Phase"
+      },
+      {
+        "ref": "UNI70A-9P11-T",
+        "phaseLabel": "208 V · 3-PHASE",
+        "wllLbs": "1,500",
+        "wllLbsRaw": 1500,
+        "wllKg": "680 kg WLL",
+        "wllKgMetric": "680 kg",
+        "supply": "208 V · 3-phase",
+        "supplyFreq": "208 V / 60 Hz",
+        "motorHp": "3 hp",
+        "motorKw": "2.2 kW",
+        "motorDisplay": "3 hp (2.2 kW)",
+        "ratedCurrent": "9 A",
+        "controlBox": "3P",
+        "connector": "4-pin / 4-core",
+        "featured": true,
+        "ribbon": "Most Popular",
+        "ctaVariant": "primary",
+        "ctaLabel": "Request Quote",
+        "ctaId": "quote-UNI70A-T",
+        "formOption": "UNI70A-9P11-T, 1,500 lbs, Three-Phase"
+      },
+      {
+        "ref": "UNI100A-9P11-T",
+        "phaseLabel": "208 V · 3-PHASE",
+        "wllLbs": "2,200",
+        "wllLbsRaw": 2200,
+        "wllKg": "1,000 kg WLL",
+        "wllKgMetric": "1,000 kg",
+        "supply": "208 V · 3-phase",
+        "supplyFreq": "208 V / 60 Hz",
+        "motorHp": "3 hp",
+        "motorKw": "2.2 kW",
+        "motorDisplay": "3 hp (2.2 kW)",
+        "ratedCurrent": "9 A",
+        "controlBox": "3P",
+        "connector": "4-pin / 4-core",
+        "featured": false,
+        "ribbon": "",
+        "ctaVariant": "outline",
+        "ctaLabel": "Request Quote",
+        "ctaId": "quote-UNI100A-T",
+        "formOption": "UNI100A-9P11-T, 2,200 lbs, Three-Phase"
+      }
+    ],
+    "sharedStrip": [
+      {
+        "label": "Lifting speed",
+        "valueHtml": "<strong>35 fpm</strong> (10.7 m/min)"
+      },
+      {
+        "label": "Wire rope",
+        "valueHtml": "<strong>3/8\"</strong> (9.5 mm)"
+      },
+      {
+        "label": "Net weight",
+        "valueHtml": "<strong>159 lbs</strong> (72 kg)"
+      },
+      {
+        "label": "",
+        "valueHtml": "<strong>IP55</strong>"
+      },
+      {
+        "label": "Overload trip",
+        "valueHtml": "<strong>125%</strong> WLL"
+      },
+      {
+        "label": "Height",
+        "valueHtml": "<strong>Unlimited</strong>"
+      }
+    ]
+  },
+  "specs": {
+    "kicker": "Technical Datasheet",
+    "heading": "Full Specifications",
+    "subline": "From the official FAS-Technology datasheet (REF: TSUNIA-EN, Rev 1).",
+    "downloadTitle": "Download the full datasheet",
+    "downloadText": "Complete PDF with certified values, drawings, and installation data. Enter your email and we will send it to your inbox.",
+    "downloadCta": "Download PDF",
+    "tabs": [
+      {
+        "id": "general",
+        "label": "General",
+        "items": [
+          {
+            "label": "Drive principle",
+            "value": "Friction traction"
+          },
+          {
+            "label": "Lifting height",
+            "value": "Unlimited (rope length)"
+          },
+          {
+            "label": "Primary brake",
+            "value": "Electromagnetic"
+          },
+          {
+            "label": "Secondary brake",
+            "value": "OSLA overspeed lock"
+          },
+          {
+            "label": "Sound power",
+            "value": "≤ 79 dB @ 3.3 ft"
+          },
+          {
+            "label": "Protection class",
+            "value": "IP55"
+          },
+          {
+            "label": "Gearbox",
+            "value": "Double reduction"
+          },
+          {
+            "label": "Overload protection",
+            "value": "Trips at 125% WLL"
+          },
+          {
+            "label": "Motor protection",
+            "value": "Thermal + overcurrent"
+          },
+          {
+            "label": "Phase protection",
+            "value": "Seq./loss/voltage"
+          },
+          {
+            "label": "Manual lift",
+            "value": "Handwheel (optional)"
+          },
+          {
+            "label": "Emergency descent",
+            "value": "Speed-limited"
+          }
+        ],
+        "calloutHtml": "<strong>Operating environment:</strong> &minus;4 &deg;F to +131 &deg;F, humidity &le; 90% @ 77 &deg;F."
+      },
+      {
+        "id": "osla",
+        "label": "OSLA Brake",
+        "items": [
+          {
+            "label": "Type",
+            "value": "Independent mechanical"
+          },
+          {
+            "label": "Working load limit",
+            "valueHtml": "2,200 lbs <span class=\"metric\">(1,000 kg)</span>"
+          },
+          {
+            "label": "Rope diameter",
+            "valueHtml": "3/8\" <span class=\"metric\">(9.5 mm)</span>"
+          },
+          {
+            "label": "Locking speed",
+            "value": "98 ft/min"
+          },
+          {
+            "label": "Locking distance",
+            "value": "≤ 10.2 in"
+          },
+          {
+            "label": "Reset",
+            "value": "Manual only"
+          },
+          {
+            "label": "Overhaul cycle",
+            "value": "500 h @ 98 ft/min"
+          }
+        ],
+        "calloutHtml": "<strong>Important:</strong> The OSLA automatically locks the wire rope on rope breakage or overspeed. It must always remain fitted; the hoist cannot operate without it."
+      },
+      {
+        "id": "rope",
+        "label": "Wire Rope",
+        "items": [
+          {
+            "label": "Construction",
+            "value": "5xK19S-SFC, fibre core"
+          },
+          {
+            "label": "Diameter",
+            "valueHtml": "3/8\" <span class=\"metric\">(9.5 mm)</span>"
+          },
+          {
+            "label": "Min. breaking force",
+            "valueHtml": "16,200 lbf <span class=\"metric\">(72.1 kN)</span>"
+          },
+          {
+            "label": "Tensile strength",
+            "valueHtml": "313 ksi <span class=\"metric\">(2,160 MPa)</span>"
+          },
+          {
+            "label": "Lay",
+            "value": "Right-hand"
+          },
+          {
+            "label": "Reel length range",
+            "value": "328 to 1,312 ft"
+          },
+          {
+            "label": "End termination",
+            "value": "Crimped alu sleeve"
+          },
+          {
+            "label": "Approval",
+            "value": "FAS authorised only"
+          }
+        ],
+        "calloutHtml": "<strong>Safety:</strong> Use only FAS-Technology authorised 3/8\" (9.5 mm) steel wire rope in good condition."
+      },
+      {
+        "id": "electrical",
+        "label": "Electrical",
+        "items": [
+          {
+            "label": "Main switch",
+            "value": "Required"
+          },
+          {
+            "label": "RCD/ELCB",
+            "value": "≤ 30 mA"
+          },
+          {
+            "label": "Overcurrent protection",
+            "value": "Type C fuse"
+          },
+          {
+            "label": "Generator sizing",
+            "value": "≥ 3× rated power"
+          },
+          {
+            "label": "Connector",
+            "value": "3-pin (1P) / 4-pin (3P)"
+          }
+        ],
+        "cableTable": {
+          "heading": "Supply cable by working height (AWG)",
+          "columns": [
+            "164 ft (50 m)",
+            "328 ft (100 m)",
+            "656 ft (200 m)"
+          ],
+          "rowLabel": "Cable",
+          "values": [
+            "16 AWG",
+            "14 AWG",
+            "12 AWG"
+          ]
+        },
+        "calloutHtml": "<strong>Note:</strong> Electrical connection must comply with applicable national standards; supply voltage and frequency must match the hoist nameplate."
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "items": [
+          {
+            "label": "Overall width",
+            "valueHtml": "11.8 in <span class=\"metric\">(300 mm)</span>"
+          },
+          {
+            "label": "Overall height",
+            "valueHtml": "30.2 in <span class=\"metric\">(767 mm)</span>"
+          },
+          {
+            "label": "Mounting holes",
+            "valueHtml": "1 × &Oslash;0.65 in"
+          },
+          {
+            "label": "Fixing",
+            "value": "5/8\" pin / M16-8.8"
+          },
+          {
+            "label": "Orientations",
+            "value": "Front / lateral / inverted"
+          },
+          {
+            "label": "Flat install",
+            "value": "Not permitted"
+          }
+        ],
+        "calloutHtml": "<strong>Note:</strong> Dimensions are nominal. Refer to the drawing and to FAS-Technology for installation-specific values."
+      },
+      {
+        "id": "service",
+        "label": "Service",
+        "items": [
+          {
+            "label": "Gear oil",
+            "value": "Mobil SHC 632 synth."
+          },
+          {
+            "label": "Oil capacity",
+            "valueHtml": "1.6 qt <span class=\"metric\">(1.5 L)</span>"
+          },
+          {
+            "label": "Oil temp range",
+            "value": "&minus;22 to +140 &deg;F"
+          },
+          {
+            "label": "Brake clearance",
+            "value": "0.012 to 0.016 in"
+          },
+          {
+            "label": "Service interval",
+            "value": "100 h / per site / annual"
+          },
+          {
+            "label": "Overhaul cycle",
+            "value": "500 working hours"
+          }
+        ],
+        "calloutHtml": "<strong>Certifications:</strong> UL 1323 &middot; CSA Z271 &middot; EN 1808:2015 &middot; EN 60204-1."
+      }
+    ]
+  },
+  "applications": {
+    "items": [
+      {
+        "numeral": "01",
+        "kicker": "Application 01",
+        "title": "Elevator installation",
+        "line": "Lift crews and materials in the shaft during install, with unlimited height on the rope you deploy.",
+        "image": "assets/context/app-1.webp"
+      },
+      {
+        "numeral": "02",
+        "kicker": "Application 02",
+        "title": "Suspended platforms & facade access",
+        "line": "Swing stages and BMU rigs for cleaning, caulking, painting and inspection on high-rise facades.",
+        "image": "assets/context/app-2.webp"
+      },
+      {
+        "numeral": "03",
+        "kicker": "Application 03",
+        "title": "Material lifting",
+        "line": "Fast, compact vertical material handling. At 159 lbs the hoist is easy to move site to site.",
+        "image": "assets/context/app-3.webp"
+      },
+      {
+        "numeral": "04",
+        "kicker": "Application 04",
+        "title": "Windmill / turbine tower access",
+        "line": "Reliable, repeatable vertical access inside the tower for maintenance crews at extreme height.",
+        "image": "assets/context/app-4.jpg"
+      }
+    ]
+  },
+  "faq": {
+    "titleHtml": "FAQ <span class=\"faq__title-accent\">UNILIFT</span>",
+    "items": [
+      {
+        "category": "Certification & US market",
+        "question": "Is the UNILIFT certified for use in the United States?",
+        "answer": "Yes. It's UL 1323 listed and CSA Z271 certified, built to EN 1808:2015 and EN 60204-1. Certificates available on request."
+      },
+      {
+        "category": "Certification & US market",
+        "question": "Is it certified to lift people (man-riding)?",
+        "answer": "Yes, it's certified to EN 1808 for man-riding. Overload protection, dual braking, the OSLA overspeed lock and manual lowering are all built in as standard."
+      },
+      {
+        "category": "Certification & US market",
+        "question": "How does it fit OSHA and ANSI rules on my jobsite?",
+        "answer": "OSHA compliance for suspended work is site-based: it comes down to your rigging, anchorage, inspections and an independent fall-arrest system per worker. The UNILIFT is the certified hoist inside that setup, and we supply the load ratings and documentation your competent person needs. Ask our engineers about your specific application."
+      },
+      {
+        "category": "Specification & fit",
+        "question": "Single-phase or three-phase, which do I need?",
+        "answer": "Single-phase (UNI70A-S, 2 hp / 12 A) if that's the only power on site. Three-phase (UNI70A-T and UNI100A-T, 3 hp / 9 A) otherwise. The two UNI70A models lift the same load; the UNI100A steps up to 2,200 lbs."
+      },
+      {
+        "category": "Specification & fit",
+        "question": "What's the maximum lifting height?",
+        "answer": "Effectively unlimited. The rope passes through the hoist instead of winding onto a drum, so height depends only on the rope you run, not the machine. Reels go from 328 to 1,312 ft."
+      },
+      {
+        "category": "Specification & fit",
+        "question": "How big and heavy is it?",
+        "answer": "159 lbs, 11.8 in wide by 30.2 in tall. Compact enough for a small crew to position, with an IP55 aluminium housing for exposed sites."
+      },
+      {
+        "category": "Safety",
+        "question": "What happens if the rope breaks or the hoist overspeeds?",
+        "answer": "The OSLA secondary brake grips the rope and stops the fall automatically. It's fully mechanical, needs no power, and the hoist won't run without it."
+      },
+      {
+        "category": "Safety",
+        "question": "What if the power fails mid-lift?",
+        "answer": "The manual lowering mechanism brings the platform down by hand, safely and speed-limited. Nobody gets stranded."
+      },
+      {
+        "category": "Safety",
+        "question": "Can I use any wire rope?",
+        "answer": "No. Only FAS-authorised 3/8 in. steel rope (16,200 lbf breaking force). We supply certified rope with every hoist."
+      },
+      {
+        "category": "Ownership & support",
+        "question": "What are the lead times and warranty?",
+        "answer": "Both are confirmed with your quote, based on configuration and quantity. Send us your timeline and we'll come back with dates."
+      },
+      {
+        "category": "Ownership & support",
+        "question": "Can my team service it themselves?",
+        "answer": "Yes. Service is every 100 hours or annually, with a 500-hour overhaul. A built-in hour-meter tracks runtime, we train your crew for free, and we supply original parts."
+      },
+      {
+        "category": "Ownership & support",
+        "question": "Do you have US distributors?",
+        "answer": "The US network is opening up now. End user or would-be distributor, get in touch and we'll sort out local support."
+      }
+    ]
+  },
+  "distributors": {
+    "kicker": "US Distributors & Service Partners",
+    "heading": "Represent UNILIFT in your territory.",
+    "line": "We're building the US network now. Territories are open. If you sell or service lifting and access equipment, let's talk.",
+    "ctaLabel": "Become a Partner"
+  }
+}

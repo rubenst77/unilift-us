@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "numeral": "01",
+      "kicker": "Application 01",
+      "title": "Elevator installation",
+      "line": "Lift crews and materials in the shaft during install, with unlimited height on the rope you deploy.",
+      "image": "assets/context/app-1.webp"
+    },
+    {
+      "numeral": "02",
+      "kicker": "Application 02",
+      "title": "Suspended platforms & facade access",
+      "line": "Swing stages and BMU rigs for cleaning, caulking, painting and inspection on high-rise facades.",
+      "image": "assets/context/app-2.webp"
+    },
+    {
+      "numeral": "03",
+      "kicker": "Application 03",
+      "title": "Material lifting",
+      "line": "Fast, compact vertical material handling. At 159 lbs the hoist is easy to move site to site.",
+      "image": "assets/context/app-3.webp"
+    },
+    {
+      "numeral": "04",
+      "kicker": "Application 04",
+      "title": "Windmill / turbine tower access",
+      "line": "Reliable, repeatable vertical access inside the tower for maintenance crews at extreme height.",
+      "image": "assets/context/app-4.jpg"
+    }
+  ]
+}

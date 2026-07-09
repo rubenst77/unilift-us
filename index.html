@@ -25,22 +25,623 @@
   <meta name="twitter:image" content="https://unilift-us.vercel.app/assets/photos/1.webp">
   <meta name="theme-color" content="#0A1C33">
 
-  <!-- Site + tracking config (client replaces placeholders) -->
-  <script>
-    window.SITE_URL = 'https://unilift-us.vercel.app';
-    window.GA4_ID = 'G-XXXXXXXXXX';
-    window.GADS_ID = 'AW-XXXXXXXXXX';
-    window.LEAD_WEBHOOK_URL = ''; /* n8n/Make webhook: stores emails + can email leads from ruben.dacosta@fas-technology.com */
+  <!-- SITE-DATA-START -->
+  <script type="application/json" id="site-data">
+{
+  "global": {
+    "companyName": "FAS-Technology S.A.R.L",
+    "brandName": "FAS-Technology",
+    "tagline": "Engineering at your side. <strong>ACCESS, LIFTING, HEIGHT SAFETY SYSTEMS.</strong>",
+    "address": {
+      "street": "Avenue du Blues N°9",
+      "postalCode": "L-4368",
+      "city": "Belvaux",
+      "country": "Grand Duchy of Luxembourg",
+      "display": "Avenue du Blues N°9, L-4368 Belvaux,<br>Grand Duchy of Luxembourg"
+    },
+    "phone": "+352 691 592 667",
+    "phoneTel": "+352691592667",
+    "whatsapp": "+352691592667",
+    "email": "info@fas-technology.com",
+    "rcs": "B237309",
+    "vat": "LU33813019",
+    "copyrightYear": "2026",
+    "social": {
+      "linkedin": "https://www.linkedin.com/company/26258075",
+      "youtube": "https://www.youtube.com/channel/UC3aVqagmLcEgvphduGfdfrg"
+    },
+    "manufacturerUrl": "https://www.fas-technology.com",
+    "SITE_URL": "https://unilift-us.vercel.app",
+    "LEAD_WEBHOOK_URL": "",
+    "GA4_ID": "G-XXXXXXXXXX",
+    "GADS_ID": "AW-XXXXXXXXXX",
+    "seo": {
+      "title": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist | FAS-Tech",
+      "description": "UNILIFT motorized traction hoist. UL 1323 listed, man-riding certified, 1,500 to 2,200 lbs WLL, unlimited lift height. Built for the US jobsite. Request a quote.",
+      "ogTitle": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist",
+      "ogDescription": "Motorized traction hoists for lifting people and equipment. Unlimited height, built for the American jobsite.",
+      "ogImage": "assets/photos/1.webp",
+      "twitterTitle": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist",
+      "twitterDescription": "Motorized traction hoists for lifting people and equipment. Unlimited height."
+    },
+    "productSchema": {
+      "name": "UNILIFT Traction Hoist Range",
+      "description": "Electric wire-rope traction hoist for man-riding and material lifting. UL 1323 listed, CSA Z271 certified, EN 1808:2015. Unlimited lift height.",
+      "image": "assets/photos/1.webp",
+      "category": "Traction Hoist"
+    },
+    "contact": {
+      "kicker": "Let's Talk",
+      "title": "Ready to spec the UNILIFT for your project?",
+      "intro": "Get a custom quote, request the full technical datasheet, or discuss US distribution."
+    },
+    "navCta": "Request a Quote",
+    "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf"
+  },
+  "hero": {
+    "kicker": "Lifting Solutions",
+    "titleLines": [
+      "Efficient lifting for",
+      "elevator installation."
+    ],
+    "subtitle": "Motorized traction hoists for lifting people and equipment. Unlimited height, built for the American jobsite.",
+    "primaryCta": "Request a Quote",
+    "secondaryCta": "Get the Datasheet",
+    "backgroundImage": "assets/context/hero.webp",
+    "scrollLabel": "Scroll to explore",
+    "certifications": [
+      "UL 1323",
+      "CSA Z271",
+      "EN 1808:2015",
+      "EN 60204-1"
+    ]
+  },
+  "product": {
+    "kicker": "The UNILIFT Hoist",
+    "headingHtml": "One hoist.<br>Unlimited <span class=\"hl\">height</span>.",
+    "intro": "An electric wire-rope traction hoist for man-riding and material lifting. Its &alpha;-shaped rope path lets the rope pass through the machine, so lift height is limited only by the rope you deploy.",
+    "points": [
+      {
+        "title": "Man-riding certified",
+        "line": "Designed and certified to EN 1808 for lifting people, with safety devices built in."
+      },
+      {
+        "titleHtml": "<span class=\"num\">1,500 to 2,200 lbs</span> WLL",
+        "line": "Three models, one platform. Single or three-phase, 208 V / 60 Hz."
+      },
+      {
+        "title": "Integrated OSLA brake",
+        "line": "Independent overspeed safety lock, factory-fitted. The hoist cannot run without it."
+      }
+    ]
+  },
+  "features": {
+    "kicker": "Standard Safety",
+    "headingHtml": "Hoist main <span class=\"hl\">features</span>.",
+    "subline": "All required safety devices integrated as standard, per EN 1808.",
+    "items": [
+      {
+        "image": "assets/features/overload.png",
+        "imageAlt": "Built-in overload mechanism on the UNILIFT hoist",
+        "title": "Built-in Overload Mechanism",
+        "descriptionHtml": "When the load reaches or exceeds the limit, the hoist stops rising and will only descend. Trips at <span class=\"num\">125%</span> WLL."
+      },
+      {
+        "image": "assets/features/lowering.png",
+        "imageAlt": "Manual safety lowering mechanism on the UNILIFT hoist",
+        "title": "Safety Lowering Mechanism",
+        "descriptionHtml": "In a power failure, the electro-mechanical brake can be released manually for a safe, controlled descent."
+      },
+      {
+        "image": "assets/features/hour-counter.png",
+        "imageAlt": "Hour counter in the UNILIFT connection box",
+        "title": "Hour Counter",
+        "descriptionHtml": "An internal running-hours counter in the connection box records operating time, so service intervals are always known."
+      },
+      {
+        "image": "assets/features/attachment.png",
+        "imageAlt": "UNILIFT attachment points and suspension options",
+        "title": "Attachment Points",
+        "descriptionHtml": "Suspend from a central load pin, or fix at the housing corners with a hook, screw or pins. Adaptable to any rig."
+      }
+    ]
+  },
+  "closeups": {
+    "items": [
+      {
+        "image": "assets/closeups/1.webp",
+        "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
+        "imageSize": "lg",
+        "reverse": false,
+        "label": "Build quality",
+        "heading": "Engineered and labelled in Luxembourg",
+        "textHtml": "Every UNILIFT is factory-tested before it ships. The control box integrates E-stop, up/down, overload alarm and status indicators in one sealed <span class=\"num\">IP55</span> unit."
+      },
+      {
+        "image": "assets/closeups/8.webp",
+        "imageAlt": "Close-up of the OSLA overspeed lock mechanism at the top of the hoist",
+        "imageSize": "default",
+        "reverse": true,
+        "label": "Safety mechanism",
+        "heading": "The OSLA overspeed lock, up close",
+        "textHtml": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. It is mechanical and independent, needing no electrical power to arrest a fall."
+      },
+      {
+        "image": "assets/closeups/5.webp",
+        "imageAlt": "UNILIFT hoist motor and service connection detail",
+        "imageSize": "lg",
+        "reverse": false,
+        "label": "Serviceability",
+        "heading": "Built to be connected and serviced",
+        "textHtml": "Industrial 3-pin (1P) or 4-pin (3P) connectors, an internal hour-meter, and a <span class=\"num\">500-hour</span> overhaul cycle make integration and maintenance straightforward."
+      }
+    ]
+  },
+  "models": {
+    "kicker": "Model Lineup",
+    "headingHtml": "Three models.<br>One spec sheet to <span class=\"hl\">learn</span>.",
+    "subline": "Single-phase for lighter setups, three-phase for maximum capacity. Same proven platform.",
+    "models": [
+      {
+        "ref": "UNI70A-9P11-S",
+        "phaseLabel": "208 V · 1-PHASE",
+        "wllLbs": "1,500",
+        "wllLbsRaw": 1500,
+        "wllKg": "680 kg WLL",
+        "wllKgMetric": "680 kg",
+        "supply": "208 V · 1-phase",
+        "supplyFreq": "208 V / 60 Hz",
+        "motorHp": "2 hp",
+        "motorKw": "1.5 kW",
+        "motorDisplay": "2 hp (1.5 kW)",
+        "ratedCurrent": "12 A",
+        "controlBox": "1P",
+        "connector": "3-pin / 3-core",
+        "featured": false,
+        "ribbon": "",
+        "ctaVariant": "outline",
+        "ctaLabel": "Request Quote",
+        "ctaId": "quote-UNI70A-S",
+        "formOption": "UNI70A-9P11-S, 1,500 lbs, Single-Phase"
+      },
+      {
+        "ref": "UNI70A-9P11-T",
+        "phaseLabel": "208 V · 3-PHASE",
+        "wllLbs": "1,500",
+        "wllLbsRaw": 1500,
+        "wllKg": "680 kg WLL",
+        "wllKgMetric": "680 kg",
+        "supply": "208 V · 3-phase",
+        "supplyFreq": "208 V / 60 Hz",
+        "motorHp": "3 hp",
+        "motorKw": "2.2 kW",
+        "motorDisplay": "3 hp (2.2 kW)",
+        "ratedCurrent": "9 A",
+        "controlBox": "3P",
+        "connector": "4-pin / 4-core",
+        "featured": true,
+        "ribbon": "Most Popular",
+        "ctaVariant": "primary",
+        "ctaLabel": "Request Quote",
+        "ctaId": "quote-UNI70A-T",
+        "formOption": "UNI70A-9P11-T, 1,500 lbs, Three-Phase"
+      },
+      {
+        "ref": "UNI100A-9P11-T",
+        "phaseLabel": "208 V · 3-PHASE",
+        "wllLbs": "2,200",
+        "wllLbsRaw": 2200,
+        "wllKg": "1,000 kg WLL",
+        "wllKgMetric": "1,000 kg",
+        "supply": "208 V · 3-phase",
+        "supplyFreq": "208 V / 60 Hz",
+        "motorHp": "3 hp",
+        "motorKw": "2.2 kW",
+        "motorDisplay": "3 hp (2.2 kW)",
+        "ratedCurrent": "9 A",
+        "controlBox": "3P",
+        "connector": "4-pin / 4-core",
+        "featured": false,
+        "ribbon": "",
+        "ctaVariant": "outline",
+        "ctaLabel": "Request Quote",
+        "ctaId": "quote-UNI100A-T",
+        "formOption": "UNI100A-9P11-T, 2,200 lbs, Three-Phase"
+      }
+    ],
+    "sharedStrip": [
+      {
+        "label": "Lifting speed",
+        "valueHtml": "<strong>35 fpm</strong> (10.7 m/min)"
+      },
+      {
+        "label": "Wire rope",
+        "valueHtml": "<strong>3/8\"</strong> (9.5 mm)"
+      },
+      {
+        "label": "Net weight",
+        "valueHtml": "<strong>159 lbs</strong> (72 kg)"
+      },
+      {
+        "label": "",
+        "valueHtml": "<strong>IP55</strong>"
+      },
+      {
+        "label": "Overload trip",
+        "valueHtml": "<strong>125%</strong> WLL"
+      },
+      {
+        "label": "Height",
+        "valueHtml": "<strong>Unlimited</strong>"
+      }
+    ]
+  },
+  "specs": {
+    "kicker": "Technical Datasheet",
+    "heading": "Full Specifications",
+    "subline": "From the official FAS-Technology datasheet (REF: TSUNIA-EN, Rev 1).",
+    "downloadTitle": "Download the full datasheet",
+    "downloadText": "Complete PDF with certified values, drawings, and installation data. Enter your email and we will send it to your inbox.",
+    "downloadCta": "Download PDF",
+    "tabs": [
+      {
+        "id": "general",
+        "label": "General",
+        "items": [
+          {
+            "label": "Drive principle",
+            "value": "Friction traction"
+          },
+          {
+            "label": "Lifting height",
+            "value": "Unlimited (rope length)"
+          },
+          {
+            "label": "Primary brake",
+            "value": "Electromagnetic"
+          },
+          {
+            "label": "Secondary brake",
+            "value": "OSLA overspeed lock"
+          },
+          {
+            "label": "Sound power",
+            "value": "≤ 79 dB @ 3.3 ft"
+          },
+          {
+            "label": "Protection class",
+            "value": "IP55"
+          },
+          {
+            "label": "Gearbox",
+            "value": "Double reduction"
+          },
+          {
+            "label": "Overload protection",
+            "value": "Trips at 125% WLL"
+          },
+          {
+            "label": "Motor protection",
+            "value": "Thermal + overcurrent"
+          },
+          {
+            "label": "Phase protection",
+            "value": "Seq./loss/voltage"
+          },
+          {
+            "label": "Manual lift",
+            "value": "Handwheel (optional)"
+          },
+          {
+            "label": "Emergency descent",
+            "value": "Speed-limited"
+          }
+        ],
+        "calloutHtml": "<strong>Operating environment:</strong> &minus;4 &deg;F to +131 &deg;F, humidity &le; 90% @ 77 &deg;F."
+      },
+      {
+        "id": "osla",
+        "label": "OSLA Brake",
+        "items": [
+          {
+            "label": "Type",
+            "value": "Independent mechanical"
+          },
+          {
+            "label": "Working load limit",
+            "valueHtml": "2,200 lbs <span class=\"metric\">(1,000 kg)</span>"
+          },
+          {
+            "label": "Rope diameter",
+            "valueHtml": "3/8\" <span class=\"metric\">(9.5 mm)</span>"
+          },
+          {
+            "label": "Locking speed",
+            "value": "98 ft/min"
+          },
+          {
+            "label": "Locking distance",
+            "value": "≤ 10.2 in"
+          },
+          {
+            "label": "Reset",
+            "value": "Manual only"
+          },
+          {
+            "label": "Overhaul cycle",
+            "value": "500 h @ 98 ft/min"
+          }
+        ],
+        "calloutHtml": "<strong>Important:</strong> The OSLA automatically locks the wire rope on rope breakage or overspeed. It must always remain fitted; the hoist cannot operate without it."
+      },
+      {
+        "id": "rope",
+        "label": "Wire Rope",
+        "items": [
+          {
+            "label": "Construction",
+            "value": "5xK19S-SFC, fibre core"
+          },
+          {
+            "label": "Diameter",
+            "valueHtml": "3/8\" <span class=\"metric\">(9.5 mm)</span>"
+          },
+          {
+            "label": "Min. breaking force",
+            "valueHtml": "16,200 lbf <span class=\"metric\">(72.1 kN)</span>"
+          },
+          {
+            "label": "Tensile strength",
+            "valueHtml": "313 ksi <span class=\"metric\">(2,160 MPa)</span>"
+          },
+          {
+            "label": "Lay",
+            "value": "Right-hand"
+          },
+          {
+            "label": "Reel length range",
+            "value": "328 to 1,312 ft"
+          },
+          {
+            "label": "End termination",
+            "value": "Crimped alu sleeve"
+          },
+          {
+            "label": "Approval",
+            "value": "FAS authorised only"
+          }
+        ],
+        "calloutHtml": "<strong>Safety:</strong> Use only FAS-Technology authorised 3/8\" (9.5 mm) steel wire rope in good condition."
+      },
+      {
+        "id": "electrical",
+        "label": "Electrical",
+        "items": [
+          {
+            "label": "Main switch",
+            "value": "Required"
+          },
+          {
+            "label": "RCD/ELCB",
+            "value": "≤ 30 mA"
+          },
+          {
+            "label": "Overcurrent protection",
+            "value": "Type C fuse"
+          },
+          {
+            "label": "Generator sizing",
+            "value": "≥ 3× rated power"
+          },
+          {
+            "label": "Connector",
+            "value": "3-pin (1P) / 4-pin (3P)"
+          }
+        ],
+        "cableTable": {
+          "heading": "Supply cable by working height (AWG)",
+          "columns": [
+            "164 ft (50 m)",
+            "328 ft (100 m)",
+            "656 ft (200 m)"
+          ],
+          "rowLabel": "Cable",
+          "values": [
+            "16 AWG",
+            "14 AWG",
+            "12 AWG"
+          ]
+        },
+        "calloutHtml": "<strong>Note:</strong> Electrical connection must comply with applicable national standards; supply voltage and frequency must match the hoist nameplate."
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "items": [
+          {
+            "label": "Overall width",
+            "valueHtml": "11.8 in <span class=\"metric\">(300 mm)</span>"
+          },
+          {
+            "label": "Overall height",
+            "valueHtml": "30.2 in <span class=\"metric\">(767 mm)</span>"
+          },
+          {
+            "label": "Mounting holes",
+            "valueHtml": "1 × &Oslash;0.65 in"
+          },
+          {
+            "label": "Fixing",
+            "value": "5/8\" pin / M16-8.8"
+          },
+          {
+            "label": "Orientations",
+            "value": "Front / lateral / inverted"
+          },
+          {
+            "label": "Flat install",
+            "value": "Not permitted"
+          }
+        ],
+        "calloutHtml": "<strong>Note:</strong> Dimensions are nominal. Refer to the drawing and to FAS-Technology for installation-specific values."
+      },
+      {
+        "id": "service",
+        "label": "Service",
+        "items": [
+          {
+            "label": "Gear oil",
+            "value": "Mobil SHC 632 synth."
+          },
+          {
+            "label": "Oil capacity",
+            "valueHtml": "1.6 qt <span class=\"metric\">(1.5 L)</span>"
+          },
+          {
+            "label": "Oil temp range",
+            "value": "&minus;22 to +140 &deg;F"
+          },
+          {
+            "label": "Brake clearance",
+            "value": "0.012 to 0.016 in"
+          },
+          {
+            "label": "Service interval",
+            "value": "100 h / per site / annual"
+          },
+          {
+            "label": "Overhaul cycle",
+            "value": "500 working hours"
+          }
+        ],
+        "calloutHtml": "<strong>Certifications:</strong> UL 1323 &middot; CSA Z271 &middot; EN 1808:2015 &middot; EN 60204-1."
+      }
+    ]
+  },
+  "applications": {
+    "items": [
+      {
+        "numeral": "01",
+        "kicker": "Application 01",
+        "title": "Elevator installation",
+        "line": "Lift crews and materials in the shaft during install, with unlimited height on the rope you deploy.",
+        "image": "assets/context/app-1.webp"
+      },
+      {
+        "numeral": "02",
+        "kicker": "Application 02",
+        "title": "Suspended platforms & facade access",
+        "line": "Swing stages and BMU rigs for cleaning, caulking, painting and inspection on high-rise facades.",
+        "image": "assets/context/app-2.webp"
+      },
+      {
+        "numeral": "03",
+        "kicker": "Application 03",
+        "title": "Material lifting",
+        "line": "Fast, compact vertical material handling. At 159 lbs the hoist is easy to move site to site.",
+        "image": "assets/context/app-3.webp"
+      },
+      {
+        "numeral": "04",
+        "kicker": "Application 04",
+        "title": "Windmill / turbine tower access",
+        "line": "Reliable, repeatable vertical access inside the tower for maintenance crews at extreme height.",
+        "image": "assets/context/app-4.jpg"
+      }
+    ]
+  },
+  "faq": {
+    "titleHtml": "FAQ <span class=\"faq__title-accent\">UNILIFT</span>",
+    "items": [
+      {
+        "category": "Certification & US market",
+        "question": "Is the UNILIFT certified for use in the United States?",
+        "answer": "Yes. It's UL 1323 listed and CSA Z271 certified, built to EN 1808:2015 and EN 60204-1. Certificates available on request."
+      },
+      {
+        "category": "Certification & US market",
+        "question": "Is it certified to lift people (man-riding)?",
+        "answer": "Yes, it's certified to EN 1808 for man-riding. Overload protection, dual braking, the OSLA overspeed lock and manual lowering are all built in as standard."
+      },
+      {
+        "category": "Certification & US market",
+        "question": "How does it fit OSHA and ANSI rules on my jobsite?",
+        "answer": "OSHA compliance for suspended work is site-based: it comes down to your rigging, anchorage, inspections and an independent fall-arrest system per worker. The UNILIFT is the certified hoist inside that setup, and we supply the load ratings and documentation your competent person needs. Ask our engineers about your specific application."
+      },
+      {
+        "category": "Specification & fit",
+        "question": "Single-phase or three-phase, which do I need?",
+        "answer": "Single-phase (UNI70A-S, 2 hp / 12 A) if that's the only power on site. Three-phase (UNI70A-T and UNI100A-T, 3 hp / 9 A) otherwise. The two UNI70A models lift the same load; the UNI100A steps up to 2,200 lbs."
+      },
+      {
+        "category": "Specification & fit",
+        "question": "What's the maximum lifting height?",
+        "answer": "Effectively unlimited. The rope passes through the hoist instead of winding onto a drum, so height depends only on the rope you run, not the machine. Reels go from 328 to 1,312 ft."
+      },
+      {
+        "category": "Specification & fit",
+        "question": "How big and heavy is it?",
+        "answer": "159 lbs, 11.8 in wide by 30.2 in tall. Compact enough for a small crew to position, with an IP55 aluminium housing for exposed sites."
+      },
+      {
+        "category": "Safety",
+        "question": "What happens if the rope breaks or the hoist overspeeds?",
+        "answer": "The OSLA secondary brake grips the rope and stops the fall automatically. It's fully mechanical, needs no power, and the hoist won't run without it."
+      },
+      {
+        "category": "Safety",
+        "question": "What if the power fails mid-lift?",
+        "answer": "The manual lowering mechanism brings the platform down by hand, safely and speed-limited. Nobody gets stranded."
+      },
+      {
+        "category": "Safety",
+        "question": "Can I use any wire rope?",
+        "answer": "No. Only FAS-authorised 3/8 in. steel rope (16,200 lbf breaking force). We supply certified rope with every hoist."
+      },
+      {
+        "category": "Ownership & support",
+        "question": "What are the lead times and warranty?",
+        "answer": "Both are confirmed with your quote, based on configuration and quantity. Send us your timeline and we'll come back with dates."
+      },
+      {
+        "category": "Ownership & support",
+        "question": "Can my team service it themselves?",
+        "answer": "Yes. Service is every 100 hours or annually, with a 500-hour overhaul. A built-in hour-meter tracks runtime, we train your crew for free, and we supply original parts."
+      },
+      {
+        "category": "Ownership & support",
+        "question": "Do you have US distributors?",
+        "answer": "The US network is opening up now. End user or would-be distributor, get in touch and we'll sort out local support."
+      }
+    ]
+  },
+  "distributors": {
+    "kicker": "US Distributors & Service Partners",
+    "heading": "Represent UNILIFT in your territory.",
+    "line": "We're building the US network now. Territories are open. If you sell or service lifting and access equipment, let's talk.",
+    "ctaLabel": "Become a Partner"
+  }
+}
   </script>
-
-  <!-- Google Analytics 4 + Google Ads -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- SITE-DATA-END -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-    gtag('config', 'AW-XXXXXXXXXX');
+    (function () {
+      var g = JSON.parse(document.getElementById('site-data').textContent).global;
+      window.SITE_URL = g.SITE_URL;
+      window.GA4_ID = g.GA4_ID;
+      window.GADS_ID = g.GADS_ID;
+      window.LEAD_WEBHOOK_URL = g.LEAD_WEBHOOK_URL;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(g.GA4_ID);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', g.GA4_ID);
+      gtag('config', g.GADS_ID);
+    })();
   </script>
 
   <!-- Performance: preconnect + LCP hero preload -->
@@ -52,87 +653,10 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
 
-  <!-- Structured Data: Organization -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "FAS-Technology S.A.R.L",
-    "url": "https://unilift-us.vercel.app",
-    "description": "Engineering, manufacturing and consultancy group specializing in access solutions, lifting solutions, and height safety systems.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Avenue du Blues N°9",
-      "addressLocality": "Belvaux",
-      "postalCode": "L-4368",
-      "addressCountry": "LU"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+352-691-592-667",
-      "contactType": "sales",
-      "areaServed": "US",
-      "availableLanguage": "English"
-    },
-    "sameAs": [
-      "https://www.linkedin.com/company/26258075",
-      "https://www.youtube.com/channel/UC3aVqagmLcEgvphduGfdfrg"
-    ]
-  }
-  </script>
-
-  <!-- Structured Data: Product -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "UNILIFT Traction Hoist Range",
-    "brand": { "@type": "Brand", "name": "FAS-Technology" },
-    "manufacturer": {
-      "@type": "Organization",
-      "name": "FAS-Technology S.A.R.L",
-      "url": "https://www.fas-technology.com"
-    },
-    "description": "Electric wire-rope traction hoist for man-riding and material lifting. UL 1323 listed, CSA Z271 certified, EN 1808:2015. Unlimited lift height.",
-    "image": "https://unilift-us.vercel.app/assets/photos/1.webp",
-    "url": "https://unilift-us.vercel.app/",
-    "category": "Traction Hoist",
-    "additionalProperty": [
-      { "@type": "PropertyValue", "name": "Working Load Limit", "value": "1,500 to 2,200 lbs" },
-      { "@type": "PropertyValue", "name": "Lifting Speed", "value": "35 fpm" },
-      { "@type": "PropertyValue", "name": "Supply Voltage", "value": "208 V / 60 Hz" },
-      { "@type": "PropertyValue", "name": "Certifications", "value": "UL 1323, CSA Z271, EN 1808:2015, EN 60204-1" }
-    ],
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "USD",
-      "description": "Request a quote for pricing"
-    }
-  }
-  </script>
-
-  <!-- Structured Data: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      { "@type": "Question", "name": "Is the UNILIFT certified for use in the United States?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It's UL 1323 listed and CSA Z271 certified, built to EN 1808:2015 and EN 60204-1. Certificates available on request." } },
-      { "@type": "Question", "name": "Is it certified to lift people (man-riding)?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, it's certified to EN 1808 for man-riding. Overload protection, dual braking, the OSLA overspeed lock and manual lowering are all built in as standard." } },
-      { "@type": "Question", "name": "How does it fit OSHA and ANSI rules on my jobsite?", "acceptedAnswer": { "@type": "Answer", "text": "OSHA compliance for suspended work is site-based: it comes down to your rigging, anchorage, inspections and an independent fall-arrest system per worker. The UNILIFT is the certified hoist inside that setup, and we supply the load ratings and documentation your competent person needs. Ask our engineers about your specific application." } },
-      { "@type": "Question", "name": "Single-phase or three-phase, which do I need?", "acceptedAnswer": { "@type": "Answer", "text": "Single-phase (UNI70A-S, 2 hp / 12 A) if that's the only power on site. Three-phase (UNI70A-T and UNI100A-T, 3 hp / 9 A) otherwise. The two UNI70A models lift the same load; the UNI100A steps up to 2,200 lbs." } },
-      { "@type": "Question", "name": "What's the maximum lifting height?", "acceptedAnswer": { "@type": "Answer", "text": "Effectively unlimited. The rope passes through the hoist instead of winding onto a drum, so height depends only on the rope you run, not the machine. Reels go from 328 to 1,312 ft." } },
-      { "@type": "Question", "name": "How big and heavy is it?", "acceptedAnswer": { "@type": "Answer", "text": "159 lbs, 11.8 in wide by 30.2 in tall. Compact enough for a small crew to position, with an IP55 aluminium housing for exposed sites." } },
-      { "@type": "Question", "name": "What happens if the rope breaks or the hoist overspeeds?", "acceptedAnswer": { "@type": "Answer", "text": "The OSLA secondary brake grips the rope and stops the fall automatically. It's fully mechanical, needs no power, and the hoist won't run without it." } },
-      { "@type": "Question", "name": "What if the power fails mid-lift?", "acceptedAnswer": { "@type": "Answer", "text": "The manual lowering mechanism brings the platform down by hand, safely and speed-limited. Nobody gets stranded." } },
-      { "@type": "Question", "name": "Can I use any wire rope?", "acceptedAnswer": { "@type": "Answer", "text": "No. Only FAS-authorised 3/8 in. steel rope (16,200 lbf breaking force). We supply certified rope with every hoist." } },
-      { "@type": "Question", "name": "What are the lead times and warranty?", "acceptedAnswer": { "@type": "Answer", "text": "Both are confirmed with your quote, based on configuration and quantity. Send us your timeline and we'll come back with dates." } },
-      { "@type": "Question", "name": "Can my team service it themselves?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Service is every 100 hours or annually, with a 500-hour overhaul. A built-in hour-meter tracks runtime, we train your crew for free, and we supply original parts." } },
-      { "@type": "Question", "name": "Do you have US distributors?", "acceptedAnswer": { "@type": "Answer", "text": "The US network is opening up now. End user or would-be distributor, get in touch and we'll sort out local support." } }
-    ]
-  }
-  </script>
+  <!-- Structured Data: generated from site-data by content.js -->
+  <script type="application/ld+json" id="ld-org"></script>
+  <script type="application/ld+json" id="ld-product"></script>
+  <script type="application/ld+json" id="ld-faq"></script>
 
 </head>
 
@@ -168,7 +692,7 @@
       </ul>
 
       <a href="#contact" class="btn btn--outline-white btn--sm nav__cta" data-cta="nav-quote" data-track="quote">
-        Request a Quote <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        <span data-cms="nav-cta">Request a Quote</span> <span class="btn__arrow" aria-hidden="true">&rarr;</span>
       </a>
 
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
@@ -194,24 +718,24 @@
 
     <div class="hero__inner">
       <div class="hero__content">
-        <div class="kicker hero__kicker" data-hero-anim>Lifting Solutions</div>
-        <h1 class="hero__title">
+        <div class="kicker hero__kicker" data-hero-anim data-cms="hero-kicker">Lifting Solutions</div>
+        <h1 class="hero__title" data-cms="hero-title">
           <span class="line"><span data-hero-anim>Efficient lifting for</span></span>
           <span class="line"><span data-hero-anim>elevator installation.</span></span>
         </h1>
-        <p class="hero__subtitle" data-hero-anim>
+        <p class="hero__subtitle" data-hero-anim data-cms="hero-subtitle">
           Motorized traction hoists for lifting people and equipment. Unlimited height,
           built for the American jobsite.
         </p>
         <div class="hero__actions" data-hero-anim>
           <a href="#contact" class="btn btn--light btn--lg" data-cta="hero-quote" data-track="quote">
-            Request a Quote <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+            <span data-cms="hero-primary-cta">Request a Quote</span> <span class="btn__arrow" aria-hidden="true">&rarr;</span>
           </a>
           <button type="button" class="btn btn--outline-white btn--lg" data-datasheet-trigger data-cta="hero-datasheet">
-            Get the Datasheet <span aria-hidden="true">&darr;</span>
+            <span data-cms="hero-secondary-cta">Get the Datasheet</span> <span aria-hidden="true">&darr;</span>
           </button>
         </div>
-        <ul class="hero__certs" data-hero-anim aria-label="Certifications">
+        <ul class="hero__certs" data-hero-anim data-cms="hero-certs" aria-label="Certifications">
           <li>UL 1323</li>
           <li>CSA Z271</li>
           <li>EN 1808:2015</li>
@@ -221,7 +745,7 @@
     </div>
 
     <a href="#product" class="hero__scroll" aria-label="Scroll to explore">
-      <span>Scroll to explore</span>
+      <span data-cms="hero-scroll">Scroll to explore</span>
       <span class="hero__scroll-line" aria-hidden="true"></span>
     </a>
   </header>
@@ -233,15 +757,15 @@
       <div class="product__grid">
         <!-- Left: selling points -->
         <div class="product__text reveal">
-          <div class="kicker">The UNILIFT Hoist</div>
-          <h2 class="product__title">One hoist.<br>Unlimited <span class="hl">height</span>.</h2>
-          <p class="product__lead">
+          <div class="kicker" data-cms="product-kicker">The UNILIFT Hoist</div>
+          <h2 class="product__title" data-cms="product-heading">One hoist.<br>Unlimited <span class="hl">height</span>.</h2>
+          <p class="product__lead" data-cms="product-intro">
             An electric wire-rope traction hoist for man-riding and material lifting. Its
             &alpha;-shaped rope path lets the rope pass through the machine, so lift height is
             limited only by the rope you deploy.
           </p>
 
-          <ul class="points">
+          <ul class="points" data-cms="product-points">
             <li class="point">
               <span class="point__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
@@ -317,7 +841,7 @@
   <!-- ========== CLOSE-UP DETAIL ROWS ========== -->
   <section class="section section--paper closeups-section" aria-label="Close-up detail">
     <div class="container">
-      <div class="closeups">
+      <div class="closeups" data-cms="closeups-list">
         <!-- Row 1 -->
         <article class="closeup" data-closeup>
           <div class="closeup__media-wrap">
@@ -371,12 +895,12 @@
   <section class="section section--white" aria-label="Hoist main features">
     <div class="container">
       <div class="section-head section-head--center reveal">
-        <div class="kicker kicker--center">Standard Safety</div>
-        <h2>Hoist main <span class="hl">features</span>.</h2>
-        <p>All required safety devices integrated as standard, per EN 1808.</p>
+        <div class="kicker kicker--center" data-cms="features-kicker">Standard Safety</div>
+        <h2 data-cms="features-heading">Hoist main <span class="hl">features</span>.</h2>
+        <p data-cms="features-subline">All required safety devices integrated as standard, per EN 1808.</p>
       </div>
 
-      <div class="features__list">
+      <div class="features__list" data-cms="features-list">
         <article class="feature-row reveal">
           <div class="feature-row__thumb">
             <img src="assets/features/overload.png" width="400" height="400" loading="lazy" decoding="async" alt="Built-in overload mechanism on the UNILIFT hoist">
@@ -425,12 +949,12 @@
   <section id="models" class="section section--paper" aria-label="Model comparison">
     <div class="container">
       <div class="section-head section-head--center reveal">
-        <div class="kicker kicker--center">Model Lineup</div>
-        <h2>Three models.<br>One spec sheet to <span class="hl">learn</span>.</h2>
-        <p>Single-phase for lighter setups, three-phase for maximum capacity. Same proven platform.</p>
+        <div class="kicker kicker--center" data-cms="models-kicker">Model Lineup</div>
+        <h2 data-cms="models-heading">Three models.<br>One spec sheet to <span class="hl">learn</span>.</h2>
+        <p data-cms="models-subline">Single-phase for lighter setups, three-phase for maximum capacity. Same proven platform.</p>
       </div>
 
-      <div class="models__cards">
+      <div class="models__cards" data-cms="models-cards">
         <!-- S -->
         <div class="model-card reveal">
           <div class="model-card__phase">208 V &middot; 1-PHASE</div>
@@ -494,7 +1018,7 @@
       </div>
 
       <!-- Shared strip -->
-      <div class="models__shared reveal">
+      <div class="models__shared reveal" data-cms="models-strip">
         <span class="models__shared-item">Lifting speed <strong>35 fpm</strong> (10.7 m/min)</span>
         <span class="models__shared-item">Wire rope <strong>3/8"</strong> (9.5 mm)</span>
         <span class="models__shared-item">Net weight <strong>159 lbs</strong> (72 kg)</span>
@@ -507,7 +1031,7 @@
       <div class="compare reveal">
         <table class="compare__table">
           <caption class="visually-hidden">Full UNILIFT model comparison</caption>
-          <thead>
+          <thead data-cms="models-table-head">
             <tr>
               <th scope="col">Parameter</th>
               <th scope="col">UNI70A-9P11-S</th>
@@ -515,7 +1039,7 @@
               <th scope="col">UNI100A-9P11-T</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-cms="models-table-body">
             <tr><td>WLL</td><td class="val">1,500 lbs <span class="metric">(680 kg)</span></td><td class="val">1,500 lbs <span class="metric">(680 kg)</span></td><td class="val">2,200 lbs <span class="metric">(1,000 kg)</span></td></tr>
             <tr><td>Supply</td><td class="val">208 V &middot; 1-phase</td><td class="val">208 V &middot; 3-phase</td><td class="val">208 V &middot; 3-phase</td></tr>
             <tr><td>Supply freq.</td><td class="val">208 V / 60 Hz</td><td class="val">208 V / 60 Hz</td><td class="val">208 V / 60 Hz</td></tr>
@@ -534,11 +1058,11 @@
   <section id="distributors" class="section section--navy-800 on-dark distributor" aria-label="US distributors and service partners">
     <div class="container">
       <div class="distributor__inner reveal">
-        <div class="kicker kicker--white">US Distributors &amp; Service Partners</div>
-        <h2 class="distributor__title">Represent UNILIFT in your territory.</h2>
-        <p class="distributor__text">We're building the US network now. Territories are open. If you sell or service lifting and access equipment, let's talk.</p>
+        <div class="kicker kicker--white" data-cms="distributors-kicker">US Distributors &amp; Service Partners</div>
+        <h2 class="distributor__title" data-cms="distributors-heading">Represent UNILIFT in your territory.</h2>
+        <p class="distributor__text" data-cms="distributors-line">We're building the US network now. Territories are open. If you sell or service lifting and access equipment, let's talk.</p>
         <a href="#contact" class="btn btn--light" id="partner-cta" data-cta="partner-cta" data-track="quote">
-          Become a Partner <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+          <span data-cms="distributors-cta">Become a Partner</span> <span class="btn__arrow" aria-hidden="true">&rarr;</span>
         </a>
       </div>
     </div>
@@ -549,12 +1073,12 @@
   <section id="specs" class="section section--paper" aria-label="Full specifications">
     <div class="container">
       <div class="section-head reveal">
-        <div class="kicker">Technical Datasheet</div>
-        <h2>Full Specifications</h2>
-        <p>From the official FAS-Technology datasheet (REF: TSUNIA-EN, Rev 1).</p>
+        <div class="kicker" data-cms="specs-kicker">Technical Datasheet</div>
+        <h2 data-cms="specs-heading">Full Specifications</h2>
+        <p data-cms="specs-subline">From the official FAS-Technology datasheet (REF: TSUNIA-EN, Rev 1).</p>
       </div>
 
-      <div class="specs__tabs reveal" role="tablist" aria-label="Specification categories">
+      <div class="specs__tabs reveal" data-cms="specs-tabs" role="tablist" aria-label="Specification categories">
         <button class="specs__tab is-active" role="tab" aria-selected="true" aria-controls="panel-general" id="tab-general" data-spec-tab="general">General</button>
         <button class="specs__tab" role="tab" aria-selected="false" aria-controls="panel-osla" id="tab-osla" data-spec-tab="osla">OSLA Brake</button>
         <button class="specs__tab" role="tab" aria-selected="false" aria-controls="panel-rope" id="tab-rope" data-spec-tab="rope">Wire Rope</button>
@@ -563,6 +1087,7 @@
         <button class="specs__tab" role="tab" aria-selected="false" aria-controls="panel-service" id="tab-service" data-spec-tab="service">Service</button>
       </div>
 
+      <div data-cms="specs-panels">
       <!-- General -->
       <div class="specs__panel is-active" id="panel-general" role="tabpanel" aria-labelledby="tab-general" data-spec-panel="general">
         <div class="specs__grid">
@@ -655,15 +1180,16 @@
         </div>
         <div class="specs__callout"><strong>Certifications:</strong> UL 1323 &middot; CSA Z271 &middot; EN 1808:2015 &middot; EN 60204-1.</div>
       </div>
+      </div>
 
       <div class="specs__download reveal">
         <div class="specs__download-bar">
           <div class="specs__download-copy">
-            <h3 class="specs__download-title">Download the full datasheet</h3>
-            <p class="specs__download-text">Complete PDF with certified values, drawings, and installation data. Enter your email and we will send it to your inbox.</p>
+            <h3 class="specs__download-title" data-cms="specs-download-title">Download the full datasheet</h3>
+            <p class="specs__download-text" data-cms="specs-download-text">Complete PDF with certified values, drawings, and installation data. Enter your email and we will send it to your inbox.</p>
           </div>
           <button type="button" class="btn btn--primary btn--lg specs__download-btn" data-datasheet-gate data-cta="specs-datasheet">
-            Download PDF <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            <span data-cms="specs-download-cta">Download PDF</span> <span class="btn__arrow" aria-hidden="true">&darr;</span>
           </button>
         </div>
       </div>
@@ -675,10 +1201,10 @@
   <section id="faq" class="section section--white" aria-label="Frequently asked questions">
     <div class="container">
       <div class="section-head section-head--center reveal">
-        <h2 class="faq__title">FAQ <span class="faq__title-accent">UNILIFT</span></h2>
+        <h2 class="faq__title" data-cms="faq-title">FAQ <span class="faq__title-accent">UNILIFT</span></h2>
       </div>
 
-      <div class="faq__list">
+      <div class="faq__list" data-cms="faq-list">
         <h3 class="faq__category reveal">Certification &amp; US market</h3>
 
         <div class="faq__item reveal">
@@ -748,22 +1274,22 @@
     <div class="container">
       <div class="contact__grid">
         <div class="contact__info reveal">
-          <div class="kicker kicker--white">Let's Talk</div>
-          <h2 class="contact__title">Ready to spec the UNILIFT for your project?</h2>
-          <p class="contact__intro">Get a custom quote, request the full technical datasheet, or discuss US distribution.</p>
+          <div class="kicker kicker--white" data-cms="contact-kicker">Let's Talk</div>
+          <h2 class="contact__title" data-cms="contact-title">Ready to spec the UNILIFT for your project?</h2>
+          <p class="contact__intro" data-cms="contact-intro">Get a custom quote, request the full technical datasheet, or discuss US distribution.</p>
 
           <div class="contact__tiles">
-            <a href="mailto:info@fas-technology.com" class="contact__tile" data-cta="email-contact">
+            <a href="mailto:info@fas-technology.com" class="contact__tile" data-cta="email-contact" data-cms="contact-email">
               <span class="contact__tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-              <span><span class="contact__tile-label">Email</span><span class="contact__tile-value">info@fas-technology.com</span></span>
+              <span><span class="contact__tile-label">Email</span><span class="contact__tile-value" data-cms-value>info@fas-technology.com</span></span>
             </a>
-            <a href="https://wa.me/352691592667" target="_blank" rel="noopener" class="contact__tile" data-cta="whatsapp-contact">
+            <a href="https://wa.me/352691592667" target="_blank" rel="noopener" class="contact__tile" data-cta="whatsapp-contact" data-cms="contact-whatsapp">
               <span class="contact__tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L4 20l1.1-4A8.5 8.5 0 1 1 21 11.5z"/></svg></span>
-              <span><span class="contact__tile-label">WhatsApp</span><span class="contact__tile-value">+352 691 592 667</span></span>
+              <span><span class="contact__tile-label">WhatsApp</span><span class="contact__tile-value" data-cms-value>+352 691 592 667</span></span>
             </a>
-            <div class="contact__tile">
+            <div class="contact__tile" data-cms="contact-address">
               <span class="contact__tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-              <span><span class="contact__tile-label">Address</span><span class="contact__tile-value contact__tile-value--sm">Avenue du Blues N°9, L-4368 Belvaux,<br>Grand Duchy of Luxembourg</span></span>
+              <span><span class="contact__tile-label">Address</span><span class="contact__tile-value contact__tile-value--sm" data-cms-value>Avenue du Blues N°9, L-4368 Belvaux,<br>Grand Duchy of Luxembourg</span></span>
             </div>
           </div>
         </div>
@@ -867,12 +1393,12 @@
               </text>
             </svg>
           </a>
-          <p class="footer__tagline">Engineering at your side. <strong>ACCESS, LIFTING, HEIGHT SAFETY SYSTEMS.</strong></p>
+          <p class="footer__tagline" data-cms="footer-tagline">Engineering at your side. <strong>ACCESS, LIFTING, HEIGHT SAFETY SYSTEMS.</strong></p>
           <div class="footer__social">
-            <a href="https://www.linkedin.com/company/26258075" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/company/26258075" target="_blank" rel="noopener" aria-label="LinkedIn" data-cms="social-linkedin">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-.9 1.8-1.9 3.6-1.9 3.9 0 4.6 2.5 4.6 5.8V21H18v-5c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg>
             </a>
-            <a href="https://www.youtube.com/channel/UC3aVqagmLcEgvphduGfdfrg" target="_blank" rel="noopener" aria-label="YouTube">
+            <a href="https://www.youtube.com/channel/UC3aVqagmLcEgvphduGfdfrg" target="_blank" rel="noopener" aria-label="YouTube" data-cms="social-youtube">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.2 5 12 5 12 5s-7.2 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.8 19 12 19 12 19s7.2 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12zM10 15V9l5 3z"/></svg>
             </a>
           </div>
@@ -891,7 +1417,7 @@
 
         <div class="footer__col">
           <h4>Contact</h4>
-          <address class="footer__address">
+          <address class="footer__address" data-cms="footer-address">
             Avenue du Blues N°9<br>
             L-4368 Belvaux, Luxembourg<br><br>
             <a href="tel:+352691592667" class="footer__link">+352 691 592 667</a><br>
@@ -901,7 +1427,7 @@
       </div>
 
       <div class="footer__bottom">
-        <span class="footer__legal">© 2026 FAS-Technology S.A.R.L &middot; R.C.S B237309 &middot; VAT LU33813019</span>
+        <span class="footer__legal" data-cms="footer-legal">© 2026 FAS-Technology S.A.R.L &middot; R.C.S B237309 &middot; VAT LU33813019</span>
         <span class="footer__legal"><a href="privacy.html">Privacy Policy</a> &middot; <a href="cookie-policy.html">Cookie Policy</a></span>
       </div>
     </div>
@@ -930,7 +1456,7 @@
         <div class="modal__success-icon" aria-hidden="true">&check;</div>
         <h3>Check your inbox</h3>
         <p>The datasheet is on its way.</p>
-        <a href="assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf" class="modal__download" download data-cta="datasheet-direct">Download now &darr;</a>
+        <a href="assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf" class="modal__download" download data-cta="datasheet-direct" data-cms="datasheet-pdf">Download now &darr;</a>
       </div>
     </div>
   </div>
@@ -950,6 +1476,7 @@
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/content.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/chat-widget.js" defer></script>
 </body>
