@@ -88,9 +88,9 @@
     "booking": {
       "enabled": true,
       "title": "Book a call with Ruben",
-      "description": "Pick a time that works for you. Confirmed automatically on Google Calendar.",
+      "description": "Choose a time on Google Calendar. Opens in a new tab.",
       "duration": "30 min",
-      "provider": "iframe",
+      "ctaLabel": "Book the meeting",
       "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
     }
   },
@@ -1485,7 +1485,12 @@
         <p class="booking-head__desc" id="booking-desc">Pick a time that works for you. Ruben will confirm by email.</p>
         <p class="booking-head__duration" id="booking-duration">30 min</p>
       </header>
-      <div id="booking-embed" class="booking-embed" hidden></div>
+      <div id="booking-action" class="booking-action" hidden>
+        <a id="booking-cta" class="btn btn--primary btn--lg btn--full booking-action__btn" href="#" target="_blank" rel="noopener noreferrer">
+          Book the meeting <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <p class="booking-action__hint">Opens Google Calendar in a new tab.</p>
+      </div>
       <div id="booking-fallback" class="booking-fallback" hidden></div>
     </div>
   </div>

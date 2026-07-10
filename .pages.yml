@@ -126,18 +126,14 @@ content:
               - name: duration
                 label: Duration label
                 type: string
-              - name: provider
-                label: Provider
-                type: select
-                description: Use iframe for Google Calendar or Microsoft Bookings. Use calendly only for Calendly links.
-                options:
-                  values:
-                    - iframe
-                    - calendly
+              - name: ctaLabel
+                label: Button label
+                type: string
+                description: e.g. Book the meeting
               - name: url
                 label: Calendar URL
                 type: string
-                description: Google link e.g. https://calendar.app.google/xxxxx or Calendly event URL.
+                description: Google Calendar or Calendly link. Opens in a new browser tab.
           - name: rep
             label: "Ruben (photo + contact)"
             type: object

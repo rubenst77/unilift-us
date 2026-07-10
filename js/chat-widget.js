@@ -217,7 +217,7 @@
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'btn btn--primary chat-action-btn';
-    btn.textContent = 'Open calendar';
+    btn.textContent = 'Book the meeting';
     btn.addEventListener('click', function () {
       openBooking();
       closePanel();

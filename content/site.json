@@ -59,9 +59,9 @@
     "booking": {
       "enabled": true,
       "title": "Book a call with Ruben",
-      "description": "Pick a time that works for you. Confirmed automatically on Google Calendar.",
+      "description": "Choose a time on Google Calendar. Opens in a new tab.",
       "duration": "30 min",
-      "provider": "iframe",
+      "ctaLabel": "Book the meeting",
       "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
     }
   },

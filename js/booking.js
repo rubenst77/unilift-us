@@ -1,10 +1,10 @@
 /* ==========================================================================
-   Booking modal — Calendly / iframe embed for Ruben's calendar
+   Booking modal — lightweight CTA that opens calendar in a new tab
    ========================================================================== */
 (function () {
   'use strict';
 
-  var modal, embedEl, fallbackEl, lastFocus, calendlyLoaded = false, widgetMounted = false;
+  var modal, actionEl, fallbackEl, ctaEl, lastFocus;
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -20,8 +20,9 @@
     modal = document.getElementById('booking-modal');
     if (!modal) return;
 
-    embedEl = document.getElementById('booking-embed');
+    actionEl = document.getElementById('booking-action');
     fallbackEl = document.getElementById('booking-fallback');
+    ctaEl = document.getElementById('booking-cta');
 
     modal.querySelectorAll('[data-booking-close]').forEach(function (el) {
       el.addEventListener('click', closeBooking);
@@ -42,12 +43,18 @@
         openBooking();
       });
     });
+
+    if (ctaEl) {
+      ctaEl.addEventListener('click', function () {
+        closeBooking();
+      });
+    }
   }
 
   function openBooking() {
     if (!modal) return;
     hydrateHeader();
-    mountEmbed();
+    mountAction();
     lastFocus = document.activeElement;
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -83,13 +90,13 @@
     if (duration) duration.textContent = b.duration || '';
   }
 
-  function mountEmbed() {
+  function mountAction() {
     var b = cfg();
     var url = (b.url || '').trim();
     var r = rep();
 
     if (!b.enabled || !url) {
-      if (embedEl) embedEl.hidden = true;
+      if (actionEl) actionEl.hidden = true;
       if (fallbackEl) {
         fallbackEl.hidden = false;
         var email = r.email || 'ruben.dacosta@fas-technology.com';
@@ -101,72 +108,11 @@
     }
 
     if (fallbackEl) fallbackEl.hidden = true;
-    if (embedEl) {
-      embedEl.hidden = false;
-      embedEl.innerHTML = '';
-    }
-
-    if ((b.provider || 'calendly') === 'calendly') {
-      loadCalendly(url, embedEl);
-    } else {
-      var iframe = document.createElement('iframe');
-      iframe.src = url;
-      iframe.title = 'Book a meeting';
-      iframe.className = 'booking-embed__frame';
-      iframe.setAttribute('loading', 'lazy');
-      iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-      embedEl.appendChild(iframe);
-
-      var ext = document.createElement('p');
-      ext.className = 'booking-embed__external';
-      ext.innerHTML =
-        'Calendar not loading? <a href="' + url + '" target="_blank" rel="noopener noreferrer">Open booking page in a new tab</a>.';
-      embedEl.appendChild(ext);
-    }
-  }
-
-  function loadCalendly(url, parent) {
-    if (!parent) return;
-    parent.innerHTML = '';
-    var host = document.createElement('div');
-    host.className = 'booking-embed__calendly';
-    parent.appendChild(host);
-
-    var mount = function () {
-      if (!window.Calendly || widgetMounted) return;
-      widgetMounted = true;
-      window.Calendly.initInlineWidget({
-        url: url,
-        parentElement: host,
-        resize: true
-      });
-    };
-
-    if (window.Calendly) {
-      mount();
-      return;
-    }
-
-    if (!calendlyLoaded) {
-      calendlyLoaded = true;
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://assets.calendly.com/assets/external/widget.css';
-      document.head.appendChild(link);
-
-      var script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      script.onload = mount;
-      document.head.appendChild(script);
-    } else {
-      var wait = setInterval(function () {
-        if (window.Calendly) {
-          clearInterval(wait);
-          mount();
-        }
-      }, 80);
-      setTimeout(function () { clearInterval(wait); }, 8000);
+    if (actionEl) actionEl.hidden = false;
+    if (ctaEl) {
+      ctaEl.href = url;
+      var label = (b.ctaLabel || 'Book the meeting').trim();
+      ctaEl.innerHTML = label + ' <span class="btn__arrow" aria-hidden="true">&rarr;</span>';
     }
   }
 })();
