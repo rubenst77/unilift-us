@@ -1561,6 +1561,8 @@ h1 { letter-spacing: -0.03em; }
   padding: clamp(1.5rem, 3vw, 2.5rem);
   color: var(--ink);
 }
+.on-dark .form .form__title { color: var(--navy-900); }
+.on-dark .form .form__subtitle { color: var(--steel); }
 .form__title { font-size: 1.4rem; margin-bottom: 0.35rem; color: var(--navy-900); }
 .form__subtitle { color: var(--steel); font-size: 0.95rem; margin-bottom: var(--sp-xl); }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-md); }
@@ -1631,6 +1633,8 @@ h1 { letter-spacing: -0.03em; }
   background: var(--navy-700); color: var(--white);
   border-radius: 50%;   font-size: 1.8rem;
 }
+.on-dark .form .form__success h3 { color: var(--navy-900); }
+.on-dark .form .form__success p { color: var(--steel); }
 .form__success h3 { color: var(--navy-900); margin-bottom: var(--sp-sm); }
 .form__success p { color: var(--steel); }
 
