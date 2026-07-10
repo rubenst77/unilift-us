@@ -501,7 +501,7 @@
     gsap.registerPlugin(ST);
     section._xrayST = [];
 
-    function bindStepMotion(step, frame, img, copy, isMobile) {
+    function bindStepMotion(step, frame, img, isMobile) {
       if (!frame) return;
 
       gsap.set(frame, {
@@ -512,14 +512,12 @@
         clipPath: 'inset(6% 6% 6% 6% round 12px)'
       });
       if (img) gsap.set(img, { scale: 1.16, y: 0 });
-      if (copy) gsap.set(copy, { opacity: 0, x: 28 });
 
       section._xrayST.push(ST.create({
         trigger: step,
         start: 'top 84%',
         once: true,
         onEnter: function () {
-          step.classList.add('is-revealed');
           gsap.to(frame, {
             opacity: 1,
             x: 0,
@@ -563,7 +561,6 @@
           step,
           $('.xray__frame', step),
           $('.xray__frame img', step),
-          $('.xray__copy', step),
           false
         );
       });
@@ -583,7 +580,6 @@
           block,
           $('.xray__mframe', block),
           $('.xray__mframe img', block),
-          null,
           true
         );
       });
