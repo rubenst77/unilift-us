@@ -678,6 +678,7 @@ h1 { letter-spacing: -0.03em; }
   background: #fff;
   box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.45);
   overflow: hidden;
+  will-change: transform, opacity;
 }
 .xray__frame img {
   display: block;
@@ -686,6 +687,7 @@ h1 { letter-spacing: -0.03em; }
   object-fit: cover;
   object-position: center center;
   transform: scale(1.06);
+  will-change: transform;
 }
 .xray__copy {
   padding: 0 clamp(0px, 2vw, 16px);
@@ -778,6 +780,7 @@ h1 { letter-spacing: -0.03em; }
   transform: translateY(8px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
+.xray__step.is-revealed .xray__copy > *,
 .xray__step.is-active .xray__copy > * {
   opacity: 1;
   transform: none;
@@ -810,6 +813,7 @@ h1 { letter-spacing: -0.03em; }
     max-width: 520px;
     margin: 0 auto;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.42);
+    will-change: transform, opacity;
   }
   .xray__mframe img {
     width: 100%;
@@ -818,6 +822,7 @@ h1 { letter-spacing: -0.03em; }
     object-position: center center;
     transform: scale(1.06);
     padding: 0;
+    will-change: transform;
   }
   .xray__mobile .xray__title { font-size: 26px; }
   .xray__mobile .xray__text { font-size: 16px; }

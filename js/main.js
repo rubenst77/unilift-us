@@ -453,7 +453,7 @@
     return lb;
   }
 
-  /* ---------- Inside the UNILIFT (scroll steps) ---------- */
+  /* ---------- Inside the UNILIFT (scroll steps + image motion) ---------- */
   function initCloseups() {
     var section = document.getElementById('xray');
     if (!section) return;
@@ -462,11 +462,26 @@
       section._xrayIO.disconnect();
       section._xrayIO = null;
     }
+    if (section._xrayST) {
+      section._xrayST.forEach(function (st) { st.kill(); });
+      section._xrayST = null;
+    }
 
     var steps = $$('.xray__step', section);
-    if (!steps.length) return;
+    var blocks = $$('.xray__mblock', section);
+    if (!steps.length && !blocks.length) return;
 
-    if (prefersReduced || window.innerWidth < 1024) return;
+    if (prefersReduced) {
+      steps.forEach(function (s) { s.classList.add('is-active'); });
+      return;
+    }
+
+    if (window.gsap && window.ScrollTrigger) {
+      initCloseupsMotion(section, steps, blocks);
+      return;
+    }
+
+    if (window.innerWidth < 1024) return;
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -478,6 +493,103 @@
 
     steps.forEach(function (s) { io.observe(s); });
     section._xrayIO = io;
+  }
+
+  function initCloseupsMotion(section, steps, blocks) {
+    var gsap = window.gsap;
+    var ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
+    section._xrayST = [];
+
+    function bindStepMotion(step, frame, img, copy, isMobile) {
+      if (!frame) return;
+
+      gsap.set(frame, {
+        opacity: 0,
+        x: isMobile ? 0 : -44,
+        y: isMobile ? 40 : 28,
+        scale: 0.94,
+        clipPath: 'inset(6% 6% 6% 6% round 12px)'
+      });
+      if (img) gsap.set(img, { scale: 1.16, y: 0 });
+      if (copy) gsap.set(copy, { opacity: 0, x: 28 });
+
+      section._xrayST.push(ST.create({
+        trigger: step,
+        start: 'top 84%',
+        once: true,
+        onEnter: function () {
+          step.classList.add('is-revealed');
+          gsap.to(frame, {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            clipPath: 'inset(0% 0% 0% 0% round 12px)',
+            duration: 0.95,
+            ease: 'power3.out'
+          });
+          if (img) {
+            gsap.to(img, {
+              scale: 1.06,
+              duration: 1.15,
+              ease: 'power2.out'
+            });
+          }
+        }
+      }));
+
+      if (img) {
+        var drift = gsap.fromTo(img,
+          { y: isMobile ? 16 : 22 },
+          {
+            y: isMobile ? -16 : -22,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: step,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.15
+            }
+          }
+        );
+        if (drift.scrollTrigger) section._xrayST.push(drift.scrollTrigger);
+      }
+    }
+
+    if (window.innerWidth >= 1024) {
+      steps.forEach(function (step) {
+        bindStepMotion(
+          step,
+          $('.xray__frame', step),
+          $('.xray__frame img', step),
+          $('.xray__copy', step),
+          false
+        );
+      });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            steps.forEach(function (s) { s.classList.toggle('is-active', s === e.target); });
+          }
+        });
+      }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
+      steps.forEach(function (s) { io.observe(s); });
+      section._xrayIO = io;
+    } else {
+      blocks.forEach(function (block) {
+        bindStepMotion(
+          block,
+          $('.xray__mframe', block),
+          $('.xray__mframe img', block),
+          null,
+          true
+        );
+      });
+    }
+
+    ST.refresh();
   }
 
   /* ---------- Hoist main features (scroll + 3D motion) ---------- */
