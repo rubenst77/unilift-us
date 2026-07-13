@@ -1914,8 +1914,10 @@ h1 { letter-spacing: -0.03em; }
 .faq__q[aria-expanded="true"] .faq__icon { transform: rotate(45deg); }
 .faq__q[aria-expanded="true"] .faq__icon::before,
 .faq__q[aria-expanded="true"] .faq__icon::after { background: var(--coral); }
-.faq__a { overflow: hidden; height: 0; transition: height 0.35s var(--ease); }
-.faq__a-inner { padding: 0 0 1.35rem; color: var(--steel); max-width: 68ch; }
+.faq__a { overflow: hidden; height: 0; }
+.faq__a.is-open { /* height set by JS */ }
+.faq__a-inner { padding: 0 0 1.35rem; color: var(--steel); max-width: 68ch; line-height: 1.65; }
+.faq__a-inner p + p { margin-top: 0.75rem; }
 
 /* ==========================================================================
    CONTACT

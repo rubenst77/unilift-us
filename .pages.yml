@@ -578,6 +578,19 @@ content:
           - name: titleHtml
             label: FAQ section title (HTML)
             type: text
+          - name: intro
+            label: FAQ page intro
+            type: text
+            description: Subtitle on faq.html below the main title.
+          - name: bannerLabel
+            label: Homepage FAQ strip label
+            type: string
+          - name: bannerSub
+            label: Homepage FAQ strip subline
+            type: string
+          - name: bannerCta
+            label: Homepage FAQ strip CTA
+            type: string
           - name: items
             label: Questions
             type: object
