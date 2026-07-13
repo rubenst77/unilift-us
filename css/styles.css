@@ -747,29 +747,16 @@ h1 { letter-spacing: -0.03em; }
 .xray__media-foot {
   position: relative;
   margin-top: clamp(14px, 2.2vh, 20px);
-  min-height: 64px;
 }
-.brand-slashes--xray {
-  position: absolute;
-  left: -2%;
-  top: 18%;
-  width: 72%;
-  height: 58px;
-  overflow: visible;
+.xray__slashes-wrap {
+  position: relative;
+  margin-top: clamp(12px, 1.8vh, 18px);
+  margin-left: -6%;
+  width: min(82%, 420px);
+  height: clamp(84px, 11vw, 124px);
+  overflow: hidden;
   pointer-events: none;
   z-index: 1;
-}
-.brand-slashes--xray .brand-slashes__bar {
-  left: 0;
-  width: 108%;
-  height: clamp(20px, 2.4vw, 28px);
-  box-shadow: none;
-}
-.brand-slashes--xray .brand-slashes__bar:first-child { top: 0; }
-.brand-slashes--xray .brand-slashes__bar:last-child {
-  top: 30px;
-  left: 10%;
-  width: 92%;
 }
 .xray__dot {
   font-family: var(--font-mono);
@@ -1083,6 +1070,8 @@ h1 { letter-spacing: -0.03em; }
    MANUFACTURING VIDEO (YouTube facade — zero weight until play)
    ========================================================================== */
 .manufacturing .section-head { max-width: 720px; margin-left: auto; margin-right: auto; }
+.manufacturing .kicker::after { content: none; }
+.manufacturing .kicker { padding-bottom: 0; margin-bottom: var(--sp-sm); }
 .video-facade {
   position: relative;
   max-width: 920px;
@@ -1613,17 +1602,26 @@ h1 { letter-spacing: -0.03em; }
 .contact__title { font-size: var(--fs-h2); margin-bottom: var(--sp-md); }
 .contact__intro { color: rgba(255,255,255,0.8); margin-bottom: var(--sp-2xl); max-width: 46ch; }
 
-/* FAS brand motif — twin diagonal coral slashes (used once on site) */
+/* FAS brand motif — twin diagonal coral slashes (Figma) */
 .brand-slashes {
   position: absolute;
+  inset: -6% -14% -4% -16%;
   pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
 }
 .brand-slashes__bar {
   position: absolute;
+  left: -22%;
+  width: 128%;
+  height: clamp(26px, 3.2vw, 36px);
   background: var(--coral);
   transform: rotate(-33deg);
   border-radius: 1px;
+  box-shadow: 0 2px 18px rgba(232, 80, 46, 0.22);
 }
+.brand-slashes__bar:first-child { top: 20%; }
+.brand-slashes__bar:last-child { top: 54%; left: -12%; width: 118%; }
 
 .contact__tiles {
   display: flex;
@@ -2052,9 +2050,10 @@ h1 { letter-spacing: -0.03em; }
 @media (max-width: 768px) {
   .nav__links, .nav__cta { display: none; }
   .nav__toggle { display: flex; }
-  .brand-slashes--xray { width: 64%; }
-  .brand-slashes--xray .brand-slashes__bar { height: 20px; }
-  .brand-slashes--xray .brand-slashes__bar:last-child { top: 26px; }
+  .xray__slashes-wrap { width: 74%; height: 76px; }
+  .brand-slashes__bar { height: 24px; }
+  .brand-slashes__bar:first-child { top: 18%; }
+  .brand-slashes__bar:last-child { top: 52%; }
   .models__cards { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .model-card--featured { order: -1; }
   .apps { grid-template-columns: 1fr; }

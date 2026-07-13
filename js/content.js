@@ -244,9 +244,11 @@
                     return '<span class="xray__dot' + (i === 0 ? ' is-active' : '') + '" data-xray-dot="' + i + '">' + item.step + '</span>';
                   }).join('') +
                 '</div>' +
-                '<div class="brand-slashes brand-slashes--xray" aria-hidden="true">' +
-                  '<span class="brand-slashes__bar"></span>' +
-                  '<span class="brand-slashes__bar"></span>' +
+                '<div class="xray__slashes-wrap" aria-hidden="true">' +
+                  '<div class="brand-slashes">' +
+                    '<span class="brand-slashes__bar"></span>' +
+                    '<span class="brand-slashes__bar"></span>' +
+                  '</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
