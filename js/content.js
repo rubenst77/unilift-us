@@ -587,9 +587,10 @@
       if (valuesGrid && a.values.items) {
         valuesGrid.innerHTML = a.values.items.map(function (item, i) {
           var num = item.num || ('0' + (i + 1));
+          var fromClass = i === 0 ? ' about-value--from-left' : (i === 2 ? ' about-value--from-right' : ' about-value--from-center');
           return (
-            '<article class="about-value reveal" style="--i:' + i + '">' +
-              '<span class="about-value__idx">' + num + '.</span>' +
+            '<article class="about-value' + fromClass + '" data-about-value="' + i + '">' +
+              '<span class="about-value__idx" aria-hidden="true">' + num + '</span>' +
               '<h3 class="about-value__label">' + item.label + '</h3>' +
               '<p class="about-value__line">' + item.line + '</p>' +
             '</article>'
@@ -604,9 +605,9 @@
       setText(document.querySelector('[data-cms="about-certs-intro"]'), a.certifications.intro);
       var certList = document.querySelector('[data-cms="about-certs-list"]');
       if (certList && a.certifications.items) {
-        certList.innerHTML = a.certifications.items.map(function (cert) {
+        certList.innerHTML = a.certifications.items.map(function (cert, i) {
           return (
-            '<article class="about-cert reveal">' +
+            '<article class="about-cert" data-about-cert="' + i + '">' +
               '<h3 class="about-cert__code">' + cert.code + '</h3>' +
               '<p class="about-cert__desc">' + cert.description + '</p>' +
             '</article>'

@@ -7,11 +7,11 @@
     "kicker": "WHO WE ARE",
     "titleLine1": "ENGINEERED ACCESS.",
     "titleLine2": "BUILT FOR THE REAL WORLD.",
-    "backgroundImage": "assets/pexels-thomas-parker-1272388137-26935835-1.jpg"
+    "backgroundImage": "assets/about/hero-elevator-shaft.png"
   },
   "story": {
-    "image": "assets/pexels-thomas-parker-1272388137-26935835.jpg",
-    "imageAlt": "FAS-Tech traction hoist installation on a commercial jobsite",
+    "image": "assets/about/story-rooftop-access.png",
+    "imageAlt": "Technician on a suspended access platform above a city skyline",
     "paragraphs": [
       "FAS-Tech develops certified traction hoists, suspended access equipment, and lifting solutions for contractors, rental companies, elevator installers, and façade access professionals worldwide. We combine European engineering, controlled manufacturing, and practical jobsite experience to deliver equipment that is safe, robust, and straightforward to maintain.",
       "Our support extends beyond the product. From equipment selection and project engineering to technical documentation, training, spare parts, and after-sales service, we help customers keep their crews working and their projects moving.",

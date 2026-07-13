@@ -45,6 +45,7 @@
     initScrollFx();
     if (isLanding) initHeroIntro();
     if (isAboutPage) initAboutIntro();
+    if (isAboutPage) initAboutMotion();
     if (isLanding) initCountUps();
     if (isLanding) initProductViewer();
     if (isLanding) initCloseups();
@@ -265,10 +266,57 @@
       items.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
       return;
     }
-    window.gsap.from(items, {
-      opacity: 0, y: 36, duration: 0.95, ease: 'power3.out',
-      stagger: 0.16, delay: 0.15
+    window.gsap.set(items, { opacity: 0, y: 28 });
+    window.gsap.to(items, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      stagger: 0.14, delay: 0.12
     });
+  }
+
+  function initAboutMotion() {
+    if (prefersReduced || !(window.gsap && window.ScrollTrigger)) return;
+
+    var gsap = window.gsap;
+    var ST = window.ScrollTrigger;
+
+    var values = $$('.about-value');
+    if (values.length) {
+      values.forEach(function (card, i) {
+        var fromX = i === 0 ? -72 : (i === 2 ? 72 : 0);
+        var fromY = i === 1 ? 48 : 0;
+        gsap.set(card, { opacity: 0, x: fromX, y: fromY });
+      });
+
+      ST.create({
+        trigger: '.about-values__grid',
+        start: 'top 82%',
+        once: true,
+        onEnter: function () {
+          gsap.to(values, {
+            opacity: 1, x: 0, y: 0,
+            duration: 0.75, ease: 'power3.out',
+            stagger: 0.12
+          });
+        }
+      });
+    }
+
+    var certs = $$('.about-cert');
+    if (certs.length) {
+      gsap.set(certs, { opacity: 0, y: 28 });
+      ST.create({
+        trigger: '.about-certs__list',
+        start: 'top 86%',
+        once: true,
+        onEnter: function () {
+          gsap.to(certs, {
+            opacity: 1, y: 0,
+            duration: 0.6, ease: 'power2.out',
+            stagger: 0.08
+          });
+        }
+      });
+    }
   }
 
   /* ---------- Count ups ---------- */
