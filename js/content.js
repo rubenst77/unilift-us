@@ -561,15 +561,14 @@
 
     if (a.hero) {
       setText(document.querySelector('[data-cms="about-hero-kicker"]'), a.hero.kicker);
-      setText(document.querySelector('[data-cms="about-hero-title"]'), a.hero.title);
-      setText(document.querySelector('[data-cms="about-hero-lead"]'), a.hero.lead);
+      setText(document.querySelector('[data-cms="about-hero-title-1"]'), a.hero.titleLine1 || a.hero.title);
+      setText(document.querySelector('[data-cms="about-hero-title-2"]'), a.hero.titleLine2 || '');
       var aboutBg = document.querySelector('[data-about-hero-bg]');
       if (aboutBg && a.hero.backgroundImage) {
         aboutBg.style.backgroundImage = "url('" + a.hero.backgroundImage + "')";
       }
       var preload = document.querySelector('link[rel="preload"][as="image"]');
       if (preload && a.hero.backgroundImage) preload.href = a.hero.backgroundImage;
-      setText(document.querySelector('[data-cms="about-story-kicker"]'), a.hero.kicker);
     }
 
     if (a.story) {
@@ -591,21 +590,16 @@
       var valuesGrid = document.querySelector('[data-cms="about-values-grid"]');
       if (valuesGrid && a.values.items) {
         valuesGrid.innerHTML = a.values.items.map(function (item, i) {
+          var num = item.num || ('0' + (i + 1));
           return (
             '<article class="about-value reveal" style="--i:' + i + '">' +
-              '<span class="about-value__idx">0' + (i + 1) + '</span>' +
+              '<span class="about-value__idx">' + num + '.</span>' +
               '<h3 class="about-value__label">' + item.label + '</h3>' +
               '<p class="about-value__line">' + item.line + '</p>' +
             '</article>'
           );
         }).join('');
       }
-    }
-
-    if (a.support) {
-      setText(document.querySelector('[data-cms="about-support-kicker"]'), a.support.kicker);
-      setText(document.querySelector('[data-cms="about-support-heading"]'), a.support.heading);
-      setText(document.querySelector('[data-cms="about-support-text"]'), a.support.text);
     }
 
     if (a.certifications) {
@@ -617,13 +611,8 @@
         certList.innerHTML = a.certifications.items.map(function (cert) {
           return (
             '<article class="about-cert reveal">' +
-              '<span class="about-cert__mark" aria-hidden="true">' +
-                '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>' +
-              '</span>' +
-              '<div class="about-cert__body">' +
-                '<h3 class="about-cert__code">' + cert.code + '</h3>' +
-                '<p class="about-cert__desc">' + cert.description + '</p>' +
-              '</div>' +
+              '<h3 class="about-cert__code">' + cert.code + '</h3>' +
+              '<p class="about-cert__desc">' + cert.description + '</p>' +
             '</article>'
           );
         }).join('');

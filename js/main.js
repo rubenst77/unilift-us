@@ -259,8 +259,8 @@
       return;
     }
     window.gsap.from(items, {
-      opacity: 0, y: 28, duration: 0.85, ease: 'power2.out',
-      stagger: 0.14, delay: 0.2
+      opacity: 0, y: 36, duration: 0.95, ease: 'power3.out',
+      stagger: 0.16, delay: 0.15
     });
   }
 

@@ -684,12 +684,12 @@ content:
               - name: kicker
                 label: Hero kicker
                 type: string
-              - name: title
-                label: Hero headline
+              - name: titleLine1
+                label: Hero headline line 1
                 type: string
-              - name: lead
-                label: Hero lead paragraph
-                type: text
+              - name: titleLine2
+                label: Hero headline line 2
+                type: string
               - name: backgroundImage
                 label: Hero background image
                 type: image
@@ -720,25 +720,15 @@ content:
                 type: object
                 list: true
                 fields:
+                  - name: num
+                    label: Card number (e.g. 01)
+                    type: string
                   - name: label
                     label: Value title
                     type: string
                   - name: line
                     label: Value description
                     type: text
-          - name: support
-            label: Engineering support band
-            type: object
-            fields:
-              - name: kicker
-                label: Kicker
-                type: string
-              - name: heading
-                label: Heading
-                type: string
-              - name: text
-                label: Body text
-                type: text
           - name: certifications
             label: Certifications
             type: object
