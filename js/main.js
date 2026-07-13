@@ -655,6 +655,8 @@
       section._featuresST = null;
     }
 
+    var head = $('.section-head', section);
+    var list = $('.features__list', section);
     var rows = $$('.feature-row', section);
     if (!rows.length) return;
 
@@ -671,16 +673,26 @@
       { x: 72, y: 56 }
     ];
 
+    if (head) gsap.set(head, { opacity: 0, y: 22 });
     rows.forEach(function (row, i) {
       var o = origins[i] || { x: 0, y: 40 };
       gsap.set(row, { opacity: 0, x: o.x, y: o.y, scale: 0.94 });
     });
 
     section._featuresST = ST.create({
-      trigger: section,
-      start: 'top 80%',
+      trigger: list || section,
+      start: 'top 58%',
       once: true,
+      invalidateOnRefresh: true,
       onEnter: function () {
+        if (head) {
+          gsap.to(head, {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: 'power3.out'
+          });
+        }
         gsap.to(rows, {
           opacity: 1,
           x: 0,
@@ -689,7 +701,9 @@
           duration: 0.85,
           ease: 'power3.out',
           stagger: 0.1,
+          delay: head ? 0.08 : 0,
           onComplete: function () {
+            if (head) gsap.set(head, { clearProps: 'transform,opacity' });
             rows.forEach(function (row) {
               gsap.set(row, { clearProps: 'transform,opacity' });
             });
@@ -697,6 +711,8 @@
         });
       }
     });
+
+    ST.refresh();
   }
 
   /* ---------- Feature cards (mobile tap-to-expand) ---------- */
