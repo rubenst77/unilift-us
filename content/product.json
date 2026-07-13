@@ -1,11 +1,11 @@
 {
   "kicker": "The UNILIFT Hoist",
-  "headingHtml": "One hoist.<br>Unlimited <span class=\"hl\">height</span>.",
-  "intro": "An electric wire-rope traction hoist for man-riding and material lifting. Its &alpha;-shaped rope path lets the rope pass through the machine, so lift height is limited only by the rope you deploy.",
+  "headingHtml": "One hoist.<br>Unlimited <span class=\"hl\">height.</span>.",
+  "intro": "An electric wire-rope traction hoist for suspended access platforms and material lifting. The α-shaped rope path drives the rope through the machine instead of winding it on a drum, so platform height is limited only by the rope you deploy — from a two-point swing stage to a full façade rig.",
   "points": [
     {
       "title": "Man-riding certified",
-      "line": "Designed and certified to EN 1808 for lifting people, with safety devices built in."
+      "line": "Designed and certified to UL 1323, CSA Z271 and EN 1808 for lifting people on suspended platforms, with all safety devices built in."
     },
     {
       "titleHtml": "<span class=\"num\">1,500 to 2,200 lbs</span> WLL",
