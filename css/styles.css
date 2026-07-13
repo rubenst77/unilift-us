@@ -1080,6 +1080,85 @@ h1 { letter-spacing: -0.03em; }
 }
 
 /* ==========================================================================
+   MANUFACTURING VIDEO (YouTube facade — zero weight until play)
+   ========================================================================== */
+.manufacturing .section-head { max-width: 720px; margin-left: auto; margin-right: auto; }
+.video-facade {
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy-900);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+}
+.video-facade__play {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  font: inherit;
+  color: inherit;
+}
+.video-facade__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-facade__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 28, 51, 0.08) 0%, rgba(10, 28, 51, 0.28) 100%);
+  transition: background 0.25s var(--ease);
+}
+.video-facade__play:hover .video-facade__shade,
+.video-facade__play:focus-visible .video-facade__shade {
+  background: linear-gradient(180deg, rgba(10, 28, 51, 0.12) 0%, rgba(10, 28, 51, 0.38) 100%);
+}
+.video-facade__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s var(--ease);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+}
+.video-facade__play:hover .video-facade__icon,
+.video-facade__play:focus-visible .video-facade__icon {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+.video-facade__icon-bg { transition: fill-opacity 0.25s var(--ease); }
+.video-facade__play:hover .video-facade__icon-bg { fill-opacity: 0.95; }
+.video-facade.is-playing iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.manufacturing__yt {
+  margin-top: var(--sp-lg);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.manufacturing__yt a {
+  color: var(--blue-accent);
+  font-weight: 600;
+  transition: color 0.2s var(--ease);
+}
+.manufacturing__yt a:hover { color: var(--navy-800); }
+
+/* ==========================================================================
    MODELS
    ========================================================================== */
 .models__cards {

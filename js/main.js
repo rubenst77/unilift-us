@@ -45,6 +45,7 @@
     initCloseups();
     initFeaturesMotion();
     initFeatureCards();
+    initYoutubeFacade();
     initSpecTabs();
     initFaq();
     initDatasheet();
@@ -715,6 +716,37 @@
     });
 
     ST.refresh();
+  }
+
+  /* ---------- YouTube facade (lazy embed — hosted on YouTube only) ---------- */
+  function initYoutubeFacade() {
+    $$('[data-youtube-facade]').forEach(function (wrap) {
+      if (wrap._ytReady) return;
+      wrap._ytReady = true;
+
+      var id = wrap.getAttribute('data-video-id');
+      var btn = $('.video-facade__play', wrap);
+      if (!id || !btn) return;
+
+      function loadPlayer() {
+        if (wrap.classList.contains('is-playing')) return;
+        var iframe = document.createElement('iframe');
+        iframe.src =
+          'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+          '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        iframe.title = 'FAS-Tech Traction Hoist Manufacturing Process';
+        iframe.setAttribute(
+          'allow',
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+        );
+        iframe.allowFullscreen = true;
+        wrap.innerHTML = '';
+        wrap.appendChild(iframe);
+        wrap.classList.add('is-playing');
+      }
+
+      btn.addEventListener('click', loadPlayer);
+    });
   }
 
   /* ---------- Feature cards (mobile tap-to-expand) ---------- */

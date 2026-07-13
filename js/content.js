@@ -487,6 +487,27 @@
     list.innerHTML = html;
   }
 
+  function hydrateManufacturing(d) {
+    var m = d.manufacturing;
+    if (!m) return;
+
+    setText(document.querySelector('[data-cms="mfg-kicker"]'), m.kicker);
+    setText(document.querySelector('[data-cms="mfg-heading"]'), m.heading);
+    setText(document.querySelector('[data-cms="mfg-subline"]'), m.subline);
+
+    var facade = document.querySelector('[data-youtube-facade]');
+    if (facade && m.youtubeId) {
+      facade.setAttribute('data-video-id', m.youtubeId);
+      var thumb = facade.querySelector('.video-facade__thumb');
+      if (thumb) thumb.src = 'https://i.ytimg.com/vi/' + m.youtubeId + '/hqdefault.jpg';
+    }
+
+    var ytLink = document.querySelector('[data-cms="mfg-youtube"]');
+    if (ytLink) {
+      ytLink.href = m.youtubeUrl || ('https://www.youtube.com/watch?v=' + m.youtubeId);
+    }
+  }
+
   function hydrateJsonLd(d) {
     var g = d.global;
     var siteUrl = g.SITE_URL;
@@ -576,6 +597,7 @@
     hydrateProduct(data);
     hydrateCloseups(data);
     hydrateFeatures(data);
+    hydrateManufacturing(data);
     hydrateModels(data);
     hydrateDistributors(data);
     hydrateSpecs(data);
