@@ -157,8 +157,11 @@ content:
                 label: Avatar (large, booking modal)
                 type: image
           - name: datasheetPdf
-            label: Datasheet PDF path
-            type: image
+            label: Datasheet PDF
+            type: file
+            options:
+              path: docs
+              extensions: [pdf]
           - name: seo
             label: SEO & social
             type: object
