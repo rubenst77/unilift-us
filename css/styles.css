@@ -1954,9 +1954,8 @@ h1 { letter-spacing: -0.03em; }
   border-radius: 1px;
   box-shadow: 0 2px 18px rgba(232, 80, 46, 0.22);
 }
-.brand-slashes__bar:nth-child(1) { top: 14%; }
-.brand-slashes__bar:nth-child(2) { top: 40%; left: -16%; width: 122%; }
-.brand-slashes__bar:nth-child(3) { top: 66%; left: -10%; width: 115%; }
+.brand-slashes__bar:nth-child(1) { top: 20%; }
+.brand-slashes__bar:nth-child(2) { top: 54%; left: -12%; width: 118%; }
 
 .contact__tiles-wrap {
   position: relative;
@@ -2417,9 +2416,8 @@ h1 { letter-spacing: -0.03em; }
   .about-hero__title { font-size: clamp(2.2rem, 10vw, 3rem); }
   .about-hero__kicker { letter-spacing: 0.16em; }
   .brand-slashes__bar { height: 24px; }
-  .brand-slashes__bar:nth-child(1) { top: 12%; }
-  .brand-slashes__bar:nth-child(2) { top: 38%; }
-  .brand-slashes__bar:nth-child(3) { top: 62%; }
+  .brand-slashes__bar:nth-child(1) { top: 18%; }
+  .brand-slashes__bar:nth-child(2) { top: 52%; }
   .models__cards { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .model-card--featured { order: -1; }
   .apps { grid-template-columns: 1fr; }
