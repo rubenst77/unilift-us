@@ -639,7 +639,7 @@ h1 { letter-spacing: -0.03em; }
 }
 .xray__intro {
   position: relative;
-  padding: clamp(32px, 4vw, 48px) 0 0;
+  padding: clamp(24px, 3vw, 40px) 0 clamp(12px, 2vw, 20px);
 }
 .xray__kicker {
   font-family: var(--font-mono);
@@ -668,29 +668,39 @@ h1 { letter-spacing: -0.03em; }
   color: var(--white);
 }
 .xray__steps {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(36px, 5vh, 64px);
-  margin-top: clamp(4px, 0.8vw, 12px);
-  padding-bottom: clamp(32px, 5vh, 56px);
+  margin-top: clamp(8px, 1.2vw, 16px);
+  padding-bottom: clamp(28px, 4vh, 44px);
 }
-.xray__step {
+.xray__carousel {
+  position: relative;
+}
+.xray__stage {
   display: grid;
   grid-template-columns: minmax(0, 46%) minmax(0, 54%);
   gap: clamp(20px, 3vw, 40px);
   align-items: center;
-  padding: clamp(8px, 1.5vh, 20px) 0;
 }
-.xray__frame {
+.xray__media {
   position: relative;
   width: 100%;
   max-width: min(62vw, 580px);
   aspect-ratio: 4 / 5;
+}
+.xray__frame {
+  position: absolute;
+  inset: 0;
   border-radius: 12px;
   background: #fff;
   box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.45);
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
   will-change: transform, opacity;
+}
+.xray__frame.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
 }
 .xray__frame img {
   display: block;
@@ -701,8 +711,47 @@ h1 { letter-spacing: -0.03em; }
   transform: scale(1.06);
   will-change: transform;
 }
-.xray__copy {
+.xray__copy-stack {
+  position: relative;
+  min-height: 260px;
   padding: 0 clamp(0px, 2vw, 16px);
+}
+.xray__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.xray__panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+.xray__progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(20px, 3vh, 28px);
+  padding-left: clamp(0px, 2vw, 4px);
+}
+.xray__dot {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.35s ease, opacity 0.35s ease;
+}
+.xray__dot.is-active {
+  color: var(--coral);
+}
+.xray__dot + .xray__dot::before {
+  content: none;
 }
 .xray__eyebrow {
   display: flex;
@@ -735,10 +784,12 @@ h1 { letter-spacing: -0.03em; }
   transform-origin: left;
   transition: transform 0.55s ease 0.08s;
 }
-.xray__step.is-active .xray__rule::after {
+.xray__step.is-active .xray__rule::after,
+.xray__panel.is-active .xray__rule::after {
   transform: scaleX(1);
 }
-.xray__step.is-active .xray__idx {
+.xray__step.is-active .xray__idx,
+.xray__panel.is-active .xray__idx {
   color: var(--coral);
   opacity: 1;
 }
@@ -787,60 +838,44 @@ h1 { letter-spacing: -0.03em; }
   color: var(--white);
   font-weight: 600;
 }
+.xray__panel .xray__copy > *,
 .xray__step .xray__copy > * {
   opacity: 0.35;
   transform: translateY(8px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
+.xray__panel.is-active > *,
 .xray__step.is-active .xray__copy > * {
   opacity: 1;
   transform: none;
 }
+.xray__panel.is-active > *:nth-child(2),
 .xray__step.is-active .xray__copy > *:nth-child(2) { transition-delay: 0.04s; }
+.xray__panel.is-active > *:nth-child(3),
 .xray__step.is-active .xray__copy > *:nth-child(3) { transition-delay: 0.08s; }
+.xray__panel.is-active > *:nth-child(4),
 .xray__step.is-active .xray__copy > *:nth-child(4) { transition-delay: 0.12s; }
+.xray__panel.is-active > *:nth-child(5),
 .xray__step.is-active .xray__copy > *:nth-child(5) { transition-delay: 0.16s; }
 .xray__mobile {
   display: none;
 }
 @media (max-width: 1023px) {
-  .xray__steps { display: none; }
-  .xray__mobile {
-    display: block;
-    padding-bottom: 64px;
+  .xray__stage {
+    grid-template-columns: 1fr;
+    gap: clamp(18px, 4vw, 28px);
   }
-  .xray__mblock {
-    margin-top: 40px;
-  }
-  .xray__mblock:first-child {
-    margin-top: 0;
-  }
-  .xray__mframe {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-    aspect-ratio: 4 / 5;
-    max-width: 520px;
+  .xray__media {
+    max-width: min(92vw, 420px);
     margin: 0 auto;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.42);
-    will-change: transform, opacity;
   }
-  .xray__mframe img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    transform: scale(1.06);
-    padding: 0;
-    will-change: transform;
+  .xray__copy-stack {
+    min-height: clamp(200px, 32vh, 280px);
+    text-align: left;
   }
-  .xray__mobile .xray__title { font-size: 26px; }
-  .xray__mobile .xray__text { font-size: 16px; }
-  .xray__mobile .xray__eyebrow { margin-top: 20px; }
-  .xray__mobile .xray__mblock > * {
-    opacity: 1;
-    transform: none;
+  .xray__progress {
+    justify-content: center;
+    padding-left: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -848,7 +883,8 @@ h1 { letter-spacing: -0.03em; }
     transition: none !important;
     animation: none !important;
   }
-  .xray__step .xray__copy > * {
+  .xray__step .xray__copy > *,
+  .xray__panel > * {
     opacity: 1;
     transform: none;
   }

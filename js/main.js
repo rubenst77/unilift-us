@@ -460,7 +460,7 @@
     return lb;
   }
 
-  /* ---------- Inside the UNILIFT (scroll steps + image motion) ---------- */
+  /* ---------- Inside the UNILIFT (compact carousel) ---------- */
   function initCloseups() {
     var section = document.getElementById('xray');
     if (!section) return;
@@ -473,126 +473,233 @@
       section._xrayST.forEach(function (st) { st.kill(); });
       section._xrayST = null;
     }
-
-    var steps = $$('.xray__step', section);
-    var blocks = $$('.xray__mblock', section);
-    if (!steps.length && !blocks.length) return;
-
-    if (prefersReduced) {
-      steps.forEach(function (s) { s.classList.add('is-active'); });
-      return;
+    if (section._xrayTimer) {
+      if (section._xrayTimer.kill) section._xrayTimer.kill();
+      else clearTimeout(section._xrayTimer);
+      section._xrayTimer = null;
+    }
+    if (section._xrayTween) {
+      section._xrayTween.kill();
+      section._xrayTween = null;
     }
 
-    if (window.gsap && window.ScrollTrigger) {
-      initCloseupsMotion(section, steps, blocks);
-      return;
+    var carousel = $('[data-xray-carousel]', section);
+    if (!carousel) return;
+
+    var frames = $$('.xray__frame', carousel);
+    var panels = $$('.xray__panel', carousel);
+    var dots = $$('.xray__dot', carousel);
+    if (!frames.length || !panels.length) return;
+
+    var count = frames.length;
+    var current = 0;
+    var seq = [];
+    var i;
+    for (i = 0; i < count; i++) seq.push(i);
+    for (i = count - 2; i >= 0; i--) seq.push(i);
+    var seqPos = 0;
+    var holdMs = 4200;
+    var playing = false;
+    section._xrayST = section._xrayST || [];
+
+    function fitCopyHeight() {
+      var stack = $('.xray__copy-stack', carousel);
+      if (!stack) return;
+      var max = 0;
+      panels.forEach(function (panel) {
+        var prev = {
+          position: panel.style.position,
+          visibility: panel.style.visibility,
+          opacity: panel.style.opacity,
+          pointerEvents: panel.style.pointerEvents
+        };
+        panel.style.position = 'relative';
+        panel.style.visibility = 'hidden';
+        panel.style.opacity = '0';
+        panel.style.pointerEvents = 'none';
+        max = Math.max(max, panel.offsetHeight);
+        panel.style.position = prev.position;
+        panel.style.visibility = prev.visibility;
+        panel.style.opacity = prev.opacity;
+        panel.style.pointerEvents = prev.pointerEvents;
+      });
+      if (max > 0) stack.style.minHeight = max + 'px';
     }
 
-    if (window.innerWidth < 1024) return;
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          steps.forEach(function (s) { s.classList.toggle('is-active', s === e.target); });
-        }
-      });
-    }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
-
-    steps.forEach(function (s) { io.observe(s); });
-    section._xrayIO = io;
-  }
-
-  function initCloseupsMotion(section, steps, blocks) {
-    var gsap = window.gsap;
-    var ST = window.ScrollTrigger;
-    gsap.registerPlugin(ST);
-    section._xrayST = [];
-
-    function bindStepMotion(step, frame, img, isMobile) {
-      if (!frame) return;
-
-      gsap.set(frame, {
-        opacity: 0,
-        x: isMobile ? 0 : -44,
-        y: isMobile ? 40 : 28,
-        scale: 0.94,
-        clipPath: 'inset(6% 6% 6% 6% round 12px)'
-      });
-      if (img) gsap.set(img, { scale: 1.16, y: 0 });
-
-      section._xrayST.push(ST.create({
-        trigger: step,
-        start: 'top 84%',
-        once: true,
-        onEnter: function () {
-          gsap.to(frame, {
-            opacity: 1,
-            x: 0,
+    function setActive(index) {
+      frames.forEach(function (el, n) {
+        var on = n === index;
+        el.classList.toggle('is-active', on);
+        if (window.gsap) {
+          window.gsap.set(el, {
+            opacity: on ? 1 : 0,
+            visibility: on ? 'visible' : 'hidden',
             y: 0,
-            scale: 1,
-            clipPath: 'inset(0% 0% 0% 0% round 12px)',
-            duration: 0.95,
-            ease: 'power3.out'
+            zIndex: on ? 2 : 1,
+            clearProps: on ? 'transform' : ''
           });
-          if (img) {
-            gsap.to(img, {
-              scale: 1.06,
-              duration: 1.15,
-              ease: 'power2.out'
-            });
-          }
         }
-      }));
+      });
+      panels.forEach(function (el, n) {
+        var on = n === index;
+        el.classList.toggle('is-active', on);
+        if (window.gsap) {
+          window.gsap.set(el, {
+            opacity: on ? 1 : 0,
+            visibility: on ? 'visible' : 'hidden',
+            y: 0,
+            zIndex: on ? 2 : 1,
+            clearProps: on ? 'transform' : ''
+          });
+        }
+      });
+      dots.forEach(function (el, n) { el.classList.toggle('is-active', n === index); });
+      current = index;
+    }
 
-      if (img) {
-        var drift = gsap.fromTo(img,
-          { y: isMobile ? 16 : 22 },
-          {
-            y: isMobile ? -16 : -22,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: step,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.15
-            }
-          }
-        );
-        if (drift.scrollTrigger) section._xrayST.push(drift.scrollTrigger);
+    function nextIndex() {
+      seqPos = (seqPos + 1) % seq.length;
+      return seq[seqPos];
+    }
+
+    function scheduleNext() {
+      if (!playing) return;
+      if (section._xrayTimer) {
+        if (section._xrayTimer.kill) section._xrayTimer.kill();
+        else clearTimeout(section._xrayTimer);
+      }
+      if (window.gsap) {
+        section._xrayTimer = window.gsap.delayedCall(holdMs / 1000, advance);
+      } else {
+        section._xrayTimer = setTimeout(advance, holdMs);
       }
     }
 
-    if (window.innerWidth >= 1024) {
-      steps.forEach(function (step) {
-        bindStepMotion(
-          step,
-          $('.xray__frame', step),
-          $('.xray__frame img', step),
-          false
-        );
-      });
-
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            steps.forEach(function (s) { s.classList.toggle('is-active', s === e.target); });
-          }
-        });
-      }, { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
-      steps.forEach(function (s) { io.observe(s); });
-      section._xrayIO = io;
-    } else {
-      blocks.forEach(function (block) {
-        bindStepMotion(
-          block,
-          $('.xray__mframe', block),
-          $('.xray__mframe img', block),
-          true
-        );
+    function advance() {
+      if (!playing) return;
+      var target = nextIndex();
+      if (target === current) {
+        scheduleNext();
+        return;
+      }
+      var dir = target > current ? 1 : -1;
+      crossfade(current, target, dir, function () {
+        setActive(target);
+        scheduleNext();
       });
     }
 
-    ST.refresh();
+    function crossfade(from, to, dir, done) {
+      var outFrame = frames[from];
+      var inFrame = frames[to];
+      var outPanel = panels[from];
+      var inPanel = panels[to];
+      var outImg = $('img', outFrame);
+      var inImg = $('img', inFrame);
+      var yFrame = dir > 0 ? 22 : -22;
+      var yPanel = dir > 0 ? 14 : -14;
+
+      if (prefersReduced || !window.gsap) {
+        setActive(to);
+        if (done) done();
+        return;
+      }
+
+      var gsap = window.gsap;
+      if (section._xrayTween) section._xrayTween.kill();
+
+      panels.forEach(function (panel) {
+        panel.style.position = 'absolute';
+      });
+
+      gsap.set(inFrame, { opacity: 0, y: yFrame, zIndex: 3, visibility: 'visible' });
+      gsap.set(inPanel, { opacity: 0, y: yPanel, visibility: 'visible' });
+      if (inImg) gsap.set(inImg, { scale: 1.12 });
+      gsap.set(outFrame, { zIndex: 2 });
+      gsap.set(outPanel, { zIndex: 1 });
+
+      section._xrayTween = gsap.timeline({
+        defaults: { ease: 'power2.inOut' },
+        onComplete: function () {
+          gsap.set(outFrame, { clearProps: 'transform,zIndex,visibility' });
+          gsap.set(inFrame, { clearProps: 'transform,zIndex' });
+          gsap.set(outPanel, { clearProps: 'transform,zIndex,visibility' });
+          gsap.set(inPanel, { clearProps: 'transform,zIndex' });
+          if (done) done();
+        }
+      });
+
+      section._xrayTween
+        .to(outFrame, { opacity: 0, y: -yFrame * 0.65, duration: 0.55 }, 0)
+        .to(outPanel, { opacity: 0, y: -yPanel * 0.7, duration: 0.45 }, 0)
+        .to(inFrame, { opacity: 1, y: 0, duration: 0.62 }, 0.1)
+        .to(inPanel, { opacity: 1, y: 0, duration: 0.52 }, 0.16);
+      if (inImg) {
+        section._xrayTween.to(inImg, { scale: 1.06, duration: 0.85, ease: 'power2.out' }, 0.1);
+      }
+      if (outImg) {
+        section._xrayTween.to(outImg, { scale: 1.1, duration: 0.55, ease: 'power2.in' }, 0);
+      }
+    }
+
+    function playEntrance() {
+      if (prefersReduced || !window.gsap || !window.ScrollTrigger || section._xrayEntered) return;
+      section._xrayEntered = true;
+      var gsap = window.gsap;
+      var ST = window.ScrollTrigger;
+      var frame = frames[0];
+      var panel = panels[0];
+      var img = $('img', frame);
+      var entrance = ST.create({
+        trigger: carousel,
+        start: 'top 84%',
+        once: true,
+        onEnter: function () {
+          gsap.from(frame, {
+            opacity: 0,
+            x: -36,
+            y: 20,
+            scale: 0.96,
+            duration: 0.9,
+            ease: 'power3.out'
+          });
+          if (img) {
+            gsap.from(img, { scale: 1.14, duration: 1.05, ease: 'power2.out', delay: 0.08 });
+          }
+          gsap.from(panel, {
+            opacity: 0,
+            y: 18,
+            duration: 0.75,
+            ease: 'power2.out',
+            delay: 0.12
+          });
+        }
+      });
+      section._xrayST.push(entrance);
+    }
+
+    if (prefersReduced) {
+      fitCopyHeight();
+      setActive(0);
+      return;
+    }
+
+    fitCopyHeight();
+    setActive(0);
+    playEntrance();
+
+    var io = new IntersectionObserver(function (entries) {
+      playing = entries[0] && entries[0].isIntersecting;
+      if (playing) scheduleNext();
+      else if (section._xrayTimer) {
+        if (section._xrayTimer.kill) section._xrayTimer.kill();
+        else clearTimeout(section._xrayTimer);
+        section._xrayTimer = null;
+      }
+    }, { threshold: 0.2 });
+
+    io.observe(carousel);
+    section._xrayIO = io;
   }
 
   /* ---------- Hoist main features (corner assemble) ---------- */

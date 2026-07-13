@@ -224,46 +224,46 @@
     }
 
     if (stepsRoot) {
-      stepsRoot.innerHTML = items.map(function (item, i) {
-        return (
-          '<article class="xray__step' + (i === 0 ? ' is-active' : '') + '" data-step="' + i + '">' +
-            '<div class="xray__frame">' +
-              '<img src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
-                'decoding="async" alt="' + (item.imageAlt || '') + '">' +
+      stepsRoot.innerHTML =
+        '<div class="xray__carousel" data-xray-carousel>' +
+          '<div class="xray__stage">' +
+            '<div class="xray__media">' +
+              items.map(function (item, i) {
+                return (
+                  '<article class="xray__frame' + (i === 0 ? ' is-active' : '') + '" data-xray-slide="' + i + '">' +
+                    '<img src="' + item.image + '" width="1563" height="1563" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
+                      'decoding="async" alt="' + (item.imageAlt || '') + '">' +
+                  '</article>'
+                );
+              }).join('') +
             '</div>' +
-            '<div class="xray__copy">' +
-              '<div class="xray__eyebrow">' +
-                '<span class="xray__idx">' + item.step + '</span>' +
-                '<span class="xray__rule" aria-hidden="true"></span>' +
-              '</div>' +
-              '<h3 class="xray__title">' + item.title + '</h3>' +
-              '<p class="xray__sub">' + item.subline + '</p>' +
-              '<p class="xray__text">' + item.text + '</p>' +
-              renderSpecs(item.specs) +
+            '<div class="xray__copy-stack">' +
+              items.map(function (item, i) {
+                return (
+                  '<article class="xray__panel' + (i === 0 ? ' is-active' : '') + '" data-xray-slide="' + i + '">' +
+                    '<div class="xray__eyebrow">' +
+                      '<span class="xray__idx">' + item.step + '</span>' +
+                      '<span class="xray__rule" aria-hidden="true"></span>' +
+                    '</div>' +
+                    '<h3 class="xray__title">' + item.title + '</h3>' +
+                    '<p class="xray__sub">' + item.subline + '</p>' +
+                    '<p class="xray__text">' + item.text + '</p>' +
+                    renderSpecs(item.specs) +
+                  '</article>'
+                );
+              }).join('') +
             '</div>' +
-          '</article>'
-        );
-      }).join('');
+          '</div>' +
+          '<div class="xray__progress" aria-hidden="true">' +
+            items.map(function (item, i) {
+              return '<span class="xray__dot' + (i === 0 ? ' is-active' : '') + '" data-xray-dot="' + i + '">' + item.step + '</span>';
+            }).join('') +
+          '</div>' +
+        '</div>';
     }
 
     if (mobileRoot) {
-      mobileRoot.innerHTML = items.map(function (item) {
-        return (
-          '<article class="xray__mblock">' +
-            '<div class="xray__mframe">' +
-              '<img src="' + item.mobileImage + '" width="800" height="800" loading="lazy" decoding="async" alt="' + (item.mobileImageAlt || '') + '">' +
-            '</div>' +
-            '<div class="xray__eyebrow">' +
-              '<span class="xray__idx">' + item.step + '</span>' +
-              '<span class="xray__rule" aria-hidden="true"></span>' +
-            '</div>' +
-            '<h3 class="xray__title">' + item.title + '</h3>' +
-            '<p class="xray__sub">' + item.subline + '</p>' +
-            '<p class="xray__text">' + item.text + '</p>' +
-            renderSpecs(item.specs) +
-          '</article>'
-        );
-      }).join('');
+      mobileRoot.innerHTML = '';
     }
   }
 
