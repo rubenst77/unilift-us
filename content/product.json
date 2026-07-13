@@ -1,5 +1,5 @@
 {
-  "kicker": "TRACTION HOIST FOR SUSPENDED ACCESS AT ANY HEIGHT",
+  "kicker": "TRACTION HOIST FOR SUSPENDED ACCESS ",
   "headingHtml": "One hoist.<br>Unlimited <span class=\"hl\">height</span>.",
   "intro": "UNILIFT is an electric traction hoist built for swing stages, suspended scaffolds, elevator installation, and material lifting. Its continuous wire-rope design pulls the suspension rope through the hoist instead of winding it onto a drum, allowing the lifting height to be determined by the length of wire rope deployed.",
   "points": [
@@ -9,11 +9,11 @@
     },
     {
       "titleHtml": "<span class=\"num\">1,500 to 2,200 lbs</span> WLL",
-      "line": "Three models, one platform. Single or three-phase, 208 V / 60 Hz."
+      "line": "Three models. Available in single-phase or three-phase configurations, 208 V / 60 Hz."
     },
     {
       "title": "Integrated OSLA brake",
-      "line": "Independent overspeed safety lock, factory-fitted. The hoist cannot run without it."
+      "line": "Independent secondary safety device that automatically locks the wire rope if the platform exceeds its rated descent speed."
     }
   ]
 }
