@@ -705,11 +705,12 @@ h1 { letter-spacing: -0.03em; }
   opacity: 0;
   visibility: hidden;
   will-change: transform, opacity;
+  z-index: 2;
 }
 .xray__frame.is-active {
   opacity: 1;
   visibility: visible;
-  z-index: 2;
+  z-index: 3;
 }
 .xray__frame img {
   display: block;
@@ -719,6 +720,8 @@ h1 { letter-spacing: -0.03em; }
   object-position: center center;
   transform: scale(1.06);
   will-change: transform;
+  position: relative;
+  z-index: 1;
 }
 .xray__copy-stack {
   position: relative;
@@ -760,7 +763,7 @@ h1 { letter-spacing: -0.03em; }
   height: 42%;
   overflow: hidden;
   pointer-events: none;
-  z-index: 4;
+  z-index: 1;
 }
 .brand-slashes--xray-inset {
   inset: -12% -22% -8% -28%;
