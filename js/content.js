@@ -237,18 +237,18 @@
                   '</article>'
                 );
               }).join('') +
+              '<div class="xray__slashes-wrap" aria-hidden="true">' +
+                '<div class="brand-slashes brand-slashes--xray-inset">' +
+                  '<span class="brand-slashes__bar"></span>' +
+                  '<span class="brand-slashes__bar"></span>' +
+                '</div>' +
+              '</div>' +
               '</div>' +
               '<div class="xray__media-foot">' +
                 '<div class="xray__progress" aria-hidden="true">' +
                   items.map(function (item, i) {
                     return '<span class="xray__dot' + (i === 0 ? ' is-active' : '') + '" data-xray-dot="' + i + '">' + item.step + '</span>';
                   }).join('') +
-                '</div>' +
-                '<div class="xray__slashes-wrap" aria-hidden="true">' +
-                  '<div class="brand-slashes">' +
-                    '<span class="brand-slashes__bar"></span>' +
-                    '<span class="brand-slashes__bar"></span>' +
-                  '</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
