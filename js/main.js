@@ -171,7 +171,7 @@
     var mobile = $('#nav-mobile');
     if (!nav) return;
 
-    var hasHero = !!$('#hero');
+    var hasHero = !!($('#hero') || $('.about-hero'));
 
     var onScroll = function () {
       if (!hasHero) {
