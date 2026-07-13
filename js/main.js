@@ -219,17 +219,24 @@
     var gsap = window.gsap;
     var ST = window.ScrollTrigger;
     gsap.registerPlugin(ST);
-    gsap.set(els, { opacity: 0, y: 26 });
+
+    var isFaqPage = document.body.classList.contains('page-faq');
+    var start = isFaqPage ? 'top 94%' : 'top 62%';
+    var duration = isFaqPage ? 0.45 : 0.9;
+    var stagger = isFaqPage ? 0.03 : 0.09;
+    var offsetY = isFaqPage ? 14 : 26;
+
+    gsap.set(els, { opacity: 0, y: offsetY });
 
     window.ScrollTrigger.batch('.reveal', {
-      start: 'top 62%',
+      start: start,
       once: true,
       invalidateOnRefresh: true,
       onEnter: function (batch) {
         gsap.to(batch, {
           opacity: 1, y: 0,
-          duration: 0.9, ease: 'power3.out',
-          stagger: 0.09, overwrite: true
+          duration: duration, ease: 'power2.out',
+          stagger: stagger, overwrite: true
         });
       }
     });
