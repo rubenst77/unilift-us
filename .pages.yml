@@ -693,17 +693,37 @@ content:
             label: Company story
             type: object
             fields:
+              - name: kicker
+                label: Story kicker
+                type: string
+              - name: heading
+                label: Story heading
+                type: string
+              - name: lead
+                label: Lead paragraph
+                type: text
+              - name: body
+                label: Main paragraph
+                type: text
+              - name: support
+                label: Support paragraph
+                type: text
+              - name: market
+                label: Regional note
+                type: object
+                fields:
+                  - name: label
+                    label: Note label
+                    type: string
+                  - name: text
+                    label: Note text
+                    type: text
               - name: image
                 label: Story image
                 type: image
               - name: imageAlt
                 label: Story image alt text
                 type: string
-              - name: paragraphs
-                label: Story paragraphs
-                type: text
-                list: true
-                description: HTML allowed in each paragraph (e.g. <strong>).
           - name: values
             label: Values
             type: object
@@ -711,6 +731,9 @@ content:
               - name: heading
                 label: Values heading
                 type: string
+              - name: intro
+                label: Values intro
+                type: text
               - name: items
                 label: Value cards
                 type: object

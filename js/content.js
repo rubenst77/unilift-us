@@ -573,16 +573,41 @@
         storyImg.src = a.story.image;
         storyImg.alt = a.story.imageAlt || '';
       }
+      setText(document.querySelector('[data-cms="about-story-kicker"]'), a.story.kicker);
+      setText(document.querySelector('[data-cms="about-story-heading"]'), a.story.heading);
       var body = document.querySelector('[data-cms="about-story-body"]');
-      if (body && a.story.paragraphs) {
-        body.innerHTML = a.story.paragraphs.map(function (p) {
-          return '<p>' + p + '</p>';
-        }).join('');
+      if (body) {
+        var html = '';
+        if (a.story.lead) {
+          html += '<p class="about-story__lead">' + a.story.lead + '</p>';
+        }
+        if (a.story.body) {
+          html += '<p>' + a.story.body + '</p>';
+        }
+        if (a.story.support) {
+          html += '<p>' + a.story.support + '</p>';
+        }
+        if (a.story.market && a.story.market.text) {
+          html += (
+            '<aside class="about-story__note">' +
+              '<span class="about-story__note-label">' + (a.story.market.label || '') + '</span>' +
+              '<p>' + a.story.market.text + '</p>' +
+            '</aside>'
+          );
+        }
+        if (!html && a.story.paragraphs) {
+          html = a.story.paragraphs.map(function (p, i) {
+            var cls = i === 0 ? ' class="about-story__lead"' : '';
+            return '<p' + cls + '>' + p + '</p>';
+          }).join('');
+        }
+        body.innerHTML = html;
       }
     }
 
     if (a.values) {
       setText(document.querySelector('[data-cms="about-values-heading"]'), a.values.heading);
+      setText(document.querySelector('[data-cms="about-values-intro"]'), a.values.intro);
       var valuesGrid = document.querySelector('[data-cms="about-values-grid"]');
       if (valuesGrid && a.values.items) {
         valuesGrid.innerHTML = a.values.items.map(function (item, i) {
