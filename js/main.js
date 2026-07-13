@@ -517,6 +517,26 @@
       if (max > 0) stack.style.minHeight = max + 'px';
     }
 
+    function transitionState(t, drift) {
+      var hold = 0.72;
+      if (t <= 0.001) {
+        return { outOp: 1, inOp: 0, outY: 0, inY: drift };
+      }
+      if (t >= 0.999) {
+        return { outOp: 0, inOp: 1, outY: 0, inY: 0 };
+      }
+      if (t < hold) {
+        return { outOp: 1, inOp: 0, outY: 0, inY: drift };
+      }
+      var u = (t - hold) / (1 - hold);
+      if (u < 0.5) {
+        var exit = u * 2;
+        return { outOp: 1 - exit, inOp: 0, outY: -exit * drift, inY: drift };
+      }
+      var enter = (u - 0.5) * 2;
+      return { outOp: 0, inOp: enter, outY: -drift, inY: drift * (1 - enter) };
+    }
+
     function setSlideProgress(progress) {
       var gsap = window.gsap;
       if (!gsap || frames.length <= 1) return;
@@ -525,44 +545,49 @@
       var pos = progress * maxIdx;
       var base = Math.min(Math.floor(pos), maxIdx - 1);
       var t = pos - base;
-      var frameDrift = 20;
-      var panelDrift = 12;
+      var frameDrift = 18;
+      var panelDrift = 10;
       var activeDot = Math.round(Math.min(pos, frames.length - 1));
+      var frameState = transitionState(t, frameDrift);
+      var panelState = transitionState(t, panelDrift);
 
-      function applyLayer(nodes, drift) {
+      function applyLayer(nodes, state) {
         nodes.forEach(function (node, idx) {
-          var opacity = 0;
-          var y = 0;
-          var z = 1;
           if (idx === base) {
-            opacity = 1 - t;
-            y = -t * drift;
-            z = 2;
+            gsap.set(node, {
+              opacity: state.outOp,
+              y: state.outY,
+              zIndex: 2,
+              visibility: state.outOp > 0.01 ? 'visible' : 'hidden'
+            });
+            node.classList.toggle('is-active', state.outOp > 0.5 && state.inOp < 0.2);
           } else if (idx === base + 1) {
-            opacity = t;
-            y = (1 - t) * drift;
-            z = 3;
+            gsap.set(node, {
+              opacity: state.inOp,
+              y: state.inY,
+              zIndex: 3,
+              visibility: state.inOp > 0.01 ? 'visible' : 'hidden'
+            });
+            node.classList.toggle('is-active', state.inOp > 0.5);
+          } else {
+            gsap.set(node, { opacity: 0, y: 0, zIndex: 1, visibility: 'hidden' });
+            node.classList.remove('is-active');
           }
-          var visible = opacity > 0.02;
-          gsap.set(node, {
-            opacity: visible ? opacity : 0,
-            y: y,
-            zIndex: z,
-            visibility: visible ? 'visible' : 'hidden'
-          });
-          node.classList.toggle('is-active', opacity > 0.55);
         });
       }
 
-      applyLayer(frames, frameDrift);
-      applyLayer(panels, panelDrift);
+      applyLayer(frames, frameState);
+      applyLayer(panels, panelState);
 
       frames.forEach(function (frame, idx) {
         var img = $('img', frame);
         if (!img) return;
         var scale = 1.06;
-        if (idx === base + 1) scale = 1.1 - t * 0.04;
-        else if (idx === base) scale = 1.06 + t * 0.02;
+        if (idx === base && frameState.outOp > 0.01) {
+          scale = 1.06 - (1 - frameState.outOp) * 0.03;
+        } else if (idx === base + 1 && frameState.inOp > 0.01) {
+          scale = 1.09 - frameState.inOp * 0.03;
+        }
         gsap.set(img, { scale: scale });
       });
 
@@ -592,7 +617,7 @@
     setSlideProgress(0);
 
     function scrollDistance() {
-      return Math.max(window.innerHeight * 0.72 * (frames.length - 1), window.innerHeight * 0.9);
+      return Math.max(window.innerHeight * 0.24 * (frames.length - 1), window.innerHeight * 0.32);
     }
 
     var pinST = ST.create({
@@ -602,7 +627,7 @@
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 0.45,
+      scrub: 0.18,
       invalidateOnRefresh: true,
       onUpdate: function (self) {
         setSlideProgress(self.progress);
