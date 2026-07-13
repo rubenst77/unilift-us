@@ -518,7 +518,7 @@
     }
 
     function transitionState(t, drift) {
-      var hold = 0.72;
+      var hold = 0.8;
       if (t <= 0.001) {
         return { outOp: 1, inOp: 0, outY: 0, inY: drift };
       }
@@ -531,10 +531,10 @@
       var u = (t - hold) / (1 - hold);
       if (u < 0.5) {
         var exit = u * 2;
-        return { outOp: 1 - exit, inOp: 0, outY: -exit * drift, inY: drift };
+        return { outOp: 1 - exit, inOp: 0, outY: -exit * drift * 0.85, inY: drift };
       }
       var enter = (u - 0.5) * 2;
-      return { outOp: 0, inOp: enter, outY: -drift, inY: drift * (1 - enter) };
+      return { outOp: 0, inOp: enter, outY: -drift * 0.85, inY: drift * (1 - enter) };
     }
 
     function setSlideProgress(progress) {
@@ -545,8 +545,8 @@
       var pos = progress * maxIdx;
       var base = Math.min(Math.floor(pos), maxIdx - 1);
       var t = pos - base;
-      var frameDrift = 18;
-      var panelDrift = 10;
+      var frameDrift = 14;
+      var panelDrift = 8;
       var activeDot = Math.round(Math.min(pos, frames.length - 1));
       var frameState = transitionState(t, frameDrift);
       var panelState = transitionState(t, panelDrift);
@@ -617,7 +617,7 @@
     setSlideProgress(0);
 
     function scrollDistance() {
-      return Math.max(window.innerHeight * 0.24 * (frames.length - 1), window.innerHeight * 0.32);
+      return Math.max(window.innerHeight * 0.36 * (frames.length - 1), window.innerHeight * 0.46);
     }
 
     var pinST = ST.create({
@@ -627,7 +627,7 @@
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 0.18,
+      scrub: 0.28,
       invalidateOnRefresh: true,
       onUpdate: function (self) {
         setSlideProgress(self.progress);
