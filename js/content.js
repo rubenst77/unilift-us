@@ -227,7 +227,8 @@
       stepsRoot.innerHTML =
         '<div class="xray__carousel" data-xray-carousel>' +
           '<div class="xray__stage">' +
-            '<div class="xray__media">' +
+            '<div class="xray__media-col">' +
+              '<div class="xray__media">' +
               items.map(function (item, i) {
                 return (
                   '<article class="xray__frame' + (i === 0 ? ' is-active' : '') + '" data-xray-slide="' + i + '">' +
@@ -236,6 +237,18 @@
                   '</article>'
                 );
               }).join('') +
+              '</div>' +
+              '<div class="xray__media-foot">' +
+                '<div class="xray__progress" aria-hidden="true">' +
+                  items.map(function (item, i) {
+                    return '<span class="xray__dot' + (i === 0 ? ' is-active' : '') + '" data-xray-dot="' + i + '">' + item.step + '</span>';
+                  }).join('') +
+                '</div>' +
+                '<div class="brand-slashes brand-slashes--xray" aria-hidden="true">' +
+                  '<span class="brand-slashes__bar"></span>' +
+                  '<span class="brand-slashes__bar"></span>' +
+                '</div>' +
+              '</div>' +
             '</div>' +
             '<div class="xray__copy-stack">' +
               items.map(function (item, i) {
@@ -253,11 +266,6 @@
                 );
               }).join('') +
             '</div>' +
-          '</div>' +
-          '<div class="xray__progress" aria-hidden="true">' +
-            items.map(function (item, i) {
-              return '<span class="xray__dot' + (i === 0 ? ' is-active' : '') + '" data-xray-dot="' + i + '">' + item.step + '</span>';
-            }).join('') +
           '</div>' +
         '</div>';
     }
