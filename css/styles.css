@@ -1308,8 +1308,7 @@ h1 { letter-spacing: -0.03em; }
    FAQ STRIP (homepage)
    ========================================================================== */
 .faq-strip {
-  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
-  background: var(--paper);
+  margin-top: var(--sp-xl);
 }
 .faq-strip__card {
   display: flex;
