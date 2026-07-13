@@ -38,7 +38,6 @@
     warnWebhookUnset();
     initSmoothScroll();
     initNavbar();
-    initReveal();
     initScrollFx();
     initHeroIntro();
     initCountUps();
@@ -54,6 +53,7 @@
     initPartner();
     initConsent();
     initAppsParallax();
+    initReveal();
     initTracking();
     window.__scrollToSection = function (id) { scrollToEl(document.getElementById(id)); };
     window.__sendLead = sendLead;
@@ -202,12 +202,14 @@
     }
 
     var gsap = window.gsap;
-    gsap.registerPlugin(window.ScrollTrigger);
+    var ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
     gsap.set(els, { opacity: 0, y: 26 });
 
     window.ScrollTrigger.batch('.reveal', {
-      start: 'top 88%',
+      start: 'top 62%',
       once: true,
+      invalidateOnRefresh: true,
       onEnter: function (batch) {
         gsap.to(batch, {
           opacity: 1, y: 0,
@@ -217,7 +219,7 @@
       }
     });
 
-    window.ScrollTrigger.refresh();
+    ST.refresh();
   }
 
   /* ---------- Hero intro ---------- */
