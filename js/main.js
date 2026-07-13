@@ -460,7 +460,7 @@
     return lb;
   }
 
-  /* ---------- Inside the UNILIFT (compact carousel) ---------- */
+  /* ---------- Inside the UNILIFT (scroll-pinned slides) ---------- */
   function initCloseups() {
     var section = document.getElementById('xray');
     if (!section) return;
@@ -491,16 +491,7 @@
     var dots = $$('.xray__dot', carousel);
     if (!frames.length || !panels.length) return;
 
-    var count = frames.length;
-    var current = 0;
-    var seq = [];
-    var i;
-    for (i = 0; i < count; i++) seq.push(i);
-    for (i = count - 2; i >= 0; i--) seq.push(i);
-    var seqPos = 0;
-    var holdMs = 4200;
-    var playing = false;
-    section._xrayST = section._xrayST || [];
+    section._xrayST = [];
 
     function fitCopyHeight() {
       var stack = $('.xray__copy-stack', carousel);
@@ -526,180 +517,107 @@
       if (max > 0) stack.style.minHeight = max + 'px';
     }
 
-    function setActive(index) {
-      frames.forEach(function (el, n) {
-        var on = n === index;
-        el.classList.toggle('is-active', on);
-        if (window.gsap) {
-          window.gsap.set(el, {
-            opacity: on ? 1 : 0,
-            visibility: on ? 'visible' : 'hidden',
-            y: 0,
-            zIndex: on ? 2 : 1,
-            clearProps: on ? 'transform' : ''
-          });
-        }
-      });
-      panels.forEach(function (el, n) {
-        var on = n === index;
-        el.classList.toggle('is-active', on);
-        if (window.gsap) {
-          window.gsap.set(el, {
-            opacity: on ? 1 : 0,
-            visibility: on ? 'visible' : 'hidden',
-            y: 0,
-            zIndex: on ? 2 : 1,
-            clearProps: on ? 'transform' : ''
-          });
-        }
-      });
-      dots.forEach(function (el, n) { el.classList.toggle('is-active', n === index); });
-      current = index;
-    }
-
-    function nextIndex() {
-      seqPos = (seqPos + 1) % seq.length;
-      return seq[seqPos];
-    }
-
-    function scheduleNext() {
-      if (!playing) return;
-      if (section._xrayTimer) {
-        if (section._xrayTimer.kill) section._xrayTimer.kill();
-        else clearTimeout(section._xrayTimer);
-      }
-      if (window.gsap) {
-        section._xrayTimer = window.gsap.delayedCall(holdMs / 1000, advance);
-      } else {
-        section._xrayTimer = setTimeout(advance, holdMs);
-      }
-    }
-
-    function advance() {
-      if (!playing) return;
-      var target = nextIndex();
-      if (target === current) {
-        scheduleNext();
-        return;
-      }
-      var dir = target > current ? 1 : -1;
-      crossfade(current, target, dir, function () {
-        setActive(target);
-        scheduleNext();
-      });
-    }
-
-    function crossfade(from, to, dir, done) {
-      var outFrame = frames[from];
-      var inFrame = frames[to];
-      var outPanel = panels[from];
-      var inPanel = panels[to];
-      var outImg = $('img', outFrame);
-      var inImg = $('img', inFrame);
-      var yFrame = dir > 0 ? 22 : -22;
-      var yPanel = dir > 0 ? 14 : -14;
-
-      if (prefersReduced || !window.gsap) {
-        setActive(to);
-        if (done) done();
-        return;
-      }
-
+    function setSlideProgress(progress) {
       var gsap = window.gsap;
-      if (section._xrayTween) section._xrayTween.kill();
+      if (!gsap || frames.length <= 1) return;
 
-      panels.forEach(function (panel) {
-        panel.style.position = 'absolute';
-      });
+      var maxIdx = frames.length - 1;
+      var pos = progress * maxIdx;
+      var base = Math.min(Math.floor(pos), maxIdx - 1);
+      var t = pos - base;
+      var frameDrift = 20;
+      var panelDrift = 12;
+      var activeDot = Math.round(Math.min(pos, frames.length - 1));
 
-      gsap.set(inFrame, { opacity: 0, y: yFrame, zIndex: 3, visibility: 'visible' });
-      gsap.set(inPanel, { opacity: 0, y: yPanel, visibility: 'visible' });
-      if (inImg) gsap.set(inImg, { scale: 1.12 });
-      gsap.set(outFrame, { zIndex: 2 });
-      gsap.set(outPanel, { zIndex: 1 });
-
-      section._xrayTween = gsap.timeline({
-        defaults: { ease: 'power2.inOut' },
-        onComplete: function () {
-          gsap.set(outFrame, { clearProps: 'transform,zIndex,visibility' });
-          gsap.set(inFrame, { clearProps: 'transform,zIndex' });
-          gsap.set(outPanel, { clearProps: 'transform,zIndex,visibility' });
-          gsap.set(inPanel, { clearProps: 'transform,zIndex' });
-          if (done) done();
-        }
-      });
-
-      section._xrayTween
-        .to(outFrame, { opacity: 0, y: -yFrame * 0.65, duration: 0.55 }, 0)
-        .to(outPanel, { opacity: 0, y: -yPanel * 0.7, duration: 0.45 }, 0)
-        .to(inFrame, { opacity: 1, y: 0, duration: 0.62 }, 0.1)
-        .to(inPanel, { opacity: 1, y: 0, duration: 0.52 }, 0.16);
-      if (inImg) {
-        section._xrayTween.to(inImg, { scale: 1.06, duration: 0.85, ease: 'power2.out' }, 0.1);
-      }
-      if (outImg) {
-        section._xrayTween.to(outImg, { scale: 1.1, duration: 0.55, ease: 'power2.in' }, 0);
-      }
-    }
-
-    function playEntrance() {
-      if (prefersReduced || !window.gsap || !window.ScrollTrigger || section._xrayEntered) return;
-      section._xrayEntered = true;
-      var gsap = window.gsap;
-      var ST = window.ScrollTrigger;
-      var frame = frames[0];
-      var panel = panels[0];
-      var img = $('img', frame);
-      var entrance = ST.create({
-        trigger: carousel,
-        start: 'top 84%',
-        once: true,
-        onEnter: function () {
-          gsap.from(frame, {
-            opacity: 0,
-            x: -36,
-            y: 20,
-            scale: 0.96,
-            duration: 0.9,
-            ease: 'power3.out'
-          });
-          if (img) {
-            gsap.from(img, { scale: 1.14, duration: 1.05, ease: 'power2.out', delay: 0.08 });
+      function applyLayer(nodes, drift) {
+        nodes.forEach(function (node, idx) {
+          var opacity = 0;
+          var y = 0;
+          var z = 1;
+          if (idx === base) {
+            opacity = 1 - t;
+            y = -t * drift;
+            z = 2;
+          } else if (idx === base + 1) {
+            opacity = t;
+            y = (1 - t) * drift;
+            z = 3;
           }
-          gsap.from(panel, {
-            opacity: 0,
-            y: 18,
-            duration: 0.75,
-            ease: 'power2.out',
-            delay: 0.12
+          var visible = opacity > 0.02;
+          gsap.set(node, {
+            opacity: visible ? opacity : 0,
+            y: y,
+            zIndex: z,
+            visibility: visible ? 'visible' : 'hidden'
           });
-        }
+          node.classList.toggle('is-active', opacity > 0.55);
+        });
+      }
+
+      applyLayer(frames, frameDrift);
+      applyLayer(panels, panelDrift);
+
+      frames.forEach(function (frame, idx) {
+        var img = $('img', frame);
+        if (!img) return;
+        var scale = 1.06;
+        if (idx === base + 1) scale = 1.1 - t * 0.04;
+        else if (idx === base) scale = 1.06 + t * 0.02;
+        gsap.set(img, { scale: scale });
       });
-      section._xrayST.push(entrance);
+
+      dots.forEach(function (dot, n) {
+        dot.classList.toggle('is-active', n === activeDot);
+      });
     }
 
-    if (prefersReduced) {
-      fitCopyHeight();
+    function setActive(index) {
+      setSlideProgress(index / Math.max(frames.length - 1, 1));
+    }
+
+    fitCopyHeight();
+
+    if (prefersReduced || !window.gsap || !window.ScrollTrigger) {
       setActive(0);
       return;
     }
 
-    fitCopyHeight();
-    setActive(0);
-    playEntrance();
+    var gsap = window.gsap;
+    var ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
 
-    var io = new IntersectionObserver(function (entries) {
-      playing = entries[0] && entries[0].isIntersecting;
-      if (playing) scheduleNext();
-      else if (section._xrayTimer) {
-        if (section._xrayTimer.kill) section._xrayTimer.kill();
-        else clearTimeout(section._xrayTimer);
-        section._xrayTimer = null;
+    panels.forEach(function (panel) {
+      panel.style.position = 'absolute';
+    });
+    setSlideProgress(0);
+
+    function scrollDistance() {
+      return Math.max(window.innerHeight * 0.72 * (frames.length - 1), window.innerHeight * 0.9);
+    }
+
+    var pinST = ST.create({
+      trigger: section,
+      start: 'center center',
+      end: function () { return '+=' + scrollDistance(); },
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+      scrub: 0.45,
+      invalidateOnRefresh: true,
+      onUpdate: function (self) {
+        setSlideProgress(self.progress);
       }
-    }, { threshold: 0.2 });
+    });
 
-    io.observe(carousel);
-    section._xrayIO = io;
+    section._xrayST.push(pinST);
+
+    var resizeT;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(function () { ST.refresh(); }, 150);
+    });
+
+    ST.refresh();
   }
 
   /* ---------- Hoist main features (corner assemble) ---------- */
