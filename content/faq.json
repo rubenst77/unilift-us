@@ -1,54 +1,55 @@
 {
   "titleHtml": "FAQ <span class=\"faq__title-accent\">UNILIFT</span>",
-  "intro": "Certification, specifications, safety, and support — answered in one place.",
-  "bannerLabel": "FAQ",
-  "bannerSub": "Certification, specs, safety, and support.",
-  "bannerCta": "View FAQ",
   "items": [
     {
-      "category": "Certification & US market",
-      "question": "Is the UNILIFT certified for use in the United States?",
-      "answer": "Yes. It's UL 1323 listed and CSA Z271 certified, built to EN 1808:2015 and EN 60204-1. Certificates available on request."
+      "category": "CERTIFICATION & U.S. MARKET",
+      "question": "Is UNILIFT certified for use in the United States and Canada?",
+      "answer": "Yes. North American UNILIFT models are certified to UL 1323 and CSA Z271 for powered suspended scaffold and suspended access applications.\n\nCertification applies to the specified hoist model and configuration. Always verify the certification markings, voltage, capacity, and serial number shown on the equipment nameplate."
     },
     {
-      "category": "Certification & US market",
-      "question": "Is it certified to lift people (man-riding)?",
-      "answer": "Yes, it's certified to EN 1808 for man-riding. Overload protection, dual braking, the OSLA overspeed lock and manual lowering are all built in as standard."
+      "category": "CERTIFICATION & U.S. MARKET",
+      "question": "Is UNILIFT certified for lifting people?",
+      "answer": "Yes. UNILIFT is designed and certified for personnel lifting on powered suspended scaffolds, swing stages, and suspended access platforms.\n\n“Man-riding hoist” is commonly used internationally. In the United States, “personnel-lifting traction hoist” or “powered suspended scaffold hoist” is more conventional.\n\nThe complete platform, rigging system, fall protection, and installation must also comply with applicable jobsite requirements."
     },
     {
-      "category": "Certification & US market",
-      "question": "How does it fit OSHA and ANSI rules on my jobsite?",
-      "answer": "OSHA compliance for suspended work is site-based: it comes down to your rigging, anchorage, inspections and an independent fall-arrest system per worker. The UNILIFT is the certified hoist inside that setup, and we supply the load ratings and documentation your competent person needs. Ask our engineers about your specific application."
+      "category": "CERTIFICATION & U.S. MARKET",
+      "question": "Does a UL-certified hoist make my suspended scaffold OSHA compliant?",
+      "answer": "No single component makes the complete scaffold OSHA compliant.\n\nUNILIFT provides a certified hoist for integration into a properly designed suspended scaffold system. The complete installation must comply with OSHA 29 CFR 1926 Subpart L, applicable state and local requirements, and relevant standards such as ANSI/ASSP A10.8.\n\nThe employer, qualified person, and competent person remain responsible for system design, rigging, inspection, training, fall protection, and safe operation."
     },
     {
-      "category": "Specification & fit",
-      "question": "Single-phase or three-phase, which do I need?",
-      "answer": "Single-phase (UNI70A-S, 2 hp / 12 A) if that's the only power on site. Three-phase (UNI70A-T and UNI100A-T, 3 hp / 9 A) otherwise. The two UNI70A models lift the same load; the UNI100A steps up to 2,200 lbs."
+      "category": "SPECIFICATION & FIT",
+      "question": "Which UNILIFT model do I need: single-phase or three-phase?",
+      "answer": "UNILIFT is available in three North American configurations:\n\n1,500 lb capacity, 208 V single-phase\n1,500 lb capacity, 208 V three-phase\n2,200 lb capacity, 208 V three-phase\n\nThe single-phase model is suitable for jobsites where three-phase power is unavailable. Three-phase models offer lower current draw and include the maximum-capacity 2,200 lb configuration.\n\nModel selection should consider platform capacity, number of hoists, available power, working height, and cable length."
     },
     {
-      "category": "Specification & fit",
-      "question": "What's the maximum lifting height?",
-      "answer": "Effectively unlimited. The rope passes through the hoist instead of winding onto a drum, so height depends only on the rope you run, not the machine. Reels go from 328 to 1,312 ft."
+      "category": "SPECIFICATION & FIT",
+      "question": "What is the maximum lifting height?",
+      "answer": "UNILIFT has no fixed drum-capacity limit.\n\nThe wire rope passes continuously through the traction mechanism instead of winding onto a drum. Practical lifting height is therefore determined by the deployed wire rope, electrical cable, rigging arrangement, and jobsite requirements."
     },
     {
-      "category": "Specification & fit",
-      "question": "How big and heavy is it?",
-      "answer": "159 lbs, 11.8 in wide by 30.2 in tall. Compact enough for a small crew to position, with an IP55 aluminium housing for exposed sites."
+      "category": "SPECIFICATION & FIT",
+      "question": "How large and heavy is the UNILIFT hoist?",
+      "answer": "The North American UNILIFT weighs approximately 159 lb.\n\nIts nominal dimensions include:\n\nHeight: 30.2 inches\nWidth: 11.8 inches\nWire rope: 3/8 inch\nLifting speed: approximately 35 feet per minute\n\nRefer to the technical drawing before designing mounting brackets, stirrups, or platform interfaces."
     },
     {
-      "category": "Safety",
-      "question": "What happens if the rope breaks or the hoist overspeeds?",
-      "answer": "The OSLA secondary brake grips the rope and stops the fall automatically. It's fully mechanical, needs no power, and the hoist won't run without it."
+      "category": "SPECIFICATION & FIT",
+      "question": "Can UNILIFT replace a Tirak, Sky Climber, Spider, Power Climber, or Bisomac hoist?",
+      "answer": "UNILIFT operates in the same powered suspended scaffold hoist category as Tirak, Sky Climber, Spider, Power Climber, and Bisomac equipment.\n\nA direct replacement cannot be assumed. Manufacturers may use different mounting interfaces, wire-rope constructions, electrical connectors, control systems, capacities, and safety devices.\n\nFAS-Tech can review your existing scaffold motor or traction hoist configuration and identify the required UNILIFT model, mounting arrangement, and electrical connection."
     },
     {
-      "category": "Safety",
-      "question": "What if the power fails mid-lift?",
-      "answer": "The manual lowering mechanism brings the platform down by hand, safely and speed-limited. Nobody gets stranded."
+      "category": "SAFETY",
+      "question": "What happens if the suspension rope breaks or the hoist overspeeds?",
+      "answer": "UNILIFT includes an independent OSLA overspeed safety lock.\n\nIf the primary suspension rope fails or the platform exceeds the permitted descent speed, the OSLA automatically grips the independent safety wire rope and stops the platform.\n\nThe safety lock is factory-installed and electrically interlocked with the hoist."
     },
     {
-      "category": "Safety",
-      "question": "Can I use any wire rope?",
-      "answer": "No. Only FAS-authorised 3/8 in. steel rope (16,200 lbf breaking force). We supply certified rope with every hoist."
+      "category": "SAFETY",
+      "question": "What happens if power fails during operation?",
+      "answer": "The electromagnetic brake engages automatically and holds the load.\n\nA trained operator can use the manual brake-release system to perform a controlled emergency descent. The procedure must follow the operating manual and should only be performed by personnel trained on the equipment."
+    },
+    {
+      "category": "SAFETY",
+      "question": "Can I use any 3/8-inch wire rope?",
+      "answer": "No. Matching the diameter alone is insufficient.\n\nUNILIFT must only operate with FAS-Tech-authorized 3/8-inch wire rope of the specified construction, strength, lay, and condition. Using an incompatible rope can reduce traction, damage the hoist, or prevent the safety system from operating correctly.\n\nDo not reuse rope from a Tirak, Sky Climber, Spider, Power Climber, or other scaffold hoist unless FAS-Tech has confirmed compatibility."
     },
     {
       "category": "Ownership & support",
@@ -56,14 +57,14 @@
       "answer": "Both are confirmed with your quote, based on configuration and quantity. Send us your timeline and we'll come back with dates."
     },
     {
-      "category": "Ownership & support",
-      "question": "Can my team service it themselves?",
-      "answer": "Yes. Service is every 100 hours or annually, with a 500-hour overhaul. A built-in hour-meter tracks runtime, we train your crew for free, and we supply original parts."
+      "category": "OWNERSHIP & SUPPORT",
+      "question": "Can our technicians service UNILIFT themselves?",
+      "answer": "Qualified technicians can perform routine inspections and maintenance by following the UNILIFT service manual.\n\nThe hoist uses maintenance procedures familiar to suspended scaffold technicians and does not require proprietary service tools for standard work. An integrated hour meter supports accurate maintenance records, with routine service intervals and a 500-operating-hour overhaul cycle.\n\nMajor repairs and overhauls must be completed by trained and authorized personnel."
     },
     {
-      "category": "Ownership & support",
-      "question": "Do you have US distributors?",
-      "answer": "The US network is opening up now. End user or would-be distributor, get in touch and we'll sort out local support."
+      "category": "OWNERSHIP & SUPPORT",
+      "question": "Do you have U.S. distributors and service partners?",
+      "answer": "FAS-Tech currently supports U.S. customers directly while developing its distributor and service network.\n\nContact FAS-Tech to confirm available sales, training, spare-parts, and technical-service coverage for your state. Distribution and service territories remain open for qualified suspended-access companies.\n\nThird-party company and product names are trademarks of their respective owners. They are referenced only to identify comparable equipment and compatibility considerations."
     }
   ]
 }
