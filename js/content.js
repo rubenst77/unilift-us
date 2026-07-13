@@ -188,7 +188,7 @@
 
     list.innerHTML = f.items.map(function (item) {
       return (
-        '<article class="feature-row feature-reveal">' +
+        '<article class="feature-row">' +
           '<div class="feature-row__thumb">' +
             '<img src="' + item.image + '" width="400" height="400" loading="lazy" decoding="async" alt="' + item.imageAlt + '">' +
           '</div>' +

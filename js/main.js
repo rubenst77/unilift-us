@@ -588,103 +588,58 @@
     ST.refresh();
   }
 
-  /* ---------- Hoist main features (scroll + 3D motion) ---------- */
+  /* ---------- Hoist main features (corner assemble) ---------- */
   function initFeaturesMotion() {
     var section = document.getElementById('features');
     if (!section) return;
 
+    if (section._featuresST) {
+      section._featuresST.kill();
+      section._featuresST = null;
+    }
+
     var rows = $$('.feature-row', section);
     if (!rows.length) return;
 
-    if (prefersReduced || !(window.gsap && window.ScrollTrigger)) {
-      rows.forEach(function (row) { row.classList.add('is-live'); });
-      return;
-    }
+    if (prefersReduced || !(window.gsap && window.ScrollTrigger)) return;
 
     var gsap = window.gsap;
     var ST = window.ScrollTrigger;
     gsap.registerPlugin(ST);
 
+    var origins = [
+      { x: -72, y: -56 },
+      { x: 72, y: -56 },
+      { x: -72, y: 56 },
+      { x: 72, y: 56 }
+    ];
+
     rows.forEach(function (row, i) {
-      gsap.set(row, {
-        opacity: 0,
-        x: i % 2 === 0 ? -72 : 72,
-        y: 48,
-        rotateY: i % 2 === 0 ? -16 : 16,
-        rotateX: 10,
-        scale: 0.9,
-        transformOrigin: 'center bottom',
-        transformPerspective: 1000
-      });
+      var o = origins[i] || { x: 0, y: 40 };
+      gsap.set(row, { opacity: 0, x: o.x, y: o.y, scale: 0.94 });
     });
 
-    ST.create({
+    section._featuresST = ST.create({
       trigger: section,
-      start: 'top 78%',
+      start: 'top 80%',
       once: true,
       onEnter: function () {
         gsap.to(rows, {
           opacity: 1,
           x: 0,
           y: 0,
-          rotateY: 0,
-          rotateX: 0,
           scale: 1,
-          duration: 1.05,
-          ease: 'power4.out',
-          stagger: {
-            each: 0.13,
-            onComplete: function () {
-              var row = this.targets()[0];
-              if (row) row.classList.add('is-live');
-            }
+          duration: 0.85,
+          ease: 'power3.out',
+          stagger: 0.1,
+          onComplete: function () {
+            rows.forEach(function (row) {
+              gsap.set(row, { clearProps: 'transform,opacity' });
+            });
           }
         });
       }
     });
-
-    rows.forEach(function (row, i) {
-      var img = $('.feature-row__thumb img', row);
-      if (!img) return;
-      gsap.fromTo(img, { y: i % 2 === 0 ? 14 : -14 }, {
-        y: i % 2 === 0 ? -14 : 14,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: row,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.1
-        }
-      });
-    });
-
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      rows.forEach(function (row) {
-        row.addEventListener('mousemove', function (e) {
-          var rect = row.getBoundingClientRect();
-          var px = (e.clientX - rect.left) / rect.width - 0.5;
-          var py = (e.clientY - rect.top) / rect.height - 0.5;
-          gsap.to(row, {
-            rotateY: px * 7,
-            rotateX: -py * 5,
-            y: -6,
-            duration: 0.35,
-            ease: 'power2.out',
-            overwrite: 'auto'
-          });
-        });
-        row.addEventListener('mouseleave', function () {
-          gsap.to(row, {
-            rotateY: 0,
-            rotateX: 0,
-            y: 0,
-            duration: 0.75,
-            ease: 'elastic.out(1, 0.72)',
-            overwrite: 'auto'
-          });
-        });
-      });
-    }
   }
 
   /* ---------- Feature cards (mobile tap-to-expand) ---------- */
