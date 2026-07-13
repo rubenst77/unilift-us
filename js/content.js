@@ -238,12 +238,6 @@
                   '</article>'
                 );
               }).join('') +
-              '<div class="xray__slashes-wrap" aria-hidden="true">' +
-                '<div class="brand-slashes brand-slashes--xray-inset">' +
-                  '<span class="brand-slashes__bar"></span>' +
-                  '<span class="brand-slashes__bar"></span>' +
-                '</div>' +
-              '</div>' +
               '</div>' +
               '<div class="xray__media-foot">' +
                 '<div class="xray__progress" aria-hidden="true">' +
@@ -293,12 +287,6 @@
                 '<div class="xray-mobile__media">' +
                   '<img src="' + img + '" width="800" height="800" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
                     'decoding="async" alt="' + alt + '">' +
-                  '<div class="xray__slashes-wrap" aria-hidden="true">' +
-                    '<div class="brand-slashes brand-slashes--xray-inset">' +
-                      '<span class="brand-slashes__bar"></span>' +
-                      '<span class="brand-slashes__bar"></span>' +
-                    '</div>' +
-                  '</div>' +
                 '</div>' +
                 '<div class="xray-mobile__body">' +
                   '<div class="xray__eyebrow">' +
