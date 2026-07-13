@@ -9,8 +9,14 @@
       "text": "Every UNILIFT is factory-tested before it ships, with E-stop, up/down, overload alarm and status indicators sealed in one IP55 control box.",
       "chip": "IP55 CONTROL BOX",
       "specs": [
-        { "k": "Protection", "v": "IP55" },
-        { "k": "Testing", "v": "100% factory" }
+        {
+          "k": "Protection",
+          "v": "IP55"
+        },
+        {
+          "k": "Testing",
+          "v": "100% factory"
+        }
       ],
       "image": "assets/photos/1.webp",
       "imageAlt": "UNILIFT control box with E-stop and FAS-Tech nameplate",
@@ -24,8 +30,14 @@
       "text": "Mounted above the rope inlet, the OSLA secondary brake grips the rope on breakage or overspeed. Fully mechanical and independent, it needs no power to arrest a fall.",
       "chip": "OSLA SECONDARY BRAKE",
       "specs": [
-        { "k": "Locking speed", "v": "98 ft/min" },
-        { "k": "Locking distance", "v": "<= 10.2 in" }
+        {
+          "k": "Locking speed",
+          "v": "98 ft/min"
+        },
+        {
+          "k": "Locking distance",
+          "v": "<= 10.2 in"
+        }
       ],
       "image": "assets/photos/2.webp",
       "imageAlt": "Close-up of the OSLA overspeed lock at the top of the hoist",
@@ -39,12 +51,18 @@
       "text": "Industrial 3-pin or 4-pin power connectors, an internal hour-meter, and a 500-hour overhaul cycle keep integration and maintenance straightforward.",
       "chip": "3P POWER CONNECTOR",
       "specs": [
-        { "k": "Service interval", "v": "100 h" },
-        { "k": "Overhaul cycle", "v": "500 h" }
+        {
+          "k": "Service interval",
+          "v": "100 h"
+        },
+        {
+          "k": "Overhaul cycle",
+          "v": "500 h"
+        }
       ],
-      "image": "assets/photos/3.webp",
+      "image": "assets/inside unilift traction hoist-1.jpg",
       "imageAlt": "UNILIFT power connector and service connection detail",
-      "mobileImage": "assets/photos/3@800.webp",
+      "mobileImage": "assets/inside unilift traction hoist.jpg",
       "mobileImageAlt": "UNILIFT power connector and service connection detail"
     }
   ]
