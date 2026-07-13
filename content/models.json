@@ -1,7 +1,7 @@
 {
   "kicker": "Model Lineup",
   "headingHtml": "Three models.<br>One spec sheet to <span class=\"hl\">learn</span>.",
-  "subline": "Single-phase for lighter setups, three-phase for maximum capacity. Same proven platform.",
+  "subline": "Three models designed for a wide range of jobsite conditions, power supplies, and suspended access configurations.",
   "models": [
     {
       "ref": "UNI70A-9P11-S",
@@ -19,7 +19,6 @@
       "controlBox": "1P",
       "connector": "3-pin / 3-core",
       "featured": false,
-      "ribbon": "",
       "ctaVariant": "outline",
       "ctaLabel": "Request Quote",
       "ctaId": "quote-UNI70A-S",
@@ -63,7 +62,6 @@
       "controlBox": "3P",
       "connector": "4-pin / 4-core",
       "featured": false,
-      "ribbon": "",
       "ctaVariant": "outline",
       "ctaLabel": "Request Quote",
       "ctaId": "quote-UNI100A-T",
@@ -71,11 +69,28 @@
     }
   ],
   "sharedStrip": [
-    { "label": "Lifting speed", "valueHtml": "<strong>35 fpm</strong> (10.7 m/min)" },
-    { "label": "Wire rope", "valueHtml": "<strong>3/8\"</strong> (9.5 mm)" },
-    { "label": "Net weight", "valueHtml": "<strong>159 lbs</strong> (72 kg)" },
-    { "label": "", "valueHtml": "<strong>IP55</strong>" },
-    { "label": "Overload trip", "valueHtml": "<strong>125%</strong> WLL" },
-    { "label": "Height", "valueHtml": "<strong>Unlimited</strong>" }
+    {
+      "label": "Lifting speed",
+      "valueHtml": "<strong>35 fpm</strong> (10.7 m/min)"
+    },
+    {
+      "label": "Wire rope",
+      "valueHtml": "<strong>3/8\"</strong> (9.5 mm)"
+    },
+    {
+      "label": "Net weight",
+      "valueHtml": "<strong>159 lbs</strong> (72 kg)"
+    },
+    {
+      "valueHtml": "<strong>IP55</strong>"
+    },
+    {
+      "label": "Overload trip",
+      "valueHtml": "<strong>125%</strong> WLL"
+    },
+    {
+      "label": "Height",
+      "valueHtml": "<strong>Unlimited</strong>"
+    }
   ]
 }
