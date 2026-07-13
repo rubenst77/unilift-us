@@ -36,24 +36,29 @@
       window.__hydrateSite();
     }
     warnWebhookUnset();
+    var isAboutPage = document.body.classList.contains('page-about');
+    var isFaqPage = document.body.classList.contains('page-faq');
+    var isLanding = !isAboutPage && !isFaqPage;
+
     initSmoothScroll();
     initNavbar();
     initScrollFx();
-    initHeroIntro();
-    initCountUps();
-    initProductViewer();
-    initCloseups();
-    initFeaturesMotion();
-    initFeatureCards();
-    initYoutubeFacade();
-    initSpecTabs();
-    initFaq();
-    initDatasheet();
+    if (isLanding) initHeroIntro();
+    if (isAboutPage) initAboutIntro();
+    if (isLanding) initCountUps();
+    if (isLanding) initProductViewer();
+    if (isLanding) initCloseups();
+    if (isLanding) initFeaturesMotion();
+    if (isLanding) initFeatureCards();
+    if (isLanding) initYoutubeFacade();
+    if (isLanding) initSpecTabs();
+    if (isLanding || isFaqPage) initFaq();
+    if (isLanding) initDatasheet();
     initContactForm();
-    initModelQuote();
-    initPartner();
+    if (isLanding) initModelQuote();
+    if (isLanding) initPartner();
     initConsent();
-    initAppsParallax();
+    if (isLanding) initAppsParallax();
     initReveal();
     initTracking();
     window.__scrollToSection = function (id) { scrollToEl(document.getElementById(id)); };
@@ -129,6 +134,14 @@
       gsap.to(heroBg, {
         yPercent: 18, ease: 'none',
         scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+    }
+
+    var aboutBg = $('[data-about-hero-bg]');
+    if (aboutBg) {
+      gsap.to(aboutBg, {
+        yPercent: 16, ease: 'none',
+        scrollTrigger: { trigger: '.about-hero', start: 'top top', end: 'bottom top', scrub: true }
       });
     }
 
@@ -234,6 +247,19 @@
     window.gsap.to(items, {
       opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
       stagger: 0.12, delay: 0.15
+    });
+  }
+
+  function initAboutIntro() {
+    var items = $$('.about-hero [data-about-anim]');
+    if (!items.length) return;
+    if (prefersReduced || !window.gsap) {
+      items.forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
+      return;
+    }
+    window.gsap.from(items, {
+      opacity: 0, y: 28, duration: 0.85, ease: 'power2.out',
+      stagger: 0.14, delay: 0.2
     });
   }
 

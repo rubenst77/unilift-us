@@ -17,7 +17,8 @@ const KEYS = [
   'applications',
   'faq',
   'distributors',
-  'manufacturing'
+  'manufacturing',
+  'about'
 ];
 
 const site = {};

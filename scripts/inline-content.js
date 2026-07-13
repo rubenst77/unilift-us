@@ -8,7 +8,8 @@ const ROOT = path.join(__dirname, '..');
 const sitePath = path.join(ROOT, 'content', 'site.json');
 const targets = [
   path.join(ROOT, 'index.html'),
-  path.join(ROOT, 'faq.html')
+  path.join(ROOT, 'faq.html'),
+  path.join(ROOT, 'about.html')
 ];
 
 const site = fs.readFileSync(sitePath, 'utf8').trim();

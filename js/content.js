@@ -510,6 +510,92 @@
     }
   }
 
+  function hydrateAbout(d) {
+    var a = d.about;
+    if (!a || !document.body.classList.contains('page-about')) return;
+
+    var g = d.global || {};
+    var siteUrl = (g.SITE_URL || 'https://www.fas-tech.us').replace(/\/$/, '');
+
+    if (a.seo) {
+      document.title = a.seo.title;
+      setText(document.querySelector('meta[name="description"]'), a.seo.description);
+      var canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.href = siteUrl + '/about.html';
+    }
+
+    if (a.hero) {
+      setText(document.querySelector('[data-cms="about-hero-kicker"]'), a.hero.kicker);
+      setText(document.querySelector('[data-cms="about-hero-title"]'), a.hero.title);
+      setText(document.querySelector('[data-cms="about-hero-lead"]'), a.hero.lead);
+      var aboutBg = document.querySelector('[data-about-hero-bg]');
+      if (aboutBg && a.hero.backgroundImage) {
+        aboutBg.style.backgroundImage = "url('" + a.hero.backgroundImage + "')";
+      }
+      var preload = document.querySelector('link[rel="preload"][as="image"]');
+      if (preload && a.hero.backgroundImage) preload.href = a.hero.backgroundImage;
+      setText(document.querySelector('[data-cms="about-story-kicker"]'), a.hero.kicker);
+    }
+
+    if (a.story) {
+      var storyImg = document.querySelector('[data-cms="about-story-img"]');
+      if (storyImg) {
+        storyImg.src = a.story.image;
+        storyImg.alt = a.story.imageAlt || '';
+      }
+      var body = document.querySelector('[data-cms="about-story-body"]');
+      if (body && a.story.paragraphs) {
+        body.innerHTML = a.story.paragraphs.map(function (p) {
+          return '<p>' + p + '</p>';
+        }).join('');
+      }
+    }
+
+    if (a.values) {
+      setText(document.querySelector('[data-cms="about-values-heading"]'), a.values.heading);
+      var valuesGrid = document.querySelector('[data-cms="about-values-grid"]');
+      if (valuesGrid && a.values.items) {
+        valuesGrid.innerHTML = a.values.items.map(function (item, i) {
+          return (
+            '<article class="about-value reveal" style="--i:' + i + '">' +
+              '<span class="about-value__idx">0' + (i + 1) + '</span>' +
+              '<h3 class="about-value__label">' + item.label + '</h3>' +
+              '<p class="about-value__line">' + item.line + '</p>' +
+            '</article>'
+          );
+        }).join('');
+      }
+    }
+
+    if (a.support) {
+      setText(document.querySelector('[data-cms="about-support-kicker"]'), a.support.kicker);
+      setText(document.querySelector('[data-cms="about-support-heading"]'), a.support.heading);
+      setText(document.querySelector('[data-cms="about-support-text"]'), a.support.text);
+    }
+
+    if (a.certifications) {
+      setText(document.querySelector('[data-cms="about-certs-kicker"]'), a.certifications.kicker);
+      setText(document.querySelector('[data-cms="about-certs-heading"]'), a.certifications.heading);
+      setText(document.querySelector('[data-cms="about-certs-intro"]'), a.certifications.intro);
+      var certList = document.querySelector('[data-cms="about-certs-list"]');
+      if (certList && a.certifications.items) {
+        certList.innerHTML = a.certifications.items.map(function (cert) {
+          return (
+            '<article class="about-cert reveal">' +
+              '<span class="about-cert__mark" aria-hidden="true">' +
+                '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>' +
+              '</span>' +
+              '<div class="about-cert__body">' +
+                '<h3 class="about-cert__code">' + cert.code + '</h3>' +
+                '<p class="about-cert__desc">' + cert.description + '</p>' +
+              '</div>' +
+            '</article>'
+          );
+        }).join('');
+      }
+    }
+  }
+
   function hydrateJsonLd(d) {
     var g = d.global;
     var siteUrl = g.SITE_URL;
@@ -600,6 +686,7 @@
     hydrateCloseups(data);
     hydrateFeatures(data);
     hydrateManufacturing(data);
+    hydrateAbout(data);
     hydrateModels(data);
     hydrateDistributors(data);
     hydrateSpecs(data);
