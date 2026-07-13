@@ -274,7 +274,46 @@
     }
 
     if (mobileRoot) {
-      mobileRoot.innerHTML = '';
+      mobileRoot.innerHTML =
+        '<div class="xray-mobile">' +
+          '<div class="xray-mobile__nav" aria-label="Slide navigation">' +
+            items.map(function (item, i) {
+              return (
+                '<button type="button" class="xray-mobile__nav-dot' + (i === 0 ? ' is-active' : '') + '" data-xray-mobile-jump="' + i + '">' +
+                  item.step +
+                '</button>'
+              );
+            }).join('') +
+          '</div>' +
+          items.map(function (item, i) {
+            var img = item.mobileImage || item.image;
+            var alt = item.mobileImageAlt || item.imageAlt || '';
+            return (
+              '<article class="xray-mobile__card reveal" id="xray-mobile-' + i + '" data-xray-mobile-card="' + i + '">' +
+                '<div class="xray-mobile__media">' +
+                  '<img src="' + img + '" width="800" height="800" loading="' + (i === 0 ? 'eager' : 'lazy') + '" ' +
+                    'decoding="async" alt="' + alt + '">' +
+                  '<div class="xray__slashes-wrap" aria-hidden="true">' +
+                    '<div class="brand-slashes brand-slashes--xray-inset">' +
+                      '<span class="brand-slashes__bar"></span>' +
+                      '<span class="brand-slashes__bar"></span>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="xray-mobile__body">' +
+                  '<div class="xray__eyebrow">' +
+                    '<span class="xray__idx">' + item.step + '</span>' +
+                    '<span class="xray__rule" aria-hidden="true"></span>' +
+                  '</div>' +
+                  '<h3 class="xray__title">' + item.title + '</h3>' +
+                  '<p class="xray__sub">' + item.subline + '</p>' +
+                  '<p class="xray__text">' + item.text + '</p>' +
+                  renderSpecs(item.specs) +
+                '</div>' +
+              '</article>'
+            );
+          }).join('') +
+        '</div>';
     }
   }
 

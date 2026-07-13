@@ -48,6 +48,7 @@
     if (isLanding) initCountUps();
     if (isLanding) initProductViewer();
     if (isLanding) initCloseups();
+    if (isLanding) initXrayMobile();
     if (isLanding) initFeaturesMotion();
     if (isLanding) initFeatureCards();
     if (isLanding) initYoutubeFacade();
@@ -490,9 +491,43 @@
   }
 
   /* ---------- Inside the UNILIFT (scroll-pinned slides) ---------- */
+  function initXrayMobile() {
+    var section = document.getElementById('xray');
+    if (!section || !window.matchMedia('(max-width: 1023px)').matches) return;
+
+    var dots = $$('[data-xray-mobile-jump]', section);
+    var cards = $$('[data-xray-mobile-card]', section);
+    if (!dots.length || !cards.length) return;
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        var i = parseInt(dot.getAttribute('data-xray-mobile-jump'), 10);
+        var card = cards[i];
+        if (!card) return;
+        card.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+
+    if (!('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting || en.intersectionRatio < 0.4) return;
+        var id = en.target.getAttribute('data-xray-mobile-card');
+        dots.forEach(function (d, n) {
+          d.classList.toggle('is-active', String(n) === id);
+        });
+      });
+    }, { threshold: [0.4, 0.55, 0.7], rootMargin: '-18% 0px -40% 0px' });
+
+    cards.forEach(function (card) { io.observe(card); });
+  }
+
   function initCloseups() {
     var section = document.getElementById('xray');
     if (!section) return;
+
+    if (window.matchMedia('(max-width: 1023px)').matches) return;
 
     if (section._xrayIO) {
       section._xrayIO.disconnect();
