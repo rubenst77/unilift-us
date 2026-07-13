@@ -881,32 +881,6 @@
         setFaqOpen(q, !open, true);
       });
     });
-
-    if (!document.body.classList.contains('page-faq')) return;
-
-    function expandAllFaq() {
-      questions.forEach(function (q, i) {
-        window.setTimeout(function () {
-          setFaqOpen(q, true, !prefersReduced);
-        }, prefersReduced ? 0 : i * 40);
-      });
-    }
-
-    var list = $('.faq__list');
-    if (list && 'IntersectionObserver' in window && !prefersReduced) {
-      var started = false;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (started || !en.isIntersecting) return;
-          started = true;
-          expandAllFaq();
-          io.disconnect();
-        });
-      }, { threshold: 0.12 });
-      io.observe(list);
-    } else {
-      expandAllFaq();
-    }
   }
 
   /* ==========================================================================
