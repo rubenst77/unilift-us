@@ -2,5 +2,7 @@
   "kicker": "US Distributors & Service Partners",
   "heading": "Interested in representing UNILIFT in your territory?",
   "line": "We are looking for qualified distributors and service partners able to import, sell, maintain, inspect, and support UNILIFT traction hoists locally.",
-  "ctaLabel": "Become a Partner"
+  "ctaLabel": "Become a Partner",
+  "mapImage": "assets/distributors/us-map.png",
+  "mapAlt": "United States map showing open UNILIFT distributor territories"
 }

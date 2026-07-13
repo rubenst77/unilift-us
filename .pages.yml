@@ -611,6 +611,13 @@ content:
           - name: ctaLabel
             label: CTA label
             type: string
+          - name: mapImage
+            label: US map image
+            type: image
+            description: Map shown beside the distributor call-to-action.
+          - name: mapAlt
+            label: Map alt text
+            type: string
 
       - name: manufacturing
         label: Manufacturing video

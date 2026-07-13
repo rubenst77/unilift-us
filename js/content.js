@@ -492,6 +492,12 @@
     setText(document.querySelector('[data-cms="distributors-heading"]'), dist.heading);
     setText(document.querySelector('[data-cms="distributors-line"]'), dist.line);
     setText(document.querySelector('[data-cms="distributors-cta"]'), dist.ctaLabel);
+
+    var map = document.querySelector('[data-cms="distributors-map"]');
+    if (map && dist.mapImage) {
+      map.src = dist.mapImage;
+      map.alt = dist.mapAlt || '';
+    }
   }
 
   function hydrateFaq(d) {

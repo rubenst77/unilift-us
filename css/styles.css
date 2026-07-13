@@ -1634,9 +1634,27 @@ h1 { letter-spacing: -0.03em; }
 /* ==========================================================================
    DISTRIBUTOR BAND
    ========================================================================== */
-.distributor__inner { max-width: 640px; }
+.distributor__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.distributor__copy { max-width: 520px; }
 .distributor__title { font-size: var(--fs-h2); margin: 0.4rem 0 var(--sp-md); }
-.distributor__text { color: rgba(255, 255, 255, 0.82); margin-bottom: var(--sp-xl); font-size: 1.05rem; }
+.distributor__text { color: rgba(255, 255, 255, 0.82); margin-bottom: var(--sp-xl); font-size: 1.05rem; line-height: 1.65; }
+.distributor__map-wrap {
+  background: #fff;
+  border-radius: 12px;
+  padding: clamp(12px, 2vw, 20px);
+  box-shadow: 0 20px 48px -16px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.distributor__map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 /* ==========================================================================
    TRUST STRIP
@@ -2381,6 +2399,9 @@ h1 { letter-spacing: -0.03em; }
   .about-support__inner { grid-template-columns: 1fr; }
   .about-support__slashes { min-height: 120px; }
   .about-certs__list { grid-template-columns: 1fr; }
+  .distributor__grid { grid-template-columns: 1fr; }
+  .distributor__copy { max-width: none; }
+  .distributor__map-wrap { max-width: 520px; margin: 0 auto; width: 100%; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .footer__brand { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 0; }
   .footer__brand-bottom { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
