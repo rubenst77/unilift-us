@@ -5,12 +5,13 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const htmlPath = path.join(ROOT, 'index.html');
 const sitePath = path.join(ROOT, 'content', 'site.json');
+const targets = [
+  path.join(ROOT, 'index.html'),
+  path.join(ROOT, 'faq.html')
+];
 
 const site = fs.readFileSync(sitePath, 'utf8').trim();
-let html = fs.readFileSync(htmlPath, 'utf8');
-
 const start = '<!-- SITE-DATA-START -->';
 const end = '<!-- SITE-DATA-END -->';
 const block =
@@ -20,11 +21,16 @@ const block =
   '\n  </script>\n  ' +
   end;
 
-if (!html.includes(start) || !html.includes(end)) {
-  console.error('Missing SITE-DATA markers in index.html');
-  process.exit(1);
-}
+for (const htmlPath of targets) {
+  if (!fs.existsSync(htmlPath)) continue;
 
-html = html.replace(new RegExp(start + '[\\s\\S]*?' + end), block);
-fs.writeFileSync(htmlPath, html, 'utf8');
-console.log('Inlined content/site.json into index.html');
+  let html = fs.readFileSync(htmlPath, 'utf8');
+  if (!html.includes(start) || !html.includes(end)) {
+    console.warn('Skipping', path.basename(htmlPath), '- missing SITE-DATA markers');
+    continue;
+  }
+
+  html = html.replace(new RegExp(start + '[\\s\\S]*?' + end), block);
+  fs.writeFileSync(htmlPath, html, 'utf8');
+  console.log('Inlined content/site.json into', path.basename(htmlPath));
+}

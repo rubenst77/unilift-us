@@ -155,7 +155,14 @@
     var mobile = $('#nav-mobile');
     if (!nav) return;
 
+    var hasHero = !!$('#hero');
+
     var onScroll = function () {
+      if (!hasHero) {
+        nav.classList.add('nav--scrolled');
+        nav.classList.remove('nav--transparent');
+        return;
+      }
       if (window.scrollY > 60) { nav.classList.add('nav--scrolled'); nav.classList.remove('nav--transparent'); }
       else { nav.classList.remove('nav--scrolled'); nav.classList.add('nav--transparent'); }
     };

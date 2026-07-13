@@ -446,10 +446,20 @@
 
   function hydrateFaq(d) {
     var f = d.faq;
-    var list = document.querySelector('[data-cms="faq-list"]');
-    if (!f || !list) return;
+    if (!f) return;
 
     setHtml(document.querySelector('[data-cms="faq-title"]'), f.titleHtml);
+    setText(document.querySelector('[data-cms="faq-intro"]'), f.intro);
+
+    var label = document.querySelector('[data-cms="faq-banner-label"]');
+    if (label) setText(label, f.bannerLabel || 'FAQ');
+    var sub = document.querySelector('[data-cms="faq-banner-sub"]');
+    if (sub) setText(sub, f.bannerSub);
+    var cta = document.querySelector('[data-cms="faq-banner-cta"]');
+    if (cta) setText(cta, f.bannerCta || 'View FAQ');
+
+    var list = document.querySelector('[data-cms="faq-list"]');
+    if (!list) return;
 
     var html = '';
     var lastCat = '';
@@ -544,7 +554,9 @@
 
     writeLd('ld-org', org);
     writeLd('ld-product', product);
-    writeLd('ld-faq', faq);
+    if (document.getElementById('ld-faq') && d.faq && d.faq.items) {
+      writeLd('ld-faq', faq);
+    }
   }
 
   function hydrateSite() {

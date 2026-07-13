@@ -33,9 +33,9 @@
     "brandName": "FAS-Technology",
     "tagline": "Engineering at your side. <strong>ACCESS, LIFTING, HEIGHT SAFETY SYSTEMS.</strong>",
     "address": {
-      "street": "Avenue du Blues N°9",
-      "postalCode": "L-4368",
-      "city": "Belvaux",
+      "street": "4 Place Marie Paulle Molitor Peffer",
+      "postalCode": "L-44549",
+      "city": "Differdange",
       "country": "Grand Duchy of Luxembourg",
       "display": "Avenue du Blues N°9, L-4368 Belvaux,<br>Grand Duchy of Luxembourg"
     },
@@ -52,9 +52,26 @@
     },
     "manufacturerUrl": "https://www.fas-technology.com",
     "SITE_URL": "https://www.fas-tech.us",
-    "LEAD_WEBHOOK_URL": "",
     "GA4_ID": "G-XXXXXXXXXX",
     "GADS_ID": "AW-XXXXXXXXXX",
+    "navCta": "Request a Quote",
+    "booking": {
+      "enabled": true,
+      "title": "Book a call with Ruben",
+      "description": "Choose a time on Google Calendar. Opens in a new tab.",
+      "duration": "30 min",
+      "ctaLabel": "Book the meeting",
+      "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
+    },
+    "rep": {
+      "name": "Ruben da Costa",
+      "title": "Sales Director at FAS-Tech",
+      "email": "ruben.dacosta@fas-technology.com",
+      "whatsapp": "352691592667",
+      "avatar": "assets/cararuben.png",
+      "avatarLg": "assets/cararuben.png"
+    },
+    "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf",
     "seo": {
       "title": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist | FAS-Tech",
       "description": "UNILIFT motorized traction hoist. UL 1323 listed, man-riding certified, 1,500 to 2,200 lbs WLL, unlimited lift height. Built for the US jobsite. Request a quote.",
@@ -74,24 +91,6 @@
       "kicker": "Let's Talk",
       "title": "Ready to spec the UNILIFT for your project?",
       "intro": "Get a custom quote, request the full technical datasheet, or discuss US distribution."
-    },
-    "navCta": "Request a Quote",
-    "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf",
-    "rep": {
-      "name": "Ruben da Costa",
-      "title": "Sales Director at FAS-Tech",
-      "email": "ruben.dacosta@fas-technology.com",
-      "whatsapp": "352691592667",
-      "avatar": "assets/cararuben.png",
-      "avatarLg": "assets/cararuben.png"
-    },
-    "booking": {
-      "enabled": true,
-      "title": "Book a call with Ruben",
-      "description": "Choose a time on Google Calendar. Opens in a new tab.",
-      "duration": "30 min",
-      "ctaLabel": "Book the meeting",
-      "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
     }
   },
   "hero": {
@@ -103,7 +102,7 @@
     "subtitle": "Motorized traction hoists for lifting people and equipment. Unlimited height, built for the American jobsite.",
     "primaryCta": "Request a Quote",
     "secondaryCta": "Get the Datasheet",
-    "backgroundImage": "assets/context/hero.webp",
+    "backgroundImage": "assets/pexels-thomas-parker-1272388137-26935835-1.jpg",
     "scrollLabel": "Scroll to explore",
     "certifications": [
       "UL 1323",
@@ -606,6 +605,10 @@
   },
   "faq": {
     "titleHtml": "FAQ <span class=\"faq__title-accent\">UNILIFT</span>",
+    "intro": "Certification, specifications, safety, and support — answered in one place.",
+    "bannerLabel": "FAQ",
+    "bannerSub": "Certification, specs, safety, and support.",
+    "bannerCta": "View FAQ",
     "items": [
       {
         "category": "Certification & US market",
@@ -710,7 +713,6 @@
   <!-- Structured Data: generated from site-data by content.js -->
   <script type="application/ld+json" id="ld-org"></script>
   <script type="application/ld+json" id="ld-product"></script>
-  <script type="application/ld+json" id="ld-faq"></script>
 
 </head>
 
@@ -728,7 +730,7 @@
         <li><a href="#product" class="nav__link">Product</a></li>
         <li><a href="#models" class="nav__link">Models</a></li>
         <li><a href="#specs" class="nav__link">Specs</a></li>
-        <li><a href="#faq" class="nav__link">FAQ</a></li>
+        <li><a href="faq.html" class="nav__link">FAQ</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
       </ul>
 
@@ -745,7 +747,7 @@
       <a href="#product" class="nav__link">Product</a>
       <a href="#models" class="nav__link">Models</a>
       <a href="#specs" class="nav__link">Specs</a>
-      <a href="#faq" class="nav__link">FAQ</a>
+      <a href="faq.html" class="nav__link">FAQ</a>
       <a href="#contact" class="nav__link">Contact</a>
       <a href="#contact" class="btn btn--light" data-cta="mobile-nav-quote">Request a Quote</a>
     </div>
@@ -1201,73 +1203,18 @@
 
 
   <!-- ========== FAQ ========== -->
-  <section id="faq" class="section section--white" aria-label="Frequently asked questions">
+  <section id="faq" class="faq-strip" aria-label="FAQ">
     <div class="container">
-      <div class="section-head section-head--center reveal">
-        <h2 class="faq__title" data-cms="faq-title">FAQ <span class="faq__title-accent">UNILIFT</span></h2>
-      </div>
-
-      <div class="faq__list" data-cms="faq-list">
-        <h3 class="faq__category reveal">Certification &amp; US market</h3>
-
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">Is the UNILIFT certified for use in the United States?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">Yes. It's UL 1323 listed and CSA Z271 certified, built to EN 1808:2015 and EN 60204-1. Certificates available on request.</div></div>
+      <a href="faq.html" class="faq-strip__card reveal">
+        <div class="faq-strip__copy">
+          <span class="faq-strip__label" data-cms="faq-banner-label">FAQ</span>
+          <span class="faq-strip__sub" data-cms="faq-banner-sub">Certification, specs, safety, and support.</span>
         </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">Is it certified to lift people (man-riding)?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">Yes, it's certified to EN 1808 for man-riding. Overload protection, dual braking, the OSLA overspeed lock and manual lowering are all built in as standard.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">How does it fit OSHA and ANSI rules on my jobsite?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">OSHA compliance for suspended work is site-based: it comes down to your rigging, anchorage, inspections and an independent fall-arrest system per worker. The UNILIFT is the certified hoist inside that setup, and we supply the load ratings and documentation your competent person needs. Ask our engineers about your specific application.</div></div>
-        </div>
-
-        <h3 class="faq__category reveal">Specification &amp; fit</h3>
-
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">Single-phase or three-phase, which do I need?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">Single-phase (UNI70A-S, 2 hp / 12 A) if that's the only power on site. Three-phase (UNI70A-T and UNI100A-T, 3 hp / 9 A) otherwise. The two UNI70A models lift the same load; the UNI100A steps up to 2,200 lbs.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">What's the maximum lifting height?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">Effectively unlimited. The rope passes through the hoist instead of winding onto a drum, so height depends only on the rope you run, not the machine. Reels go from 328 to 1,312 ft.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">How big and heavy is it?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">159 lbs, 11.8 in wide by 30.2 in tall. Compact enough for a small crew to position, with an IP55 aluminium housing for exposed sites.</div></div>
-        </div>
-
-        <h3 class="faq__category reveal">Safety</h3>
-
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">What happens if the rope breaks or the hoist overspeeds?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">The OSLA secondary brake grips the rope and stops the fall automatically. It's fully mechanical, needs no power, and the hoist won't run without it.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">What if the power fails mid-lift?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">The manual lowering mechanism brings the platform down by hand, safely and speed-limited. Nobody gets stranded.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">Can I use any wire rope?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">No. Only FAS-authorised 3/8 in. steel rope (16,200 lbf breaking force). We supply certified rope with every hoist.</div></div>
-        </div>
-
-        <h3 class="faq__category reveal">Ownership &amp; support</h3>
-
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">What are the lead times and warranty?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">Both are confirmed with your quote, based on configuration and quantity. Send us your timeline and we'll come back with dates.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">Can my team service it themselves?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">Yes. Service is every 100 hours or annually, with a 500-hour overhaul. A built-in hour-meter tracks runtime, we train your crew for free, and we supply original parts.</div></div>
-        </div>
-        <div class="faq__item reveal">
-          <button class="faq__q" aria-expanded="false">Do you have US distributors?<span class="faq__icon" aria-hidden="true"></span></button>
-          <div class="faq__a"><div class="faq__a-inner">The US network is opening up now. End user or would-be distributor, get in touch and we'll sort out local support.</div></div>
-        </div>
-      </div>
+        <span class="btn btn--light btn--sm faq-strip__cta">
+          <span data-cms="faq-banner-cta">View FAQ</span>
+          <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+        </span>
+      </a>
     </div>
   </section>
 
@@ -1417,7 +1364,7 @@
             <a href="#product" class="footer__link">Product</a>
             <a href="#models" class="footer__link">Models</a>
             <a href="#specs" class="footer__link">Specifications</a>
-            <a href="#faq" class="footer__link">FAQ</a>
+            <a href="faq.html" class="footer__link">FAQ</a>
             <a href="#contact" class="footer__link">Contact</a>
           </div>
         </div>
