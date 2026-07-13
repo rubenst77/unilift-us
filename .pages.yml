@@ -36,10 +36,6 @@ content:
           - name: brandName
             label: Brand name
             type: string
-          - name: tagline
-            label: Footer tagline
-            type: text
-            description: HTML allowed (e.g. bold keywords).
           - name: address
             label: "Address (Contact + Footer)"
             type: object

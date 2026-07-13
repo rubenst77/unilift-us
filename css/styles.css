@@ -2145,14 +2145,6 @@ h1 { letter-spacing: -0.03em; }
   font-weight: 500;
   color: rgba(255, 255, 255, 0.88);
 }
-.footer__tagline {
-  font-size: 0.82rem;
-  line-height: 1.55;
-  max-width: 34ch;
-  margin-top: 1.25rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-.footer__tagline strong { color: var(--sky); font-weight: 600; }
 .footer__social { display: flex; gap: 0.65rem; }
 .footer__social a {
   width: 34px; height: 34px;

@@ -76,10 +76,6 @@
       setText(document.querySelector('[data-cms="contact-intro"]'), g.contact.intro);
     }
 
-    setText(document.querySelector('[data-cms="footer-tagline"]'), '');
-    var tagline = document.querySelector('[data-cms="footer-tagline"]');
-    if (tagline) tagline.innerHTML = g.tagline;
-
     var linkedin = document.querySelector('[data-cms="social-linkedin"]');
     var youtube = document.querySelector('[data-cms="social-youtube"]');
     if (linkedin) linkedin.href = g.social.linkedin;
