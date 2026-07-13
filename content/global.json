@@ -1,6 +1,6 @@
 {
   "companyName": "FAS-Technology S.A.R.L",
-  "brandName": "FAS-Technology",
+  "brandName": "FAS-Technology TESTING",
   "tagline": "Engineering at your side. <strong>ACCESS, LIFTING, HEIGHT SAFETY SYSTEMS.</strong>",
   "address": {
     "street": "Avenue du Blues N°9",
@@ -22,9 +22,26 @@
   },
   "manufacturerUrl": "https://www.fas-technology.com",
   "SITE_URL": "https://www.fas-tech.us",
-  "LEAD_WEBHOOK_URL": "",
   "GA4_ID": "G-XXXXXXXXXX",
   "GADS_ID": "AW-XXXXXXXXXX",
+  "navCta": "Request a Quote",
+  "booking": {
+    "enabled": true,
+    "title": "Book a call with Ruben",
+    "description": "Choose a time on Google Calendar. Opens in a new tab.",
+    "duration": "30 min",
+    "ctaLabel": "Book the meeting",
+    "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
+  },
+  "rep": {
+    "name": "Ruben da Costa",
+    "title": "Sales Director at FAS-Tech",
+    "email": "ruben.dacosta@fas-technology.com",
+    "whatsapp": "352691592667",
+    "avatar": "assets/cararuben.png",
+    "avatarLg": "assets/cararuben.png"
+  },
+  "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf",
   "seo": {
     "title": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist | FAS-Tech",
     "description": "UNILIFT motorized traction hoist. UL 1323 listed, man-riding certified, 1,500 to 2,200 lbs WLL, unlimited lift height. Built for the US jobsite. Request a quote.",
@@ -44,23 +61,5 @@
     "kicker": "Let's Talk",
     "title": "Ready to spec the UNILIFT for your project?",
     "intro": "Get a custom quote, request the full technical datasheet, or discuss US distribution."
-  },
-  "navCta": "Request a Quote",
-  "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf",
-  "rep": {
-    "name": "Ruben da Costa",
-    "title": "Sales Director at FAS-Tech",
-    "email": "ruben.dacosta@fas-technology.com",
-    "whatsapp": "352691592667",
-    "avatar": "assets/cararuben.png",
-    "avatarLg": "assets/cararuben.png"
-  },
-  "booking": {
-    "enabled": true,
-    "title": "Book a call with Ruben",
-    "description": "Choose a time on Google Calendar. Opens in a new tab.",
-    "duration": "30 min",
-    "ctaLabel": "Book the meeting",
-    "url": "https://calendar.app.google/mW9E6MMiYVTWegwN6"
   }
 }
