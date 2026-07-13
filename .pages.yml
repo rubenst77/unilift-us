@@ -41,24 +41,26 @@ content:
             type: text
             description: HTML allowed (e.g. bold keywords).
           - name: address
-            label: Address
+            label: "Address (Contact + Footer)"
             type: object
+            description: "The ADDRESS box in the Contact section (Let's Talk) is edited via Contact tile address below. Street / city / country also feed the footer."
             fields:
               - name: street
-                label: Street
+                label: Street (footer)
                 type: string
               - name: postalCode
-                label: Postal code
+                label: Postal code (footer)
                 type: string
               - name: city
-                label: City
+                label: City (footer)
                 type: string
               - name: country
-                label: Country (display)
+                label: Country (footer)
                 type: string
               - name: display
-                label: Contact tile address (HTML)
+                label: "Contact ADDRESS tile (HTML)"
                 type: text
+                description: "Text shown in the ADDRESS box in Contact (mobile + desktop). Use <br> for line breaks. This is the field your team should edit for the contact address card."
           - name: phone
             label: Phone / WhatsApp (display)
             type: string
@@ -609,6 +611,138 @@ content:
           - name: ctaLabel
             label: CTA label
             type: string
+
+      - name: manufacturing
+        label: Manufacturing video
+        type: file
+        path: content/manufacturing.json
+        format: json
+        description: Video section after Hoist features (YouTube embed).
+        fields:
+          - name: kicker
+            label: Section kicker
+            type: string
+          - name: heading
+            label: Section heading
+            type: string
+          - name: subline
+            label: Intro paragraph
+            type: text
+          - name: body
+            label: Quality paragraph
+            type: text
+            description: Second paragraph below the intro (above the video).
+          - name: youtubeId
+            label: YouTube video ID
+            type: string
+            description: e.g. fDMHHy-5_8Q from youtube.com/watch?v=fDMHHy-5_8Q
+          - name: youtubeUrl
+            label: YouTube watch URL
+            type: string
+
+      - name: about
+        label: About Us page
+        type: file
+        path: content/about.json
+        format: json
+        description: Full About Us page (about.html) — hero, story, values, certifications.
+        fields:
+          - name: seo
+            label: About page SEO
+            type: object
+            fields:
+              - name: title
+                label: Page title
+                type: string
+              - name: description
+                label: Meta description
+                type: text
+          - name: hero
+            label: About hero
+            type: object
+            fields:
+              - name: kicker
+                label: Hero kicker
+                type: string
+              - name: title
+                label: Hero headline
+                type: string
+              - name: lead
+                label: Hero lead paragraph
+                type: text
+              - name: backgroundImage
+                label: Hero background image
+                type: image
+          - name: story
+            label: Company story
+            type: object
+            fields:
+              - name: image
+                label: Story image
+                type: image
+              - name: imageAlt
+                label: Story image alt text
+                type: string
+              - name: paragraphs
+                label: Story paragraphs
+                type: text
+                list: true
+                description: HTML allowed in each paragraph (e.g. <strong>).
+          - name: values
+            label: Values
+            type: object
+            fields:
+              - name: heading
+                label: Values heading
+                type: string
+              - name: items
+                label: Value cards
+                type: object
+                list: true
+                fields:
+                  - name: label
+                    label: Value title
+                    type: string
+                  - name: line
+                    label: Value description
+                    type: text
+          - name: support
+            label: Engineering support band
+            type: object
+            fields:
+              - name: kicker
+                label: Kicker
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Body text
+                type: text
+          - name: certifications
+            label: Certifications
+            type: object
+            fields:
+              - name: kicker
+                label: Section kicker
+                type: string
+              - name: heading
+                label: Section heading
+                type: string
+              - name: intro
+                label: Intro paragraph
+                type: text
+              - name: items
+                label: Certification entries
+                type: object
+                list: true
+                fields:
+                  - name: code
+                    label: Standard / directive name
+                    type: string
+                  - name: description
+                    label: Description
+                    type: text
 
 settings:
   merge: direct

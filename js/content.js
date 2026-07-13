@@ -86,10 +86,11 @@
     if (youtube) youtube.href = g.social.youtube;
 
     var footerAddr = document.querySelector('[data-cms="footer-address"]');
-    if (footerAddr) {
+    if (footerAddr && g.address) {
+      var footerLines = g.address.street + '<br>' + g.address.postalCode + ' ' + g.address.city;
+      if (g.address.country) footerLines += ', ' + g.address.country;
       footerAddr.innerHTML =
-        g.address.street + '<br>' +
-        g.address.postalCode + ' ' + g.address.city + ', Luxembourg<br><br>' +
+        footerLines + '<br><br>' +
         '<a href="tel:' + g.phoneTel + '" class="footer__link">' + g.phone + '</a><br>' +
         '<a href="mailto:' + g.email + '" class="footer__link">' + g.email + '</a>';
     }
@@ -496,6 +497,7 @@
     setText(document.querySelector('[data-cms="mfg-kicker"]'), m.kicker);
     setText(document.querySelector('[data-cms="mfg-heading"]'), m.heading);
     setText(document.querySelector('[data-cms="mfg-subline"]'), m.subline);
+    setText(document.querySelector('[data-cms="mfg-body"]'), m.body);
 
     var facade = document.querySelector('[data-youtube-facade]');
     if (facade && m.youtubeId) {
