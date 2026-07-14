@@ -37,15 +37,6 @@
     return { quote: 'Request a Quote', datasheet: 'Get Datasheet', distributor: 'Become a US Distributor' }[type] || type || 'Inquiry';
   }
 
-  function leadDeliveryUrl() {
-    if (window.LEAD_WEBHOOK_URL) return window.LEAD_WEBHOOK_URL;
-    return 'https://formsubmit.co/ajax/' + encodeURIComponent(leadToEmail());
-  }
-
-  function isFormSubmitUrl(url) {
-    return /formsubmit\.co/i.test(url);
-  }
-
   function formatLeadMessage(payload) {
     var lines = [
       'Source: ' + (payload.source || 'website'),
@@ -64,61 +55,135 @@
     return lines.join('\n');
   }
 
+  function isFormSubmitUrl(url) {
+    return /formsubmit\.co/i.test(url);
+  }
+
+  function isWeb3FormsUrl(url) {
+    return /web3forms\.com/i.test(url);
+  }
+
+  function buildFormSubmitBody(payload) {
+    var label = inquiryLabel(payload.inquiry || payload.intent);
+    var subjectName = payload.company || payload.name || 'Website lead';
+    return JSON.stringify({
+      name: payload.name || 'Website visitor',
+      email: payload.email || leadToEmail(),
+      company: payload.company || '',
+      phone: payload.phone || '',
+      model: payload.model || '',
+      inquiry: label,
+      message: formatLeadMessage(payload),
+      _subject: 'UNILIFT Lead: ' + label + ' — ' + subjectName,
+      _captcha: 'false'
+    });
+  }
+
+  function buildWeb3FormsBody(payload) {
+    var label = inquiryLabel(payload.inquiry || payload.intent);
+    var subjectName = payload.company || payload.name || 'Website lead';
+    return JSON.stringify({
+      access_key: window.WEB3FORMS_ACCESS_KEY,
+      subject: 'UNILIFT Lead: ' + label + ' — ' + subjectName,
+      from_name: 'UNILIFT US Website',
+      name: payload.name || 'Website visitor',
+      email: payload.email || leadToEmail(),
+      replyto: payload.email || leadToEmail(),
+      message: formatLeadMessage(payload),
+      company: payload.company || '',
+      phone: payload.phone || '',
+      model: payload.model || '',
+      inquiry: label,
+      botcheck: ''
+    });
+  }
+
+  function parseDeliveryResponse(url, response, data) {
+    if (isFormSubmitUrl(url)) {
+      var ok = response.ok && data && (data.success === 'true' || data.success === true);
+      var activation = data && /activation/i.test(String(data.message || ''));
+      return { ok: ok, activation: activation, message: data && data.message };
+    }
+    if (isWeb3FormsUrl(url)) {
+      return { ok: response.ok && data && data.success === true, message: data && data.message };
+    }
+    return { ok: response.ok && (!data || data.ok !== false), message: data && data.message };
+  }
+
+  function postLead(url, payload) {
+    var headers = { 'Content-Type': 'application/json', Accept: 'application/json' };
+    var body = JSON.stringify(payload);
+
+    if (isFormSubmitUrl(url)) {
+      body = buildFormSubmitBody(payload);
+    } else if (isWeb3FormsUrl(url)) {
+      body = buildWeb3FormsBody(payload);
+    }
+
+    return fetch(url, { method: 'POST', headers: headers, body: body })
+      .then(function (response) {
+        return response.json().then(function (data) {
+          return parseDeliveryResponse(url, response, data);
+        }).catch(function () {
+          return { ok: response.ok };
+        });
+      });
+  }
+
+  function deliverFormSubmit(payload) {
+    return postLead('https://formsubmit.co/ajax/' + encodeURIComponent(leadToEmail()), payload);
+  }
+
+  function deliverWeb3Forms(payload) {
+    return postLead('https://api.web3forms.com/submit', payload);
+  }
+
+  function deliverApiLead(payload) {
+    return postLead('/api/lead', payload).catch(function () {
+      return { ok: false, unavailable: true };
+    });
+  }
+
+  function deliverWebhook(payload) {
+    return fetch(window.LEAD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      return { ok: response.ok };
+    });
+  }
+
+  function sendLead(payload) {
+    if (window.LEAD_WEBHOOK_URL) {
+      return deliverWebhook(payload).catch(function () {
+        return { ok: false, error: true };
+      });
+    }
+
+    if (window.WEB3FORMS_ACCESS_KEY) {
+      return deliverWeb3Forms(payload).catch(function () {
+        return deliverFormSubmit(payload);
+      });
+    }
+
+    return deliverApiLead(payload).then(function (result) {
+      if (result.ok) return result;
+      return deliverFormSubmit(payload);
+    }).catch(function (err) {
+      console.warn('[UNILIFT] lead delivery failed', err);
+      if (payload.source === 'contact_form') {
+        window.location.href = mailtoFor(payload);
+        return { ok: true, mailto: true };
+      }
+      return { ok: false, error: true };
+    });
+  }
+
   function mailtoFor(p) {
     var subject = encodeURIComponent('UNILIFT inquiry: ' + (p.company || p.name || ''));
     var body = encodeURIComponent(formatLeadMessage(p));
     return 'mailto:' + leadToEmail() + '?subject=' + subject + '&body=' + body;
-  }
-
-  function sendLead(payload) {
-    var url = leadDeliveryUrl();
-    var useFormSubmit = isFormSubmitUrl(url);
-    var headers = { 'Content-Type': 'application/json' };
-    var body;
-
-    if (useFormSubmit) {
-      headers.Accept = 'application/json';
-      var label = inquiryLabel(payload.inquiry || payload.intent);
-      var subjectName = payload.company || payload.name || 'Website lead';
-      body = JSON.stringify({
-        name: payload.name || 'Website visitor',
-        email: payload.email || leadToEmail(),
-        company: payload.company || '',
-        phone: payload.phone || '',
-        model: payload.model || '',
-        inquiry: label,
-        message: formatLeadMessage(payload),
-        _subject: 'UNILIFT Lead: ' + label + ' — ' + subjectName,
-        _template: 'table',
-        _captcha: 'false',
-        _autoresponse: 'Thank you for contacting FAS-Technology. We received your request and will respond within one business day.'
-      });
-    } else {
-      body = JSON.stringify(payload);
-    }
-
-    return fetch(url, { method: 'POST', headers: headers, body: body })
-      .then(function (r) {
-        if (useFormSubmit) {
-          return r.json().then(function (data) {
-            var ok = r.ok && (data.success === 'true' || data.success === true);
-            if (!ok) console.warn('[UNILIFT] lead delivery returned', data);
-            return { ok: ok };
-          }).catch(function () {
-            return { ok: r.ok };
-          });
-        }
-        if (!r.ok) console.warn('[UNILIFT] lead webhook returned', r.status);
-        return { ok: r.ok };
-      })
-      .catch(function (err) {
-        console.warn('[UNILIFT] lead delivery failed', err);
-        if (payload.source === 'contact_form') {
-          window.location.href = mailtoFor(payload);
-          return { ok: true, mailto: true };
-        }
-        return { ok: false, error: true };
-      });
   }
 
   document.addEventListener('DOMContentLoaded', init);
@@ -1219,6 +1284,10 @@
             localStorage.setItem('datasheetUnlocked', 'true');
             if (typeof window.__openDatasheetSuccess === 'function') window.__openDatasheetSuccess();
           }
+        } else if (res.activation) {
+          status.classList.add('is-error');
+          status.innerHTML = 'Almost ready — check <strong>' + leadToEmail() + '</strong> for a FormSubmit activation email, click the link once, then submit again.';
+          if (btn) { btn.disabled = false; btn.style.opacity = ''; }
         } else {
           status.classList.add('is-error');
           status.innerHTML = 'We couldn\'t submit right now. Email us at <a href="mailto:' + leadToEmail() + '">' + leadToEmail() + '</a>.';

@@ -98,7 +98,15 @@ content:
           - name: LEAD_WEBHOOK_URL
             label: Lead webhook URL
             type: string
-            description: Optional n8n/Make webhook. Leave empty to email Ruben via FormSubmit.
+            description: Optional n8n/Make webhook. Leave empty to use Web3Forms or FormSubmit.
+          - name: WEB3FORMS_ACCESS_KEY
+            label: Web3Forms access key
+            type: string
+            description: Get a free key at web3forms.com for ruben.dacosta@fas-technology.com. Recommended for reliable form delivery.
+          - name: leadEmail
+            label: Lead delivery email
+            type: string
+            description: Where quote form submissions are sent. Defaults to Ruben's email.
           - name: GA4_ID
             label: Google Analytics 4 ID
             type: string

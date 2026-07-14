@@ -51,6 +51,7 @@
     window.LEAD_WEBHOOK_URL = g.LEAD_WEBHOOK_URL != null ? g.LEAD_WEBHOOK_URL : window.LEAD_WEBHOOK_URL;
     window.LEAD_EMAIL = g.email || window.LEAD_EMAIL;
     window.LEAD_TO_EMAIL = (g.rep && g.rep.email) || g.leadEmail || window.LEAD_TO_EMAIL;
+    window.WEB3FORMS_ACCESS_KEY = g.WEB3FORMS_ACCESS_KEY || window.WEB3FORMS_ACCESS_KEY;
 
     document.title = g.seo.title;
     setText(document.querySelector('meta[name="description"]'), g.seo.description);
