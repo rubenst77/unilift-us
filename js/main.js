@@ -24,9 +24,13 @@
   }
 
   function warnWebhookUnset() {
-    if (!window.LEAD_WEBHOOK_URL && !window.LEAD_EMAIL) {
+    if (!window.LEAD_WEBHOOK_URL && !window.LEAD_TO_EMAIL) {
       console.warn('[UNILIFT] Lead delivery email not configured');
     }
+  }
+
+  function leadToEmail() {
+    return window.LEAD_TO_EMAIL || 'ruben.dacosta@fas-technology.com';
   }
 
   function inquiryLabel(type) {
@@ -35,8 +39,7 @@
 
   function leadDeliveryUrl() {
     if (window.LEAD_WEBHOOK_URL) return window.LEAD_WEBHOOK_URL;
-    var email = window.LEAD_EMAIL || 'info@fas-technology.com';
-    return 'https://formsubmit.co/ajax/' + encodeURIComponent(email);
+    return 'https://formsubmit.co/ajax/' + encodeURIComponent(leadToEmail());
   }
 
   function isFormSubmitUrl(url) {
@@ -64,7 +67,7 @@
   function mailtoFor(p) {
     var subject = encodeURIComponent('UNILIFT inquiry: ' + (p.company || p.name || ''));
     var body = encodeURIComponent(formatLeadMessage(p));
-    return 'mailto:' + (window.LEAD_EMAIL || 'info@fas-technology.com') + '?subject=' + subject + '&body=' + body;
+    return 'mailto:' + leadToEmail() + '?subject=' + subject + '&body=' + body;
   }
 
   function sendLead(payload) {
@@ -79,14 +82,13 @@
       var subjectName = payload.company || payload.name || 'Website lead';
       body = JSON.stringify({
         name: payload.name || 'Website visitor',
-        email: payload.email || (window.LEAD_EMAIL || 'info@fas-technology.com'),
+        email: payload.email || leadToEmail(),
         company: payload.company || '',
         phone: payload.phone || '',
         model: payload.model || '',
         inquiry: label,
         message: formatLeadMessage(payload),
         _subject: 'UNILIFT Lead: ' + label + ' — ' + subjectName,
-        _cc: window.LEAD_CC_EMAIL || '',
         _template: 'table',
         _captcha: 'false',
         _autoresponse: 'Thank you for contacting FAS-Technology. We received your request and will respond within one business day.'
@@ -1219,7 +1221,7 @@
           }
         } else {
           status.classList.add('is-error');
-          status.innerHTML = 'We couldn\'t submit right now. Email us at <a href="mailto:info@fas-technology.com">info@fas-technology.com</a>.';
+          status.innerHTML = 'We couldn\'t submit right now. Email us at <a href="mailto:' + leadToEmail() + '">' + leadToEmail() + '</a>.';
           if (btn) { btn.disabled = false; btn.style.opacity = ''; }
         }
       });
