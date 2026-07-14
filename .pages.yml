@@ -98,7 +98,7 @@ content:
           - name: LEAD_WEBHOOK_URL
             label: Lead webhook URL
             type: string
-            description: n8n/Make webhook for form submissions. Leave empty to disable.
+            description: Optional n8n/Make webhook. Leave empty to email info@ and CC Ruben via FormSubmit.
           - name: GA4_ID
             label: Google Analytics 4 ID
             type: string

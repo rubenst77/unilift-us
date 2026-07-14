@@ -24,9 +24,99 @@
   }
 
   function warnWebhookUnset() {
-    if (!window.LEAD_WEBHOOK_URL) {
-      console.warn('LEAD_WEBHOOK_URL not set - leads are not being delivered');
+    if (!window.LEAD_WEBHOOK_URL && !window.LEAD_EMAIL) {
+      console.warn('[UNILIFT] Lead delivery email not configured');
     }
+  }
+
+  function inquiryLabel(type) {
+    return { quote: 'Request a Quote', datasheet: 'Get Datasheet', distributor: 'Become a US Distributor' }[type] || type || 'Inquiry';
+  }
+
+  function leadDeliveryUrl() {
+    if (window.LEAD_WEBHOOK_URL) return window.LEAD_WEBHOOK_URL;
+    var email = window.LEAD_EMAIL || 'info@fas-technology.com';
+    return 'https://formsubmit.co/ajax/' + encodeURIComponent(email);
+  }
+
+  function isFormSubmitUrl(url) {
+    return /formsubmit\.co/i.test(url);
+  }
+
+  function formatLeadMessage(payload) {
+    var lines = [
+      'Source: ' + (payload.source || 'website'),
+      'Name: ' + (payload.name || '—'),
+      'Company: ' + (payload.company || '—'),
+      'Email: ' + (payload.email || '—'),
+      'Phone: ' + (payload.phone || '—'),
+      'Model: ' + (payload.model || '—'),
+      'Inquiry: ' + inquiryLabel(payload.inquiry),
+      'Page: ' + (payload.page || '—'),
+      ''
+    ];
+    if (payload.message) lines.push(payload.message);
+    if (payload.intent) lines.push('Chat intent: ' + payload.intent);
+    if (payload.text) lines.push('Chat message: ' + payload.text);
+    return lines.join('\n');
+  }
+
+  function mailtoFor(p) {
+    var subject = encodeURIComponent('UNILIFT inquiry: ' + (p.company || p.name || ''));
+    var body = encodeURIComponent(formatLeadMessage(p));
+    return 'mailto:' + (window.LEAD_EMAIL || 'info@fas-technology.com') + '?subject=' + subject + '&body=' + body;
+  }
+
+  function sendLead(payload) {
+    var url = leadDeliveryUrl();
+    var useFormSubmit = isFormSubmitUrl(url);
+    var headers = { 'Content-Type': 'application/json' };
+    var body;
+
+    if (useFormSubmit) {
+      headers.Accept = 'application/json';
+      var label = inquiryLabel(payload.inquiry || payload.intent);
+      var subjectName = payload.company || payload.name || 'Website lead';
+      body = JSON.stringify({
+        name: payload.name || 'Website visitor',
+        email: payload.email || (window.LEAD_EMAIL || 'info@fas-technology.com'),
+        company: payload.company || '',
+        phone: payload.phone || '',
+        model: payload.model || '',
+        inquiry: label,
+        message: formatLeadMessage(payload),
+        _subject: 'UNILIFT Lead: ' + label + ' — ' + subjectName,
+        _cc: window.LEAD_CC_EMAIL || '',
+        _template: 'table',
+        _captcha: 'false',
+        _autoresponse: 'Thank you for contacting FAS-Technology. We received your request and will respond within one business day.'
+      });
+    } else {
+      body = JSON.stringify(payload);
+    }
+
+    return fetch(url, { method: 'POST', headers: headers, body: body })
+      .then(function (r) {
+        if (useFormSubmit) {
+          return r.json().then(function (data) {
+            var ok = r.ok && (data.success === 'true' || data.success === true);
+            if (!ok) console.warn('[UNILIFT] lead delivery returned', data);
+            return { ok: ok };
+          }).catch(function () {
+            return { ok: r.ok };
+          });
+        }
+        if (!r.ok) console.warn('[UNILIFT] lead webhook returned', r.status);
+        return { ok: r.ok };
+      })
+      .catch(function (err) {
+        console.warn('[UNILIFT] lead delivery failed', err);
+        if (payload.source === 'contact_form') {
+          window.location.href = mailtoFor(payload);
+          return { ok: true, mailto: true };
+        }
+        return { ok: false, error: true };
+      });
   }
 
   document.addEventListener('DOMContentLoaded', init);
@@ -1061,24 +1151,6 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
-  function sendLead(payload) {
-    var url = window.LEAD_WEBHOOK_URL;
-    if (!url) {
-      return Promise.resolve({ ok: false, skipped: true });
-    }
-    return fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (r) {
-      if (!r.ok) { console.warn('[UNILIFT] lead webhook returned', r.status); }
-      return { ok: r.ok };
-    }).catch(function (err) {
-      console.warn('[UNILIFT] lead webhook failed', err);
-      return { ok: false, error: true };
-    });
-  }
-
   /* ==========================================================================
      CONTACT FORM
      ========================================================================== */
@@ -1152,15 +1224,6 @@
         }
       });
     });
-  }
-
-  function mailtoFor(p) {
-    var subject = encodeURIComponent('UNILIFT inquiry: ' + (p.company || ''));
-    var body = encodeURIComponent(
-      'Name: ' + p.name + '\nCompany: ' + p.company + '\nEmail: ' + p.email +
-      '\nPhone: ' + p.phone + '\nModel: ' + p.model + '\nInquiry: ' + p.inquiry +
-      '\n\n' + p.message);
-    return 'mailto:info@fas-technology.com?subject=' + subject + '&body=' + body;
   }
 
   /* ---------- Partner / distributor CTA ---------- */

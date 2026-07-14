@@ -49,6 +49,8 @@
     window.GA4_ID = g.GA4_ID || window.GA4_ID;
     window.GADS_ID = g.GADS_ID || window.GADS_ID;
     window.LEAD_WEBHOOK_URL = g.LEAD_WEBHOOK_URL != null ? g.LEAD_WEBHOOK_URL : window.LEAD_WEBHOOK_URL;
+    window.LEAD_EMAIL = g.email || window.LEAD_EMAIL;
+    window.LEAD_CC_EMAIL = (g.rep && g.rep.email) || window.LEAD_CC_EMAIL;
 
     document.title = g.seo.title;
     setText(document.querySelector('meta[name="description"]'), g.seo.description);
