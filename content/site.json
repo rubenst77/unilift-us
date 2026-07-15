@@ -45,13 +45,13 @@
     },
     "datasheetPdf": "assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf",
     "seo": {
-      "title": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist | FAS-Tech",
-      "description": "UNILIFT motorized traction hoist. UL 1323 listed, man-riding certified, 1,500 to 2,200 lbs WLL, unlimited lift height. Built for the US jobsite. Request a quote.",
-      "ogTitle": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist",
-      "ogDescription": "Motorized traction hoists for lifting people and equipment. Unlimited height, built for the American jobsite.",
+      "title": "FAS-Tech UNILIFT | Traction Hoist USA | UL 1323 Man-Riding Hoist",
+      "description": "FAS-Tech (FAS-Technology) UNILIFT traction hoist for the US market. UL 1323 listed, CSA Z271 certified, 1,500–2,200 lbs WLL, unlimited lift height. Request a quote.",
+      "ogTitle": "FAS-Tech UNILIFT | Traction Hoist USA | UL 1323 Man-Riding Hoist",
+      "ogDescription": "FAS-Tech UNILIFT traction hoists for the US market. UL 1323 listed, man-riding certified, unlimited lift height.",
       "ogImage": "assets/photos/1.webp",
-      "twitterTitle": "UNILIFT Traction Hoist | UL 1323 Listed Man-Riding Hoist",
-      "twitterDescription": "Motorized traction hoists for lifting people and equipment. Unlimited height."
+      "twitterTitle": "FAS-Tech UNILIFT | Traction Hoist USA",
+      "twitterDescription": "FAS-Tech UNILIFT traction hoists. UL 1323 listed, man-riding certified, built for the US jobsite."
     },
     "productSchema": {
       "name": "UNILIFT Traction Hoist Range",
@@ -71,7 +71,7 @@
       "POWERING ACCESS",
       "TO NEW HEIGHTS"
     ],
-    "subtitle": "UL and CSA-certified traction hoists with capacities from 1,500 to 2,200 lbs, engineered for the North American suspended access market.",
+    "subtitle": "FAS-Tech UNILIFT traction hoists — UL and CSA-certified, 1,500 to 2,200 lbs WLL, engineered for the North American suspended access market.",
     "primaryCta": "Request a Quote",
     "secondaryCta": "Get the Datasheet",
     "backgroundImage": "assets/pexels-thomas-parker-1272388137-26935835-1.jpg",
@@ -571,6 +571,10 @@
     ]
   },
   "faq": {
+    "seo": {
+      "title": "FAQ | FAS-Tech UNILIFT Traction Hoist | UL 1323 USA",
+      "description": "FAS-Tech UNILIFT FAQ: US certification (UL 1323, CSA Z271), specifications, safety systems, competitor comparisons, and distributor support."
+    },
     "titleHtml": "FAQ <span class=\"faq__title-accent\">UNILIFT</span>",
     "intro": "Certification, specifications, safety, and support, answered in one place.",
     "bannerLabel": "FAQ",
@@ -692,8 +696,8 @@
   },
   "about": {
     "seo": {
-      "title": "About Us | FAS-Technology",
-      "description": "FAS-Tech develops certified traction hoists and suspended access equipment for contractors, elevator installers, and façade access professionals worldwide."
+      "title": "About FAS-Tech | FAS-Technology US — Traction Hoist Manufacturer",
+      "description": "FAS-Tech (FAS-Technology S.A.R.L) engineers UL and CSA-certified UNILIFT traction hoists for the US and Canada. Learn about our company, certifications, and support."
     },
     "hero": {
       "kicker": "WHO WE ARE",

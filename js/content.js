@@ -63,7 +63,7 @@
     setText(document.querySelector('meta[property="og:title"]'), g.seo.ogTitle);
     setText(document.querySelector('meta[property="og:description"]'), g.seo.ogDescription);
     setText(document.querySelector('meta[property="og:image"]'), absUrl(g.seo.ogImage, g.SITE_URL));
-    setText(document.querySelector('meta[property="og:site_name"]'), g.brandName);
+    setText(document.querySelector('meta[property="og:site_name"]'), 'FAS-Tech');
     setText(document.querySelector('meta[name="twitter:title"]'), g.seo.twitterTitle);
     setText(document.querySelector('meta[name="twitter:description"]'), g.seo.twitterDescription);
     setText(document.querySelector('meta[name="twitter:image"]'), absUrl(g.seo.ogImage, g.SITE_URL));
@@ -491,6 +491,16 @@
     var f = d.faq;
     if (!f) return;
 
+    var g = d.global || {};
+    var siteUrl = (g.SITE_URL || 'https://www.fas-tech.us').replace(/\/$/, '');
+
+    if (f.seo && document.body.classList.contains('page-faq')) {
+      document.title = f.seo.title;
+      setText(document.querySelector('meta[name="description"]'), f.seo.description);
+      var canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.href = siteUrl + '/faq.html';
+    }
+
     setHtml(document.querySelector('[data-cms="faq-title"]'), f.titleHtml);
     setText(document.querySelector('[data-cms="faq-intro"]'), f.intro);
 
@@ -647,14 +657,20 @@
 
   function hydrateJsonLd(d) {
     var g = d.global;
-    var siteUrl = g.SITE_URL;
+    var siteUrl = (g.SITE_URL || 'https://www.fas-tech.us').replace(/\/$/, '');
+    var orgId = siteUrl + '/#organization';
 
     var org = {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: g.companyName,
-      url: siteUrl,
-      description: 'Engineering, manufacturing and consultancy group specializing in access solutions, lifting solutions, and height safety systems.',
+      '@id': orgId,
+      name: g.brandName || 'FAS-Technology',
+      legalName: g.companyName,
+      alternateName: ['FAS-Tech', 'FAS Technology', 'FAS-Technology S.A.R.L', 'UNILIFT', 'FAS-Tech US'],
+      url: siteUrl + '/',
+      logo: absUrl('assets/logo/logo-footer.png', siteUrl),
+      image: absUrl(g.seo && g.seo.ogImage ? g.seo.ogImage : 'assets/photos/1.webp', siteUrl),
+      description: 'FAS-Tech engineers UL and CSA-certified UNILIFT traction hoists for man-riding and material lifting in the United States and Canada.',
       address: {
         '@type': 'PostalAddress',
         streetAddress: g.address.street,
@@ -664,12 +680,24 @@
       },
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: '+352-691-592-667',
+        telephone: g.phoneTel || '+352691592667',
+        email: g.email,
         contactType: 'sales',
-        areaServed: 'US',
+        areaServed: ['US', 'CA'],
         availableLanguage: 'English'
       },
-      sameAs: [g.social.linkedin, g.social.youtube]
+      sameAs: [g.social.linkedin, g.social.youtube, g.manufacturerUrl].filter(Boolean)
+    };
+
+    var website = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': siteUrl + '/#website',
+      name: 'FAS-Tech',
+      alternateName: ['FAS-Technology US', 'UNILIFT US', 'fas-tech.us'],
+      url: siteUrl + '/',
+      inLanguage: 'en-US',
+      publisher: { '@id': orgId }
     };
 
     var ps = g.productSchema;
@@ -677,9 +705,10 @@
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: ps.name,
-      brand: { '@type': 'Brand', name: g.brandName },
+      brand: { '@type': 'Brand', name: 'FAS-Tech' },
       manufacturer: {
         '@type': 'Organization',
+        '@id': orgId,
         name: g.companyName,
         url: g.manufacturerUrl
       },
@@ -697,7 +726,8 @@
         '@type': 'Offer',
         availability: 'https://schema.org/InStock',
         priceCurrency: 'USD',
-        description: 'Request a quote for pricing'
+        description: 'Request a quote for pricing',
+        seller: { '@id': orgId }
       }
     };
 
@@ -719,6 +749,7 @@
     }
 
     writeLd('ld-org', org);
+    writeLd('ld-website', website);
     writeLd('ld-product', product);
     if (document.getElementById('ld-faq') && d.faq && d.faq.items) {
       writeLd('ld-faq', faq);
