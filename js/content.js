@@ -700,30 +700,6 @@
       publisher: { '@id': orgId }
     };
 
-    var ps = g.productSchema;
-    var product = {
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: ps.name,
-      brand: { '@type': 'Brand', name: 'FAS-Tech' },
-      manufacturer: {
-        '@type': 'Organization',
-        '@id': orgId,
-        name: g.companyName,
-        url: g.manufacturerUrl
-      },
-      description: ps.description,
-      image: absUrl(ps.image, siteUrl),
-      url: siteUrl + '/',
-      category: ps.category,
-      additionalProperty: [
-        { '@type': 'PropertyValue', name: 'Working Load Limit', value: '1,500 to 2,200 lbs' },
-        { '@type': 'PropertyValue', name: 'Lifting Speed', value: '35 fpm' },
-        { '@type': 'PropertyValue', name: 'Supply Voltage', value: '208 V / 60 Hz' },
-        { '@type': 'PropertyValue', name: 'Certifications', value: 'UL 1323, CSA Z271, EN 1808:2015, EN 60204-1' }
-      ]
-    };
-
     var faq = {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -743,7 +719,6 @@
 
     writeLd('ld-org', org);
     writeLd('ld-website', website);
-    writeLd('ld-product', product);
     if (document.getElementById('ld-faq') && d.faq && d.faq.items) {
       writeLd('ld-faq', faq);
     }
