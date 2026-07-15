@@ -721,14 +721,7 @@
         { '@type': 'PropertyValue', name: 'Lifting Speed', value: '35 fpm' },
         { '@type': 'PropertyValue', name: 'Supply Voltage', value: '208 V / 60 Hz' },
         { '@type': 'PropertyValue', name: 'Certifications', value: 'UL 1323, CSA Z271, EN 1808:2015, EN 60204-1' }
-      ],
-      offers: {
-        '@type': 'Offer',
-        availability: 'https://schema.org/InStock',
-        priceCurrency: 'USD',
-        description: 'Request a quote for pricing',
-        seller: { '@id': orgId }
-      }
+      ]
     };
 
     var faq = {
