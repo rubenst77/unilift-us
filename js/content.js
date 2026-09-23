@@ -53,23 +53,26 @@
     window.LEAD_TO_EMAIL = (g.rep && g.rep.email) || g.leadEmail || window.LEAD_TO_EMAIL;
     window.WEB3FORMS_ACCESS_KEY = g.WEB3FORMS_ACCESS_KEY || window.WEB3FORMS_ACCESS_KEY;
 
-    document.title = g.seo.title;
-    setText(document.querySelector('meta[name="description"]'), g.seo.description);
     setText(document.querySelector('meta[name="author"]'), g.companyName);
-    var canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.href = g.SITE_URL + '/';
-
-    setText(document.querySelector('meta[property="og:url"]'), g.SITE_URL + '/');
-    setText(document.querySelector('meta[property="og:title"]'), g.seo.ogTitle);
-    setText(document.querySelector('meta[property="og:description"]'), g.seo.ogDescription);
-    setText(document.querySelector('meta[property="og:image"]'), absUrl(g.seo.ogImage, g.SITE_URL));
     setText(document.querySelector('meta[property="og:site_name"]'), 'FAS-Tech');
-    setText(document.querySelector('meta[name="twitter:title"]'), g.seo.twitterTitle);
-    setText(document.querySelector('meta[name="twitter:description"]'), g.seo.twitterDescription);
-    setText(document.querySelector('meta[name="twitter:image"]'), absUrl(g.seo.ogImage, g.SITE_URL));
+
+    var preserveSeo = document.body && document.body.hasAttribute('data-preserve-seo');
+    if (!preserveSeo) {
+      document.title = g.seo.title;
+      setText(document.querySelector('meta[name="description"]'), g.seo.description);
+      var canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.href = g.SITE_URL + '/';
+      setText(document.querySelector('meta[property="og:url"]'), g.SITE_URL + '/');
+      setText(document.querySelector('meta[property="og:title"]'), g.seo.ogTitle);
+      setText(document.querySelector('meta[property="og:description"]'), g.seo.ogDescription);
+      setText(document.querySelector('meta[property="og:image"]'), absUrl(g.seo.ogImage, g.SITE_URL));
+      setText(document.querySelector('meta[name="twitter:title"]'), g.seo.twitterTitle);
+      setText(document.querySelector('meta[name="twitter:description"]'), g.seo.twitterDescription);
+      setText(document.querySelector('meta[name="twitter:image"]'), absUrl(g.seo.ogImage, g.SITE_URL));
+    }
 
     var heroPreload = document.querySelector('link[rel="preload"][as="image"]');
-    if (heroPreload && d.hero) heroPreload.href = d.hero.backgroundImage;
+    if (heroPreload && d.hero && !document.querySelector('[data-hero-carousel]')) heroPreload.href = d.hero.backgroundImage;
 
     setText(document.querySelector('[data-cms="nav-cta"]'), g.navCta);
 
@@ -126,6 +129,7 @@
   }
 
   function hydrateHero(d) {
+    if (document.querySelector('[data-hero-carousel]')) return;
     var h = d.hero;
     if (!h) return;
 

@@ -850,6 +850,19 @@
       </a>
 
       <ul class="nav__links">
+        <li class="nav__item nav__item--apps">
+          <button type="button" class="nav__apps-btn" aria-expanded="false" aria-controls="nav-apps-menu" aria-haspopup="true">Applications</button>
+          <div class="nav__apps" id="nav-apps-menu">
+            <a class="nav__apps-link" href="/applications/elevator-installation/">
+              <span class="nav__apps-title">Elevator Installation</span>
+              <span class="nav__apps-desc">Traction hoists for personnel and equipment inside the elevator shaft.</span>
+            </a>
+            <a class="nav__apps-link" href="/applications/suspended-access/">
+              <span class="nav__apps-title">Suspended Access</span>
+              <span class="nav__apps-desc">Traction hoists for suspended platforms and exterior access.</span>
+            </a>
+          </div>
+        </li>
         <li><a href="#product" class="nav__link">Product</a></li>
         <li><a href="#models" class="nav__link">Models</a></li>
         <li><a href="#specs" class="nav__link">Specs</a></li>
@@ -868,6 +881,19 @@
     </div>
 
     <div class="nav__mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <div class="nav__item nav__item--apps">
+        <button type="button" class="nav__apps-btn" aria-expanded="false" aria-controls="nav-apps-mobile" aria-haspopup="true">Applications</button>
+        <div class="nav__apps" id="nav-apps-mobile">
+          <a class="nav__apps-link" href="/applications/elevator-installation/">
+            <span class="nav__apps-title">Elevator Installation</span>
+            <span class="nav__apps-desc">Traction hoists for personnel and equipment inside the elevator shaft.</span>
+          </a>
+          <a class="nav__apps-link" href="/applications/suspended-access/">
+            <span class="nav__apps-title">Suspended Access</span>
+            <span class="nav__apps-desc">Traction hoists for suspended platforms and exterior access.</span>
+          </a>
+        </div>
+      </div>
       <a href="#product" class="nav__link">Product</a>
       <a href="#models" class="nav__link">Models</a>
       <a href="#specs" class="nav__link">Specs</a>
@@ -879,44 +905,87 @@
   </nav>
 
 
-  <!-- ========== HERO ========== -->
-  <header id="hero" class="hero" aria-label="UNILIFT lifting solutions">
-    <div class="hero__bg hero__bg--photo" data-hero-bg style="background-image:url('assets/context/hero.webp')"></div>
-    <div class="hero__overlay"></div>
-
-    <div class="hero__inner">
-      <div class="hero__content">
-        <div class="kicker hero__kicker" data-hero-anim data-cms="hero-kicker">Lifting Solutions</div>
-        <h1 class="hero__title" data-cms="hero-title">
-          <span class="line"><span data-hero-anim>Efficient lifting for</span></span>
-          <span class="line"><span data-hero-anim>elevator installation.</span></span>
-        </h1>
-        <p class="hero__subtitle" data-hero-anim data-cms="hero-subtitle">
-          Motorized traction hoists for lifting people and equipment. Unlimited height,
-          built for the American jobsite.
-        </p>
-        <div class="hero__actions" data-hero-anim>
-          <a href="#contact" class="btn btn--light btn--lg" data-cta="hero-quote" data-track="quote">
-            <span data-cms="hero-primary-cta">Request a Quote</span> <span class="btn__arrow" aria-hidden="true">&rarr;</span>
-          </a>
-          <button type="button" class="btn btn--outline-white btn--lg" data-datasheet-trigger data-cta="hero-datasheet">
-            <span data-cms="hero-secondary-cta">Get the Datasheet</span> <span aria-hidden="true">&darr;</span>
-          </button>
+  <!-- ========== APPLICATION HERO ========== -->
+  <header id="hero" class="hero hero--slides" data-hero-carousel aria-roledescription="carousel" aria-label="Applications">
+    <div class="hero__slide is-active" id="hero-slide-0" role="tabpanel" aria-labelledby="hero-tab-0">
+      <img class="hero__slide-img" src="assets/context/hero.webp" alt="" width="1600" height="1067" fetchpriority="high" decoding="async">
+      <div class="hero__overlay"></div>
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="kicker hero__kicker" data-hero-anim>Elevator Installation</div>
+          <h1 class="hero__title">
+            <span class="line"><span data-hero-anim>Traction hoists for</span></span>
+            <span class="line"><span data-hero-anim>elevator installation.</span></span>
+          </h1>
+          <p class="hero__subtitle" data-hero-anim>Lift personnel and equipment inside the shaft with traction hoists configured for the US market.</p>
+          <div class="hero__actions" data-hero-anim>
+            <a href="/applications/elevator-installation/" class="btn btn--light btn--lg">Explore Elevator Installation <span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+            <a href="#contact" class="btn btn--outline-white btn--lg" data-set-application="Elevator Installation" data-cta="hero-quote" data-track="quote">Request a Quote</a>
+          </div>
         </div>
-        <ul class="hero__certs" data-hero-anim data-cms="hero-certs" aria-label="Certifications">
-          <li>UL 1323</li>
-          <li>CSA Z271</li>
-          <li>EN 1808:2015</li>
-          <li>EN 60204-1</li>
-        </ul>
       </div>
     </div>
-
-    <a href="#product" class="hero__scroll" aria-label="Scroll to explore">
-      <span data-cms="hero-scroll">Scroll to explore</span>
+    <div class="hero__slide" id="hero-slide-1" role="tabpanel" aria-labelledby="hero-tab-1" aria-hidden="true">
+      <img class="hero__slide-img" src="assets/context/app-2.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async">
+      <div class="hero__overlay"></div>
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="kicker hero__kicker">Suspended Access</div>
+          <h2 class="hero__title">
+            <span class="line"><span>Access where the</span></span>
+            <span class="line"><span>work needs to happen.</span></span>
+          </h2>
+          <p class="hero__subtitle">Traction hoists for suspended platforms and exterior building access.</p>
+          <div class="hero__actions">
+            <a href="/applications/suspended-access/" class="btn btn--light btn--lg">Explore Suspended Access <span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+            <a href="#contact" class="btn btn--outline-white btn--lg" data-set-application="Suspended Access" data-cta="hero-quote-access" data-track="quote">Request a Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero__switch">
+      <button type="button" class="hero__arrow" data-hero-prev aria-label="Previous application">&lsaquo;</button>
+      <div class="hero__dots" role="tablist" aria-label="Application slides">
+        <button type="button" class="hero__dot" id="hero-tab-0" role="tab" aria-selected="true" aria-controls="hero-slide-0" data-hero-dot="0"><span class="visually-hidden">Elevator Installation</span></button>
+        <button type="button" class="hero__dot" id="hero-tab-1" role="tab" aria-selected="false" aria-controls="hero-slide-1" data-hero-dot="1"><span class="visually-hidden">Suspended Access</span></button>
+      </div>
+      <button type="button" class="hero__arrow" data-hero-next aria-label="Next application">&rsaquo;</button>
+    </div>
+    <a href="#applications" class="hero__scroll" aria-label="Scroll to applications">
+      <span>Scroll</span>
       <span class="hero__scroll-line" aria-hidden="true"></span>
     </a>
   </header>
+
+  <section id="applications" class="app-entries" aria-labelledby="applications-heading">
+    <div class="container app-intro">
+      <header class="section-head reveal">
+        <div class="kicker">Applications</div>
+        <h2 id="applications-heading">Built around the job.</h2>
+        <p>Start with the application. We configure the lifting equipment around how the work is done.</p>
+      </header>
+    </div>
+    <a class="app-entry" href="/applications/elevator-installation/">
+      <div class="app-entry__media">
+        <img src="assets/context/elevator-shaft.webp" alt="Crew working inside an elevator shaft during installation." width="1800" height="873" loading="lazy" decoding="async">
+      </div>
+      <div class="app-entry__copy">
+        <h3>Elevator Installation</h3>
+        <p>Hoisting solutions for personnel and equipment inside the elevator shaft.</p>
+        <span class="btn btn--light">Explore Elevator Installation <span class="btn__arrow" aria-hidden="true">&rarr;</span></span>
+      </div>
+    </a>
+    <a class="app-entry" href="/applications/suspended-access/">
+      <div class="app-entry__media">
+        <img src="assets/context/app-2.webp" alt="Suspended access cradle at the exterior of a building." width="1200" height="800" loading="lazy" decoding="async">
+      </div>
+      <div class="app-entry__copy">
+        <h3>Suspended Access</h3>
+        <p>Traction hoists for temporary suspended platform and exterior access applications.</p>
+        <span class="btn btn--light">Explore Suspended Access <span class="btn__arrow" aria-hidden="true">&rarr;</span></span>
+      </div>
+    </a>
+  </section>
 
 
   <!-- ========== PRODUCT + VIEWER ========== -->
@@ -1460,6 +1529,18 @@
               </div>
 
               <div class="form__group">
+                <label class="form__label" for="q-application">Application</label>
+                <select class="form__select" id="q-application" name="application">
+                  <option value="">Select an application</option>
+                  <option value="Elevator Installation">Elevator Installation</option>
+                  <option value="Suspended Access">Suspended Access</option>
+                  <option value="Product / Technical Question">Product / Technical Question</option>
+                  <option value="Distribution">Distribution</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form__group">
                 <label class="form__label" for="q-model">Model Interest</label>
                 <select class="form__select" id="q-model" name="model">
                   <option value="UNI70A-9P11-S">UNI70A-9P11-S, 1,500 lbs, Single-Phase</option>
@@ -1536,6 +1617,8 @@
         <div class="footer__col">
           <h4>Navigation</h4>
           <div class="footer__links">
+            <a href="/applications/elevator-installation/" class="footer__link">Elevator Installation</a>
+            <a href="/applications/suspended-access/" class="footer__link">Suspended Access</a>
             <a href="#product" class="footer__link">Product</a>
             <a href="#models" class="footer__link">Models</a>
             <a href="#specs" class="footer__link">Specifications</a>

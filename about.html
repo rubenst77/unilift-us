@@ -801,6 +801,19 @@
       </a>
 
       <ul class="nav__links">
+        <li class="nav__item nav__item--apps">
+          <button type="button" class="nav__apps-btn" aria-expanded="false" aria-controls="nav-apps-menu" aria-haspopup="true">Applications</button>
+          <div class="nav__apps" id="nav-apps-menu">
+            <a class="nav__apps-link" href="/applications/elevator-installation/">
+              <span class="nav__apps-title">Elevator Installation</span>
+              <span class="nav__apps-desc">Traction hoists for personnel and equipment inside the elevator shaft.</span>
+            </a>
+            <a class="nav__apps-link" href="/applications/suspended-access/">
+              <span class="nav__apps-title">Suspended Access</span>
+              <span class="nav__apps-desc">Traction hoists for suspended platforms and exterior access.</span>
+            </a>
+          </div>
+        </li>
         <li><a href="index.html#product" class="nav__link">Product</a></li>
         <li><a href="index.html#models" class="nav__link">Models</a></li>
         <li><a href="index.html#specs" class="nav__link">Specs</a></li>
@@ -819,6 +832,19 @@
     </div>
 
     <div class="nav__mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <div class="nav__item nav__item--apps">
+        <button type="button" class="nav__apps-btn" aria-expanded="false" aria-controls="nav-apps-mobile" aria-haspopup="true">Applications</button>
+        <div class="nav__apps" id="nav-apps-mobile">
+          <a class="nav__apps-link" href="/applications/elevator-installation/">
+            <span class="nav__apps-title">Elevator Installation</span>
+            <span class="nav__apps-desc">Traction hoists for personnel and equipment inside the elevator shaft.</span>
+          </a>
+          <a class="nav__apps-link" href="/applications/suspended-access/">
+            <span class="nav__apps-title">Suspended Access</span>
+            <span class="nav__apps-desc">Traction hoists for suspended platforms and exterior access.</span>
+          </a>
+        </div>
+      </div>
       <a href="index.html#product" class="nav__link">Product</a>
       <a href="index.html#models" class="nav__link">Models</a>
       <a href="index.html#specs" class="nav__link">Specs</a>
@@ -954,6 +980,17 @@
                 </div>
               </div>
               <div class="form__group">
+                <label class="form__label" for="q-application">Application</label>
+                <select class="form__select" id="q-application" name="application">
+                  <option value="">Select an application</option>
+                  <option value="Elevator Installation">Elevator Installation</option>
+                  <option value="Suspended Access">Suspended Access</option>
+                  <option value="Product / Technical Question">Product / Technical Question</option>
+                  <option value="Distribution">Distribution</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form__group">
                 <label class="form__label" for="q-model">Model Interest</label>
                 <select class="form__select" id="q-model" name="model">
                   <option value="UNI70A-9P11-S">UNI70A-9P11-S, 1,500 lbs, Single-Phase</option>
@@ -1022,6 +1059,8 @@
         <div class="footer__col">
           <h4>Navigation</h4>
           <div class="footer__links">
+            <a href="/applications/elevator-installation/" class="footer__link">Elevator Installation</a>
+            <a href="/applications/suspended-access/" class="footer__link">Suspended Access</a>
             <a href="index.html#product" class="footer__link">Product</a>
             <a href="index.html#models" class="footer__link">Models</a>
             <a href="index.html#specs" class="footer__link">Specifications</a>

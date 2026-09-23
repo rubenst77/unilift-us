@@ -44,6 +44,7 @@
       'Company: ' + (payload.company || '—'),
       'Email: ' + (payload.email || '—'),
       'Phone: ' + (payload.phone || '—'),
+      'Application: ' + (payload.application || '—'),
       'Model: ' + (payload.model || '—'),
       'Inquiry: ' + inquiryLabel(payload.inquiry),
       'Page: ' + (payload.page || '—'),
@@ -71,6 +72,7 @@
       email: payload.email || leadToEmail(),
       company: payload.company || '',
       phone: payload.phone || '',
+      application: payload.application || '',
       model: payload.model || '',
       inquiry: label,
       message: formatLeadMessage(payload),
@@ -92,6 +94,7 @@
       message: formatLeadMessage(payload),
       company: payload.company || '',
       phone: payload.phone || '',
+      application: payload.application || '',
       model: payload.model || '',
       inquiry: label,
       botcheck: ''
@@ -195,12 +198,14 @@
     warnWebhookUnset();
     var isAboutPage = document.body.classList.contains('page-about');
     var isFaqPage = document.body.classList.contains('page-faq');
-    var isLanding = !isAboutPage && !isFaqPage;
+    var isApplication = document.body.classList.contains('page-application');
+    var isLanding = !isAboutPage && !isFaqPage && !isApplication;
 
     initSmoothScroll();
     initNavbar();
     initScrollFx();
-    if (isLanding) initHeroIntro();
+    initHeroCarousel();
+    if (isLanding || isApplication) initHeroIntro();
     if (isAboutPage) initAboutIntro();
     if (isAboutPage) initAboutMotion();
     if (isLanding) initCountUps();
@@ -214,7 +219,7 @@
     if (isLanding || isFaqPage) initFaq();
     if (isLanding) initDatasheet();
     initContactForm();
-    if (isLanding) initModelQuote();
+    if (isLanding || isApplication) initModelQuote();
     if (isLanding) initPartner();
     initConsent();
     if (isLanding) initAppsParallax();
@@ -351,8 +356,112 @@
       });
     }
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMobileNav();
+      if (e.key === 'Escape') {
+        closeMobileNav();
+        closeAppMenus();
+      }
     });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.nav__item--apps')) closeAppMenus();
+    });
+    $$('.nav__apps-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var item = btn.closest('.nav__item--apps');
+        var open = item.classList.contains('is-open');
+        closeAppMenus();
+        if (!open) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown') {
+          var item = btn.closest('.nav__item--apps');
+          var first = item && item.querySelector('.nav__apps-link');
+          if (!first) return;
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          first.focus();
+          e.preventDefault();
+        }
+      });
+    });
+    $$('.nav__mobile a').forEach(function (link) {
+      link.addEventListener('click', function () { closeMobileNav(); closeAppMenus(); });
+    });
+  }
+  function closeAppMenus() {
+    $$('.nav__item--apps.is-open').forEach(function (item) {
+      item.classList.remove('is-open');
+      var btn = item.querySelector('.nav__apps-btn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+  function initHeroCarousel() {
+    var root = document.querySelector('[data-hero-carousel]');
+    if (!root) return;
+    var slides = $$('.hero__slide', root);
+    var dots = $$('[data-hero-dot]', root);
+    if (slides.length < 2) return;
+    var index = 0;
+    var timer = null;
+    var reduced = prefersReduced;
+
+    function show(next) {
+      index = (next + slides.length) % slides.length;
+      slides.forEach(function (slide, i) {
+        var active = i === index;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots.forEach(function (dot, i) {
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+    }
+    function start() {
+      stop();
+      if (reduced || document.hidden) return;
+      timer = window.setInterval(function () { show(index + 1); }, 6500);
+    }
+    function stop() {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    }
+    var prev = $('[data-hero-prev]', root);
+    var next = $('[data-hero-next]', root);
+    if (prev) prev.addEventListener('click', function () { show(index - 1); start(); });
+    if (next) next.addEventListener('click', function () { show(index + 1); start(); });
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        show(parseInt(dot.getAttribute('data-hero-dot'), 10) || 0);
+        start();
+      });
+    });
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', function (e) {
+      if (!root.contains(e.relatedTarget)) start();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop();
+      else start();
+    });
+    var touchX = null;
+    root.addEventListener('touchstart', function (e) {
+      touchX = e.changedTouches[0].clientX;
+      stop();
+    }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (touchX == null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+      touchX = null;
+      start();
+    }, { passive: true });
+    show(0);
+    start();
   }
   function closeMobileNav() {
     var toggle = $('.nav__toggle');
@@ -1244,6 +1353,22 @@
       if (err) err.classList.toggle('is-visible', show);
     };
 
+    var params = new URLSearchParams(window.location.search);
+    var applicationKey = params.get('application');
+    var applicationMap = {
+      'elevator-installation': 'Elevator Installation',
+      'suspended-access': 'Suspended Access'
+    };
+    var applicationSelect = $('#q-application', form);
+    if (applicationSelect && applicationMap[applicationKey]) {
+      applicationSelect.value = applicationMap[applicationKey];
+    }
+    $$('[data-set-application]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (applicationSelect) applicationSelect.value = el.getAttribute('data-set-application');
+      });
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       status.textContent = ''; status.classList.remove('is-error');
@@ -1265,7 +1390,8 @@
         company: company.value.trim(),
         email: email.value.trim(),
         phone: ($('#q-phone').value || '').trim(),
-        model: $('#q-model').value,
+        application: ($('#q-application') && $('#q-application').value) || '',
+        model: $('#q-model') ? $('#q-model').value : '',
         inquiry: inquiry,
         message: ($('#q-message').value || '').trim(),
         page: location.pathname,

@@ -1,4 +1,26 @@
 {
   "buildCommand": "node scripts/merge-content.js && node scripts/inline-content.js",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/applications/elevator-installation/index.html",
+      "destination": "/applications/elevator-installation/",
+      "permanent": true
+    },
+    {
+      "source": "/applications/suspended-access/index.html",
+      "destination": "/applications/suspended-access/",
+      "permanent": true
+    },
+    {
+      "source": "/applications/elevator-installation",
+      "destination": "/applications/elevator-installation/",
+      "permanent": true
+    },
+    {
+      "source": "/applications/suspended-access",
+      "destination": "/applications/suspended-access/",
+      "permanent": true
+    }
+  ]
 }
