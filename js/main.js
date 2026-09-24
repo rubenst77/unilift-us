@@ -12,6 +12,83 @@
   var DATASHEET_PDF = 'assets/docs/UNILIFT_Datasheet_TSUNIA-EN.pdf';
   var isEmail = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); };
 
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+  function isPlaceholderId(id) {
+    return !id || /X{4,}/.test(String(id));
+  }
+
+  function readStoredAttribution() {
+    try {
+      return JSON.parse(sessionStorage.getItem('fas_campaign') || '{}') || {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function captureCampaign() {
+    var params = new URLSearchParams(window.location.search);
+    var stored = readStoredAttribution();
+    var changed = false;
+    UTM_KEYS.forEach(function (key) {
+      var value = params.get(key);
+      if (value) {
+        stored[key] = value;
+        changed = true;
+      }
+    });
+    if (!stored.landing_page) {
+      stored.landing_page = window.location.pathname + window.location.search;
+      changed = true;
+    }
+    if (changed) {
+      try { sessionStorage.setItem('fas_campaign', JSON.stringify(stored)); } catch (err) { /* storage may be blocked */ }
+    }
+    return stored;
+  }
+
+  function campaignFields() {
+    var stored = readStoredAttribution();
+    var fields = {
+      landing_page: stored.landing_page || '',
+      current_page: window.location.pathname
+    };
+    UTM_KEYS.forEach(function (key) { fields[key] = stored[key] || ''; });
+    return fields;
+  }
+
+  function loadAnalytics(ids) {
+    if (!ids || isPlaceholderId(ids.ga4) || window.__fasAnalyticsLoaded) return;
+    window.__fasAnalyticsLoaded = true;
+    window.GA4_ID = ids.ga4;
+    window.GADS_ID = ids.ads || '';
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ids.ga4);
+    document.head.appendChild(script);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', ids.ga4);
+    if (!isPlaceholderId(ids.ads) && /^AW-\d+$/.test(ids.ads)) window.gtag('config', ids.ads);
+  }
+
+  function initAnalytics() {
+    var dataEl = document.getElementById('site-data');
+    if (dataEl) {
+      try {
+        var global = JSON.parse(dataEl.textContent).global || {};
+        loadAnalytics({ ga4: global.GA4_ID, ads: global.GADS_ID });
+      } catch (err) { /* invalid site data must not break the page */ }
+      return;
+    }
+    fetch('/content/global.json').then(function (response) {
+      return response.json();
+    }).then(function (global) {
+      loadAnalytics({ ga4: global.GA4_ID, ads: global.GADS_ID });
+    }).catch(function () { /* tracking stays on dataLayer until an ID is configured */ });
+  }
+
   function trackConversion(eventName, params) {
     try {
       window.dataLayer = window.dataLayer || [];
@@ -48,6 +125,13 @@
       'Model: ' + (payload.model || '—'),
       'Inquiry: ' + inquiryLabel(payload.inquiry),
       'Page: ' + (payload.page || '—'),
+      'Landing page: ' + (payload.landing_page || '—'),
+      'Current page: ' + (payload.current_page || '—'),
+      'UTM source: ' + (payload.utm_source || '—'),
+      'UTM medium: ' + (payload.utm_medium || '—'),
+      'UTM campaign: ' + (payload.utm_campaign || '—'),
+      'UTM content: ' + (payload.utm_content || '—'),
+      'UTM term: ' + (payload.utm_term || '—'),
       ''
     ];
     if (payload.message) lines.push(payload.message);
@@ -74,6 +158,13 @@
       phone: payload.phone || '',
       application: payload.application || '',
       model: payload.model || '',
+      landing_page: payload.landing_page || '',
+      current_page: payload.current_page || '',
+      utm_source: payload.utm_source || '',
+      utm_medium: payload.utm_medium || '',
+      utm_campaign: payload.utm_campaign || '',
+      utm_content: payload.utm_content || '',
+      utm_term: payload.utm_term || '',
       inquiry: label,
       message: formatLeadMessage(payload),
       _subject: 'UNILIFT Lead: ' + label + ' — ' + subjectName,
@@ -96,6 +187,13 @@
       phone: payload.phone || '',
       application: payload.application || '',
       model: payload.model || '',
+      landing_page: payload.landing_page || '',
+      current_page: payload.current_page || '',
+      utm_source: payload.utm_source || '',
+      utm_medium: payload.utm_medium || '',
+      utm_campaign: payload.utm_campaign || '',
+      utm_content: payload.utm_content || '',
+      utm_term: payload.utm_term || '',
       inquiry: label,
       botcheck: ''
     });
@@ -201,6 +299,9 @@
     var isApplication = document.body.classList.contains('page-application');
     var isLanding = !isAboutPage && !isFaqPage && !isApplication;
 
+    captureCampaign();
+    initAnalytics();
+    initApplicationView();
     initSmoothScroll();
     initNavbar();
     initScrollFx();
@@ -1397,13 +1498,20 @@
         page: location.pathname,
         ts: Date.now()
       };
+      Object.assign(payload, campaignFields());
+      payload.selected_application = payload.application;
+      payload.selected_model = payload.model;
 
       var btn = $('[data-cta="form-submit"]', form);
       if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
 
       sendLead(payload).then(function (res) {
         if (res.ok) {
-          trackConversion('generate_lead', { source: 'contact_form', inquiry: inquiry });
+          trackConversion('generate_lead', {
+            application: payload.application || undefined,
+            model: payload.model || undefined,
+            page: payload.page
+          });
           fields.style.display = 'none';
           success.classList.add('is-visible');
           if (inquiry === 'datasheet') {
@@ -1451,11 +1559,16 @@
     });
     $$('[data-cta]').forEach(function (el) {
       var cta = el.getAttribute('data-cta') || '';
-      if (/quote/i.test(cta) && !el.hasAttribute('data-track')) {
+      if (/quote/i.test(cta) && !el.hasAttribute('data-track') && !el.hasAttribute('data-model-quote')) {
         el.addEventListener('click', function () {
           trackConversion('quote_click', { cta: cta });
         });
       }
+    });
+    $$('[data-booking-open]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        trackConversion('book_call_click', { cta: el.getAttribute('data-cta') || 'booking' });
+      });
     });
     $$('[data-cta="whatsapp-contact"]').forEach(function (el) {
       el.addEventListener('click', function () {
@@ -1477,10 +1590,16 @@
         // set inquiry to quote
         var chips = $$('#quote-form .chip');
         setInquiryChip('quote');
-        trackConversion('quote_click', { cta: btn.getAttribute('data-cta') || 'model-quote' });
+        trackConversion('model_quote_click', { model: model, cta: btn.getAttribute('data-cta') || 'model-quote' });
         scrollToEl($('#contact'));
       });
     });
+  }
+
+  function initApplicationView() {
+    var application = document.body.getAttribute('data-application');
+    if (!application) return;
+    trackConversion('application_view', { application: application });
   }
 
   /* ---------- Cookie consent ---------- */
