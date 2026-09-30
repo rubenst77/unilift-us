@@ -131,9 +131,13 @@
       'UTM medium: ' + (payload.utm_medium || '—'),
       'UTM campaign: ' + (payload.utm_campaign || '—'),
       'UTM content: ' + (payload.utm_content || '—'),
-      'UTM term: ' + (payload.utm_term || '—'),
-      ''
+      'UTM term: ' + (payload.utm_term || '—')
     ];
+    if (payload.platform_type) lines.push('Platform type: ' + payload.platform_type);
+    if (payload.required_load) lines.push('Required load: ' + payload.required_load);
+    if (payload.power_available) lines.push('Power available: ' + payload.power_available);
+    if (payload.working_height) lines.push('Working height: ' + payload.working_height);
+    lines.push('');
     if (payload.message) lines.push(payload.message);
     if (payload.intent) lines.push('Chat intent: ' + payload.intent);
     if (payload.text) lines.push('Chat message: ' + payload.text);
@@ -315,7 +319,7 @@
     if (isLanding) initXrayMobile();
     if (isLanding) initFeaturesMotion();
     if (isLanding) initFeatureCards();
-    if (isLanding) initYoutubeFacade();
+    if (isLanding || isApplication) initYoutubeFacade();
     if (isLanding) initSpecTabs();
     if (isLanding || isFaqPage) initFaq();
     if (isLanding) initDatasheet();
@@ -1217,7 +1221,7 @@
         iframe.src =
           'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
           '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-        iframe.title = 'FAS-Tech Traction Hoist Manufacturing Process';
+        iframe.title = btn.getAttribute('aria-label') || 'FAS-Tech video';
         iframe.setAttribute(
           'allow',
           'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
@@ -1498,6 +1502,16 @@
         page: location.pathname,
         ts: Date.now()
       };
+      var detailFields = {
+        platform_type: '#q-platform',
+        required_load: '#q-load',
+        power_available: '#q-power',
+        working_height: '#q-height'
+      };
+      Object.keys(detailFields).forEach(function (key) {
+        var field = $(detailFields[key]);
+        if (field && field.value.trim()) payload[key] = field.value.trim();
+      });
       Object.assign(payload, campaignFields());
       payload.selected_application = payload.application;
       payload.selected_model = payload.model;
@@ -1584,8 +1598,12 @@
         var model = btn.getAttribute('data-model-quote');
         var select = $('#q-model');
         if (select) {
-          var opt = Array.prototype.slice.call(select.options).find(function (o) { return o.value === model; });
-          if (opt) select.value = model;
+          if (select.tagName === 'SELECT') {
+            var opt = Array.prototype.slice.call(select.options).find(function (o) { return o.value === model; });
+            if (opt) select.value = model;
+          } else {
+            select.value = model;
+          }
         }
         // set inquiry to quote
         var chips = $$('#quote-form .chip');

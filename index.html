@@ -816,7 +816,7 @@
   <!-- Performance: preconnect + LCP hero preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/context/elevator-shaft.webp" fetchpriority="high" type="image/webp">
+  <link rel="preload" as="image" href="assets/context/elevator-shaft.webp" imagesrcset="assets/context/elevator-shaft@1280.webp 1280w, assets/context/elevator-shaft.webp 2560w" imagesizes="100vw" fetchpriority="high" type="image/webp">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
@@ -897,8 +897,8 @@
   <!-- ========== APPLICATION HERO ========== -->
   <header id="hero" class="hero hero--slides" data-hero-carousel aria-roledescription="carousel" aria-label="Applications">
     <div class="hero__slide is-active" id="hero-slide-0" role="tabpanel" aria-labelledby="hero-tab-0">
-      <img class="hero__slide-img" src="assets/context/elevator-shaft.webp" alt="" width="1800" height="873" fetchpriority="high" decoding="async">
-      <div class="hero__overlay hero__overlay--lighter"></div>
+      <img class="hero__slide-img" src="assets/context/elevator-shaft.webp" srcset="assets/context/elevator-shaft@1280.webp 1280w, assets/context/elevator-shaft.webp 2560w" sizes="100vw" alt="" width="2560" height="1241" fetchpriority="high" decoding="async">
+      <div class="hero__overlay"></div>
       <div class="hero__inner">
         <div class="hero__content">
           <div class="kicker hero__kicker" data-hero-anim>Elevator Installation</div>
@@ -915,7 +915,7 @@
       </div>
     </div>
     <div class="hero__slide" id="hero-slide-1" role="tabpanel" aria-labelledby="hero-tab-1" aria-hidden="true">
-      <img class="hero__slide-img hero__slide-img--facade" src="assets/context/facade-platforms.webp" alt="Suspended platforms on a glass building facade." width="1460" height="2048" loading="lazy" decoding="async">
+      <img class="hero__slide-img" src="assets/context/facade-platforms.webp" srcset="assets/context/facade-platforms@1280.webp 1280w, assets/context/facade-platforms.webp 1672w" sizes="100vw" alt="Suspended platforms on a glass building facade." width="1672" height="941" loading="lazy" decoding="async">
       <div class="hero__overlay"></div>
       <div class="hero__inner">
         <div class="hero__content">
@@ -956,7 +956,7 @@
     </div>
     <a class="app-entry" href="/applications/elevator-installation/">
       <div class="app-entry__media">
-        <img src="assets/context/suspended-hoist.webp" alt="Technician with a traction hoist on a platform during installation." width="1024" height="576" loading="lazy" decoding="async">
+        <img src="assets/context/suspended-hoist.webp" srcset="assets/context/suspended-hoist@1280.webp 1280w, assets/context/suspended-hoist.webp 2000w" sizes="(max-width: 900px) 100vw, 62vw" alt="Technician with a traction hoist on a platform during installation." width="2000" height="1125" loading="lazy" decoding="async">
       </div>
       <div class="app-entry__copy">
         <h3>Elevator Installation</h3>
@@ -966,7 +966,7 @@
     </a>
     <a class="app-entry" href="/applications/suspended-access/">
       <div class="app-entry__media">
-        <img src="assets/context/facade-bmu.webp" alt="Suspended platforms on a curved glass facade." width="1360" height="611" loading="lazy" decoding="async">
+        <img src="assets/context/facade-bmu.webp" srcset="assets/context/facade-bmu@1280.webp 1280w, assets/context/facade-bmu.webp 1672w" sizes="(max-width: 900px) 100vw, 62vw" alt="Suspended platforms on a curved glass facade." width="1672" height="941" loading="lazy" decoding="async">
       </div>
       <div class="app-entry__copy">
         <h3>Suspended Access</h3>

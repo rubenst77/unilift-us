@@ -116,12 +116,19 @@
       <div class="ap-panels">
         <article class="config reveal">
           <div class="config__figure">
-            <svg viewBox="0 0 220 280" fill="none" role="img" aria-label="Diagram of a 1:1 lifting configuration. The hoist is on the platform.">
-              <rect x="50" y="16" width="120" height="248" stroke="#9CC3E5" stroke-width="1.5"/>
-              <circle cx="110" cy="40" r="12" stroke="#fff" stroke-width="2"/>
-              <path d="M110 52 V150" stroke="#E8502E" stroke-width="2.5"/>
-              <rect x="92" y="142" width="36" height="28" fill="#E8502E"/>
-              <path d="M72 184 H148" stroke="#fff" stroke-width="4"/>
+            <svg viewBox="0 0 400 340" role="img" aria-label="1:1 lifting configuration. One rope runs from the hoist at the top of the shaft to the platform.">
+              <rect width="400" height="340" fill="#E6EBEF"/>
+              <rect width="8" height="340" fill="#B7C0C9"/>
+              <rect x="392" width="8" height="340" fill="#B7C0C9"/>
+              <rect y="228" width="400" height="72" fill="#0C2A4D"/>
+              <line x1="200" y1="48" x2="200" y2="228" stroke="#14202E" stroke-width="1.75" stroke-dasharray="2 4"/>
+              <rect x="184" y="18" width="32" height="26" fill="#E8502E"/>
+              <g transform="translate(200 228)" fill="#14202E">
+                <path d="M-11 -84h22v5h-22z"/>
+                <circle cy="-70" r="8"/>
+                <path d="M-12 -60h24v28h-24z"/>
+                <path d="M-10 -32h8v32h-8zM2 -32h8v32H2z"/>
+              </g>
             </svg>
           </div>
           <div class="config__body">
@@ -132,12 +139,20 @@
         </article>
         <article class="config reveal">
           <div class="config__figure">
-            <svg viewBox="0 0 220 280" fill="none" role="img" aria-label="Diagram of a 2:1 lifting configuration. The hoist stays fixed.">
-              <rect x="50" y="16" width="120" height="248" stroke="#9CC3E5" stroke-width="1.5"/>
-              <rect x="128" y="24" width="28" height="32" fill="#E8502E"/>
-              <path d="M72 36 V158 Q110 198 148 158 V56" stroke="#E8502E" stroke-width="2.5"/>
-              <circle cx="110" cy="172" r="13" stroke="#fff" stroke-width="2"/>
-              <path d="M72 196 H148" stroke="#fff" stroke-width="4"/>
+            <svg viewBox="0 0 400 340" role="img" aria-label="2:1 lifting configuration. The rope runs over a sheave, so two parts of rope support the platform.">
+              <rect width="400" height="340" fill="#E6EBEF"/>
+              <rect width="8" height="340" fill="#B7C0C9"/>
+              <rect x="392" width="8" height="340" fill="#B7C0C9"/>
+              <rect y="228" width="400" height="72" fill="#0C2A4D"/>
+              <circle cx="200" cy="30" r="10" fill="#E8502E"/>
+              <path d="M190 38 L150 228 M210 38 L292 228" fill="none" stroke="#14202E" stroke-width="1.75" stroke-dasharray="2 4"/>
+              <rect x="262" y="186" width="30" height="42" fill="#E8502E"/>
+              <g transform="translate(176 228)" fill="#14202E">
+                <path d="M-11 -84h22v5h-22z"/>
+                <circle cy="-70" r="8"/>
+                <path d="M-12 -60h24v28h-24z"/>
+                <path d="M-10 -32h8v32h-8zM2 -32h8v32H2z"/>
+              </g>
             </svg>
           </div>
           <div class="config__body">
@@ -157,8 +172,20 @@
         <h2 id="shaft-heading">How it works in the shaft</h2>
         <p>During elevator installation the traction hoist lifts personnel and equipment in the shaft. The wire rope passes through the hoist instead of winding onto a drum, so lifting height follows the length of rope deployed.</p>
       </header>
-      <div class="ap-work__photo reveal">
-        <img src="/assets/context/elevator-shaft.webp" alt="Crew working inside an elevator shaft with guide rails and wire ropes." width="1800" height="873" loading="lazy" decoding="async">
+      <div class="ap-work__video reveal">
+        <div class="video-facade" data-youtube-facade data-video-id="YDNbZvjg0n0">
+          <button type="button" class="video-facade__play" aria-label="Play the UNILIFT elevator installation video on YouTube">
+            <img class="video-facade__thumb" src="https://i.ytimg.com/vi/YDNbZvjg0n0/hqdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video-facade__shade" aria-hidden="true"></span>
+            <span class="video-facade__icon" aria-hidden="true">
+              <svg viewBox="0 0 68 48" width="68" height="48" focusable="false">
+                <path class="video-facade__icon-bg" d="M66.52 7.74a8 8 0 0 0-5.63-5.66C55.3 1 34 1 34 1S12.7 1 7.11 2.08a8 8 0 0 0-5.63 5.66A83 83 0 0 0 1 24a83 83 0 0 0 1.48 16.26 8 8 0 0 0 5.63 5.66C12.7 47 34 47 34 47s21.3 0 26.89-1.08a8 8 0 0 0 5.63-5.66A83 83 0 0 0 67 24a83 83 0 0 0-1.48-16.26z" fill="#212121" fill-opacity="0.8"/>
+                <path d="M45 24 27 14v20" fill="#fff"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+        <p class="manufacturing__yt ap-work__yt"><a href="https://www.youtube.com/watch?v=YDNbZvjg0n0" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">&rarr;</span></a></p>
       </div>
       <div class="ap-points reveal">
         <article class="ap-point">
@@ -188,43 +215,34 @@
 
   <section class="section section--white" aria-labelledby="setup-heading">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head section-head--wide reveal">
         <div class="kicker ap-kicker">Configuration</div>
-        <h2 id="setup-heading">Configure the right setup</h2>
-        <p>Every installation is different. These are the variables we use to define the hoist.</p>
+        <h2 id="setup-heading">Tell us how you install. We configure the system.</h2>
+        <p>Give us the key installation parameters and we define the right hoist, rope and control configuration for the job.</p>
       </header>
       <div class="ap-params reveal">
         <article class="ap-param">
           <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4h8v6H8zM12 10v4M7 20h10M9 14h6v6H9z"/></svg></span>
-          <h3>Lifting configuration</h3>
-          <p>How your team installs, including common 1:1 and 2:1 setups.</p>
+          <h3>Installation method</h3>
+          <p>Direct lifting, 1:1 or 2:1 configuration.</p>
         </article>
         <article class="ap-param">
           <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M8 7h8M9 12h6M10 17h4"/></svg></span>
-          <h3>Working load</h3>
-          <p>Personnel and equipment to be lifted.</p>
+          <h3>Required load</h3>
+          <p>Define the load required for the installation operation.</p>
         </article>
         <article class="ap-param">
           <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V8l8-4 8 4v12M9 20v-6h6v6"/></svg></span>
-          <h3>Shaft</h3>
-          <p>The shaft the hoist is selected for, with the load and power on site.</p>
+          <h3>Shaft conditions</h3>
+          <p>Travel height, available space and suspension points.</p>
         </article>
         <article class="ap-param">
-          <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 3L6 13h5l-1 8 8-12h-5l0-6z"/></svg></span>
+          <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 3L6 13h5l-1 8 8-12h-5z"/></svg></span>
           <h3>Power supply</h3>
-          <p>208 V, single-phase or three-phase, 60 Hz, matched to the model.</p>
-        </article>
-        <article class="ap-param">
-          <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4c4 3 4 13 0 16M16 4c-4 3-4 13 0 16"/></svg></span>
-          <h3>Wire rope</h3>
-          <p>FAS-authorized 3/8 in (9.5 mm) steel wire rope.</p>
-        </article>
-        <article class="ap-param">
-          <span class="ap-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="16" height="10" rx="1"/><path d="M8 11h2M12 11h.01M16 11h.01M8 14h8"/></svg></span>
-          <h3>Controls and accessories</h3>
-          <p>Control box, connector, and jobsite items confirmed with the quote.</p>
+          <p>Available voltage, phase and frequency on site.</p>
         </article>
       </div>
+      <p class="ap-define reveal">We define: <strong>Hoist model</strong> · <strong>Wire rope</strong> · <strong>Controls</strong> · <strong>Safety devices</strong> · <strong>Accessories</strong></p>
     </div>
   </section>
 
@@ -383,7 +401,7 @@
     </div>
   </section>
 
-  <section id="contact" class="section section--navy-800 on-dark ap-contact" style="--ap-contact-image:url('/assets/context/elevator-shaft.webp')" aria-labelledby="contact-heading">
+  <section id="contact" class="section section--navy-800 on-dark ap-contact" style="--ap-contact-image:url('/assets/context/shaft-guides.webp')" aria-labelledby="contact-heading">
     <div class="container">
       <div class="contact__grid">
         <div class="contact__info reveal">

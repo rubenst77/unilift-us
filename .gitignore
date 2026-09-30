@@ -20,3 +20,11 @@ _lh.json
 
 # Source bundle (assets already copied into /assets)
 UNIFIFT_build_assets/
+
+# Local reference folders, not part of the site
+.cursor/
+3imagensAQUI/
+ordem/
+design-reference/
+mudar/
+cararuben.png
