@@ -2890,6 +2890,13 @@ h1 { letter-spacing: -0.03em; }
   z-index: 0;
 }
 .hero--slides .hero__overlay { z-index: 1; }
+.hero__overlay--lighter {
+  background: linear-gradient(180deg,
+    rgba(10, 28, 51, 0.52) 0%,
+    rgba(10, 28, 51, 0.58) 45%,
+    rgba(10, 28, 51, 0.68) 100%);
+}
+.hero__slide-img--hoist { object-position: center 42%; }
 .hero--slides .hero__inner {
   position: relative;
   z-index: 2;
