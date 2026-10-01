@@ -46,7 +46,7 @@
 .page-application .config { background: var(--navy-800); }
 .page-application .config__figure {
   height: auto;
-  aspect-ratio: 240 / 460;
+  aspect-ratio: 240 / 382;
   min-height: 0;
   background: #fff;
   padding: 0;
