@@ -108,8 +108,9 @@
     var waTile = document.querySelector('[data-cms="contact-whatsapp"]');
     var addrTile = document.querySelector('[data-cms="contact-address"]');
     if (emailTile) {
-      emailTile.href = 'mailto:' + g.email;
-      setText(emailTile.querySelector('[data-cms-value]'), g.email);
+      var leadEmail = (g.rep && g.rep.email) || g.leadEmail || g.email;
+      emailTile.href = 'mailto:' + leadEmail;
+      setText(emailTile.querySelector('[data-cms-value]'), leadEmail);
     }
     if (waTile) {
       waTile.href = 'https://wa.me/' + g.whatsapp.replace(/\D/g, '');

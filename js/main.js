@@ -266,22 +266,25 @@
       });
     }
 
-    if (window.WEB3FORMS_ACCESS_KEY) {
-      return deliverWeb3Forms(payload).catch(function () {
-        return deliverFormSubmit(payload);
-      });
+    function fallbackWeb3() {
+      if (window.WEB3FORMS_ACCESS_KEY) return deliverWeb3Forms(payload);
+      return deliverApiLead(payload);
     }
 
-    return deliverApiLead(payload).then(function (result) {
-      if (result.ok) return result;
-      return deliverFormSubmit(payload);
+    // FormSubmit is addressed to leadToEmail(), so the lead reaches that inbox
+    // even when the Web3Forms key is tied to a different address.
+    return deliverFormSubmit(payload).then(function (result) {
+      if (result && (result.ok || result.activation)) return result;
+      return fallbackWeb3();
     }).catch(function (err) {
       console.warn('[UNILIFT] lead delivery failed', err);
-      if (payload.source === 'contact_form') {
-        window.location.href = mailtoFor(payload);
-        return { ok: true, mailto: true };
-      }
-      return { ok: false, error: true };
+      return fallbackWeb3().catch(function () {
+        if (payload.source === 'contact_form') {
+          window.location.href = mailtoFor(payload);
+          return { ok: true, mailto: true };
+        }
+        return { ok: false, error: true };
+      });
     });
   }
 

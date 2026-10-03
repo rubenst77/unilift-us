@@ -2005,7 +2005,9 @@ h1 { letter-spacing: -0.03em; }
 .contact__tile-icon { width: 42px; height: 42px; flex-shrink: 0; display: grid; place-items: center; color: var(--sky); }
 .contact__tile-icon svg { width: 22px; height: 22px; }
 .contact__tile-label { display: block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sky); margin-bottom: 0.15rem; }
-.contact__tile-value { color: var(--white); font-weight: 500; font-size: 0.98rem; }
+.contact__tile-value { color: var(--white); font-weight: 500; font-size: 0.98rem; overflow-wrap: anywhere; }
+.contact__mail { margin: 0.85rem 0 0; font-size: 1.02rem; }
+.contact__mail a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .contact__tile-value--sm { font-size: 0.86rem; line-height: 1.4; }
 .contact__tile--action {
   width: 100%;
